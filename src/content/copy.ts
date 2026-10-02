@@ -71,6 +71,21 @@ export const copy = {
     kicker: "CASE 01",
     question: "Can she own an implementation?",
     client: "REAL ESTATE CLIENT",
+    // Plain-words context shown BEFORE the diagram. Every line is a fact Marta confirmed.
+    context: [
+      { k: "THE CLIENT", t: "A real estate company. Lots of enquiries on WhatsApp and by phone. Answering each one by hand was slow, and interest went cold." },
+      { k: "THE GOAL", t: "An AI agent that answers instantly, finds out if the person is serious, and books a visit." },
+      { k: "WHO DID WHAT", t: "I brought the client in and ran discovery, requirements, testing and training. The technical build, I did with a developer." },
+      { k: "NOW WATCH IT GET BUILT", t: "A lead writes. The agent answers, checks the available properties, and books a visit with the sales team." },
+    ],
+    // One-line captions shown while the diagram plays ("in plain words").
+    plain: [
+      "A lead writes. The agent answers, checks the properties, and books a visit.",
+      "Every enquiry follows this path, in seconds.",
+      "The agent needs the list of available properties. The listing portal doesn’t give us access to its data (no API). Without it, the agent can’t answer.",
+      "I looked at the options and proposed an alternative route to the developers.",
+      "It worked. The agent answers with real data again.",
+    ],
     need: "Respond to property enquiries and convert qualified interest into action.",
     nodes: [
       { id: "lead", label: "LEAD" },
@@ -110,11 +125,11 @@ export const copy = {
       line: "Going live isn’t the end of implementation.",
     },
     troubleshooting: [
-      { n: "01", label: "REPRODUCE" },
-      { n: "02", label: "INSPECT" },
-      { n: "03", label: "ISOLATE" },
-      { n: "04", label: "FORM A HYPOTHESIS" },
-      { n: "05", label: "ESCALATE WITH CONTEXT" },
+      { n: "01", label: "REPRODUCE", x: "I ran the same question again, to see it happen." },
+      { n: "02", label: "INSPECT", x: "I read the conversation log." },
+      { n: "03", label: "ISOLATE", x: "I narrowed down where it could be failing." },
+      { n: "04", label: "FORM A HYPOTHESIS", x: "I formed a theory about the cause." },
+      { n: "05", label: "ESCALATE WITH CONTEXT", x: "I sent it to engineering with everything they needed." },
     ],
     isolate: ["DATA RETRIEVAL?", "INTEGRATION?", "PROMPT?", "RULES?"],
     handoff: {

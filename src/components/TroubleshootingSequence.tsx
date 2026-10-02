@@ -13,7 +13,10 @@ export function TroubleshootingSequence() {
         {t.map((s, i) => (
           <li key={s.n} data-step={i}>
             <span className="mono ts-n">{s.n}</span>
-            <span className="ts-l">{s.label}</span>
+            <span className="ts-l">
+              {s.label}
+              <small className="ts-x">{s.x}</small>
+            </span>
           </li>
         ))}
       </ol>

@@ -8,6 +8,7 @@ import { Ambient } from "./Ambient";
 import { Momentum } from "./Momentum";
 import { Act1Signal } from "@/scenes/Act1Signal";
 import { Act3Diagnosis } from "@/scenes/Act3Diagnosis";
+import { Act4pCase1Context } from "@/scenes/Act4pCase1Context";
 import { Act4aImplementation } from "@/scenes/Act4aImplementation";
 import { Act4bTroubleshooting } from "@/scenes/Act4bTroubleshooting";
 import { Act4cResolution } from "@/scenes/Act4cResolution";
@@ -64,6 +65,7 @@ export function Experience() {
       <main>
         <Act1Signal />
         <Act3Diagnosis />
+        <Act4pCase1Context />
         <Act4aImplementation />
         <Act4bTroubleshooting />
         <Act4cResolution />

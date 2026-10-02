@@ -29,12 +29,13 @@ export function Act4aImplementation() {
   const mobile = useIsMobile();
 
   const ref = useScene({
-    vh: 1150,
-    mobileVh: 1000,
+    vh: 960,
+    mobileVh: 840,
     build(tl, ctx: SceneCtx) {
       ctxRef.current = ctx;
       const { q, mobile, root } = ctx;
       const TOTAL = 114;
+      const SHIFT = 21; // the title + context now live in the scene before this one
       const L = mapLayout(mobile);
       const $ = <T extends Element = SVGElement>(s: string) => root.querySelector(s) as unknown as T | null;
       const conn = (id: string) => $<SVGPathElement>(`[data-conn="${id}"]`);
@@ -42,7 +43,7 @@ export function Act4aImplementation() {
       const node = (id: string) => $(`[data-node="${id}"]`);
 
       // ── initial state
-      gsap.set(q(".sn, .chip, .im-x, .scan"), { autoAlpha: 0 });
+      gsap.set(q(".sn, .chip, .im-x, .scan, [data-plain]"), { autoAlpha: 0 });
       gsap.set(q("[data-fs-load], [data-fs-denied], [data-own], [data-tech]"), { autoAlpha: 0 });
       const segs = L.pos.slice(0, -1).map((_, i) => conn(`seg-${i}`));
       segs.forEach((s) => s && gsap.set(s, { autoAlpha: 1 }));
@@ -57,17 +58,6 @@ export function Act4aImplementation() {
         return -Math.max(0, Math.min(H - view, y * scale - view * 0.42));
       };
       const cam = (y: number, at: number, dur = 2) => mobile && tl.to(q(".a4-mapinner"), { y: () => camY(y), duration: dur, ease: "power2.inOut" }, at);
-
-      // ── CASE 01 title
-      show(tl, "#a4a-k", 0, 0.5);
-      maskIn(tl, "#a4a-k", 1, 3, 0.15);
-      show(tl, "#a4a-k .k-kicker", 0.5, 1);
-      maskOut(tl, "#a4a-k", 9, 1);
-      hide(tl, "#a4a-k", 10, 0.5);
-
-      // ── the client + the need
-      show(tl, "#a4a-client", 11, 1.5);
-      hide(tl, "#a4a-client", 20, 1.2);
 
       // ── build the system
       show(tl, "#a4a-map", 21.5, 0.8);
@@ -96,6 +86,15 @@ export function Act4aImplementation() {
         cam(L.pos[5].y, T0 + 9, 2);
       }
 
+      // ── "in plain words" captions
+      const plain = (i: number, at: number, until: number) => {
+        show(tl, q(`[data-plain="${i}"]`), at, 0.8);
+        hide(tl, q(`[data-plain="${i}"]`), until, 0.8);
+      };
+      show(tl, "#a4a-plain", 21.5, 0.5);
+      plain(0, 22.5, 36);
+      plain(1, 38.5, 52);
+
       // ── ownership, introduced quietly while the flow runs
       show(tl, "#a4a-own", 54, 1);
       c.ownership.forEach((_, i) => show(tl, q(`[data-own="${i}"]`), 54.5 + i * 1.3, 1));
@@ -120,7 +119,7 @@ export function Act4aImplementation() {
       show(tl, q("[data-fs-load]"), hit + 0.1, 0.1);
       hide(tl, q("[data-fs-load]"), hit + 2.2, 0.1);
       show(tl, q("[data-fs-denied]"), hit + 2.6, 0.1); // hard cut, no easing
-      tl.call(() => {}, [], hit); // (audio cue handled in onProgress)
+      plain(2, hit + 0.6, 85);
 
       // ── statement + decision
       hide(tl, "#a4a-own", 73, 1.6);
@@ -131,7 +130,6 @@ export function Act4aImplementation() {
       hide(tl, "#a4a-stmt", 86, 1.2);
       show(tl, "#a4a-what", 88, 1.5);
       show(tl, "#a4a-act", 91, 1.2);
-      gate.current.start = 92 / TOTAL;
 
       // ── investigation (click or scroll)
       const I = 95;
@@ -151,7 +149,10 @@ export function Act4aImplementation() {
       hide(tl, q(".im-x"), I + 11, 0.5);
       tl.to(q('[data-node="source"] .sn-box'), { stroke: "rgba(244,243,239,.35)", duration: 0.5 }, I + 11);
       tl.to(conn("feed"), { opacity: 0.25, duration: 0.5 }, I + 11);
-      gate.current.end = (I + 13) / TOTAL;
+      gate.current.end = (I + 13 - SHIFT) / (TOTAL - SHIFT);
+
+      plain(3, I + 4, I + 10.5);
+      plain(4, I + 11.5, 112);
 
       // ── ambient flow once the new route is live (driven by onProgress)
       const lp = gsap.timeline({ repeat: -1, paused: true, defaults: { ease: "none" } });
@@ -162,7 +163,8 @@ export function Act4aImplementation() {
       lp.set([pk("pk-loop-a"), pk("pk-loop-b")], { autoAlpha: 0 }, 8.1);
       loop.current = lp;
 
-      tl.to({}, { duration: 0.001 }, TOTAL);
+      tl.shiftChildren(-SHIFT, false, SHIFT - 1);
+      tl.to({}, { duration: 0.001 }, TOTAL - SHIFT);
     },
     onProgress(p) {
       const live = p >= gate.current.end;
@@ -178,15 +180,6 @@ export function Act4aImplementation() {
   return (
     <section id="act-4a" ref={ref} className="scene" aria-label="Act IV — Case 01: implementation">
       <div className="stage">
-        <div className="beat a4-k" id="a4a-k" data-beat>
-          <p className="mono k-kicker">{c.kicker}</p>
-          <MaskText as="h2" className="h-xl" text={c.question} />
-        </div>
-        <div className="beat" id="a4a-client" data-beat>
-          <p className="mono">{c.client}</p>
-          <p className="h-lg a4-need">{c.need}</p>
-        </div>
-
         <div className="beat a4-map" id="a4a-map" data-beat>
           <div className={`a4-mapinner${mobile ? " is-mobile" : ""}`}>
             <ImplementationMap mobile={mobile} />
@@ -195,6 +188,14 @@ export function Act4aImplementation() {
         <p className="beat mono a4-cap" id="a4a-cap" data-beat>
           {c.kicker} · {c.client}
         </p>
+        <div className="beat a4-plain" id="a4a-plain" data-beat>
+          <p className="mono">In plain words</p>
+          {c.plain.map((t, i) => (
+            <p className="a4-plain-t" data-plain={i} key={t}>
+              {t}
+            </p>
+          ))}
+        </div>
         <div className="a4-flash" id="a4a-flash" aria-hidden="true" />
         <div className="beat a4-fail" id="a4a-fail" data-beat>
           <FailureState />
