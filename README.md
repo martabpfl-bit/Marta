@@ -109,3 +109,11 @@ Static prerender; fonts via `next/font` (swap); no video/images; SVG only. Watch
 - Team act now only recaps what the page already showed (confirm: it ends with "Happy to share references" — `team.closing`).
 - Act IX is a "what you asked → what I showed" list, one factual line per request (`resolution.facts`; confirm the "presented to leadership" wording).
 - Act VII explains the reveal: "Your feedback was a signal. I handled it the way I handle a customer signal."
+
+## v4 — bilingual + real facts
+
+- PT | EN toggle (saved choice, else browser language). English is the source shape (`copy.en.ts`); Portuguese in `copy.pt.ts`.
+- Removed the overdue-payment segment (no outcome, read as a dispute). No client names anywhere.
+- Real-estate case: small team of five (**assumed to be the client's team — confirm**), ~350 contacts/month, ~50% automated (approximate, as given).
+- Construction case: ~10 people, ~700 contacts/month, nothing digitised; client approved the agreed Phase 1.
+- Positioned for Implementation Specialist; close: "If another role opens, I'd love to be considered. I really liked the team and the spirit."

@@ -86,7 +86,7 @@ export const en = {
     client: "REAL ESTATE CLIENT",
     // Plain-words context shown BEFORE the diagram. Every line is a fact Marta confirmed.
     context: [
-      { k: "THE CLIENT", t: "A real estate company. Lots of enquiries on WhatsApp and by phone. Answering each one by hand was slow, and interest went cold." },
+      { k: "THE CLIENT", t: "A small real estate company, a team of five. Around 350 contacts a month on WhatsApp and by phone. Answering each one by hand was slow, and interest went cold." },
       { k: "THE GOAL", t: "An AI agent that answers instantly, finds out if the person is serious, and books a visit." },
       { k: "WHO DID WHAT", t: "I brought the client in and ran discovery, requirements, testing and training. The technical build, I did with a developer." },
       { k: "NOW WATCH IT GET BUILT", t: "A lead writes. The agent answers, checks the available properties, and books a visit with the sales team." },
@@ -178,7 +178,7 @@ export const en = {
     },
     production: {
       title: "PRODUCTION",
-      outcomes: ["Real users ✓", "Customer continued ✓", "Continuation signed before I left ✓"],
+      outcomes: ["Real users ✓", "About half of the ~350 monthly contacts handled automatically ✓", "Customer continued ✓", "Continuation signed before I left ✓"],
       caveat: "Some product limitations remained, including text-to-speech quality.",
     },
     found: "EVIDENCE FOUND",
@@ -188,7 +188,7 @@ export const en = {
   case2: {
     kicker: "CASE 02",
     opener: "Not every implementation problem is technical.",
-    client: "PORTUGUESE CONSTRUCTION / BUILDING-SERVICES CLIENT", // company intentionally not named
+    client: "PORTUGUESE CONSTRUCTION CLIENT", // company intentionally not named
     statements: [
       "“The process works like this.”",
       "“No, that’s not how we do it.”",
@@ -196,13 +196,14 @@ export const en = {
       "“That needs to happen first.”",
       "“Can we add…”",
     ],
-    ctxA: [{ k: "THE PROBLEM", t: "Everyone wanted something different. The scope kept growing." }],
-    ctxB: [{ k: "THE COMMERCIAL SIDE", t: "The client was two months behind on payments. Our developers were still working for them." }],
+    ctxA: [
+      { k: "THE CLIENT", t: "A construction company in the north of Portugal. About ten people and around 700 contacts a month. Nothing was shared between them: everyone did their own thing, and nothing was digitised." },
+      { k: "THE PROBLEM", t: "Everyone wanted something different. The scope kept growing." },
+    ],
     plain: [
       "Everyone wanted something different, and the project kept growing: Phase 1 became Phase 1 + X + Y + Z…",
       "When that happens, I follow the same steps every time.",
       "Back to what was agreed: Phase 1. The rest can wait.",
-      "The client was two months behind on payments, while our development resources kept working for them.",
     ],
     scope: { base: "PHASE 1", extras: ["X", "Y", "Z", "..."] },
     process: [
@@ -216,16 +217,6 @@ export const en = {
     ],
     principle: ["A good implementation isn’t everything the customer can imagine.", "It’s knowing what needs to happen now — and what can wait."],
     returnAction: "RETURN TO AGREED SCOPE",
-    commercial: {
-      account: "ACCOUNT",
-      overdue: "PAYMENT OVERDUE",
-      duration: "2 MONTHS",
-      resources: "DEVELOPMENT RESOURCES",
-      active: "ACTIVE",
-      ask: "What would you recommend?",
-      answer:
-        "After repeated attempts to reconcile the account, I recommended pausing additional Development work until payment was resolved.",
-    },
   },
 
   // ───────────────────────── ACT VI — CUSTOMER HEALTH
@@ -288,8 +279,7 @@ export const en = {
       "I sent problems to engineering with full context.",
       "I took decisions to the right people.",
     ],
-    // PLACEHOLDER: confirm you are happy to offer references (and who).
-    closing: "The rest is better heard from them. Happy to share references.",
+    closing: "Implementations don’t succeed alone.",
     excerpts: [] as { text: string; attribution?: string }[],
   },
 
@@ -299,8 +289,8 @@ export const en = {
     relHeading: "VISOR × MARTA",
     // One factual line per request. All from Marta's brief; "approved" wording is flagged in PLACEHOLDERS.
     facts: {
-      projects: "AI agent for a real estate client. Built with a developer, in production, and the customer continued.",
-      decisions: "Construction project: scope back to Phase 1, and extra development paused on an overdue account.",
+      projects: "AI agent for a small real estate team: about half of ~350 monthly contacts automated. Built with a developer, in production, and the customer continued.",
+      decisions: "Construction client (about ten people, ~700 contacts a month, nothing digitised): scope agreed, back to Phase 1, and approved by the client.",
       results: "A customer health view I built unprompted and presented to leadership. A flagged customer subsequently renewed.",
       team: "Problems sent to engineering with full context. Solutions built together with a developer.",
     },
@@ -311,7 +301,7 @@ export const en = {
       { label: "RELATIONSHIP", value: "OPEN" },
     ],
     future: "FUTURE",
-    typed: "Available for the next opportunity.",
+    typed: "If another role opens, I’d love to be considered.",
   },
 
   // ───────────────────────── ACT X — FALSE ENDING + REVEAL
@@ -320,8 +310,9 @@ export const en = {
     lines: ["You gave me feedback.", "I did something with it."],
     hero: "I tend to start before someone asks me to.",
     thanks: "Thank you for the signal, Catarina.",
+    like: "I really liked the team and the spirit.",
     name: "Marta Lopes",
-    role: "Customer Success · Implementation · Growth",
+    role: "Implementation Specialist · Customer Success",
     underTheHood: { label: "Under the hood →", href: "/under-the-hood" },
     links: [
       // PLACEHOLDER: real URLs required.
@@ -334,13 +325,13 @@ export const en = {
 /** Items that still need Marta's input. Surfaced in the build report. */
 export const PLACEHOLDERS = [
   "ending.links — LinkedIn URL (hidden until a real https:// URL is set)",
-  "team.closing — confirms you are happy to offer references",
   "team.excerpts — anonymised real messages / screenshots, only with consent (empty = nothing shown)",
   "underTheHood — real tools, timelines, results and a short \"what I would do differently\" per case",
   "health.adoption.steps — exact organisational adoption wording",
   "case1.second.query — real (anonymised) enquiry text, if desired",
   "case1.handoff.fields — real handoff values (currently abstract bars)",
-  "case2.client — descriptor wording for the construction client",
+  "case1.context[0] — \"a team of five\" assumed to be the real-estate client's team (confirm)",
+  "case2 — what the client approved, and the scope problem you mentioned (not used yet)",
   "public/audio/*.mp3 — real UI sounds (see src/lib/audio.ts for cue names)",
 ] as const;
 
@@ -351,7 +342,7 @@ export const underTheHoodEn = {
   cases: [
     {
       kicker: "CASE 01 · PROJECTS",
-      title: "AI agent for a real estate client",
+      title: "AI agent for a small real estate team",
       problem: "Respond to property enquiries (voice / WhatsApp) and convert qualified interest into action.",
       did: [
         "Originated the client; ran sales / discovery, requirements, client communication, testing and training.",
@@ -360,19 +351,18 @@ export const underTheHoodEn = {
         "After go-live, an enquiry returned incomplete information. I reproduced it, inspected the transcript, isolated the possibilities and escalated to engineering with full context (account, conversation, recording, reported / expected / reproduced behaviour, findings).",
       ],
       outcome: ["Real users in production.", "The customer continued; the continuation was signed before I left.", "Some product limitations remained, including text-to-speech quality."],
-      numbers: [] as string[], // PLACEHOLDER: real metrics, if you have them
+      numbers: ["About 350 contacts a month (approximate).", "About 50% of them handled automatically (approximate)."],
       different: "", // PLACEHOLDER: what you would do differently
     },
     {
       kicker: "CASE 02 · DECISIONS",
-      title: "Scope and commercial judgment, construction client",
-      problem: "Stakeholders pulled the project in different directions and the scope kept growing.",
+      title: "Getting a team to agree on scope, construction client",
+      problem: "A team of about ten people, around 700 contacts a month, nothing shared or digitised, and everyone with a different idea of the process and of what the project should include.",
       did: [
         "Listened, identified the actual decision, brought in the right people, proposed a workable path, confirmed it and documented it.",
         "Returned the project to the agreed Phase 1 and kept the rest for later.",
-        "With the account two months overdue, and after repeated attempts to reconcile it, I recommended pausing additional development work until payment was resolved.",
       ],
-      outcome: [],
+      outcome: ["The client approved the agreed Phase 1."],
       numbers: [] as string[],
       different: "",
     },

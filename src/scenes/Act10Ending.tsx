@@ -67,6 +67,7 @@ export function Act10Reveal() {
         </div>
         <div className="beat beat--lower a10-sign" id="a10-sign" data-beat>
           <p className="a10-thanks">{e.thanks}</p>
+          <p className="a10-thanks">{e.like}</p>
           <p className="a10-name">{e.name}</p>
           <p className="mono a10-role">{e.role}</p>
           <p className="a10-uth" data-links>

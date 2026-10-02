@@ -77,7 +77,7 @@ export const pt: Copy = {
     question: "Consegue ela ser responsável por uma implementação?",
     client: "CLIENTE IMOBILIÁRIO",
     context: [
-      { k: "O CLIENTE", t: "Uma empresa imobiliária. Muitos pedidos por WhatsApp e por telefone. Responder a cada um à mão era lento, e o interesse arrefecia." },
+      { k: "O CLIENTE", t: "Uma pequena empresa imobiliária, uma equipa de cinco pessoas. Cerca de 350 contactos por mês por WhatsApp e por telefone. Responder a cada um à mão era lento, e o interesse arrefecia." },
       { k: "O OBJETIVO", t: "Um agente de IA que responde logo, percebe se a pessoa está mesmo interessada e marca uma visita." },
       { k: "QUEM FEZ O QUÊ", t: "Eu trouxe o cliente e tratei de discovery, requisitos, testes e formação. A parte técnica fiz com um developer." },
       { k: "AGORA VÊ-O A SER CONSTRUÍDO", t: "Um lead escreve. O agente responde, verifica os imóveis disponíveis e marca uma visita com a equipa comercial." },
@@ -159,7 +159,7 @@ export const pt: Copy = {
     },
     production: {
       title: "PRODUÇÃO",
-      outcomes: ["Utilizadores reais ✓", "O cliente continuou ✓", "Continuação assinada antes de eu sair ✓"],
+      outcomes: ["Utilizadores reais ✓", "Cerca de metade dos ~350 contactos mensais tratados automaticamente ✓", "O cliente continuou ✓", "Continuação assinada antes de eu sair ✓"],
       caveat: "Ficaram algumas limitações do produto, incluindo a qualidade da síntese de voz.",
     },
     found: "EVIDÊNCIA ENCONTRADA",
@@ -168,7 +168,7 @@ export const pt: Copy = {
   case2: {
     kicker: "CASO 02",
     opener: "Nem todos os problemas de implementação são técnicos.",
-    client: "CLIENTE PORTUGUÊS DE CONSTRUÇÃO / SERVIÇOS PARA EDIFÍCIOS",
+    client: "CLIENTE PORTUGUÊS DE CONSTRUÇÃO",
     statements: [
       "“O processo funciona assim.”",
       "“Não, não é assim que fazemos.”",
@@ -176,27 +176,19 @@ export const pt: Copy = {
       "“Isso tem de acontecer primeiro.”",
       "“Podemos acrescentar…”",
     ],
-    ctxA: [{ k: "O PROBLEMA", t: "Toda a gente queria algo diferente. O âmbito não parava de crescer." }],
-    ctxB: [{ k: "O LADO COMERCIAL", t: "O cliente tinha dois meses de pagamentos em atraso. Os nossos developers continuavam a trabalhar para ele." }],
+    ctxA: [
+      { k: "O CLIENTE", t: "Uma empresa de construção no norte de Portugal. Cerca de dez pessoas e uns 700 contactos por mês. Não havia nada partilhado entre elas: cada um fazia o seu trabalho e nada estava digitalizado." },
+      { k: "O PROBLEMA", t: "Toda a gente queria algo diferente. O âmbito não parava de crescer." },
+    ],
     plain: [
       "Toda a gente queria algo diferente e o projeto não parava de crescer: a Fase 1 passou a Fase 1 + X + Y + Z…",
       "Quando isso acontece, sigo sempre os mesmos passos.",
       "De volta ao que foi acordado: Fase 1. O resto pode esperar.",
-      "O cliente estava com dois meses de atraso nos pagamentos, enquanto os nossos recursos de desenvolvimento continuavam a trabalhar para ele.",
     ],
     scope: { base: "FASE 1", extras: ["X", "Y", "Z", "..."] },
     process: ["OUVIR", "IDENTIFICAR A DECISÃO", "AS PESSOAS CERTAS", "PROPOR UM CAMINHO VIÁVEL", "CONFIRMAR", "DOCUMENTAR", "REVER SE NECESSÁRIO"],
     principle: ["Uma boa implementação não é tudo o que o cliente consegue imaginar.", "É saber o que tem de acontecer agora — e o que pode esperar."],
     returnAction: "VOLTAR AO ÂMBITO ACORDADO",
-    commercial: {
-      account: "CONTA",
-      overdue: "PAGAMENTO EM ATRASO",
-      duration: "2 MESES",
-      resources: "RECURSOS DE DESENVOLVIMENTO",
-      active: "ATIVOS",
-      ask: "O que recomendarias?",
-      answer: "Depois de várias tentativas de regularizar a conta, recomendei pausar o desenvolvimento adicional até o pagamento estar resolvido.",
-    },
   },
 
   health: {
@@ -247,7 +239,7 @@ export const pt: Copy = {
       "Enviei os problemas à engenharia com todo o contexto.",
       "Levei as decisões às pessoas certas.",
     ],
-    closing: "O resto ouve-se melhor deles. Terei gosto em partilhar referências.",
+    closing: "As implementações não têm sucesso sozinhas.",
     excerpts: [] as { text: string; attribution?: string }[],
   },
 
@@ -255,8 +247,8 @@ export const pt: Copy = {
     heading: "O QUE PEDISTE → O QUE MOSTREI",
     relHeading: "VISOR × MARTA",
     facts: {
-      projects: "Agente de IA para um cliente imobiliário. Construído com um developer, em produção, e o cliente continuou.",
-      decisions: "Projeto de construção: âmbito de volta à Fase 1, e desenvolvimento adicional pausado numa conta em atraso.",
+      projects: "Agente de IA para uma pequena equipa imobiliária: cerca de metade dos ~350 contactos mensais automatizados. Construído com um developer, em produção, e o cliente continuou.",
+      decisions: "Cliente de construção (cerca de dez pessoas, ~700 contactos por mês, nada digitalizado): âmbito acordado, de volta à Fase 1, e aprovado pelo cliente.",
       results: "Uma vista de saúde do cliente que construí por iniciativa própria e apresentei à liderança. Um cliente sinalizado renovou posteriormente.",
       team: "Problemas enviados à engenharia com todo o contexto. Soluções construídas em conjunto com um developer.",
     },
@@ -267,7 +259,7 @@ export const pt: Copy = {
       { label: "RELAÇÃO", value: "ABERTA" },
     ],
     future: "FUTURO",
-    typed: "Disponível para a próxima oportunidade.",
+    typed: "Se abrir outra vaga, adorava ser considerada.",
   },
 
   ending: {
@@ -275,8 +267,9 @@ export const pt: Copy = {
     lines: ["Deste-me feedback.", "Fiz algo com ele."],
     hero: "Costumo começar antes de alguém me pedir.",
     thanks: "Obrigada pelo sinal, Catarina.",
+    like: "Gostei mesmo da equipa e do espírito.",
     name: "Marta Lopes",
-    role: "Customer Success · Implementação · Growth",
+    role: "Implementation Specialist · Customer Success",
     underTheHood: { label: "Por dentro →", href: "/under-the-hood" },
     links: [
       { label: "LinkedIn", href: "#linkedin-placeholder" },
@@ -291,7 +284,7 @@ export const underTheHoodPt = {
   cases: [
     {
       kicker: "CASO 01 · PROJETOS",
-      title: "Agente de IA para um cliente imobiliário",
+      title: "Agente de IA para uma pequena equipa imobiliária",
       problem: "Responder a pedidos sobre imóveis (voz / WhatsApp) e transformar o interesse qualificado em ação.",
       did: [
         "Trouxe o cliente; tratei de vendas / discovery, requisitos, comunicação com o cliente, testes e formação.",
@@ -300,19 +293,18 @@ export const underTheHoodPt = {
         "Depois do lançamento, um pedido devolveu informação incompleta. Reproduzi-o, inspecionei a transcrição, isolei as possibilidades e escalei para a engenharia com todo o contexto (conta, conversa, gravação, comportamento reportado / esperado / reproduzido, conclusões).",
       ],
       outcome: ["Utilizadores reais em produção.", "O cliente continuou; a continuação foi assinada antes de eu sair.", "Ficaram algumas limitações do produto, incluindo a qualidade da síntese de voz."],
-      numbers: [] as string[],
+      numbers: ["Cerca de 350 contactos por mês (aproximado).", "Cerca de 50% tratados automaticamente (aproximado)."],
       different: "",
     },
     {
       kicker: "CASO 02 · DECISÕES",
-      title: "Âmbito e juízo comercial, cliente de construção",
-      problem: "Os stakeholders puxavam o projeto em direções diferentes e o âmbito não parava de crescer.",
+      title: "Pôr uma equipa de acordo sobre o âmbito, cliente de construção",
+      problem: "Uma equipa de cerca de dez pessoas, uns 700 contactos por mês, nada partilhado nem digitalizado, e cada um com uma ideia diferente do processo e do que o projeto devia incluir.",
       did: [
         "Ouvi, identifiquei a decisão real, trouxe as pessoas certas, propus um caminho viável, confirmei-o e documentei-o.",
         "Voltei a pôr o projeto na Fase 1 acordada e deixei o resto para depois.",
-        "Com a conta dois meses em atraso, e depois de várias tentativas de a regularizar, recomendei pausar o desenvolvimento adicional até o pagamento estar resolvido.",
       ],
-      outcome: [] as string[],
+      outcome: ["O cliente aprovou a Fase 1 acordada."],
       numbers: [] as string[],
       different: "",
     },

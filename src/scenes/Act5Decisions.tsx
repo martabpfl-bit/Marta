@@ -12,7 +12,6 @@ import { MaskText } from "@/components/MaskText";
 import { StakeholderChaos } from "@/components/StakeholderChaos";
 import { ScopeController } from "@/components/ScopeController";
 import { EvidenceTracker } from "@/components/EvidenceTracker";
-import { StatusIndicator } from "@/components/StatusIndicator";
 
 /**
  * ACT V — CASE 02 / DECISIONS
@@ -21,19 +20,19 @@ import { StatusIndicator } from "@/components/StatusIndicator";
  */
 export function Act5Decisions() {
   const c = copy.case2;
-  const T = 118;
+  const T = 88;
   const GATE = { at: 56, end: 63 };
   const ctxRef = useRef<SceneCtx | null>(null);
-  const marks = useRef({ total: T, decisions: 107, gate: GATE.end });
+  const marks = useRef({ total: T, decisions: 77, gate: GATE.end });
   const ref = useScene({
-    vh: 820,
+    vh: 640,
     mobileVh: 640,
     build(tl, ctx) {
       ctxRef.current = ctx;
       const { q } = ctx;
       const stmts = q("[data-stmt]");
       gsap.set(q("[data-plain]"), { autoAlpha: 0 });
-      gsap.set(q("[data-stmt], [data-extra], [data-return], [data-proc], [data-line], #a5-ans, [data-com]"), { autoAlpha: 0 });
+      gsap.set(q("[data-stmt], [data-extra], [data-return], [data-proc], [data-line]"), { autoAlpha: 0 });
       gsap.set(q("[data-line]"), { scaleY: 0, transformOrigin: "top" });
       gsap.set(q("[data-fill]"), { scale: (i: number, el: Element) => (el.getAttribute("data-on") === "true" ? 1 : 0) });
 
@@ -90,25 +89,17 @@ export function Act5Decisions() {
       hide(tl, q("[data-return]"), GATE.end, 0.8);
       hide(tl, "#a5-scope", 70, 1.2);
 
-      // ── commercial judgment — calm and factual
-      show(tl, "#a5-com", 71.5, 0.8);
-      tl.to(q("[data-com]"), { autoAlpha: 1, duration: 1, stagger: 1.4 }, 72);
-      show(tl, "#a5-ask", 79, 0.1);
-      maskIn(tl, "#a5-ask", 79.5, 3, 0.1);
-      tl.to(q("#a5-com"), { opacity: 0.2, duration: 1.2 }, 80);
-      hide(tl, "#a5-ask", 88, 1);
-      show(tl, "#a5-ans", 89, 2);
-      hide(tl, "#a5-com, #a5-ans", 101, 1.5);
+      // (the overdue-payment segment was removed — it had no outcome and read as a dispute)
+      tl.shiftChildren(-30, false, 102);
 
       // ── DECISIONS ○ → ●
       show(tl, "#a5-evid", 103, 1);
       tl.to(q('[data-fill="decisions"]'), { scale: 1, duration: 1.4, ease: "back.out(2)" }, 106);
       tl.to(q("[data-count-n]"), { textContent: 2, snap: { textContent: 1 }, duration: 0.1 }, 106);
       // centred context sentences (inserted last; they push later beats back)
-      const n2 = insertContext(tl, "a5b", c.ctxB.length, 70.5);
       const n1 = insertContext(tl, "a5a", c.ctxA.length, 13.5);
-      marks.current = { total: T + n1 + n2, decisions: 107 + n1 + n2, gate: GATE.end + n1 };
-      tl.to({}, { duration: 0.001 }, T + n1 + n2);
+      marks.current = { total: T + n1, decisions: 77 + n1, gate: GATE.end + n1 };
+      tl.to({}, { duration: 0.001 }, T + n1);
     },
     onProgress(p) {
       store.setEvidence("decisions", p >= marks.current.decisions / marks.current.total);
@@ -126,7 +117,6 @@ export function Act5Decisions() {
         </div>
 
         <ContextBeats prefix="a5a" items={c.ctxA} />
-        <ContextBeats prefix="a5b" items={c.ctxB} />
         <PlainWords id="a5-plain" lines={c.plain} />
         <div className="beat a5-chaos" id="a5-chaos" data-beat>
           <StakeholderChaos />
@@ -151,28 +141,6 @@ export function Act5Decisions() {
         <div className="beat" id="a5-principle" data-beat>
           <MaskText id="a5-p1" as="p" className="h-lg" text={c.principle[0]} />
           <MaskText id="a5-p2" as="p" className="h-lg a5-p2" text={c.principle[1]} />
-        </div>
-
-        <div className="beat a5-com" id="a5-com" data-beat>
-          <div className="com-col" data-com>
-            <p className="mono">{c.commercial.account}</p>
-            <StatusIndicator tone="bad" className="com-big">
-              {c.commercial.overdue}
-            </StatusIndicator>
-            <p className="mono">{c.commercial.duration}</p>
-          </div>
-          <div className="com-col" data-com>
-            <p className="mono">{c.commercial.resources}</p>
-            <StatusIndicator tone="good" className="com-big">
-              {c.commercial.active}
-            </StatusIndicator>
-          </div>
-        </div>
-        <div className="beat beat--upper" id="a5-ask" data-beat>
-          <MaskText as="h2" className="h-xl" text={c.commercial.ask} />
-        </div>
-        <div className="beat beat--lower" id="a5-ans" data-beat>
-          <p className="a5-ans">{c.commercial.answer}</p>
         </div>
 
         <div className="beat beat--left" id="a5-evid" data-beat>
