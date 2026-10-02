@@ -1,11 +1,14 @@
 "use client";
 import { copy } from "@/content/copy";
 import { useStore } from "@/lib/store";
+import { useLang } from "@/lib/useLang";
+import { setLang } from "@/lib/lang";
 import { SoundControl } from "./SoundControl";
 
-/** Persistent system chrome: relationship id + the four-part evidence read-out + sound. */
+/** Persistent system chrome: relationship id + the four-part evidence read-out + language + sound. */
 export function SignalHeader() {
   const { evidence, chrome } = useStore((s) => s);
+  const lang = useLang();
   const n = copy.evidence.keys.filter((k) => evidence[k]).length;
   return (
     <header className="sh" data-visible={chrome}>
@@ -14,12 +17,21 @@ export function SignalHeader() {
         {copy.evidence.keys.map((k) => (
           <li key={k} data-on={evidence[k]}>
             <i aria-hidden="true" />
-            <span>{copy.evidence.labels[k].replace(" CONTRIBUTION", "")}</span>
+            <span>{copy.evidence.short[k]}</span>
           </li>
         ))}
         <li className="sh-n">{n} / 4</li>
       </ul>
-      <SoundControl />
+      <div className="sh-right">
+        <div className="lang mono" role="group" aria-label="Language">
+          {(["pt", "en"] as const).map((l) => (
+            <button key={l} type="button" aria-pressed={lang === l} onClick={() => setLang(l)}>
+              {l.toUpperCase()}
+            </button>
+          ))}
+        </div>
+        <SoundControl />
+      </div>
     </header>
   );
 }

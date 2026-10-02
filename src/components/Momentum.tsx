@@ -2,6 +2,7 @@
 import { useEffect, useLayoutEffect, useState } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { useStore } from "@/lib/store";
+import { copy } from "@/content/copy";
 
 /** Journey progress line, first-scroll cue, and headlines that lean into the scroll. */
 export function Momentum() {
@@ -39,7 +40,7 @@ export function Momentum() {
     <>
       <i className="pbar" aria-hidden="true" />
       <p className="cue mono" data-hide={scrolled || !ready} aria-hidden="true">
-        Scroll
+        {copy.ui.scroll}
         <i />
       </p>
     </>

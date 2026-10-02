@@ -97,7 +97,7 @@ export function Act7Meta() {
 function Tile({ tone, className = "" }: { tone: (typeof TONES)[number]; className?: string }) {
   return (
     <div className={`a7-tile ${className}`}>
-      <p className="mono a7-acc">ACCOUNT</p>
+      <p className="mono a7-acc">{copy.ui.account}</p>
       <i className="bar" style={{ width: "58%" }} />
       <i className="bar" style={{ width: "34%" }} />
       <StatusIndicator tone={tone} />

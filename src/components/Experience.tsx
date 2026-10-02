@@ -2,6 +2,8 @@
 import { useEffect, useLayoutEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { store } from "@/lib/store";
+import { useLang } from "@/lib/useLang";
+import { initLang } from "@/lib/lang";
 import { Preloader } from "./Preloader";
 import { SignalHeader } from "./SignalHeader";
 import { Ambient } from "./Ambient";
@@ -21,6 +23,21 @@ import { Act10Reveal } from "@/scenes/Act10Ending";
 
 /** Narrative route, in order. Each scene owns its own pinned, scrubbed timeline. */
 export function Experience() {
+  const lang = useLang();
+  // pick the saved / browser language before first paint (the preloader is still covering the page)
+  useLayoutEffect(() => {
+    initLang();
+  }, []);
+  return (
+    <>
+      <Preloader />
+      <Stage key={lang} />
+    </>
+  );
+}
+
+/** Everything that depends on the active language. Remounted when it changes so all copy is re-read. */
+function Stage() {
   const offRef = useRef(false);
   // header chrome: visible from the diagnosis until the team scene (which removes all dashboard language)
   useLayoutEffect(() => {
@@ -57,7 +74,6 @@ export function Experience() {
   void gsap;
   return (
     <>
-      <Preloader />
       <Ambient />
       <div className="grain" aria-hidden="true" />
       <Momentum />

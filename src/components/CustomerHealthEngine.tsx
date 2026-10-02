@@ -54,12 +54,15 @@ export function CustomerHealthEngine({ mobile }: { mobile: boolean }) {
           strokeDashoffset={circ}
           transform={`rotate(-90 ${L.engine.x} ${L.engine.y})`}
         />
-        <text className="che-core" textAnchor="middle" x={L.engine.x} y={L.engine.y - 2}>
-          CUSTOMER
-        </text>
-        <text className="che-core" textAnchor="middle" x={L.engine.x} y={L.engine.y + 14}>
-          HEALTH
-        </text>
+        {(() => {
+          const w = copy.health.engine.split(" ");
+          const cut = Math.ceil(w.length / 2);
+          return [w.slice(0, cut).join(" "), w.slice(cut).join(" ")].map((line, i) => (
+            <text key={i} className="che-core" textAnchor="middle" x={L.engine.x} y={L.engine.y - 2 + i * 16}>
+              {line}
+            </text>
+          ));
+        })()}
       </g>
       <RiskSignal x={L.risk.x} y={L.risk.y} label={copy.health.risk} />
     </svg>

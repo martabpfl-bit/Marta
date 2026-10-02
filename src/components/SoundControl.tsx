@@ -1,9 +1,10 @@
 "use client";
 import { useState } from "react";
 import { audio } from "@/lib/audio";
+import { copy } from "@/content/copy";
 
 export function SoundControl() {
-  const [on, setOn] = useState(false);
+  const [on, setOn] = useState(audio.isEnabled());
   return (
     <button
       type="button"
@@ -14,7 +15,7 @@ export function SoundControl() {
         setOn(!on);
       }}
     >
-      Sound {on ? "on" : "off"}
+      {on ? copy.ui.soundOn : copy.ui.soundOff}
     </button>
   );
 }

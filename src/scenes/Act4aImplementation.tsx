@@ -189,7 +189,7 @@ export function Act4aImplementation() {
           {c.kicker} · {c.client}
         </p>
         <div className="beat a4-plain" id="a4a-plain" data-beat>
-          <p className="mono">In plain words</p>
+          <p className="mono">{copy.ui.plainWords}</p>
           {c.plain.map((t, i) => (
             <p className="a4-plain-t" data-plain={i} key={t}>
               {t}

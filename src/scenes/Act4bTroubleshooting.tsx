@@ -59,7 +59,7 @@ export function Act4bTroubleshooting() {
         <PlainWords id="a4b-plain" lines={plain} />
         <div className="beat a4b-chat" id="a4b-chat" data-beat>
           <p className="a4b-status mono" id="a4b-ok">
-            <StatusIndicator tone="good">LIVE · HEALTHY</StatusIndicator>
+            <StatusIndicator tone="good">{copy.ui.live}</StatusIndicator>
           </p>
           <div className="cb">
             <p className="cb-q mono" id="a4b-q" />

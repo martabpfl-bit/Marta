@@ -43,7 +43,7 @@ export function Act10Reveal() {
       <div className="stage">
         <div className="beat" id="a10-red" data-beat>
           <p className="mono" id="a10-redk" style={{ marginBottom: "3vh" }}>
-            How I work
+            {copy.ui.howIWork}
           </p>
           <ol className="reduce">
             {e.reduction.map((r, i) => (

@@ -131,7 +131,7 @@
 .reduce svg { width: 10px; height: 24px; }
 .reduce path { stroke: var(--mute); stroke-width: 1.2; }
 .a10-l2 { margin-top: 0.2em; color: var(--mute); }
-.a10-hero { font-size: clamp(2.6rem, 8.2vw, 8.8rem); max-width: 15ch; }
+.a10-hero { font-size: clamp(2.4rem, 6.6vw, 7.4rem); max-width: 18ch; }
 .a10-sign { gap: 0.55em; }
 .a10-thanks { font-size: clamp(0.95rem, 1.5vw, 1.25rem); color: var(--mute); }
 .a10-name { font-size: clamp(1.1rem, 1.8vw, 1.5rem); letter-spacing: -0.01em; }
@@ -226,3 +226,5 @@ html[data-motion="reduce"] .plain-t { position: static; }
 .et--recap .et-label { font-size: clamp(1.6rem, 3.6vw, 3.2rem); }
 .et--recap .et-list { gap: 3.2vh; }
 #a9-board .rs-head { margin-bottom: 0; }
+.uth-top { display: flex; justify-content: space-between; align-items: center; }
+.lang--light button { color: #090909; }
