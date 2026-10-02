@@ -65,7 +65,7 @@ export function Act8Team() {
         </div>
         <div className="beat beat--lower a8-pr" id="a8-pr" data-beat>
           <ul>
-            {t.principles.map((p) => (
+            {t.recap.map((p) => (
               <li key={p} data-pr>
                 {p}
               </li>

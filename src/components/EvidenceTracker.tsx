@@ -9,8 +9,10 @@ export function EvidenceTracker({
   filled = [],
   detail = false,
   statusText = copy.act3.status,
+  facts,
   className = "",
 }: {
+  facts?: Record<EvidenceKey, string>;
   filled?: EvidenceKey[];
   detail?: boolean;
   statusText?: string;
@@ -27,6 +29,7 @@ export function EvidenceTracker({
               <i className="et-fill" data-fill={k} data-on={filled.includes(k)} />
             </span>
             <span className="et-label">{copy.evidence.labels[k]}</span>
+            {facts && <span className="et-fact">{facts[k]}</span>}
             {detail && (
               <>
                 <span className="et-sub mono" data-sub>

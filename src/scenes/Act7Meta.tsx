@@ -15,7 +15,7 @@ const TONES = ["good", "good", "warn", "good", "good", "good", "warn", "good", "
  */
 export function Act7Meta() {
   const m = copy.meta7;
-  const T = 84;
+  const T = 98;
   const ref = useScene({
     vh: 480,
     build(tl, { q, root }) {
@@ -24,7 +24,7 @@ export function Act7Meta() {
       const center = root.querySelector<HTMLElement>(".a7-center")!;
       gsap.set(q(".a7-tile:not(.a7-center)"), { autoAlpha: 0 });
       gsap.set(world, { scale: 4.2, transformOrigin: "50% 50%" });
-      gsap.set(q("#a7-q, #a7-x"), { autoAlpha: 0 });
+      gsap.set(q("#a7-q, #a7-x, #a7-why"), { autoAlpha: 0 });
 
       // pull back
       show(tl, q(".a7-world"), 0, 0.01);
@@ -44,8 +44,13 @@ export function Act7Meta() {
       show(tl, "#a7-q", 55, 0.1);
       maskIn(tl, "#a7-q", 55, 3.5, 0.12);
       hide(tl, "#a7-q", 70, 1.2);
+      tl.to(world, { opacity: 0.1, duration: 2 }, 71);
       show(tl, "#a7-x", 72, 0.1);
       maskIn(tl, "#a7-x", 72, 2.2, 0.12);
+      hide(tl, "#a7-x", 80, 1.2);
+      show(tl, "#a7-why", 81.5, 0.1);
+      maskIn(tl, "#a7-why-1", 81.5, 2.4, 0.1);
+      maskIn(tl, "#a7-why-2", 86, 3, 0.05);
       tl.to({}, { duration: 0.001 }, T);
       void center;
     },
@@ -80,6 +85,10 @@ export function Act7Meta() {
         <div className="beat a7-text" id="a7-x" data-beat>
           <MaskText as="h2" className="display" text={m.exactly} />
         </div>
+        <div className="beat" id="a7-why" data-beat>
+          <MaskText id="a7-why-1" as="h2" className="h-xl" text={m.why[0]} />
+          <MaskText id="a7-why-2" as="p" className="h-lg a7-why" text={m.why[1]} />
+        </div>
       </div>
     </section>
   );
@@ -88,6 +97,7 @@ export function Act7Meta() {
 function Tile({ tone, className = "" }: { tone: (typeof TONES)[number]; className?: string }) {
   return (
     <div className={`a7-tile ${className}`}>
+      <p className="mono a7-acc">ACCOUNT</p>
       <i className="bar" style={{ width: "58%" }} />
       <i className="bar" style={{ width: "34%" }} />
       <StatusIndicator tone={tone} />

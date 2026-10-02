@@ -236,3 +236,5 @@
   .che-sig { font-size: 11px; letter-spacing: 0.06em; }
   .che-core { font-size: 11px; }
 }
+.et-fact { grid-area: sub; margin-top: 0.5em; font-size: clamp(0.9rem, 1.3vw, 1.1rem); line-height: 1.35; color: var(--mute); max-width: 56ch; }
+@media (max-width: 767px) { .et-fact { grid-area: sub; } }

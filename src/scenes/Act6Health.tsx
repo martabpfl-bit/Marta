@@ -2,7 +2,10 @@
 import { copy } from "@/content/copy";
 import { gsap } from "@/lib/gsap";
 import { useScene } from "@/lib/useScene";
-import { show, hide, maskIn, draw, packet } from "@/lib/beats";
+import { show, hide, maskIn, draw, packet, plainLine, insertContext } from "@/lib/beats";
+import { PlainWords } from "@/components/PlainWords";
+import { ContextBeats } from "@/components/ContextBeats";
+import { useRef } from "react";
 import { store } from "@/lib/store";
 import { audio } from "@/lib/audio";
 import { useIsMobile } from "@/lib/useMedia";
@@ -21,12 +24,14 @@ export function Act6Health() {
   const h = copy.health;
   const mobile = useIsMobile();
   const T = 164;
+  const marks = useRef({ total: T, results: 157, risk: 53.4 });
   const ref = useScene({
     vh: 940,
     mobileVh: 800,
     build(tl, { q, root }) {
       const n = h.signals.length;
       const circ = (id: string) => root.querySelector<SVGGeometryElement>(id);
+      gsap.set(q("[data-plain]"), { autoAlpha: 0 });
       gsap.set(q("[data-sig], [data-engine], [data-risk-label], .rk circle, [data-step-r], [data-step-p], [data-int], [data-adopt], #a6-found"), { autoAlpha: 0 });
       gsap.set(q(".rk circle"), { autoAlpha: 0.18 });
       gsap.set(q("[data-fill]"), { scale: (i: number, el: Element) => (el.getAttribute("data-on") === "true" ? 1 : 0) });
@@ -40,6 +45,8 @@ export function Act6Health() {
       hide(tl, "#a6-o2", 25, 1.5);
 
       // ── convergence
+      show(tl, "#a6-plain", 26.5, 0.4);
+      plainLine(tl, q, 0, 27, 66);
       show(tl, "#a6-engine", 27, 0.6);
       show(tl, q("[data-engine]"), 27, 1.5);
       for (let i = 0; i < n; i++) {
@@ -94,12 +101,15 @@ export function Act6Health() {
       tl.to(q('[data-fill="results"]'), { scale: 1, duration: 1.4, ease: "back.out(2)" }, 156);
       tl.to(q("[data-count-n]"), { textContent: 3, snap: { textContent: 1 }, duration: 0.1 }, 156);
       show(tl, q("#a6-found"), 156.5, 1);
-      tl.to({}, { duration: 0.001 }, T);
+      const n2 = insertContext(tl, "a6b", h.ctxB.length, 105.5);
+      const n1 = insertContext(tl, "a6a", h.ctxA.length, 26);
+      marks.current = { total: T + n1 + n2, results: 157 + n1 + n2, risk: 53.4 + n1 };
+      tl.to({}, { duration: 0.001 }, T + n1 + n2);
       void mobile;
     },
     onProgress(p) {
-      store.setEvidence("results", p >= 157 / T);
-      audio.once("a6-risk", "signal", p >= 53.4 / T && p < 66 / T);
+      store.setEvidence("results", p >= marks.current.results / marks.current.total);
+      audio.once("a6-risk", "signal", p >= marks.current.risk / marks.current.total && p < (marks.current.risk + 12) / marks.current.total);
     },
   });
 
@@ -113,6 +123,9 @@ export function Act6Health() {
           <MaskText as="h2" className="h-xl" text={h.open[1]} />
         </div>
 
+        <ContextBeats prefix="a6a" items={h.ctxA} />
+        <ContextBeats prefix="a6b" items={h.ctxB} />
+        <PlainWords id="a6-plain" lines={h.plain} />
         <div className="beat a6-engine" id="a6-engine" data-beat>
           <CustomerHealthEngine mobile={mobile} />
         </div>

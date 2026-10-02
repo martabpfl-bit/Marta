@@ -2,7 +2,9 @@
 import { copy } from "@/content/copy";
 import { gsap } from "@/lib/gsap";
 import { useScene } from "@/lib/useScene";
-import { show, hide, maskIn, maskOut } from "@/lib/beats";
+import { show, hide, maskIn, plainLine, insertContext } from "@/lib/beats";
+import { PlainWords } from "@/components/PlainWords";
+import { ContextBeats } from "@/components/ContextBeats";
 import { store } from "@/lib/store";
 import { useRef } from "react";
 import type { SceneCtx } from "@/lib/useScene";
@@ -22,13 +24,15 @@ export function Act5Decisions() {
   const T = 118;
   const GATE = { at: 56, end: 63 };
   const ctxRef = useRef<SceneCtx | null>(null);
+  const marks = useRef({ total: T, decisions: 107, gate: GATE.end });
   const ref = useScene({
-    vh: 760,
+    vh: 820,
     mobileVh: 640,
     build(tl, ctx) {
       ctxRef.current = ctx;
       const { q } = ctx;
       const stmts = q("[data-stmt]");
+      gsap.set(q("[data-plain]"), { autoAlpha: 0 });
       gsap.set(q("[data-stmt], [data-extra], [data-return], [data-proc], [data-line], #a5-ans, [data-com]"), { autoAlpha: 0 });
       gsap.set(q("[data-line]"), { scaleY: 0, transformOrigin: "top" });
       gsap.set(q("[data-fill]"), { scale: (i: number, el: Element) => (el.getAttribute("data-on") === "true" ? 1 : 0) });
@@ -41,6 +45,9 @@ export function Act5Decisions() {
       hide(tl, "#a5-open", 13, 1.2);
 
       // ── chaos: slow at first, then stacking up
+      show(tl, "#a5-plain", 14.5, 0.4);
+      plainLine(tl, q, 0, 15, 30);
+      plainLine(tl, q, 1, 31, 42);
       show(tl, "#a5-chaos", 15, 0.4);
       show(tl, "#a5-scope", 15, 0.4);
       const times = [15, 18, 20.5, 22.5, 24, 25.2, 26.2, 27, 27.7, 28.3];
@@ -77,6 +84,7 @@ export function Act5Decisions() {
       // ── return to agreed scope (gate)
       hide(tl, "#a5-principle", 54, 1.2);
       show(tl, q("[data-return]"), 55, 1);
+      plainLine(tl, q, 2, 55, 70);
       tl.to(q("[data-extra]"), { autoAlpha: 0, maxWidth: 0, duration: 1.1, stagger: 0.7 }, GATE.at + 2);
       tl.to(q("[data-scope]"), { scale: 1, duration: 4, ease: "power2.out" }, GATE.at + 2);
       hide(tl, q("[data-return]"), GATE.end, 0.8);
@@ -96,10 +104,14 @@ export function Act5Decisions() {
       show(tl, "#a5-evid", 103, 1);
       tl.to(q('[data-fill="decisions"]'), { scale: 1, duration: 1.4, ease: "back.out(2)" }, 106);
       tl.to(q("[data-count-n]"), { textContent: 2, snap: { textContent: 1 }, duration: 0.1 }, 106);
-      tl.to({}, { duration: 0.001 }, T);
+      // centred context sentences (inserted last; they push later beats back)
+      const n2 = insertContext(tl, "a5b", c.ctxB.length, 70.5);
+      const n1 = insertContext(tl, "a5a", c.ctxA.length, 13.5);
+      marks.current = { total: T + n1 + n2, decisions: 107 + n1 + n2, gate: GATE.end + n1 };
+      tl.to({}, { duration: 0.001 }, T + n1 + n2);
     },
     onProgress(p) {
-      store.setEvidence("decisions", p >= 107 / T);
+      store.setEvidence("decisions", p >= marks.current.decisions / marks.current.total);
     },
   });
   return (
@@ -113,11 +125,14 @@ export function Act5Decisions() {
           </p>
         </div>
 
+        <ContextBeats prefix="a5a" items={c.ctxA} />
+        <ContextBeats prefix="a5b" items={c.ctxB} />
+        <PlainWords id="a5-plain" lines={c.plain} />
         <div className="beat a5-chaos" id="a5-chaos" data-beat>
           <StakeholderChaos />
         </div>
         <div className="beat a5-scope" id="a5-scope" data-beat>
-          <ScopeController onReturn={() => ctxRef.current?.scrollTo(GATE.end / T, 2.4)} />
+          <ScopeController onReturn={() => ctxRef.current?.scrollTo(marks.current.gate / marks.current.total, 2.4)} />
         </div>
 
         <div className="beat a5-proc" id="a5-proc" data-beat>

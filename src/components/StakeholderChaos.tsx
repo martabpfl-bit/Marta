@@ -2,8 +2,8 @@ import { copy } from "@/content/copy";
 
 // scattered start positions (% of stage). Echoes repeat the same lines so the screen overlaps.
 const POS = [
-  { l: 8, t: 18 }, { l: 52, t: 12 }, { l: 22, t: 46 }, { l: 62, t: 40 }, { l: 38, t: 70 },
-  { l: 58, t: 66 }, { l: 6, t: 64 }, { l: 44, t: 28 }, { l: 70, t: 22 }, { l: 28, t: 82 },
+  { l: 8, t: 26 }, { l: 52, t: 22 }, { l: 22, t: 46 }, { l: 62, t: 40 }, { l: 38, t: 66 },
+  { l: 58, t: 62 }, { l: 6, t: 60 }, { l: 44, t: 32 }, { l: 66, t: 28 }, { l: 28, t: 72 },
 ];
 
 /** Statements arriving from every direction, then reorganised. Quotes here are *characterisations*, not real quotes. */

@@ -74,3 +74,29 @@ export function swap(tl: gsap.core.Timeline, out: T, inn: T, at: number, dur = 0
   hide(tl, out, at, dur);
   show(tl, inn, at + dur * 0.6, dur);
 }
+
+/** "In plain words" captions: hide all lines up front, then call plainLine() to show one for a stretch. */
+export function plainLine(tl: gsap.core.Timeline, q: gsap.utils.SelectorFunc, i: number, at: number, until: number) {
+  show(tl, q(`[data-plain="${i}"]`), at, 0.8);
+  hide(tl, q(`[data-plain="${i}"]`), until, 0.8);
+}
+
+/**
+ * Insert centred "context" sentences into an already-built timeline at `at`.
+ * Everything from `at` onwards is pushed later; returns how many units were inserted.
+ * Beats must exist as #`${prefix}-c${i}` (see ContextBeats).
+ */
+export function insertContext(tl: gsap.core.Timeline, prefix: string, count: number, at: number, per = 8) {
+  const N = count * per;
+  tl.shiftChildren(N, false, at);
+  for (let i = 0; i < count; i++) {
+    const id = `#${prefix}-c${i}`;
+    const t = at + i * per;
+    show(tl, id, t, 0.1);
+    tl.fromTo(`${id} .ctx-k`, { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: 0.9, ease: "power3.out" }, t);
+    maskIn(tl, id, t + 0.5, 2.4, 0.05);
+    maskOut(tl, id, t + per - 1.8, 0.8, 0.01);
+    hide(tl, id, t + per - 0.9, 0.2);
+  }
+  return N;
+}

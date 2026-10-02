@@ -37,6 +37,9 @@ export function Act3Diagnosis() {
       <div className="stage">
         <div className="beat" id="a3-intro" data-beat>
           <MaskText as="h2" className="h-xl" text={copy.act3.intro} />
+          <p className="mono ctx-k" style={{ marginTop: "3vh" }}>
+            {copy.act3.introSub}
+          </p>
         </div>
         <div className="beat beat--left" id="a3-board" data-beat>
           <EvidenceTracker detail className="et--big" />

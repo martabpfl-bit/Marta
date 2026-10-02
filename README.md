@@ -100,3 +100,12 @@ Static prerender; fonts via `next/font` (swap); no video/images; SVG only. Watch
 - **False ending removed.** Closing line: "Available for the next opportunity." + **Under the hood →** (`/under-the-hood`, plain-text cases using only facts from Marta's brief; `numbers` / `different` sections appear once filled).
 - **Stronger motion:** per-act mood (base colour + drifting lights), grain, progress line, scroll cue, velocity lean on headlines, red flash + screen shake at the API blocker, shorter pacing (`PACE` in `useScene.ts`).
 - Images: Unsplash reachable from the build environment, search is not. No photos used yet; backgrounds are code-generated.
+
+## v3 — clarity pass
+
+- Case 01 gets plain-words context screens before the diagram + "In plain words" captions while it plays.
+- Centred explanatory sentences added before the construction case, the customer-health view and the second problem; small captions kept for step-level detail.
+- Removed: Act II choice, false ending, final zoom-out map, fake logs/charts in troubleshooting, unlabeled squares in the retest.
+- Team act now only recaps what the page already showed (confirm: it ends with "Happy to share references" — `team.closing`).
+- Act IX is a "what you asked → what I showed" list, one factual line per request (`resolution.facts`; confirm the "presented to leadership" wording).
+- Act VII explains the reveal: "Your feedback was a signal. I handled it the way I handle a customer signal."

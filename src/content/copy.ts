@@ -60,6 +60,7 @@ export const copy = {
   act3: {
     signals: ["PROJECTS", "DECISIONS", "RESULTS", "TEAM CONTRIBUTION"],
     intro: "The four things you asked to see.",
+    introSub: "I’ll tick them off at the top of the screen as we go.",
     sub: "YOU ASKED TO SEE THIS",
     status: "LET ME SHOW YOU",
     lines: ["I could have replied with a better explanation.", "I thought showing you would be more useful."],
@@ -118,6 +119,15 @@ export const copy = {
       // Do NOT name the real source/provider here until legal/compliance wording is confirmed.
       altLabel: "ALTERNATIVE DATA ROUTE",
     },
+    ctx2: [{ k: "THE SECOND PROBLEM", t: "After launch, a customer asked about a property. The agent’s answer was missing information it should have had." }],
+    plain2: [
+      "After launch, a customer asked about a property. The agent’s answer was missing information it should have had.",
+      "So I treated it like a problem to solve, step by step.",
+    ],
+    plain3: [
+      "Then I sent engineering everything they needed in one message, so they could fix it faster.",
+      "Engineering made the fix. I tested the same question again.",
+    ],
     second: {
       searching: "Searching...",
       query: "Is there anything available in this development?", // PLACEHOLDER: replace with a real (anonymised) enquiry if desired
@@ -174,6 +184,14 @@ export const copy = {
       "“That needs to happen first.”",
       "“Can we add…”",
     ],
+    ctxA: [{ k: "THE PROBLEM", t: "Everyone wanted something different. The scope kept growing." }],
+    ctxB: [{ k: "THE COMMERCIAL SIDE", t: "The client was two months behind on payments. Our developers were still working for them." }],
+    plain: [
+      "Everyone wanted something different, and the project kept growing: Phase 1 became Phase 1 + X + Y + Z…",
+      "When that happens, I follow the same steps every time.",
+      "Back to what was agreed: Phase 1. The rest can wait.",
+      "The client was two months behind on payments, while our development resources kept working for them.",
+    ],
     scope: { base: "PHASE 1", extras: ["X", "Y", "Z", "..."] },
     process: [
       "LISTEN",
@@ -212,6 +230,12 @@ export const copy = {
       "Lifecycle stage",
       "Renewal proximity",
     ],
+    ctxA: [{ k: "THE IDEA", t: "Nine signals about each customer, combined into one health status: green, yellow or red." }],
+    ctxB: [{ k: "AN EXAMPLE", t: "On one account that turned yellow, I didn’t wait for the customer to complain." }],
+    plain: [
+      "I built a view that combines nine signals about each customer into one health status: green, yellow or red.",
+      "On one account that turned yellow:",
+    ],
     engine: "CUSTOMER HEALTH",
     risk: "RISK DETECTED",
     reactive: { title: "REACTIVE", steps: ["Customer complains", "Investigate", "Respond"] },
@@ -239,27 +263,35 @@ export const copy = {
     inputValue: "INTERVIEW FEEDBACK",
     recognise: "Recognise this one?",
     exactly: "Exactly.",
+    why: ["Your feedback was a signal.", "I handled it the way I handle a customer signal. This whole page is that process."],
   },
 
   // ───────────────────────── ACT VIII — TEAM
   team: {
     label: "TEAM CONTRIBUTION",
-    lines: ["There was one thing I couldn’t put on a dashboard.", "How I show up for a team."],
-    // PLACEHOLDER: these are soft principles, NOT facts. Replace with one real, concrete example of
-    // what you do for a team (a habit, a moment, something a colleague would recognise).
-    principles: [
-      "I bring problems with context, not just alarms.",
-      "I make the next person’s job easier.",
-      "I’d rather explain once and document it.",
+    lines: ["There was one thing I couldn’t put on a dashboard.", "How I work with a team."],
+    // Grounded in what the page already showed (all confirmed by Marta) — no new claims.
+    recap: [
+      "I built the technical solution together with a developer.",
+      "I sent problems to engineering with full context.",
+      "I took decisions to the right people.",
     ],
-    closing: "Implementations don’t succeed alone.",
-    // PLACEHOLDER: anonymised real message excerpts / screenshots, ONLY if the people agree. Leave EMPTY otherwise.
+    // PLACEHOLDER: confirm you are happy to offer references (and who).
+    closing: "The rest is better heard from them. Happy to share references.",
     excerpts: [] as { text: string; attribution?: string }[],
   },
 
   // ───────────────────────── ACT IX — RESOLUTION
   resolution: {
-    heading: "VISOR × MARTA",
+    heading: "WHAT YOU ASKED → WHAT I SHOWED",
+    relHeading: "VISOR × MARTA",
+    // One factual line per request. All from Marta's brief; "approved" wording is flagged in PLACEHOLDERS.
+    facts: {
+      projects: "AI agent for a real estate client. Built with a developer, in production, and the customer continued.",
+      decisions: "Construction project: scope back to Phase 1, and extra development paused on an overdue account.",
+      results: "A customer health view I built unprompted and presented to leadership. A flagged customer subsequently renewed.",
+      team: "Problems sent to engineering with full context. Solutions built together with a developer.",
+    },
     rows: ["PROJECTS", "DECISIONS", "RESULTS", "TEAM CONTRIBUTION"],
     complete: "INTERVENTION COMPLETE",
     status: [
@@ -272,17 +304,6 @@ export const copy = {
 
   // ───────────────────────── ACT X — FALSE ENDING + REVEAL
   ending: {
-    journey: [
-      { id: "feedback", label: "FEEDBACK" },
-      { id: "signal", label: "SIGNAL" },
-      { id: "architecture", label: "ARCHITECTURE" },
-      { id: "blocker", label: "API BLOCKER" },
-      { id: "troubleshooting", label: "TROUBLESHOOTING" },
-      { id: "stakeholders", label: "STAKEHOLDERS" },
-      { id: "health", label: "HEALTH SYSTEM" },
-      { id: "team", label: "TEAM" },
-    ],
-    center: "This website.",
     reduction: ["SIGNAL", "LISTEN", "INVESTIGATE", "UNDERSTAND", "ACT", "PRESERVE THE RELATIONSHIP"],
     lines: ["You gave me feedback.", "I did something with it."],
     hero: "I tend to start before someone asks me to.",
@@ -303,7 +324,7 @@ export type EvidenceKey = (typeof copy.evidence.keys)[number];
 /** Items that still need Marta's input. Surfaced in the build report. */
 export const PLACEHOLDERS = [
   "ending.links — LinkedIn + Portfolio URLs",
-  "team.principles — soft principles, NOT facts: replace with one real concrete example of how you work with a team",
+  "team.closing — confirms you are happy to offer references",
   "team.excerpts — anonymised real messages / screenshots, only with consent (empty = nothing shown)",
   "underTheHood — real tools, timelines, results and a short \"what I would do differently\" per case",
   "health.adoption.steps — exact organisational adoption wording",

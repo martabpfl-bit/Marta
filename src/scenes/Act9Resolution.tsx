@@ -45,15 +45,15 @@ export function Act9Resolution() {
     <section id="act-9" ref={ref} className="scene" aria-label="Act IX — Resolution">
       <div className="stage" id="a9-stage">
         <div className="beat beat--left" id="a9-board" data-beat>
-          <h2 className="rs-head display">{r.heading}</h2>
-          <EvidenceTracker filled={[]} className="et--big et--marks" />
+          <p className="mono recap-h">{r.heading}</p>
+          <EvidenceTracker filled={[]} facts={r.facts} className="et--big et--marks et--recap" />
         </div>
         <div className="beat" id="a9-done" data-beat>
           <MaskText as="h2" className="display" text={r.complete} />
         </div>
         <div className="beat" id="a9-rel" data-beat>
           <RelationshipStatus
-            heading={r.heading}
+            heading={r.relHeading}
             rows={[
               { label: r.status[0].label, value: r.status[0].value },
               { label: r.status[1].label, value: r.status[1].value },
