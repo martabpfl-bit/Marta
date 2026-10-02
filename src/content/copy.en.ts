@@ -131,41 +131,43 @@ export const en = {
       // Do NOT name the real source/provider here until legal/compliance wording is confirmed.
       altLabel: "ALTERNATIVE DATA ROUTE",
     },
-    ctx2: [{ k: "THE SECOND PROBLEM", t: "After launch, a customer asked about a property. The agent’s answer was missing information it should have had." }],
+    ctx2: [
+      { k: "AFTER GO-LIVE", t: "I stayed the client’s point of contact: a weekly meeting and a shared Slack channel. When something broke, I took it to the team." },
+      { k: "ONE EXAMPLE", t: "A customer asked about a property. The agent’s answer was missing information it should have had." },
+    ],
     plain2: [
       "After launch, a customer asked about a property. The agent’s answer was missing information it should have had.",
       "So I treated it like a problem to solve, step by step.",
     ],
     plain3: [
-      "Then I sent engineering everything they needed in one message, so they could fix it faster.",
+      "I wrote it up in Linear and Slack, with everything the team needed in one place.",
       "Engineering made the fix. I tested the same question again.",
     ],
     second: {
       searching: "Searching...",
       query: "Is there anything available in this development?", // PLACEHOLDER: replace with a real (anonymised) enquiry if desired
       missing: "EXPECTED INFORMATION MISSING",
-      line: "Going live isn’t the end of implementation.",
+      line: "After go-live, I stayed the client’s voice.",
     },
     troubleshooting: [
       { n: "01", label: "REPRODUCE", x: "I ran the same question again, to see it happen." },
       { n: "02", label: "INSPECT", x: "I read the conversation log." },
       { n: "03", label: "ISOLATE", x: "I narrowed down where it could be failing." },
       { n: "04", label: "FORM A HYPOTHESIS", x: "I formed a theory about the cause." },
-      { n: "05", label: "ESCALATE WITH CONTEXT", x: "I sent it to engineering with everything they needed." },
+      { n: "05", label: "ESCALATE WITH CONTEXT", x: "I sent it to the team in Linear and Slack with everything they needed." },
     ],
     isolate: ["DATA RETRIEVAL?", "INTEGRATION?", "PROMPT?", "RULES?"],
     handoff: {
       title: "ENGINEERING HANDOFF",
       fields: [
-        "Account",
-        "Conversation ID",
-        "Recording",
-        "Reported behaviour",
-        "Expected behaviour",
-        "Reproduced behaviour",
-        "Findings",
-        "Possible cause",
-        "Additional notes",
+        "Client and IDs",
+        "Link to the conversation",
+        "What happened",
+        "What was expected",
+        "My findings",
+        "The likely problem",
+        "What I already tried",
+        "Why it didn’t fix it",
       ],
       // The field *values* are intentionally abstract bars — real content is not supplied.
       quote: ["I didn’t want to forward problems.", "I wanted to make them easier to solve."],
@@ -179,7 +181,7 @@ export const en = {
     production: {
       title: "PRODUCTION",
       outcomes: ["Real users ✓", "About half of the ~350 monthly contacts handled automatically ✓", "Customer continued ✓", "Continuation signed before I left ✓"],
-      caveat: "Some product limitations remained, including text-to-speech quality.",
+      caveat: "For the Portuguese market, voice quality (speech-to-text and text-to-speech) was the limit. Prompts couldn’t fix it. The team met and agreed the model was still weak for Portuguese.",
     },
     found: "EVIDENCE FOUND",
   },
@@ -217,6 +219,25 @@ export const en = {
     ],
     principle: ["A good implementation isn’t everything the customer can imagine.", "It’s knowing what needs to happen now — and what can wait."],
     returnAction: "RETURN TO AGREED SCOPE",
+  },
+
+  // ───────────────────────── ACT V-b — NOBODY ASKED ME (growth). Figures are approximate, as Marta gave them.
+  growth: {
+    a: [
+      { k: "NOBODY ASKED ME", t: "The team wanted clients beyond the US. Nobody asked me to try Portugal. I did." },
+      { k: "THE WORK", t: "LinkedIn content, and direct conversations with up to 20 people a day, until LinkedIn’s message limit stopped me." },
+    ],
+    stats: [
+      { n: 20, pre: "", suf: "/day", l: "people contacted on LinkedIn, at my busiest" },
+      { n: 33, pre: "~", suf: "%", l: "became a meaningful conversation" },
+      { n: 20, pre: "~", suf: "", l: "meetings booked in two months" },
+    ],
+    b: [
+      { k: "BEYOND LINKEDIN", t: "I found a Customer Success summit, reached out to people who implement this, and invited two speakers onto our podcast. They came." },
+      { k: "PARTNERS", t: "I also spoke with agencies and consultants. Some of them brought us good clients." },
+      { k: "HONESTLY", t: "I started in the summer holidays. Conversations were good; closing was slow. A few big prospects reached advanced stages." },
+      { k: "THE RESULT", t: "That’s what led to my promotion." },
+    ],
   },
 
   // ───────────────────────── ACT VI — CUSTOMER HEALTH
@@ -291,7 +312,7 @@ export const en = {
     facts: {
       projects: "AI agent for a small real estate team: about half of ~350 monthly contacts automated. Built with a developer, in production, and the customer continued.",
       decisions: "Construction client (about ten people, ~700 contacts a month, nothing digitised): scope agreed, back to Phase 1, and approved by the client.",
-      results: "A customer health view I built unprompted and presented to leadership. A flagged customer subsequently renewed.",
+      results: "Opened the Portuguese market unprompted (~20 meetings in two months, partners, a podcast), which led to my promotion. Also built a customer health view unprompted.",
       team: "Problems sent to engineering with full context. Solutions built together with a developer.",
     },
     rows: ["PROJECTS", "DECISIONS", "RESULTS", "TEAM CONTRIBUTION"],
@@ -348,9 +369,10 @@ export const underTheHoodEn = {
         "Originated the client; ran sales / discovery, requirements, client communication, testing and training.",
         "Technical delivery together with a developer.",
         "When access to the original data source was lost, I investigated alternatives and we moved to a different data route.",
-        "After go-live, an enquiry returned incomplete information. I reproduced it, inspected the transcript, isolated the possibilities and escalated to engineering with full context (account, conversation, recording, reported / expected / reproduced behaviour, findings).",
+        "After go-live I stayed the client’s point of contact: a weekly meeting and a shared Slack channel.",
+        "When an enquiry returned incomplete information, I reproduced it, inspected the conversation, isolated the possibilities and wrote it up for the team in Linear and Slack: client and IDs, link to the conversation, what happened, what was expected, my findings, the likely problem, what I had already tried and why it didn’t fix it.",
       ],
-      outcome: ["Real users in production.", "The customer continued; the continuation was signed before I left.", "Some product limitations remained, including text-to-speech quality."],
+      outcome: ["Real users in production.", "The customer continued; the continuation was signed before I left.", "For the Portuguese market, voice quality (speech-to-text and text-to-speech) was the limit. Prompts couldn’t fix it; the team met and agreed the model was still weak for Portuguese."],
       numbers: ["About 350 contacts a month (approximate).", "About 50% of them handled automatically (approximate)."],
       different: "", // PLACEHOLDER: what you would do differently
     },
@@ -368,6 +390,19 @@ export const underTheHoodEn = {
     },
     {
       kicker: "CASE 03 · RESULTS",
+      title: "Opening the Portuguese market, before anyone asked",
+      problem: "The team wanted clients beyond the US. Nobody had asked me to try Portugal.",
+      did: [
+        "Created LinkedIn content and ran direct outreach (up to ~20 conversations a day, within LinkedIn’s message limits), to people on our target list and others.",
+        "Found a Customer Success summit, reached out to people who implement this, and invited two speakers onto our podcast. They came.",
+        "Spoke with agencies and consultants; some brought us good clients.",
+      ],
+      outcome: ["About a third of the conversations became meaningful ones.", "About 20 meetings booked in two months, more booked for later.", "A few big prospects reached advanced stages (I started in the summer holidays, so closing was slow).", "This is what led to my promotion."],
+      numbers: [] as string[],
+      different: "",
+    },
+    {
+      kicker: "CASE 04 · RESULTS",
       title: "A customer health view, built before anyone asked",
       problem: "I didn’t want “How is everything going?” to be how I found out something was wrong.",
       did: [

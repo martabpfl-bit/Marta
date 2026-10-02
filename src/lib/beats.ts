@@ -86,17 +86,17 @@ export function plainLine(tl: gsap.core.Timeline, q: gsap.utils.SelectorFunc, i:
  * Everything from `at` onwards is pushed later; returns how many units were inserted.
  * Beats must exist as #`${prefix}-c${i}` (see ContextBeats).
  */
+export function contextBeat(tl: gsap.core.Timeline, id: string, t: number, per = 8) {
+  show(tl, id, t, 0.1);
+  tl.fromTo(`${id} .ctx-k`, { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: 0.9, ease: "power3.out" }, t);
+  maskIn(tl, id, t + 0.5, 2.4, 0.05);
+  maskOut(tl, id, t + per - 1.8, 0.8, 0.01);
+  hide(tl, id, t + per - 0.9, 0.2);
+}
+
 export function insertContext(tl: gsap.core.Timeline, prefix: string, count: number, at: number, per = 8) {
   const N = count * per;
   tl.shiftChildren(N, false, at);
-  for (let i = 0; i < count; i++) {
-    const id = `#${prefix}-c${i}`;
-    const t = at + i * per;
-    show(tl, id, t, 0.1);
-    tl.fromTo(`${id} .ctx-k`, { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: 0.9, ease: "power3.out" }, t);
-    maskIn(tl, id, t + 0.5, 2.4, 0.05);
-    maskOut(tl, id, t + per - 1.8, 0.8, 0.01);
-    hide(tl, id, t + per - 0.9, 0.2);
-  }
+  for (let i = 0; i < count; i++) contextBeat(tl, `#${prefix}-c${i}`, at + i * per, per);
   return N;
 }

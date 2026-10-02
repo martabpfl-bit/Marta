@@ -18,6 +18,7 @@ const MOODS: Record<string, Mood> = {
   "act-4b": { base: "#0a0e18", ...SLATE },
   "act-4c": { base: "#07140d", ...GREEN },
   "act-5": { base: "#160e09", ...AMBER },
+  "act-5b": { base: "#0a1218", ...SLATE },
   "act-6": { base: "#0d0a1c", ...AMBER },
   "act-7": { base: "#0a0a0a", ...AMBER },
   "act-9": { base: "#090909", ...SLATE },

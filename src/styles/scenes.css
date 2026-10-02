@@ -228,3 +228,9 @@ html[data-motion="reduce"] .plain-t { position: static; }
 #a9-board .rs-head { margin-bottom: 0; }
 .uth-top { display: flex; justify-content: space-between; align-items: center; }
 .lang--light button { color: #090909; }
+
+/* ── growth stats */
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4vw; width: min(1100px, 100%); text-align: left; }
+.stats li { border-top: 1px solid var(--line); padding-top: 2.4vh; display: grid; gap: 1.4vh; align-content: start; }
+.stat-n { font-size: clamp(3rem, 8vw, 8rem); }
+@media (max-width: 767px) { .stats { grid-template-columns: 1fr; gap: 3vh; } .stat-n { font-size: 3.6rem; } }

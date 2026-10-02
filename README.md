@@ -117,3 +117,10 @@ Static prerender; fonts via `next/font` (swap); no video/images; SVG only. Watch
 - Real-estate case: small team of five (**assumed to be the client's team — confirm**), ~350 contacts/month, ~50% automated (approximate, as given).
 - Construction case: ~10 people, ~700 contacts/month, nothing digitised; client approved the agreed Phase 1.
 - Positioned for Implementation Specialist; close: "If another role opens, I'd love to be considered. I really liked the team and the spirit."
+
+## v5 — growth story + real ticket
+
+- New scene "Nobody asked me" (Act V-b): opening Portugal, ~20 LinkedIn conversations/day (up to the message limit), ~33% meaningful conversations, ~20 meetings in two months, a CS summit + two podcast guests, agencies/consultants who brought clients, honest note on summer slowdown, "that's what led to my promotion". No names; all figures approximate as stated.
+- Post-go-live reframed: Marta stayed the client's point of contact (weekly meeting + shared Slack), problems went to the team via Linear + Slack with a structured ticket (client/IDs, conversation link, what happened, what was expected, findings, likely problem, what I tried, why it didn't fix it).
+- Honest limitation: voice quality (STT/TTS) for Portuguese; prompts couldn't fix it; team agreed the model was weak for Portuguese.
+- OPEN: confirm whether the missing-information bug was fixed (the retest PASS scene) or is the unfixable voice limitation.

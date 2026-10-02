@@ -49,7 +49,7 @@ export function Act4cResolution() {
 
       // ── fix → retest → pass
       show(tl, "#a4c-fix", 59, 1);
-      plainLine(tl, q, 1, 59.5, 91);
+      plainLine(tl, q, 1, 59.5, 82);
       show(tl, q("#a4c-deployed"), 60, 0.8);
       hide(tl, q("#a4c-deployed"), 65, 0.6);
       show(tl, q("#a4c-retest"), 66, 0.8);
