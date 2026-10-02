@@ -234,3 +234,12 @@ html[data-motion="reduce"] .plain-t { position: static; }
 .stats li { border-top: 1px solid var(--line); padding-top: 2.4vh; display: grid; gap: 1.4vh; align-content: start; }
 .stat-n { font-size: clamp(3rem, 8vw, 8rem); }
 @media (max-width: 767px) { .stats { grid-template-columns: 1fr; gap: 3vh; } .stat-n { font-size: 3.6rem; } }
+
+/* ── verbatim quotes */
+.qt { max-width: 46ch; text-align: left; margin: 0; }
+.qt blockquote { margin: 0; font-size: clamp(1.25rem, 2.5vw, 2.3rem); line-height: 1.22; letter-spacing: -0.02em; }
+.qt figcaption { margin-top: 2.4vh; font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mute); line-height: 1.5; }
+.a8-qlabel { margin-bottom: 4vh; font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #6b6b66; }
+.a6r-qlabel { margin-bottom: 4vh; }
+.scene--light .qt figcaption { color: #6b6b66; }
+.scene--light .qt blockquote { color: #090909; }

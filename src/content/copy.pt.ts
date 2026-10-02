@@ -203,6 +203,11 @@ export const pt: Copy = {
       { k: "UM LIMITE HONESTO", t: "Para o mercado português, a qualidade da voz (speech-to-text e text-to-speech) era o limite. Os prompts não a resolviam. A equipa reuniu e concluiu que o modelo ainda era fraco para português." },
     ],
     resultsIntro: [{ k: "OS RESULTADOS", t: "O que resultou dessas decisões." }],
+    clientsLabel: "O QUE DISSERAM OS CLIENTES (no original)",
+    clients: [
+      { text: "Marta went over it with me to try to see what caused the problem, and to see how she could help in solving it. She was very helpful and courteous. She went step by step with me to try to get the issue resolved. In the end I got things working fine again.", name: "Shelly Smith-Mitchell", role: "Nedzo customer, Trustpilot" },
+      { text: "Marta was sooo helpful and nice to deal with. I couldn’t recommend it more. Very satisfied with my experience.", name: "Maria Artigas", role: "Nedzo customer, Trustpilot" },
+    ],
     stats: [
       { n: 20, pre: "", suf: "/dia", l: "pessoas contactadas no LinkedIn, no meu melhor" },
       { n: 33, pre: "~", suf: "%", l: "tornaram-se uma conversa com substância" },
@@ -213,7 +218,7 @@ export const pt: Copy = {
       { k: "PARCEIROS", t: "Falei também com agências e consultores. Alguns trouxeram-nos bons potenciais clientes." },
       { k: "COM HONESTIDADE", t: "Comecei nas férias de verão. As conversas correram bem; fechar foi lento. Alguns prospects grandes chegaram a fases avançadas." },
       { k: "A VISTA DE SAÚDE", t: "A vista de saúde do cliente foi aprovada para uso, e um cliente que sinalizei renovou posteriormente." },
-      { k: "O RESULTADO", t: "E foi isso que levou à minha promoção." },
+      { k: "O RESULTADO", t: "E foi isso que levou à minha promoção a Head of Growth & Expansion." },
     ],
   },
 
@@ -267,7 +272,13 @@ export const pt: Copy = {
       "Levei as decisões às pessoas certas.",
     ],
     closing: "As implementações não têm sucesso sozinhas.",
-    excerpts: [] as { text: string; attribution?: string }[],
+    quotesLabel: "O QUE ESCREVERAM AS PESSOAS COM QUEM TRABALHEI (no original)",
+    excerpts: [
+      { text: "Marta joined at a stage when very little was established, and she took ownership of our customer relationships with professionalism and care.", attribution: "Denis Rhomays, Founder & CEO, Nedzo AI · managed Marta directly" },
+      { text: "She’s patient with people who are frustrated, clear when explaining something technical to someone who isn’t, and she follows through.", attribution: "Ivo Schipper, Co-founder, Nedzo · managed Marta directly" },
+      { text: "Marta came in with limited exposure to SaaS and AI and left able to handle escalations on her own, onboard new customers end to end, and write help docs the team still uses.", attribution: "Ivo Schipper, Co-founder, Nedzo · managed Marta directly" },
+      { text: "Whenever someone needed a hand, regardless of the department, she was always willing to step in and help.", attribution: "Danielle Tanteco, Creative Designer & Content Creator, Nedzo AI · worked with Marta on a different team" },
+    ] as { text: string; attribution?: string }[],
   },
 
   resolution: {
@@ -299,7 +310,7 @@ export const pt: Copy = {
     role: "Implementation Specialist · Customer Success",
     underTheHood: { label: "Por dentro →", href: "/under-the-hood" },
     links: [
-      { label: "LinkedIn", href: "#linkedin-placeholder" },
+      { label: "LinkedIn", href: "https://www.linkedin.com/in/marta-lopes-07a791150/" },
       { label: "Portfólio", href: "https://marta-lopes.vercel.app" },
     ],
   },

@@ -16,7 +16,8 @@ export function Act6bResults() {
   const PER = 8;
   const S = g.resultsIntro.length * PER; // stats start
   const B = S + 13; // text beats start
-  const END = B + g.b.length * PER;
+  const C = B + g.b.length * PER; // client reviews start
+  const END = C + g.clients.length * 11;
   const ref = useScene({
     vh: 520,
     mobileVh: 460,
@@ -40,6 +41,13 @@ export function Act6bResults() {
       hide(tl, "#a6r-stats", S + 12, 1);
 
       g.b.forEach((_, i) => contextBeat(tl, `#a6r-b-c${i}`, B + i * PER, PER));
+
+      g.clients.forEach((_, i) => {
+        const at = C + i * 11;
+        show(tl, `#a6r-q${i}`, at, 0.8);
+        tl.fromTo(q(`#a6r-q${i} .qt`), { y: 16 }, { y: 0, duration: 1.2, ease: "power3.out" }, at);
+        hide(tl, `#a6r-q${i}`, at + 10, 0.9);
+      });
 
       show(tl, "#a6r-evid", END, 0.8);
       tl.to(q('[data-fill="results"]'), { scale: 1, duration: 1.4, ease: "back.out(2)" }, END + 2);
@@ -69,6 +77,17 @@ export function Act6bResults() {
           </ul>
         </div>
         <ContextBeats prefix="a6r-b" items={g.b} />
+        {g.clients.map((c, i) => (
+          <div className="beat" id={`a6r-q${i}`} data-beat key={c.name}>
+            <p className="mono a6r-qlabel">{g.clientsLabel}</p>
+            <figure className="qt">
+              <blockquote>“{c.text}”</blockquote>
+              <figcaption>
+                {c.name}, {c.role}
+              </figcaption>
+            </figure>
+          </div>
+        ))}
         <div className="beat beat--left" id="a6r-evid" data-beat>
           <EvidenceTracker filled={["projects", "decisions"]} className="et--big" />
         </div>

@@ -232,6 +232,11 @@ export const en = {
       { k: "AN HONEST LIMIT", t: "For the Portuguese market, voice quality (speech-to-text and text-to-speech) was the limit. Prompts couldn’t fix it. The team met and agreed the model was still weak for Portuguese." },
     ],
     resultsIntro: [{ k: "THE RESULTS", t: "What came out of those decisions." }],
+    clientsLabel: "WHAT CLIENTS SAID",
+    clients: [
+      { text: "Marta went over it with me to try to see what caused the problem, and to see how she could help in solving it. She was very helpful and courteous. She went step by step with me to try to get the issue resolved. In the end I got things working fine again.", name: "Shelly Smith-Mitchell", role: "Nedzo customer, Trustpilot" },
+      { text: "Marta was sooo helpful and nice to deal with. I couldn’t recommend it more. Very satisfied with my experience.", name: "Maria Artigas", role: "Nedzo customer, Trustpilot" },
+    ],
     stats: [
       { n: 20, pre: "", suf: "/day", l: "people contacted on LinkedIn, at my busiest" },
       { n: 33, pre: "~", suf: "%", l: "became a meaningful conversation" },
@@ -242,7 +247,7 @@ export const en = {
       { k: "PARTNERS", t: "I also spoke with agencies and consultants. Some of them brought us good potential clients." },
       { k: "HONESTLY", t: "I started in the summer holidays. Conversations went well; closing was slow. A few big prospects reached advanced stages." },
       { k: "THE HEALTH VIEW", t: "The customer health view was approved for use, and a customer I flagged subsequently renewed." },
-      { k: "THE RESULT", t: "And that’s what led to my promotion." },
+      { k: "THE RESULT", t: "And that’s what led to my promotion to Head of Growth & Expansion." },
     ],
   },
 
@@ -308,7 +313,13 @@ export const en = {
       "I took decisions to the right people.",
     ],
     closing: "Implementations don’t succeed alone.",
-    excerpts: [] as { text: string; attribution?: string }[],
+    quotesLabel: "WHAT THE PEOPLE I WORKED WITH WROTE",
+    excerpts: [
+      { text: "Marta joined at a stage when very little was established, and she took ownership of our customer relationships with professionalism and care.", attribution: "Denis Rhomays, Founder & CEO, Nedzo AI · managed Marta directly" },
+      { text: "She’s patient with people who are frustrated, clear when explaining something technical to someone who isn’t, and she follows through.", attribution: "Ivo Schipper, Co-founder, Nedzo · managed Marta directly" },
+      { text: "Marta came in with limited exposure to SaaS and AI and left able to handle escalations on her own, onboard new customers end to end, and write help docs the team still uses.", attribution: "Ivo Schipper, Co-founder, Nedzo · managed Marta directly" },
+      { text: "Whenever someone needed a hand, regardless of the department, she was always willing to step in and help.", attribution: "Danielle Tanteco, Creative Designer & Content Creator, Nedzo AI · worked with Marta on a different team" },
+    ] as { text: string; attribution?: string }[],
   },
 
   // ───────────────────────── ACT IX — RESOLUTION
@@ -344,7 +355,7 @@ export const en = {
     underTheHood: { label: "Under the hood →", href: "/under-the-hood" },
     links: [
       // PLACEHOLDER: real URLs required.
-      { label: "LinkedIn", href: "#linkedin-placeholder" },
+      { label: "LinkedIn", href: "https://www.linkedin.com/in/marta-lopes-07a791150/" },
       { label: "Portfolio", href: "https://marta-lopes.vercel.app" },
     ],
   },
@@ -352,8 +363,7 @@ export const en = {
 
 /** Items that still need Marta's input. Surfaced in the build report. */
 export const PLACEHOLDERS = [
-  "ending.links — LinkedIn URL (hidden until a real https:// URL is set)",
-  "team.excerpts — anonymised real messages / screenshots, only with consent (empty = nothing shown)",
+  "team.excerpts + growth.clients — verbatim from public LinkedIn recommendations / Trustpilot; confirm each person is OK with reuse",
   "underTheHood — real tools, timelines, results and a short \"what I would do differently\" per case",
   "health.adoption.steps — exact organisational adoption wording",
   "case1.second.query — real (anonymised) enquiry text, if desired",
