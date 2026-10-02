@@ -4,6 +4,8 @@ import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { store } from "@/lib/store";
 import { Preloader } from "./Preloader";
 import { SignalHeader } from "./SignalHeader";
+import { Ambient } from "./Ambient";
+import { Momentum } from "./Momentum";
 import { Act1Signal } from "@/scenes/Act1Signal";
 import { Act2Choice } from "@/scenes/Act2Choice";
 import { Act3Diagnosis } from "@/scenes/Act3Diagnosis";
@@ -56,6 +58,9 @@ export function Experience() {
   return (
     <>
       <Preloader />
+      <Ambient />
+      <div className="grain" aria-hidden="true" />
+      <Momentum />
       <SignalHeader />
       <main>
         <Act1Signal />

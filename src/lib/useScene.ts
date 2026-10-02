@@ -11,6 +11,9 @@ export type SceneCtx = {
   scrollTo: (p: number, duration?: number) => void;
 };
 
+/** global pacing: <1 shortens every pinned scene (the whole film feels tighter) */
+export const PACE = 0.72;
+
 type Opts = {
   /** pinned length, in viewport-heights of scroll */
   vh: number;
@@ -53,7 +56,7 @@ export function useScene({ vh, mobileVh, build, onProgress }: Opts) {
         },
       };
       gsap.set(q("[data-beat]"), { autoAlpha: 0 });
-      const len = mobile ? (mobileVh ?? vh * 0.85) : vh;
+      const len = (mobile ? (mobileVh ?? vh * 0.85) : vh) * PACE;
       const tl = gsap.timeline({
         defaults: { ease: "none" },
         scrollTrigger: {
