@@ -114,12 +114,13 @@ export const pt: Copy = {
       altLabel: "ROTA DE DADOS ALTERNATIVA",
     },
     ctx2: [
-      { k: "DEPOIS DO GO-LIVE", t: "Continuei a ser o ponto de contacto do cliente: uma reunião semanal e um canal partilhado no Slack. Quando algo falhava, levava-o à equipa." },
+      { k: "DEPOIS DO GO-LIVE", t: "Continuei a ser o ponto de contacto do cliente: uma reunião semanal e um canal partilhado no Slack. Continuei também a usar o produto. As correções e melhorias vinham dos reports do cliente e do que eu própria via." },
       { k: "UM EXEMPLO", t: "Um cliente perguntou por um imóvel. A resposta do agente veio sem informação que devia ter." },
+      { k: "COMO FALO COM A EQUIPA", t: "Sempre que algo precisava de correção ou melhoria, escrevia-o da mesma forma, no Linear e no Slack, para a equipa poder agir depressa." },
     ],
     plain2: [
       "Depois do lançamento, um cliente perguntou por um imóvel. A resposta do agente veio sem informação que devia ter.",
-      "Por isso tratei-o como um problema a resolver, passo a passo.",
+      "Antes de escrever à equipa, preparava cada situação da mesma forma:",
     ],
     plain3: [
       "Registei-o no Linear e no Slack, com tudo o que a equipa precisava num só sítio.",

@@ -132,12 +132,13 @@ export const en = {
       altLabel: "ALTERNATIVE DATA ROUTE",
     },
     ctx2: [
-      { k: "AFTER GO-LIVE", t: "I stayed the client’s point of contact: a weekly meeting and a shared Slack channel. When something broke, I took it to the team." },
+      { k: "AFTER GO-LIVE", t: "I stayed the client’s point of contact: a weekly meeting and a shared Slack channel. I also kept using the product myself. Fixes and improvements came from the client’s reports and from what I spotted." },
       { k: "ONE EXAMPLE", t: "A customer asked about a property. The agent’s answer was missing information it should have had." },
+      { k: "HOW I TALK TO THE TEAM", t: "Every time something needed fixing or improving, I wrote it up the same way, in Linear and Slack, so the team could act on it fast." },
     ],
     plain2: [
       "After launch, a customer asked about a property. The agent’s answer was missing information it should have had.",
-      "So I treated it like a problem to solve, step by step.",
+      "Before writing to the team, I prepared every issue the same way:",
     ],
     plain3: [
       "I wrote it up in Linear and Slack, with everything the team needed in one place.",
