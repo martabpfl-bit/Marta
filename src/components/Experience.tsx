@@ -7,7 +7,6 @@ import { SignalHeader } from "./SignalHeader";
 import { Ambient } from "./Ambient";
 import { Momentum } from "./Momentum";
 import { Act1Signal } from "@/scenes/Act1Signal";
-import { Act2Choice } from "@/scenes/Act2Choice";
 import { Act3Diagnosis } from "@/scenes/Act3Diagnosis";
 import { Act4aImplementation } from "@/scenes/Act4aImplementation";
 import { Act4bTroubleshooting } from "@/scenes/Act4bTroubleshooting";
@@ -17,7 +16,7 @@ import { Act6Health } from "@/scenes/Act6Health";
 import { Act7Meta } from "@/scenes/Act7Meta";
 import { Act8Team } from "@/scenes/Act8Team";
 import { Act9Resolution } from "@/scenes/Act9Resolution";
-import { Act10FalseEnding, Act10Reveal } from "@/scenes/Act10Ending";
+import { Act10Reveal } from "@/scenes/Act10Ending";
 
 /** Narrative route, in order. Each scene owns its own pinned, scrubbed timeline. */
 export function Experience() {
@@ -64,7 +63,6 @@ export function Experience() {
       <SignalHeader />
       <main>
         <Act1Signal />
-        <Act2Choice />
         <Act3Diagnosis />
         <Act4aImplementation />
         <Act4bTroubleshooting />
@@ -74,7 +72,6 @@ export function Experience() {
         <Act7Meta />
         <Act8Team />
         <Act9Resolution />
-        <Act10FalseEnding />
         <Act10Reveal />
       </main>
     </>

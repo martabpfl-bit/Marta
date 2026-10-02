@@ -265,9 +265,11 @@ html[data-motion="reduce"] .fjm {
   z-index: 0;
   pointer-events: none;
   --x1: 18%; --y1: 22%; --x2: 82%; --y2: 78%;
+  --base: #090909;
   --c1: rgba(110, 130, 190, 0.16);
   --c2: rgba(110, 130, 190, 0.08);
-  background:
+  background-color: var(--base);
+  background-image:
     radial-gradient(55vmax 45vmax at var(--x1) var(--y1), var(--c1), transparent 62%),
     radial-gradient(50vmax 42vmax at var(--x2) var(--y2), var(--c2), transparent 62%);
   animation: drift 22s ease-in-out infinite alternate;
@@ -278,6 +280,9 @@ html[data-motion="reduce"] .fjm {
   from { --x1: 14%; --y1: 18%; --x2: 86%; --y2: 82%; transform: scale(1); }
   to { --x1: 30%; --y1: 34%; --x2: 70%; --y2: 62%; transform: scale(1.08); }
 }
+@property --base { syntax: "<color>"; inherits: true; initial-value: #090909; }
+@property --c1 { syntax: "<color>"; inherits: true; initial-value: rgba(110, 130, 190, 0.16); }
+@property --c2 { syntax: "<color>"; inherits: true; initial-value: rgba(110, 130, 190, 0.08); }
 @property --x1 { syntax: "<percentage>"; inherits: true; initial-value: 18%; }
 @property --y1 { syntax: "<percentage>"; inherits: true; initial-value: 22%; }
 @property --x2 { syntax: "<percentage>"; inherits: true; initial-value: 82%; }

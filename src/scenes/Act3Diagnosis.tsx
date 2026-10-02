@@ -17,8 +17,11 @@ export function Act3Diagnosis() {
     build(tl, { q }) {
       gsap.set(q("[data-row]"), { autoAlpha: 0 });
       gsap.set(q(".a3-fill"), { scaleX: 0 });
-      show(tl, "#a3-board", 0, 0.5);
-      tl.fromTo(q("[data-row]"), { autoAlpha: 0, x: -30 }, { autoAlpha: 1, x: 0, duration: 1.4, stagger: 2.5, ease: "power2.out" }, 1);
+      show(tl, "#a3-intro", 0, 0.1);
+      maskIn(tl, "#a3-intro", 0.3, 2, 0.1);
+      hide(tl, "#a3-intro", 4.2, 0.8);
+      show(tl, "#a3-board", 5, 0.5);
+      tl.fromTo(q("[data-row]"), { autoAlpha: 0, x: -30 }, { autoAlpha: 1, x: 0, duration: 1.2, stagger: 1.9, ease: "power4.out" }, 5.6);
       tl.to(q("#a3-board"), { opacity: 0.1, duration: 2 }, 15);
       maskIn(tl, "#a3-l1", 17, 3);
       maskIn(tl, "#a3-l2", 22, 3);
@@ -32,6 +35,9 @@ export function Act3Diagnosis() {
   return (
     <section id="act-3" ref={ref} className="scene" aria-label="Act III — Diagnosis">
       <div className="stage">
+        <div className="beat" id="a3-intro" data-beat>
+          <MaskText as="h2" className="h-xl" text={copy.act3.intro} />
+        </div>
         <div className="beat beat--left" id="a3-board" data-beat>
           <EvidenceTracker detail className="et--big" />
         </div>

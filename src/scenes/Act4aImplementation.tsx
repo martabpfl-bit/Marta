@@ -112,6 +112,11 @@ export function Act4aImplementation() {
       tl.to(q('[data-node="source"] .sn-box'), { stroke: RED, duration: 0.1 }, hit);
       tl.to(q('[data-layer="main"] > .sn:not([data-node="source"]):not([data-node="property"]), .chip, [data-conn^="seg"]'), { opacity: 0.18, duration: 0.25 }, hit);
       show(tl, "#a4a-fail", hit, 0.1);
+      // the system *hurts*: red flash + shake
+      tl.fromTo(q("#a4a-flash"), { opacity: 0 }, { opacity: 0.6, duration: 0.12 }, hit);
+      tl.to(q("#a4a-flash"), { opacity: 0, duration: 1.6, ease: "power2.out" }, hit + 0.12);
+      tl.to(q(".stage"), { x: "random(-16,16)", y: "random(-10,10)", duration: 0.06, repeat: 7, yoyo: true, ease: "none" }, hit);
+      tl.set(q(".stage"), { x: 0, y: 0 }, hit + 0.6);
       show(tl, q("[data-fs-load]"), hit + 0.1, 0.1);
       hide(tl, q("[data-fs-load]"), hit + 2.2, 0.1);
       show(tl, q("[data-fs-denied]"), hit + 2.6, 0.1); // hard cut, no easing
@@ -190,6 +195,7 @@ export function Act4aImplementation() {
         <p className="beat mono a4-cap" id="a4a-cap" data-beat>
           {c.kicker} · {c.client}
         </p>
+        <div className="a4-flash" id="a4a-flash" aria-hidden="true" />
         <div className="beat a4-fail" id="a4a-fail" data-beat>
           <FailureState />
         </div>

@@ -7,48 +7,6 @@ import { useIsMobile } from "@/lib/useMedia";
 import { MaskText } from "@/components/MaskText";
 import { FinalJourneyMap, journeyLayout } from "@/components/FinalJourneyMap";
 
-/** ACT X (a) — the false ending. Black, then three lines with space around them. */
-export function Act10FalseEnding() {
-  const e = copy.ending;
-  const ref = useScene({
-    vh: 340,
-    mobileVh: 300,
-    build(tl, { q }) {
-      gsap.set(q("#a10-hint"), { autoAlpha: 0 });
-      // silence: nothing happens for the first stretch
-      show(tl, "#a10-w", 6, 0.1);
-      maskIn(tl, "#a10-w", 6, 1.2, 0.1);
-      hide(tl, "#a10-w", 12, 1);
-      show(tl, "#a10-m", 16, 0.1);
-      maskIn(tl, "#a10-m", 16, 2.4, 0.1);
-      hide(tl, "#a10-m", 24, 1);
-      show(tl, "#a10-o", 28, 0.1);
-      maskIn(tl, "#a10-o", 28, 2.6, 0.1);
-      show(tl, q("#a10-hint"), 36, 1.5);
-      tl.to({}, { duration: 0.001 }, 42);
-    },
-  });
-  return (
-    <section id="act-10a" ref={ref} className="scene" aria-label="Wait.">
-      <div className="stage">
-        <div className="beat" id="a10-w" data-beat>
-          <MaskText as="h2" className="h-xl" text={e.falseEnding[0]} />
-        </div>
-        <div className="beat" id="a10-m" data-beat>
-          <MaskText as="h2" className="h-xl" text={e.falseEnding[1]} />
-        </div>
-        <div className="beat" id="a10-o" data-beat>
-          <MaskText as="h2" className="h-xl" text={e.falseEnding[2]} />
-          <p className="mono a10-hint" id="a10-hint">
-            Scroll
-            <i aria-hidden="true" />
-          </p>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 /**
  * ACT X (b) — FINAL REVEAL
  * Prototype 4/4: the camera starts inside the very first miniature (the email) and pulls back
@@ -130,6 +88,9 @@ export function Act10Reveal() {
           <p className="a10-thanks">{e.thanks}</p>
           <p className="a10-name">{e.name}</p>
           <p className="mono a10-role">{e.role}</p>
+          <p className="a10-uth" data-links>
+            <a href={e.underTheHood.href}>{e.underTheHood.label}</a>
+          </p>
           <p className="mono a10-links" data-links>
             {e.links.map((l) => (
               <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer">

@@ -3,73 +3,76 @@ import { useEffect } from "react";
 import { copy } from "@/content/copy";
 import { gsap } from "@/lib/gsap";
 import { useScene } from "@/lib/useScene";
-import { show, hide } from "@/lib/beats";
+import { show, hide, maskIn, maskOut } from "@/lib/beats";
 import { store, useStore } from "@/lib/store";
 import { audio } from "@/lib/audio";
 import { MaskText } from "@/components/MaskText";
 import { RelationshipStatus } from "@/components/RelationshipStatus";
 
 /**
- * ACT I — SIGNAL RECEIVED
- * Prototype 1/4 (part A): an abstract email gives up four phrases, which leave it and become data points.
+ * ACT I — the hook, then SIGNAL RECEIVED.
+ * Opens with a direct line to Catarina (so the premise is clear in 10 seconds), says thank you,
+ * then the abstract email gives up four phrases that become four data points.
  */
 export function Act1Signal() {
   const c = copy.act1;
   const ready = useStore((s) => s.ready);
 
   const ref = useScene({
-    vh: 520,
-    build(tl, { q, root }) {
-      const TOTAL = 42;
-      // intro words/date wait for the preloader (auto-played, time-based; not scrubbed)
+    vh: 560,
+    build(tl, { q }) {
+      const O = 17; // hook + thanks come first; everything below is offset by O
+      const TOTAL = O + 42;
       if (!store.get().ready) gsap.set(q(".a1-date, .a1-title .mt-i"), { autoAlpha: 0 });
       gsap.set(q("[data-rs]"), { autoAlpha: 0 });
 
+      // ── hook: "Hi Catarina." is already on screen. Scroll delivers the rest.
+      tl.to(q(".a1-intro"), { y: -40, autoAlpha: 0, duration: 1.6, ease: "power2.in" }, 0.6);
+      show(tl, "#a1-h2", 2, 0.1);
+      maskIn(tl, "#a1-h2", 2, 1.8, 0.1);
+      maskOut(tl, "#a1-h2", 6.2, 0.9, 0.03);
+      hide(tl, "#a1-h2", 7.2, 0.2);
+      show(tl, "#a1-h3", 7.6, 0.1);
+      maskIn(tl, "#a1-h3", 7.6, 2, 0.08);
+      maskOut(tl, "#a1-h3", 12, 0.9, 0.02);
+      hide(tl, "#a1-h3", 13, 0.2);
+      show(tl, "#a1-thanks", 13.4, 0.1);
+      maskIn(tl, "#a1-thanks", 13.4, 1.8, 0.07);
+      hide(tl, "#a1-thanks", O - 0.6, 0.6);
+
+      // ── SIGNAL RECEIVED
+      show(tl, "#a1-sig", O, 0.1);
+      maskIn(tl, "#a1-sig", O, 1.4, 0.12);
+      hide(tl, "#a1-sig", O + 3.4, 0.7);
+
       // email arrives
-      tl.to(q(".a1-intro"), { autoAlpha: 0, duration: 2 }, 0.5);
-      tl.fromTo(q("#a1-email"), { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 3 }, 1.5);
+      tl.fromTo(q("#a1-email"), { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 2.4 }, O + 4);
 
       // four phrases are highlighted, one at a time
-      tl.fromTo(q(".em-hl"), { scaleX: 0 }, { scaleX: 1, duration: 1.6, stagger: 2.2, ease: "power2.out" }, 5);
+      tl.fromTo(q(".em-hl"), { scaleX: 0 }, { scaleX: 1, duration: 1.4, stagger: 1.8, ease: "power2.out" }, O + 6.5);
 
       // …then everything except the phrases falls away
-      tl.to(q(".em-chrome"), { autoAlpha: 0, duration: 2 }, 14);
+      tl.to(q(".em-chrome"), { autoAlpha: 0, duration: 1.6 }, O + 14);
       const slots = q(".a1-slot-target");
-      tl.to(
-        q(".em-ph"),
-        {
-          x: (i: number, el: Element) => {
-            const a = el.getBoundingClientRect();
-            const b = slots[i].getBoundingClientRect();
-            return b.left + b.width / 2 - (a.left + a.width / 2);
-          },
-          y: (i: number, el: Element) => {
-            const a = el.getBoundingClientRect();
-            const b = slots[i].getBoundingClientRect();
-            return b.top + b.height / 2 - (a.top + a.height / 2);
-          },
-          duration: 3.2,
-          stagger: 0.6,
-          ease: "power2.inOut",
-        },
-        15,
-      );
-      tl.to(q(".em-hl"), { autoAlpha: 0, duration: 1 }, 17);
-      show(tl, q("#a1-slots"), 19.5, 1.5);
-
-      // hold on four data points, then clear
-      hide(tl, q("#a1-email, #a1-slots"), 25, 1.6);
+      const d = (axis: "x" | "y") => (i: number, el: Element) => {
+        const a = el.getBoundingClientRect();
+        const b = slots[i].getBoundingClientRect();
+        return axis === "x" ? b.left + b.width / 2 - (a.left + a.width / 2) : b.top + b.height / 2 - (a.top + a.height / 2);
+      };
+      tl.to(q(".em-ph"), { x: d("x"), y: d("y"), duration: 2.8, stagger: 0.5, ease: "power2.inOut" }, O + 15);
+      tl.to(q(".em-hl"), { autoAlpha: 0, duration: 1 }, O + 17);
+      show(tl, q("#a1-slots"), O + 19, 1.2);
+      hide(tl, q("#a1-email, #a1-slots"), O + 24, 1.2);
 
       // VISOR × MARTA
-      show(tl, q("#a1-rel"), 27, 1.2);
-      show(tl, q('[data-rs="0"]'), 29, 1.2); // CURRENT OPPORTUNITY — CLOSED
-      show(tl, q('[data-rs="1"]'), 34, 1.2); // pause — RELATIONSHIP — OPEN
-      show(tl, q('[data-rs="signal"]'), 39, 1.2); // pause — SIGNAL
+      show(tl, q("#a1-rel"), O + 25.5, 1);
+      show(tl, q('[data-rs="0"]'), O + 27, 1);
+      show(tl, q('[data-rs="1"]'), O + 31, 1);
+      show(tl, q('[data-rs="signal"]'), O + 35, 1);
       tl.to({}, { duration: 0.001 }, TOTAL);
-      void root;
     },
     onProgress(p) {
-      audio.once("a1-signal", "signal", p > 0.04 && p < 0.9);
+      audio.once("a1-signal", "signal", p > 0.3 && p < 0.95);
       store.setChrome(false);
     },
   });
@@ -79,11 +82,11 @@ export function Act1Signal() {
     const r = ref.current;
     if (!r) return;
     const q = gsap.utils.selector(r);
+    gsap.set(q(".a1-title .mt-i"), { yPercent: 115 });
     gsap
       .timeline()
-      .to(q(".a1-date"), { autoAlpha: 1, duration: 1.4, ease: "power1.out" })
-      .to(q(".a1-title .mt-i"), { autoAlpha: 1, yPercent: 0, duration: 1.2, stagger: 0.14, ease: "power3.out" }, "+=0.5");
-    gsap.set(q(".a1-title .mt-i"), { yPercent: 115 });
+      .to(q(".a1-date"), { autoAlpha: 1, duration: 1, ease: "power1.out" })
+      .to(q(".a1-title .mt-i"), { autoAlpha: 1, yPercent: 0, duration: 1.1, stagger: 0.14, ease: "power4.out" }, "-=0.4");
   }, [ready, ref]);
 
   return (
@@ -92,6 +95,18 @@ export function Act1Signal() {
         <div className="a1-intro">
           <p className="a1-date mono">{c.date}</p>
           <MaskText as="h1" className="a1-title" text={c.title} />
+        </div>
+        <div className="beat" id="a1-h2" data-beat>
+          <MaskText as="h2" className="h-xl" text={c.hook[0]} />
+        </div>
+        <div className="beat" id="a1-h3" data-beat>
+          <MaskText as="h2" className="h-xl" text={c.hook[1]} />
+        </div>
+        <div className="beat" id="a1-thanks" data-beat>
+          <MaskText as="h2" className="h-xl" text={c.thanks} />
+        </div>
+        <div className="beat" id="a1-sig" data-beat>
+          <MaskText as="h2" className="display" text={c.signalTitle} />
         </div>
 
         <div className="beat a1-email" id="a1-email" data-beat>

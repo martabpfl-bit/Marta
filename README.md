@@ -89,3 +89,14 @@ No invented metrics, customers, quotes or screenshots · Marta + Developer for t
 ## Performance notes
 
 Static prerender; fonts via `next/font` (swap); no video/images; SVG only. Watch: many simultaneous ScrollTriggers (13 pins) — refresh cost on resize; Act IV-a has the heaviest timeline (~150 tweens). `will-change` is limited to masked text. Next step if needed: lazy-mount scenes far from the viewport and reuse one ambient packet loop.
+
+---
+
+## v2 — story rewrite + more life (latest)
+
+- **Hook first:** "Hi Catarina. / You told me what was missing. / So I did what I do with any account that sends a signal." + a thank-you, before anything abstract.
+- **Act II (A/B/C) removed.** Act III is now "the four things you asked to see" (positive framing, no "insufficient").
+- **Team act rewritten** without "after I left / they missed me". Its three principles are **placeholders, not facts** — replace with a real example (`team.principles` in `copy.ts`).
+- **False ending removed.** Closing line: "Available for the next opportunity." + **Under the hood →** (`/under-the-hood`, plain-text cases using only facts from Marta's brief; `numbers` / `different` sections appear once filled).
+- **Stronger motion:** per-act mood (base colour + drifting lights), grain, progress line, scroll cue, velocity lean on headlines, red flash + screen shake at the API blocker, shorter pacing (`PACE` in `useScene.ts`).
+- Images: Unsplash reachable from the build environment, search is not. No photos used yet; backgrounds are code-generated.

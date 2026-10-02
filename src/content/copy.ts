@@ -36,7 +36,10 @@ export const copy = {
   // ───────────────────────── ACT I
   act1: {
     date: "02 OCT 2026",
-    title: "SIGNAL RECEIVED",
+    title: "Hi Catarina.",
+    hook: ["You told me what was missing.", "So I did what I do with any account that sends a signal."],
+    thanks: "First: thank you. Feedback that specific is a gift.",
+    signalTitle: "SIGNAL RECEIVED",
     email: {
       from: "From: Catarina",
       org: "Visor.ai",
@@ -53,27 +56,14 @@ export const copy = {
     },
   },
 
-  // ───────────────────────── ACT II
-  act2: {
-    question: "What would you do with this signal?",
-    choices: [
-      { id: "A", label: "Say thank you.", reply: ["Perfectly reasonable.", "But we wouldn't have a website."] },
-      {
-        id: "B",
-        label: "Ask them to reconsider.",
-        reply: ["Tempting.", "But that's not what the feedback asked for."],
-      },
-      { id: "C", label: "Understand it and act.", reply: ["Let’s investigate."] },
-    ],
-  },
-
   // ───────────────────────── ACT III
   act3: {
     signals: ["PROJECTS", "DECISIONS", "RESULTS", "TEAM CONTRIBUTION"],
-    sub: "EVIDENCE SURFACED DURING INTERVIEW",
-    status: "INSUFFICIENT",
+    intro: "The four things you asked to see.",
+    sub: "YOU ASKED TO SEE THIS",
+    status: "LET ME SHOW YOU",
     lines: ["I could have replied with a better explanation.", "I thought showing you would be more useful."],
-    started: "INTERVENTION STARTED",
+    started: "STARTING NOW",
   },
 
   // ───────────────────────── ACT IV — CASE 01
@@ -239,16 +229,17 @@ export const copy = {
   // ───────────────────────── ACT VIII — TEAM
   team: {
     label: "TEAM CONTRIBUTION",
-    lines: [
-      "There was one thing I couldn’t put on a dashboard.",
-      "MID-SEPTEMBER 2026",
-      "My role at Nedzo ended.",
-      "After I left, former teammates reached out.",
+    lines: ["There was one thing I couldn’t put on a dashboard.", "How I show up for a team."],
+    // PLACEHOLDER: these are soft principles, NOT facts. Replace with one real, concrete example of
+    // what you do for a team (a habit, a moment, something a colleague would recognise).
+    principles: [
+      "I bring problems with context, not just alarms.",
+      "I make the next person’s job easier.",
+      "I’d rather explain once and document it.",
     ],
-    paraphrase: ["They told me the next meeting felt different without me.", "That the energy in the team wasn’t the same."],
-    // PLACEHOLDER: anonymised real message excerpts / screenshots. Leave EMPTY until real wording is supplied.
+    closing: "Implementations don’t succeed alone.",
+    // PLACEHOLDER: anonymised real message excerpts / screenshots, ONLY if the people agree. Leave EMPTY otherwise.
     excerpts: [] as { text: string; attribution?: string }[],
-    proud: "Of everything I contributed at Nedzo, this may be what I’m most proud of.",
   },
 
   // ───────────────────────── ACT IX — RESOLUTION
@@ -266,7 +257,6 @@ export const copy = {
 
   // ───────────────────────── ACT X — FALSE ENDING + REVEAL
   ending: {
-    falseEnding: ["Wait.", "There’s one more example.", "One project I haven’t shown you."],
     journey: [
       { id: "feedback", label: "FEEDBACK" },
       { id: "signal", label: "SIGNAL" },
@@ -284,6 +274,7 @@ export const copy = {
     thanks: "Thank you for the signal, Catarina.",
     name: "Marta Lopes",
     role: "Customer Success · Implementation · Growth",
+    underTheHood: { label: "Under the hood →", href: "/under-the-hood" },
     links: [
       // PLACEHOLDER: real URLs required.
       { label: "LinkedIn", href: "#linkedin-placeholder" },
@@ -297,10 +288,61 @@ export type EvidenceKey = (typeof copy.evidence.keys)[number];
 /** Items that still need Marta's input. Surfaced in the build report. */
 export const PLACEHOLDERS = [
   "ending.links — LinkedIn + Portfolio URLs",
-  "team.excerpts — anonymised real messages / screenshots (empty = nothing shown, nothing fabricated)",
+  "team.principles — soft principles, NOT facts: replace with one real concrete example of how you work with a team",
+  "team.excerpts — anonymised real messages / screenshots, only with consent (empty = nothing shown)",
+  "underTheHood — real tools, timelines, results and a short \"what I would do differently\" per case",
   "health.adoption.steps — exact organisational adoption wording",
   "case1.second.query — real (anonymised) enquiry text, if desired",
   "case1.handoff.fields — real handoff values (currently abstract bars)",
   "case2.client — descriptor wording for the construction client",
   "public/audio/*.mp3 — real UI sounds (see src/lib/audio.ts for cue names)",
 ] as const;
+
+/** Under-the-hood page. Only facts from Marta's own brief. Add `numbers` / `different` when real data exists. */
+export const underTheHood = {
+  title: "Under the hood",
+  intro: "The same cases, without the animation. What the problem was, what I did, what happened.",
+  cases: [
+    {
+      kicker: "CASE 01 · PROJECTS",
+      title: "AI agent for a real estate client",
+      problem: "Respond to property enquiries (voice / WhatsApp) and convert qualified interest into action.",
+      did: [
+        "Originated the client; ran sales / discovery, requirements, client communication, testing and training.",
+        "Technical delivery together with a developer.",
+        "When access to the original data source was lost, I investigated alternatives and we moved to a different data route.",
+        "After go-live, an enquiry returned incomplete information. I reproduced it, inspected the transcript, isolated the possibilities and escalated to engineering with full context (account, conversation, recording, reported / expected / reproduced behaviour, findings).",
+      ],
+      outcome: ["Real users in production.", "The customer continued; the continuation was signed before I left.", "Some product limitations remained, including text-to-speech quality."],
+      numbers: [] as string[], // PLACEHOLDER: real metrics, if you have them
+      different: "", // PLACEHOLDER: what you would do differently
+    },
+    {
+      kicker: "CASE 02 · DECISIONS",
+      title: "Scope and commercial judgment, construction client",
+      problem: "Stakeholders pulled the project in different directions and the scope kept growing.",
+      did: [
+        "Listened, identified the actual decision, brought in the right people, proposed a workable path, confirmed it and documented it.",
+        "Returned the project to the agreed Phase 1 and kept the rest for later.",
+        "With the account two months overdue, and after repeated attempts to reconcile it, I recommended pausing additional development work until payment was resolved.",
+      ],
+      outcome: [],
+      numbers: [] as string[],
+      different: "",
+    },
+    {
+      kicker: "CASE 03 · RESULTS",
+      title: "A customer health view, built before anyone asked",
+      problem: "I didn’t want “How is everything going?” to be how I found out something was wrong.",
+      did: [
+        "Combined signals (usage, desired outcomes, appointments, automation performance, transcripts, sentiment, communication, lifecycle stage, renewal proximity) into one health read-out.",
+        "On an account flagged yellow: investigated, gave it extra attention, reached out proactively and proposed solutions.",
+        "Built the first version on my own initiative, presented it to leadership, and it was approved.", // PLACEHOLDER: confirm exact adoption wording
+      ],
+      outcome: ["The customer subsequently renewed."],
+      numbers: [] as string[],
+      different: "",
+    },
+  ],
+  back: "← Back to the story",
+} as const;
