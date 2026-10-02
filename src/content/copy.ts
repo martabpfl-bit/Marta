@@ -314,7 +314,7 @@ export const copy = {
     links: [
       // PLACEHOLDER: real URLs required.
       { label: "LinkedIn", href: "#linkedin-placeholder" },
-      { label: "Portfolio", href: "#portfolio-placeholder" },
+      { label: "Portfolio", href: "https://marta-lopes.vercel.app" },
     ],
   },
 } as const;
@@ -323,7 +323,7 @@ export type EvidenceKey = (typeof copy.evidence.keys)[number];
 
 /** Items that still need Marta's input. Surfaced in the build report. */
 export const PLACEHOLDERS = [
-  "ending.links — LinkedIn + Portfolio URLs",
+  "ending.links — LinkedIn URL (hidden until a real https:// URL is set)",
   "team.closing — confirms you are happy to offer references",
   "team.excerpts — anonymised real messages / screenshots, only with consent (empty = nothing shown)",
   "underTheHood — real tools, timelines, results and a short \"what I would do differently\" per case",

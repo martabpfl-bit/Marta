@@ -73,7 +73,9 @@ export function Act10Reveal() {
             <a href={e.underTheHood.href}>{e.underTheHood.label}</a>
           </p>
           <p className="mono a10-links" data-links>
-            {e.links.map((l) => (
+            {e.links
+              .filter((l) => l.href.startsWith("http"))
+              .map((l) => (
               <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer">
                 {l.label}
               </a>
