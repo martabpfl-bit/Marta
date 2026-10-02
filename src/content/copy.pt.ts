@@ -162,8 +162,8 @@ export const pt: Copy = {
     },
     production: {
       title: "PRODUÇÃO",
-      outcomes: ["Utilizadores reais ✓", "Cerca de metade dos ~350 contactos mensais tratados automaticamente ✓", "O cliente continuou ✓", "Continuação assinada antes de eu sair ✓"],
-      caveat: "Para o mercado português, a qualidade da voz (speech-to-text e text-to-speech) era o limite. Os prompts não a resolviam. A equipa reuniu e concluiu que o modelo ainda era fraco para português.",
+      outcomes: ["Utilizadores reais ✓", "Cerca de metade dos ~350 contactos mensais tratados automaticamente ✓", "O cliente continuou após o piloto de 3 meses ✓"],
+      caveat: "",
     },
     found: "EVIDÊNCIA ENCONTRADA",
   },
@@ -190,15 +190,19 @@ export const pt: Copy = {
     ],
     scope: { base: "FASE 1", extras: ["X", "Y", "Z", "..."] },
     process: ["OUVIR", "IDENTIFICAR A DECISÃO", "AS PESSOAS CERTAS", "PROPOR UM CAMINHO VIÁVEL", "CONFIRMAR", "DOCUMENTAR", "REVER SE NECESSÁRIO"],
-    principle: ["Uma boa implementação não é tudo o que o cliente consegue imaginar.", "É saber o que tem de acontecer agora — e o que pode esperar."],
+    principle: ["Uma boa implementação não é tudo o que o cliente consegue imaginar.", "É saber o que tem de acontecer primeiro e o que é exequível. Parte do meu trabalho é ensinar isso ao cliente."],
     returnAction: "VOLTAR AO ÂMBITO ACORDADO",
   },
 
   growth: {
     a: [
-      { k: "NINGUÉM ME PEDIU", t: "A equipa queria clientes além dos EUA. Ninguém me pediu para experimentar Portugal. Experimentei." },
+      { k: "POR INICIATIVA PRÓPRIA", t: "A equipa queria clientes além dos EUA. Ninguém me pediu para experimentar Portugal. Experimentei." },
       { k: "O TRABALHO", t: "Conteúdo no LinkedIn e conversas diretas com até 20 pessoas por dia, até o limite de mensagens do LinkedIn me travar." },
     ],
+    limit: [
+      { k: "UM LIMITE HONESTO", t: "Para o mercado português, a qualidade da voz (speech-to-text e text-to-speech) era o limite. Os prompts não a resolviam. A equipa reuniu e concluiu que o modelo ainda era fraco para português." },
+    ],
+    resultsIntro: [{ k: "OS RESULTADOS", t: "O que resultou dessas decisões." }],
     stats: [
       { n: 20, pre: "", suf: "/dia", l: "pessoas contactadas no LinkedIn, no meu melhor" },
       { n: 33, pre: "~", suf: "%", l: "tornaram-se uma conversa com substância" },
@@ -206,13 +210,15 @@ export const pt: Copy = {
     ],
     b: [
       { k: "ALÉM DO LINKEDIN", t: "Encontrei um summit de Customer Success, contactei pessoas que implementam isto e convidei dois oradores para o nosso podcast. Vieram." },
-      { k: "PARCEIROS", t: "Falei também com agências e consultores. Alguns trouxeram-nos bons clientes." },
+      { k: "PARCEIROS", t: "Falei também com agências e consultores. Alguns trouxeram-nos bons potenciais clientes." },
       { k: "COM HONESTIDADE", t: "Comecei nas férias de verão. As conversas correram bem; fechar foi lento. Alguns prospects grandes chegaram a fases avançadas." },
-      { k: "O RESULTADO", t: "Foi isto que levou à minha promoção." },
+      { k: "A VISTA DE SAÚDE", t: "A vista de saúde do cliente foi aprovada para uso, e um cliente que sinalizei renovou posteriormente." },
+      { k: "O RESULTADO", t: "E foi isso que levou à minha promoção." },
     ],
   },
 
   health: {
+    intro: [{ k: "POR INICIATIVA PRÓPRIA", t: "Algumas decisões ninguém me pediu para tomar. Tomei-as sozinha. A primeira: saber de um problema antes de o cliente me dizer." }],
     open: ["E se o cliente não te diz que está insatisfeito?", "E se pudesses perceber primeiro?"],
     signals: [
       "Utilização",
@@ -268,9 +274,9 @@ export const pt: Copy = {
     heading: "O QUE PEDISTE → O QUE MOSTREI",
     relHeading: "VISOR × MARTA",
     facts: {
-      projects: "Agente de IA para uma pequena equipa imobiliária: cerca de metade dos ~350 contactos mensais automatizados. Construído com um developer, em produção, e o cliente continuou.",
-      decisions: "Cliente de construção (cerca de dez pessoas, ~700 contactos por mês, nada digitalizado): âmbito acordado, de volta à Fase 1, e aprovado pelo cliente.",
-      results: "Abri o mercado português por iniciativa própria (~20 reuniões em dois meses, parceiros, um podcast), o que levou à minha promoção. Construí também uma vista de saúde do cliente.",
+      projects: "Agente de IA para uma pequena equipa imobiliária: cerca de metade dos ~350 contactos mensais automatizados. Construído com um developer, em produção, e o cliente continuou após o piloto de 3 meses.",
+      decisions: "Ensinei a um cliente de construção o que é prioritário e o que é exequível. Por iniciativa própria: uma vista de saúde do cliente e a abertura do mercado português.",
+      results: "Cerca de um terço do meu outreach tornou-se conversa a sério, ~20 reuniões em dois meses, parceiros e um podcast: fui promovida. A vista de saúde foi aprovada e um cliente sinalizado renovou posteriormente.",
       team: "Problemas enviados à engenharia com todo o contexto. Soluções construídas em conjunto com um developer.",
     },
     rows: ["PROJETOS", "DECISÕES", "RESULTADOS", "CONTRIBUTO PARA A EQUIPA"],
@@ -314,7 +320,7 @@ export const underTheHoodPt = {
         "Depois do go-live continuei a ser o ponto de contacto do cliente: uma reunião semanal e um canal partilhado no Slack.",
         "Quando um pedido devolveu informação incompleta, reproduzi-o, inspecionei a conversa, isolei as possibilidades e registei-o para a equipa no Linear e no Slack: cliente e IDs, link da conversa, o que aconteceu, o que era esperado, as minhas conclusões, o problema provável, o que já tinha tentado e porque não resolveu.",
       ],
-      outcome: ["Utilizadores reais em produção.", "O cliente continuou; a continuação foi assinada antes de eu sair.", "Para o mercado português, a qualidade da voz (speech-to-text e text-to-speech) era o limite. Os prompts não a resolviam; a equipa reuniu e concluiu que o modelo ainda era fraco para português."],
+      outcome: ["Utilizadores reais em produção.", "Cerca de metade dos contactos tratados automaticamente.", "O cliente continuou após o piloto de 3 meses."],
       numbers: ["Cerca de 350 contactos por mês (aproximado).", "Cerca de 50% tratados automaticamente (aproximado)."],
       different: "",
     },
@@ -331,13 +337,22 @@ export const underTheHoodPt = {
       different: "",
     },
     {
+      kicker: "CASO 02b · DECISÕES",
+      title: "Um limite honesto",
+      problem: "Para o mercado português, a qualidade da voz (speech-to-text e text-to-speech) era o limite.",
+      did: ["Os prompts não a resolviam. A equipa reuniu e concluímos que o modelo ainda era fraco para português."],
+      outcome: [] as string[],
+      numbers: [] as string[],
+      different: "",
+    },
+    {
       kicker: "CASO 03 · RESULTADOS",
       title: "Abrir o mercado português, antes de alguém pedir",
       problem: "A equipa queria clientes além dos EUA. Ninguém me tinha pedido para experimentar Portugal.",
       did: [
         "Criei conteúdo no LinkedIn e fiz outreach direto (até ~20 conversas por dia, dentro dos limites de mensagens do LinkedIn), a pessoas da nossa lista e a outras.",
         "Encontrei um summit de Customer Success, contactei pessoas que implementam isto e convidei dois oradores para o nosso podcast. Vieram.",
-        "Falei com agências e consultores; alguns trouxeram-nos bons clientes.",
+        "Falei com agências e consultores; alguns trouxeram-nos bons potenciais clientes.",
       ],
       outcome: ["Cerca de um terço das conversas tornou-se uma conversa com substância.", "Cerca de 20 reuniões marcadas em dois meses, mais algumas para depois.", "Alguns prospects grandes chegaram a fases avançadas (comecei nas férias de verão, por isso fechar foi lento).", "Foi isto que levou à minha promoção."],
       numbers: [] as string[],

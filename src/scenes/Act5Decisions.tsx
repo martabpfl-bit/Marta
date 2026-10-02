@@ -5,13 +5,11 @@ import { useScene } from "@/lib/useScene";
 import { show, hide, maskIn, plainLine, insertContext } from "@/lib/beats";
 import { PlainWords } from "@/components/PlainWords";
 import { ContextBeats } from "@/components/ContextBeats";
-import { store } from "@/lib/store";
 import { useRef } from "react";
 import type { SceneCtx } from "@/lib/useScene";
 import { MaskText } from "@/components/MaskText";
 import { StakeholderChaos } from "@/components/StakeholderChaos";
 import { ScopeController } from "@/components/ScopeController";
-import { EvidenceTracker } from "@/components/EvidenceTracker";
 
 /**
  * ACT V — CASE 02 / DECISIONS
@@ -20,7 +18,7 @@ import { EvidenceTracker } from "@/components/EvidenceTracker";
  */
 export function Act5Decisions() {
   const c = copy.case2;
-  const T = 88;
+  const T = 72;
   const GATE = { at: 56, end: 63 };
   const ctxRef = useRef<SceneCtx | null>(null);
   const marks = useRef({ total: T, decisions: 77, gate: GATE.end });
@@ -34,7 +32,6 @@ export function Act5Decisions() {
       gsap.set(q("[data-plain]"), { autoAlpha: 0 });
       gsap.set(q("[data-stmt], [data-extra], [data-return], [data-proc], [data-line]"), { autoAlpha: 0 });
       gsap.set(q("[data-line]"), { scaleY: 0, transformOrigin: "top" });
-      gsap.set(q("[data-fill]"), { scale: (i: number, el: Element) => (el.getAttribute("data-on") === "true" ? 1 : 0) });
 
       // ── opener
       show(tl, "#a5-open", 0, 0.5);
@@ -89,20 +86,10 @@ export function Act5Decisions() {
       hide(tl, q("[data-return]"), GATE.end, 0.8);
       hide(tl, "#a5-scope", 70, 1.2);
 
-      // (the overdue-payment segment was removed — it had no outcome and read as a dispute)
-      tl.shiftChildren(-30, false, 102);
-
-      // ── DECISIONS ○ → ●
-      show(tl, "#a5-evid", 103, 1);
-      tl.to(q('[data-fill="decisions"]'), { scale: 1, duration: 1.4, ease: "back.out(2)" }, 106);
-      tl.to(q("[data-count-n]"), { textContent: 2, snap: { textContent: 1 }, duration: 0.1 }, 106);
       // centred context sentences (inserted last; they push later beats back)
       const n1 = insertContext(tl, "a5a", c.ctxA.length, 13.5);
-      marks.current = { total: T + n1, decisions: 77 + n1, gate: GATE.end + n1 };
+      marks.current = { total: T + n1, decisions: 0, gate: GATE.end + n1 };
       tl.to({}, { duration: 0.001 }, T + n1);
-    },
-    onProgress(p) {
-      store.setEvidence("decisions", p >= marks.current.decisions / marks.current.total);
     },
   });
   return (
@@ -143,9 +130,6 @@ export function Act5Decisions() {
           <MaskText id="a5-p2" as="p" className="h-lg a5-p2" text={c.principle[1]} />
         </div>
 
-        <div className="beat beat--left" id="a5-evid" data-beat>
-          <EvidenceTracker filled={["projects"]} className="et--big" />
-        </div>
       </div>
     </section>
   );

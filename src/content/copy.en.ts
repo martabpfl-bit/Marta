@@ -181,8 +181,8 @@ export const en = {
     },
     production: {
       title: "PRODUCTION",
-      outcomes: ["Real users ✓", "About half of the ~350 monthly contacts handled automatically ✓", "Customer continued ✓", "Continuation signed before I left ✓"],
-      caveat: "For the Portuguese market, voice quality (speech-to-text and text-to-speech) was the limit. Prompts couldn’t fix it. The team met and agreed the model was still weak for Portuguese.",
+      outcomes: ["Real users ✓", "About half of the ~350 monthly contacts handled automatically ✓", "The client continued after the 3-month pilot ✓"],
+      caveat: "",
     },
     found: "EVIDENCE FOUND",
   },
@@ -218,16 +218,20 @@ export const en = {
       "DOCUMENT",
       "REVISIT IF NEEDED",
     ],
-    principle: ["A good implementation isn’t everything the customer can imagine.", "It’s knowing what needs to happen now — and what can wait."],
+    principle: ["A good implementation isn’t everything the customer can imagine.", "It’s knowing what has to happen first, and what’s feasible. Part of my job is teaching the client both."],
     returnAction: "RETURN TO AGREED SCOPE",
   },
 
   // ───────────────────────── ACT V-b — NOBODY ASKED ME (growth). Figures are approximate, as Marta gave them.
   growth: {
     a: [
-      { k: "NOBODY ASKED ME", t: "The team wanted clients beyond the US. Nobody asked me to try Portugal. I did." },
+      { k: "ON MY OWN", t: "The team wanted clients beyond the US. Nobody asked me to try Portugal. I did." },
       { k: "THE WORK", t: "LinkedIn content, and direct conversations with up to 20 people a day, until LinkedIn’s message limit stopped me." },
     ],
+    limit: [
+      { k: "AN HONEST LIMIT", t: "For the Portuguese market, voice quality (speech-to-text and text-to-speech) was the limit. Prompts couldn’t fix it. The team met and agreed the model was still weak for Portuguese." },
+    ],
+    resultsIntro: [{ k: "THE RESULTS", t: "What came out of those decisions." }],
     stats: [
       { n: 20, pre: "", suf: "/day", l: "people contacted on LinkedIn, at my busiest" },
       { n: 33, pre: "~", suf: "%", l: "became a meaningful conversation" },
@@ -235,14 +239,16 @@ export const en = {
     ],
     b: [
       { k: "BEYOND LINKEDIN", t: "I found a Customer Success summit, reached out to people who implement this, and invited two speakers onto our podcast. They came." },
-      { k: "PARTNERS", t: "I also spoke with agencies and consultants. Some of them brought us good clients." },
-      { k: "HONESTLY", t: "I started in the summer holidays. Conversations were good; closing was slow. A few big prospects reached advanced stages." },
-      { k: "THE RESULT", t: "That’s what led to my promotion." },
+      { k: "PARTNERS", t: "I also spoke with agencies and consultants. Some of them brought us good potential clients." },
+      { k: "HONESTLY", t: "I started in the summer holidays. Conversations went well; closing was slow. A few big prospects reached advanced stages." },
+      { k: "THE HEALTH VIEW", t: "The customer health view was approved for use, and a customer I flagged subsequently renewed." },
+      { k: "THE RESULT", t: "And that’s what led to my promotion." },
     ],
   },
 
   // ───────────────────────── ACT VI — CUSTOMER HEALTH
   health: {
+    intro: [{ k: "ON MY OWN", t: "Some decisions nobody asked me to make. I made them on my own. The first: knowing about a problem before the customer tells me." }],
     open: ["What if the customer doesn’t tell you they’re unhappy?", "What if you could notice first?"],
     signals: [
       "Usage",
@@ -311,9 +317,9 @@ export const en = {
     relHeading: "VISOR × MARTA",
     // One factual line per request. All from Marta's brief; "approved" wording is flagged in PLACEHOLDERS.
     facts: {
-      projects: "AI agent for a small real estate team: about half of ~350 monthly contacts automated. Built with a developer, in production, and the customer continued.",
-      decisions: "Construction client (about ten people, ~700 contacts a month, nothing digitised): scope agreed, back to Phase 1, and approved by the client.",
-      results: "Opened the Portuguese market unprompted (~20 meetings in two months, partners, a podcast), which led to my promotion. Also built a customer health view unprompted.",
+      projects: "AI agent for a small real estate team: about half of ~350 monthly contacts automated. Built with a developer, in production, and the client continued after the 3-month pilot.",
+      decisions: "Taught a construction client what is priority and what is feasible. On my own initiative: a customer health view, and opening the Portuguese market.",
+      results: "About a third of my outreach became real conversations, ~20 meetings in two months, partners and a podcast: I was promoted. The health view was approved and a flagged customer subsequently renewed.",
       team: "Problems sent to engineering with full context. Solutions built together with a developer.",
     },
     rows: ["PROJECTS", "DECISIONS", "RESULTS", "TEAM CONTRIBUTION"],
@@ -373,7 +379,7 @@ export const underTheHoodEn = {
         "After go-live I stayed the client’s point of contact: a weekly meeting and a shared Slack channel.",
         "When an enquiry returned incomplete information, I reproduced it, inspected the conversation, isolated the possibilities and wrote it up for the team in Linear and Slack: client and IDs, link to the conversation, what happened, what was expected, my findings, the likely problem, what I had already tried and why it didn’t fix it.",
       ],
-      outcome: ["Real users in production.", "The customer continued; the continuation was signed before I left.", "For the Portuguese market, voice quality (speech-to-text and text-to-speech) was the limit. Prompts couldn’t fix it; the team met and agreed the model was still weak for Portuguese."],
+      outcome: ["Real users in production.", "About half of the contacts handled automatically.", "The client continued after the 3-month pilot."],
       numbers: ["About 350 contacts a month (approximate).", "About 50% of them handled automatically (approximate)."],
       different: "", // PLACEHOLDER: what you would do differently
     },
@@ -390,13 +396,22 @@ export const underTheHoodEn = {
       different: "",
     },
     {
+      kicker: "CASE 02b · DECISIONS",
+      title: "An honest limit",
+      problem: "For the Portuguese market, voice quality (speech-to-text and text-to-speech) was the limit.",
+      did: ["Prompts couldn’t fix it. The team met and we agreed the model was still weak for Portuguese."],
+      outcome: [] as string[],
+      numbers: [] as string[],
+      different: "",
+    },
+    {
       kicker: "CASE 03 · RESULTS",
       title: "Opening the Portuguese market, before anyone asked",
       problem: "The team wanted clients beyond the US. Nobody had asked me to try Portugal.",
       did: [
         "Created LinkedIn content and ran direct outreach (up to ~20 conversations a day, within LinkedIn’s message limits), to people on our target list and others.",
         "Found a Customer Success summit, reached out to people who implement this, and invited two speakers onto our podcast. They came.",
-        "Spoke with agencies and consultants; some brought us good clients.",
+        "Spoke with agencies and consultants; some brought us good potential clients.",
       ],
       outcome: ["About a third of the conversations became meaningful ones.", "About 20 meetings booked in two months, more booked for later.", "A few big prospects reached advanced stages (I started in the summer holidays, so closing was slow).", "This is what led to my promotion."],
       numbers: [] as string[],

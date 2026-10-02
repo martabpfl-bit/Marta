@@ -6,12 +6,10 @@ import { show, hide, maskIn, draw, packet, plainLine, insertContext } from "@/li
 import { PlainWords } from "@/components/PlainWords";
 import { ContextBeats } from "@/components/ContextBeats";
 import { useRef } from "react";
-import { store } from "@/lib/store";
 import { audio } from "@/lib/audio";
 import { useIsMobile } from "@/lib/useMedia";
 import { MaskText } from "@/components/MaskText";
 import { CustomerHealthEngine } from "@/components/CustomerHealthEngine";
-import { EvidenceTracker } from "@/components/EvidenceTracker";
 import { StatusIndicator } from "@/components/StatusIndicator";
 
 const AMBER = "#E3A33B";
@@ -23,7 +21,7 @@ const AMBER = "#E3A33B";
 export function Act6Health() {
   const h = copy.health;
   const mobile = useIsMobile();
-  const T = 164;
+  const T = 151;
   const marks = useRef({ total: T, results: 157, risk: 53.4 });
   const ref = useScene({
     vh: 940,
@@ -32,9 +30,8 @@ export function Act6Health() {
       const n = h.signals.length;
       const circ = (id: string) => root.querySelector<SVGGeometryElement>(id);
       gsap.set(q("[data-plain]"), { autoAlpha: 0 });
-      gsap.set(q("[data-sig], [data-engine], [data-risk-label], .rk circle, [data-step-r], [data-step-p], [data-int], [data-adopt], #a6-found"), { autoAlpha: 0 });
+      gsap.set(q("[data-sig], [data-engine], [data-risk-label], .rk circle, [data-step-r], [data-step-p], [data-int], [data-adopt]"), { autoAlpha: 0 });
       gsap.set(q(".rk circle"), { autoAlpha: 0.18 });
-      gsap.set(q("[data-fill]"), { scale: (i: number, el: Element) => (el.getAttribute("data-on") === "true" ? 1 : 0) });
 
       // ── two questions, with a pause between
       show(tl, "#a6-o1", 0, 0.5);
@@ -96,19 +93,14 @@ export function Act6Health() {
       q("[data-adopt]").forEach((el, i) => tl.to(el, { autoAlpha: 1, duration: 0.9 }, 137 + i * 2.8));
       hide(tl, "#a6-adopt", 150, 1.5);
 
-      // ── RESULTS ○ → ●
-      show(tl, "#a6-evid", 152, 1);
-      tl.to(q('[data-fill="results"]'), { scale: 1, duration: 1.4, ease: "back.out(2)" }, 156);
-      tl.to(q("[data-count-n]"), { textContent: 3, snap: { textContent: 1 }, duration: 0.1 }, 156);
-      show(tl, q("#a6-found"), 156.5, 1);
       const n2 = insertContext(tl, "a6b", h.ctxB.length, 105.5);
       const n1 = insertContext(tl, "a6a", h.ctxA.length, 26);
-      marks.current = { total: T + n1 + n2, results: 157 + n1 + n2, risk: 53.4 + n1 };
-      tl.to({}, { duration: 0.001 }, T + n1 + n2);
+      const n0 = insertContext(tl, "a6i", h.intro.length, 0);
+      marks.current = { total: T + n0 + n1 + n2, results: 0, risk: 53.4 + n0 + n1 };
+      tl.to({}, { duration: 0.001 }, T + n0 + n1 + n2);
       void mobile;
     },
     onProgress(p) {
-      store.setEvidence("results", p >= marks.current.results / marks.current.total);
       audio.once("a6-risk", "signal", p >= marks.current.risk / marks.current.total && p < (marks.current.risk + 12) / marks.current.total);
     },
   });
@@ -123,6 +115,7 @@ export function Act6Health() {
           <MaskText as="h2" className="h-xl" text={h.open[1]} />
         </div>
 
+        <ContextBeats prefix="a6i" items={h.intro} />
         <ContextBeats prefix="a6a" items={h.ctxA} />
         <ContextBeats prefix="a6b" items={h.ctxB} />
         <PlainWords id="a6-plain" lines={h.plain} />
@@ -181,12 +174,6 @@ export function Act6Health() {
           </ol>
         </div>
 
-        <div className="beat beat--left" id="a6-evid" data-beat>
-          <EvidenceTracker filled={["projects", "decisions"]} className="et--big" />
-          <p className="mono found" id="a6-found">
-            <StatusIndicator tone="good">{copy.case1.found}</StatusIndicator>
-          </p>
-        </div>
       </div>
     </section>
   );

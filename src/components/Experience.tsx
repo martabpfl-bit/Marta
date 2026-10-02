@@ -16,6 +16,7 @@ import { Act4bTroubleshooting } from "@/scenes/Act4bTroubleshooting";
 import { Act4cResolution } from "@/scenes/Act4cResolution";
 import { Act5Decisions } from "@/scenes/Act5Decisions";
 import { Act5bGrowth } from "@/scenes/Act5bGrowth";
+import { Act6bResults } from "@/scenes/Act6bResults";
 import { Act6Health } from "@/scenes/Act6Health";
 import { Act7Meta } from "@/scenes/Act7Meta";
 import { Act8Team } from "@/scenes/Act8Team";
@@ -87,8 +88,9 @@ function Stage() {
         <Act4bTroubleshooting />
         <Act4cResolution />
         <Act5Decisions />
-        <Act5bGrowth />
         <Act6Health />
+        <Act5bGrowth />
+        <Act6bResults />
         <Act7Meta />
         <Act8Team />
         <Act9Resolution />
