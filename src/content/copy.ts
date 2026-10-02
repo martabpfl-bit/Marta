@@ -261,7 +261,7 @@ export const copy = {
       { label: "RELATIONSHIP", value: "OPEN" },
     ],
     future: "FUTURE",
-    typed: "We’ll see.",
+    typed: "Available for the next opportunity.",
   },
 
   // ───────────────────────── ACT X — FALSE ENDING + REVEAL
