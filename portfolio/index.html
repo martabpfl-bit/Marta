@@ -153,7 +153,17 @@
   .proj:hover { transform: translateY(-6px); box-shadow: 0 30px 60px -30px rgba(27, 32, 64, 0.45); }
   .proj[hidden] { display: none; }
   .pv { position: relative; height: 260px; background: var(--ink); overflow: hidden; display: grid; place-items: center; }
-  .pv img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+  .pv img.shot { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; z-index: 1; }
+  .proj.wide { grid-column: 1 / -1; display: grid; grid-template-columns: 1.2fr 1fr; }
+  .proj.wide .pv { height: 100%; min-height: 300px; }
+  .proj.wide .pt { align-content: center; padding: 34px; }
+  .browser { width: 78%; border-radius: 14px; overflow: hidden; background: var(--bg); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35); transform: perspective(900px) rotateY(-8deg) rotateX(4deg); transition: transform 0.6s; }
+  .proj:hover .browser { transform: perspective(900px) rotateY(0) rotateX(0); }
+  .browser .bar { display: flex; align-items: center; gap: 6px; padding: 10px 12px; background: var(--bg2); }
+  .browser .bar i { width: 9px; height: 9px; border-radius: 50%; background: rgba(27, 32, 64, 0.2); }
+  .browser .bar span { margin-left: 10px; flex: 1; font-family: var(--mono); font-size: 11px; color: var(--ink2); background: var(--bg); border-radius: 6px; padding: 4px 10px; }
+  .browser .bview { height: 170px; display: grid; place-items: center; background: radial-gradient(80% 90% at 30% 20%, #e3ecd9, var(--bg) 70%); }
+  .browser .bview b { font-size: clamp(1.8rem, 3.4vw, 2.8rem); letter-spacing: -0.04em; }
   .pt { padding: 24px 26px 26px; display: grid; gap: 10px; }
   .pt h3 { font-size: clamp(1.4rem, 2.2vw, 1.9rem); letter-spacing: -0.035em; line-height: 1.05; }
   .pt p { font-size: 14.5px; line-height: 1.55; color: var(--ink2); }
@@ -292,6 +302,8 @@
     .jdot span { display: none; }
     .vframe button::after { width: 64px; height: 64px; margin: -32px 0 0 -32px; font-size: 20px; }
     .projects { grid-template-columns: 1fr; }
+    .proj.wide { grid-template-columns: 1fr; }
+    .proj.wide .pv { min-height: 240px; }
     .pv { height: 220px; }
     .work .acc { flex-direction: column; height: auto; }
     .panel { flex: 0 0 64px; }
@@ -470,9 +482,12 @@
           <div class="pt"><p class="mono">Technical CS · Handoff</p><h3>Escalation Ticket Builder</h3><p>How I hand a client problem to the developers, every time, in Linear and Slack: what happened, what was expected, what I found, what I tried and why it didn’t fix it.</p><span class="go"><i>→</i>Build a ticket</span></div>
         </a>
         <!-- My app: set data-href to the live link (and optionally add a screenshot at assets/app.jpg) to show this card -->
-        <a class="proj" id="appCard" data-href="" href="#" target="_blank" rel="noopener noreferrer" hidden>
-          <div class="pv"><span class="live">Live app</span><img src="assets/app.jpg" alt="" onerror="this.remove()" /></div>
-          <div class="pt"><p class="mono">Side project · App</p><h3 id="appName">My app</h3><p id="appDesc"></p><span class="go"><i>↗</i>Open the app</span></div>
+        <a class="proj wide" id="appCard" data-href="https://eatconscience.com" href="https://eatconscience.com" target="_blank" rel="noopener noreferrer">
+          <div class="pv"><span class="live">Live app</span>
+            <div class="browser" aria-hidden="true"><div class="bar"><i></i><i></i><i></i><span>eatconscience.com</span></div><div class="bview"><b>Eat <em>Conscience.</em></b></div></div>
+            <img class="shot" src="assets/app.jpg" alt="" onerror="this.remove()" />
+          </div>
+          <div class="pt"><p class="mono">My own app · Live</p><h3>Eat Conscience</h3><p>My own app, live and open to try. Built on the same thing that runs through all my work: understanding what people actually need.</p><span class="go"><i>↗</i>Open eatconscience.com</span></div>
         </a>
       </div>
 
