@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Escalation Ticket Builder — Marta Lopes</title>
+<meta name="description" content="The structure Marta Lopes uses to hand a client problem to developers, as a tool you can try." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%231b2040'/%3E%3Ctext x='16' y='21' font-family='Arial' font-size='13' font-weight='700' fill='%23f3f0e6' text-anchor='middle'%3EML%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f3f0e6; --bg2: #ece7d8; --ink: #1b2040; --ink2: #3d4266; --mute: #85826f; --line: rgba(27, 32, 64, 0.12); --card: #fbf9f3;
+    --g: #3f9c6b; --y: #d4a017; --r: #c8553d;
+    --sans: "Instrument Sans", "Helvetica Neue", Arial, sans-serif; --serif: "Instrument Serif", Georgia, serif; --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    --gut: clamp(16px, 4vw, 56px);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+  h1, h2, h3, p { margin: 0; }
+  button, input, textarea, select { font: inherit; color: inherit; }
+  a { color: inherit; }
+  em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--ink2); }
+  .mono { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mute); }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; border-radius: 6px; }
+  header { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px var(--gut); }
+  .back { display: inline-flex; gap: 8px; align-items: center; text-decoration: none; font-size: 14px; padding: 9px 15px; border: 1px solid var(--line); border-radius: 999px; background: var(--card); }
+  .tag { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; padding: 6px 10px; border-radius: 999px; background: var(--ink); color: var(--bg); }
+  .intro { padding: 10px var(--gut) 26px; }
+  .intro h1 { font-size: clamp(2.2rem, 5vw, 4.2rem); letter-spacing: -0.045em; line-height: 0.98; font-weight: 600; }
+  .intro p { margin-top: 14px; max-width: 62ch; color: var(--ink2); line-height: 1.55; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 999px; font-size: 13.5px; font-weight: 500; border: 1px solid var(--ink); cursor: pointer; background: transparent; }
+  .btn.dark { background: var(--ink); color: var(--bg); }
+  .tools { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+
+  .app { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 0 var(--gut) 60px; align-items: start; }
+  .panel { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: clamp(16px, 2.4vw, 26px); }
+  .field { display: grid; gap: 6px; margin-bottom: 14px; }
+  .field label { display: flex; justify-content: space-between; gap: 10px; font-size: 13.5px; font-weight: 600; }
+  .field label span { font-weight: 400; color: var(--mute); font-size: 12px; }
+  .field input, .field textarea, .field select { width: 100%; border: 1px solid var(--line); border-radius: 12px; background: #fff; padding: 10px 12px; font-size: 14px; resize: vertical; }
+  .field textarea { min-height: 64px; line-height: 1.45; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  .preview { position: sticky; top: 16px; }
+  .meter { display: flex; align-items: center; gap: 12px; }
+  .bar { flex: 1; height: 8px; border-radius: 999px; background: var(--bg2); overflow: hidden; }
+  .bar i { display: block; height: 100%; width: 0; background: var(--r); border-radius: 999px; transition: width 0.4s, background 0.4s; }
+  .meter b { font-size: 13px; white-space: nowrap; }
+  .hints { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 6px; }
+  .hints li { font-size: 13px; color: var(--ink2); padding-left: 18px; position: relative; line-height: 1.4; }
+  .hints li::before { content: "○"; position: absolute; left: 0; color: var(--mute); }
+  .hints li.ok::before { content: "●"; color: var(--g); }
+  .ticket { margin-top: 18px; border: 1px solid var(--line); border-radius: 16px; background: #fff; overflow: hidden; }
+  .ticket .th { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--line); background: var(--bg); }
+  .ticket .th b { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; }
+  .pri { font-family: var(--mono); font-size: 11px; padding: 4px 9px; border-radius: 999px; color: #fff; }
+  .ticket .tb { padding: 16px; }
+  .ticket h2 { font-size: 1.25rem; letter-spacing: -0.02em; }
+  .ticket dl { margin: 14px 0 0; display: grid; gap: 12px; }
+  .ticket dt { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mute); }
+  .ticket dd { margin: 3px 0 0; font-size: 14px; line-height: 1.5; white-space: pre-wrap; word-break: break-word; }
+  .ticket dd.empty { color: #bbb6a6; font-style: italic; }
+  .copied { font-size: 13px; color: var(--g); margin-left: 6px; opacity: 0; transition: opacity 0.3s; }
+  .copied.on { opacity: 1; }
+  .foot { padding: 0 var(--gut) 40px; color: var(--mute); font-size: 13px; max-width: 80ch; line-height: 1.5; }
+  @media (max-width: 900px) { .app { grid-template-columns: 1fr; } .preview { position: static; } .row2 { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <a class="back" href="index.html#work">← Back to portfolio</a>
+  <span class="tag">Interactive tool</span>
+</header>
+
+<section class="intro">
+  <p class="mono">Project · Handoff to developers</p>
+  <h1>Escalation Ticket <em>Builder.</em></h1>
+  <p>When I can’t fix a client problem myself, I hand it over the same way every time, in Linear and Slack, so the developer doesn’t have to come back with questions. This tool is that structure. Fill it in, or load the example, and copy a ticket that’s ready to go.</p>
+  <div class="tools">
+    <button class="btn dark" type="button" id="ex">Load an example</button>
+    <button class="btn" type="button" id="clear">Clear</button>
+  </div>
+</section>
+
+<div class="app">
+  <form class="panel" id="form" autocomplete="off">
+    <div class="field"><label for="title">Short title <span>what’s broken, in one line</span></label><input id="title" name="title" /></div>
+    <div class="row2">
+      <div class="field"><label for="client">Client &amp; IDs <span>account, agent, workflow</span></label><input id="client" name="client" /></div>
+      <div class="field"><label for="impact">Impact</label><select id="impact" name="impact"><option value="">Choose…</option><option>Urgent: client blocked</option><option>High: core flow affected</option><option>Medium: workaround exists</option><option>Low: cosmetic</option></select></div>
+    </div>
+    <div class="field"><label for="link">Conversation link <span>call, transcript or chat</span></label><input id="link" name="link" /></div>
+    <div class="field"><label for="happened">What happened</label><textarea id="happened" name="happened"></textarea></div>
+    <div class="field"><label for="expected">What was expected</label><textarea id="expected" name="expected"></textarea></div>
+    <div class="field"><label for="findings">What I found</label><textarea id="findings" name="findings"></textarea></div>
+    <div class="field"><label for="likely">Likely problem</label><textarea id="likely" name="likely"></textarea></div>
+    <div class="field"><label for="tried">What I tried</label><textarea id="tried" name="tried"></textarea></div>
+    <div class="field"><label for="why">Why it didn’t fix it</label><textarea id="why" name="why"></textarea></div>
+  </form>
+
+  <aside class="panel preview">
+    <div class="meter"><div class="bar"><i id="bar"></i></div><b id="ready">Not ready yet</b></div>
+    <ul class="hints" id="hints"></ul>
+    <div class="ticket">
+      <div class="th"><b>TICKET PREVIEW</b><span class="pri" id="pri" style="background:var(--mute)">No impact set</span></div>
+      <div class="tb"><h2 id="pTitle">Untitled issue</h2><dl id="dl"></dl></div>
+    </div>
+    <div class="tools"><button class="btn dark" type="button" id="copy">Copy ticket</button><span class="copied" id="copied">Copied ✓</span></div>
+  </aside>
+</div>
+
+<p class="foot">The example is invented for the demo. Nothing you type here leaves your browser.</p>
+
+<script>
+(() => {
+  const F = [
+    ["client", "Client & IDs", "Add the client and the IDs so nobody has to look them up."],
+    ["link", "Conversation link", "Add the conversation link so the developer can see it happen."],
+    ["happened", "What happened", "Describe what actually happened."],
+    ["expected", "What was expected", "Say what should have happened."],
+    ["findings", "What I found", "Share what you found while investigating."],
+    ["likely", "Likely problem", "Give your best guess at the cause."],
+    ["tried", "What I tried", "List what you already tried, so it isn’t repeated."],
+    ["why", "Why it didn’t fix it", "Explain why those attempts didn’t solve it."],
+  ];
+  const PRI = { "Urgent: client blocked": "var(--r)", "High: core flow affected": "#d9822b", "Medium: workaround exists": "var(--y)", "Low: cosmetic": "var(--g)" };
+  const EX = {
+    title: "Voice agent doesn't offer available slots after the caller gives a date",
+    client: "Sample clinic · agent #A-102 · booking workflow v3",
+    impact: "High: core flow affected",
+    link: "https://example.com/calls/48213 (03:12 → 04:05)",
+    happened: "Caller asked for Tuesday afternoon. The agent confirmed the date, then said it couldn't find availability and ended the booking.",
+    expected: "The agent should read back the open slots for Tuesday afternoon and book the one the caller picks.",
+    findings: "The calendar shows three open slots on Tuesday. The webhook to the calendar returns a 200 but an empty list. Happens on 4 of the last 10 calls, always when the caller says a weekday instead of a date.",
+    likely: "The weekday isn't converted to a date before the availability request, so the request goes out without a valid date.",
+    tried: "Re-tested with an exact date (works). Re-saved the calendar connection. Adjusted the prompt to ask for an exact date.",
+    why: "The prompt change helps but callers still say weekdays. The conversion needs to happen in the workflow, not in the conversation.",
+  };
+  const $ = (s) => document.querySelector(s), form = $("#form");
+  const val = (k) => (form.elements[k].value || "").trim();
+  const render = () => {
+    const done = F.filter(([k]) => val(k)).length + (val("title") ? 1 : 0) + (val("impact") ? 1 : 0), total = F.length + 2;
+    const pct = Math.round((done / total) * 100);
+    $("#bar").style.width = pct + "%";
+    $("#bar").style.background = pct === 100 ? "var(--g)" : pct >= 60 ? "var(--y)" : "var(--r)";
+    $("#ready").textContent = pct === 100 ? "Ready for the developers" : `${done} of ${total} filled`;
+    $("#hints").innerHTML = F.map(([k, , h]) => `<li class="${val(k) ? "ok" : ""}">${h}</li>`).join("");
+    $("#pTitle").textContent = val("title") || "Untitled issue";
+    const p = $("#pri"); p.textContent = val("impact") || "No impact set"; p.style.background = PRI[val("impact")] || "var(--mute)";
+    $("#dl").innerHTML = F.map(([k, l]) => `<div><dt>${l}</dt><dd class="${val(k) ? "" : "empty"}"></dd></div>`).join("");
+    $("#dl").querySelectorAll("dd").forEach((d, i) => (d.textContent = val(F[i][0]) || "Not filled in yet"));
+  };
+  form.addEventListener("input", render);
+  $("#ex").addEventListener("click", () => { Object.entries(EX).forEach(([k, v]) => (form.elements[k].value = v)); render(); });
+  $("#clear").addEventListener("click", () => { form.reset(); render(); });
+  $("#copy").addEventListener("click", async () => {
+    const md = `## ${val("title") || "Untitled issue"}\n**Impact:** ${val("impact") || "-"}\n\n` + F.map(([k, l]) => `**${l}**\n${val(k) || "-"}`).join("\n\n");
+    try { await navigator.clipboard.writeText(md); } catch { const t = document.createElement("textarea"); t.value = md; document.body.appendChild(t); t.select(); document.execCommand("copy"); t.remove(); }
+    $("#copied").classList.add("on"); setTimeout(() => $("#copied").classList.remove("on"), 1600);
+  });
+  render();
+})();
+</script>
+</body>
+</html>

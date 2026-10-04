@@ -147,6 +147,47 @@
   .vframe button:hover::after { transform: scale(1.08); }
   .vframe iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
+  /* ───────── projects */
+  .projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 46px; }
+  .proj { position: relative; display: flex; flex-direction: column; text-decoration: none; background: var(--card); border: 1px solid var(--line); border-radius: 24px; overflow: hidden; transition: transform 0.35s, box-shadow 0.35s; }
+  .proj:hover { transform: translateY(-6px); box-shadow: 0 30px 60px -30px rgba(27, 32, 64, 0.45); }
+  .proj[hidden] { display: none; }
+  .pv { position: relative; height: 260px; background: var(--ink); overflow: hidden; display: grid; place-items: center; }
+  .pv img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+  .pt { padding: 24px 26px 26px; display: grid; gap: 10px; }
+  .pt h3 { font-size: clamp(1.4rem, 2.2vw, 1.9rem); letter-spacing: -0.035em; line-height: 1.05; }
+  .pt p { font-size: 14.5px; line-height: 1.55; color: var(--ink2); }
+  .pt .go { margin-top: 6px; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; }
+  .pt .go i { font-style: normal; display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--ink); color: var(--bg); transition: transform 0.3s; }
+  .proj:hover .go i { transform: translateX(4px); }
+  .live { position: absolute; top: 14px; left: 14px; z-index: 2; display: inline-flex; align-items: center; gap: 7px; padding: 6px 11px; border-radius: 999px; background: var(--bg); font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .live::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--good); animation: ping 2.2s infinite; }
+  /* mini health dashboard */
+  .mh { width: 78%; display: grid; grid-template-columns: 1fr auto; gap: 18px; align-items: center; }
+  .mh ul { display: grid; gap: 8px; }
+  .mh li { display: grid; grid-template-columns: 10px 1fr 30px; gap: 10px; align-items: center; padding: 9px 12px; border-radius: 10px; background: rgba(243, 240, 230, 0.07); }
+  .mh li i { width: 10px; height: 10px; border-radius: 50%; background: var(--good); animation: mhc 7s infinite; }
+  .mh li:nth-child(2) i { animation-delay: -2.2s; } .mh li:nth-child(3) i { animation-delay: -4.6s; } .mh li:nth-child(4) i { animation-delay: -1.1s; }
+  .mh li b { height: 7px; border-radius: 4px; background: rgba(243, 240, 230, 0.25); }
+  .mh li span { height: 7px; border-radius: 4px; background: rgba(243, 240, 230, 0.12); }
+  @keyframes mhc { 0%, 30% { background: #3f9c6b; } 36%, 62% { background: #d4a017; } 68%, 88% { background: #c8553d; } 94%, 100% { background: #3f9c6b; } }
+  .mh svg { width: 104px; height: 104px; transform: rotate(-90deg); }
+  .mh circle { fill: none; stroke-width: 10; }
+  .mh .rb { stroke: rgba(243, 240, 230, 0.12); }
+  .mh .rf { stroke: #d4a017; stroke-linecap: round; stroke-dasharray: 289; animation: mhr 7s infinite; }
+  @keyframes mhr { 0%, 30% { stroke-dashoffset: 40; stroke: #3f9c6b; } 36%, 62% { stroke-dashoffset: 120; stroke: #d4a017; } 68%, 88% { stroke-dashoffset: 200; stroke: #c8553d; } 100% { stroke-dashoffset: 40; stroke: #3f9c6b; } }
+  /* mini ticket */
+  .mt { width: 70%; background: #fff; border-radius: 14px; padding: 16px; display: grid; gap: 10px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); transform: rotate(-2deg); }
+  .mt .tt { display: flex; justify-content: space-between; align-items: center; }
+  .mt .tt b { height: 9px; width: 55%; border-radius: 4px; background: var(--ink); }
+  .mt .tt span { font-family: var(--mono); font-size: 9px; color: #fff; background: #d9822b; padding: 3px 7px; border-radius: 999px; }
+  .mt p { display: grid; grid-template-columns: 70px 1fr; gap: 10px; align-items: center; margin: 0; }
+  .mt p small { font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.08em; color: var(--mute); text-transform: uppercase; }
+  .mt p i { height: 7px; border-radius: 4px; background: var(--bg2); position: relative; overflow: hidden; }
+  .mt p i::after { content: ""; position: absolute; inset: 0; background: var(--ink2); transform-origin: left; transform: scaleX(0); animation: mtf 6s infinite; animation-delay: calc(var(--d) * 0.45s); }
+  @keyframes mtf { 0% { transform: scaleX(0); } 15%, 85% { transform: scaleX(var(--w, 1)); } 100% { transform: scaleX(0); } }
+  .stories-h { margin-top: 90px; font-size: clamp(1.8rem, 3.4vw, 3rem); letter-spacing: -0.04em; font-weight: 600; line-height: 1; }
+
   /* ───────── work accordion */
   .work .acc { display: flex; gap: 10px; height: 520px; margin-top: 46px; }
   .panel { position: relative; flex: 0 0 76px; border-radius: 18px; background: var(--card); border: 1px solid var(--line); overflow: hidden; cursor: pointer; transition: flex 0.7s cubic-bezier(0.7, 0, 0.2, 1), background 0.4s; }
@@ -250,6 +291,8 @@
     .vframe { border-radius: 18px; }
     .jdot span { display: none; }
     .vframe button::after { width: 64px; height: 64px; margin: -32px 0 0 -32px; font-size: 20px; }
+    .projects { grid-template-columns: 1fr; }
+    .pv { height: 220px; }
     .work .acc { flex-direction: column; height: auto; }
     .panel { flex: 0 0 64px; }
     .panel.open { flex: 0 0 auto; }
@@ -268,7 +311,7 @@
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .status i, .marq { animation: none; }
+    .status i, .marq, .mh li i, .mh .rf, .mt p i::after, .live::before { animation: none; }
     .jcard { opacity: 1; transform: none; }
   }
 </style>
@@ -281,7 +324,7 @@
     <i class="ind" aria-hidden="true"></i>
     <a href="#about">About</a>
     <a href="#journey">How I work</a>
-    <a href="#work">Work</a>
+    <a href="#work">Projects</a>
     <a href="#experience">Experience</a>
     <a href="#feedback">Feedback</a>
     <a href="#contact">Contact</a>
@@ -410,8 +453,30 @@
   <!-- ───────── WORK -->
   <section class="work" id="work">
     <div class="wrap">
-      <p class="mono kicker">03 · Work</p>
-      <h2 class="h2">Things I’ve <em>done.</em></h2>
+      <p class="mono kicker">03 · Projects</p>
+      <h2 class="h2">Things I’ve built. <em>Open them and try.</em></h2>
+      <div class="projects">
+        <a class="proj" href="health.html">
+          <div class="pv"><span class="live">Live demo</span>
+            <div class="mh" aria-hidden="true"><ul><li><i></i><b></b><span></span></li><li><i></i><b></b><span></span></li><li><i></i><b></b><span></span></li><li><i></i><b></b><span></span></li></ul><svg viewBox="0 0 104 104"><circle class="rb" cx="52" cy="52" r="46" /><circle class="rf" cx="52" cy="52" r="46" /></svg></div>
+          </div>
+          <div class="pt"><p class="mono">Proactive · Retention</p><h3>Customer Health Monitor</h3><p>Nobody asked me to build it. Nine signals about each customer combined into one status: green, yellow or red. Pick an account, change a signal and see what I would do next.</p><span class="go"><i>→</i>Open the demo</span></div>
+        </a>
+        <a class="proj" href="escalate.html">
+          <div class="pv"><span class="live">Try it</span>
+            <div class="mt" aria-hidden="true"><div class="tt"><b></b><span>HIGH</span></div>
+              <p><small>Client &amp; IDs</small><i style="--d:0;--w:.6"></i></p><p><small>Happened</small><i style="--d:1;--w:.9"></i></p><p><small>Expected</small><i style="--d:2;--w:.75"></i></p><p><small>Found</small><i style="--d:3;--w:.85"></i></p><p><small>Tried</small><i style="--d:4;--w:.7"></i></p><p><small>Why not</small><i style="--d:5;--w:.55"></i></p></div>
+          </div>
+          <div class="pt"><p class="mono">Technical CS · Handoff</p><h3>Escalation Ticket Builder</h3><p>How I hand a client problem to the developers, every time, in Linear and Slack: what happened, what was expected, what I found, what I tried and why it didn’t fix it.</p><span class="go"><i>→</i>Build a ticket</span></div>
+        </a>
+        <!-- My app: set data-href to the live link (and optionally add a screenshot at assets/app.jpg) to show this card -->
+        <a class="proj" id="appCard" data-href="" href="#" target="_blank" rel="noopener noreferrer" hidden>
+          <div class="pv"><span class="live">Live app</span><img src="assets/app.jpg" alt="" onerror="this.remove()" /></div>
+          <div class="pt"><p class="mono">Side project · App</p><h3 id="appName">My app</h3><p id="appDesc"></p><span class="go"><i>↗</i>Open the app</span></div>
+        </a>
+      </div>
+
+      <h3 class="stories-h">Client work, <em>in short.</em></h3>
       <div class="acc" id="acc">
         <article class="panel open">
           <button class="tab" type="button" aria-expanded="true"><b>AI agent · Real estate</b><i>+</i></button>
@@ -451,24 +516,6 @@
           </div>
         </article>
         <article class="panel">
-          <button class="tab" type="button" aria-expanded="false"><b>Customer health view</b><i>+</i></button>
-          <div class="body">
-            <div>
-              <p class="mono">Proactive · Retention</p>
-              <h3>Noticing a problem before the customer tells me</h3>
-              <p>Nobody asked me to build it. I combined nine signals about each customer (usage, outcomes, appointments, automation performance, transcripts, sentiment, communication, lifecycle stage, renewal proximity) into one health status.</p>
-              <ul>
-                <li>On an account that turned yellow: investigated, reached out, proposed solutions</li>
-                <li>Presented to leadership and approved for use</li>
-              </ul>
-            </div>
-            <div class="metric">
-              <div><b>9</b><span>signals, one status: green, yellow or red</span></div>
-              <div><b>Renewed</b><span>a flagged customer subsequently renewed</span></div>
-            </div>
-          </div>
-        </article>
-        <article class="panel">
           <button class="tab" type="button" aria-expanded="false"><b>Opening Portugal</b><i>+</i></button>
           <div class="body">
             <div>
@@ -498,24 +545,24 @@
       <div class="tl" id="tl">
         <i class="tl-progress" id="tlp"></i>
         <div class="tl-item">
-          <p class="tl-year">2020</p>
-          <div class="tl-card"><span class="mono">2020 – 2022</span><h3>Project Manager</h3><p class="org">Community Nutrition</p><ul><li>3 government-funded health programs</li><li>20 partnerships</li><li>~50K beneficiaries</li></ul></div>
-        </div>
-        <div class="tl-item">
-          <p class="tl-year">2023</p>
-          <div class="tl-card"><span class="mono">2023 – 2024</span><h3>Customer Service</h3><p class="org">White Stone</p><ul><li>Customer retention &amp; re-engagement</li><li>30+ daily bookings &amp; enquiries</li></ul></div>
-        </div>
-        <div class="tl-item">
-          <p class="tl-year">2024</p>
-          <div class="tl-card"><span class="mono">2024 – 2025</span><h3>Account Management</h3><p class="org">Medinox</p><ul><li>100+ pharmacy accounts</li><li>200+ products</li><li>Account growth · +20% sales</li></ul></div>
+          <p class="tl-year"><em>Next</em></p>
+          <div class="tl-card"><span class="mono">2026 –</span><h3>Your team?</h3><p class="org">Customer Success · Implementation</p><a class="btn btn--dark" style="margin-top:16px" href="mailto:martabpfl@gmail.com">Let’s talk →</a></div>
         </div>
         <div class="tl-item">
           <p class="tl-year">2025</p>
           <div class="tl-card"><span class="mono">2025 – 2026</span><h3>Customer Success</h3><p class="org">Nedzo AI · First Customer Success hire · B2B Voice AI</p><ul><li>Onboarding · Implementation · Integrations</li><li>Adoption · Retention · Client relationships</li><li>Bridge between clients &amp; Product/Engineering</li></ul><span class="promo">↑ Promoted to Head of Growth &amp; Expansion</span><p class="org" style="margin-top:8px">Growth · Expansion · Customer lifecycle</p></div>
         </div>
         <div class="tl-item">
-          <p class="tl-year"><em>Next</em></p>
-          <div class="tl-card"><span class="mono">2026 –</span><h3>Your team?</h3><p class="org">Customer Success · Implementation</p><a class="btn btn--dark" style="margin-top:16px" href="mailto:martabpfl@gmail.com">Let’s talk →</a></div>
+          <p class="tl-year">2024</p>
+          <div class="tl-card"><span class="mono">2024 – 2025</span><h3>Account Management</h3><p class="org">Medinox</p><ul><li>100+ pharmacy accounts</li><li>200+ products</li><li>Account growth · +20% sales</li></ul></div>
+        </div>
+        <div class="tl-item">
+          <p class="tl-year">2023</p>
+          <div class="tl-card"><span class="mono">2023 – 2024</span><h3>Customer Service</h3><p class="org">White Stone</p><ul><li>Customer retention &amp; re-engagement</li><li>30+ daily bookings &amp; enquiries</li></ul></div>
+        </div>
+        <div class="tl-item">
+          <p class="tl-year">2020</p>
+          <div class="tl-card"><span class="mono">2020 – 2022</span><h3>Project Manager</h3><p class="org">Community Nutrition</p><ul><li>3 government-funded health programs</li><li>20 partnerships</li><li>~50K beneficiaries</li></ul></div>
         </div>
       </div>
     </div>
@@ -546,7 +593,7 @@
       <h2 class="h2">In other people’s <em>words.</em></h2>
 
       <div class="fb-row">
-        <div class="fb-head"><h3>What clients say <em>about working with me.</em></h3><div class="arrows"><button type="button" data-rail="r1" data-dir="-1" aria-label="Previous">←</button><button type="button" data-rail="r1" data-dir="1" aria-label="Next">→</button></div></div>
+        <div class="fb-head"><h3>What direct clients <em>say about me.</em></h3><div class="arrows"><button type="button" data-rail="r1" data-dir="-1" aria-label="Previous">←</button><button type="button" data-rail="r1" data-dir="1" aria-label="Next">→</button></div></div>
         <div class="rail" id="r1">
           <figure class="q"><div><p class="stars">★★★★★</p><blockquote style="margin-top:12px">“Marta went over it with me to try to see what caused the problem, and to see how she could help in solving it. She was very helpful and courteous. She went step by step with me to try to get the issue resolved. In the end I got things working fine again. Thanks Marta!!”</blockquote></div><figcaption><b>Shelly Smith-Mitchell</b><span>Nedzo customer · Trustpilot</span><br /><a href="https://www.trustpilot.com/reviews/6a3aeeda7732f6d535613dc2" target="_blank" rel="noopener noreferrer">View on Trustpilot ↗</a></figcaption></figure>
           <figure class="q"><div><p class="stars">★★★★★</p><blockquote style="margin-top:12px">“I love these guys. Marta the support is fantastic, the owner helped me personally too. We book a ton of appointments thanks to this software and regularly recommend it to others. So good.”</blockquote></div><figcaption><b>H Trace</b><span>Nedzo customer · Trustpilot</span><br /><a href="https://www.trustpilot.com/reviews/69bc6aaf10c0e4e523aff952" target="_blank" rel="noopener noreferrer">View on Trustpilot ↗</a></figcaption></figure>
@@ -555,7 +602,7 @@
       </div>
 
       <div class="fb-row">
-        <div class="fb-head"><h3>What it’s like to <em>work with me.</em></h3><div class="arrows"><button type="button" data-rail="r2" data-dir="-1" aria-label="Previous">←</button><button type="button" data-rail="r2" data-dir="1" aria-label="Next">→</button></div></div>
+        <div class="fb-head"><h3>What colleagues <em>say about me.</em></h3><div class="arrows"><button type="button" data-rail="r2" data-dir="-1" aria-label="Previous">←</button><button type="button" data-rail="r2" data-dir="1" aria-label="Next">→</button></div></div>
         <div class="rail" id="r2">
           <figure class="q"><div><blockquote class="clamp">“I had the pleasure of working with Marta during her time at Nedzo, where she was our first Customer Success hire and an important part of the company's early growth. Marta joined at a stage when very little was established, and she took ownership of our customer relationships with professionalism and care. Our clients consistently spoke well of her, and she represented Nedzo with a level of warmth and reliability that is not easy to find. I am grateful for her contribution to Nedzo and would happily recommend her to any organisation looking for a dedicated, customer-focused professional.”</blockquote><button class="more" type="button">Read more</button></div><figcaption><b>Denis Rhomays</b><span>Co-Founder &amp; CEO, Nedzo AI · managed Marta directly</span><br /><a href="https://www.linkedin.com/in/marta-lopes-07a791150/" target="_blank" rel="noopener noreferrer">View on LinkedIn ↗</a></figcaption></figure>
           <figure class="q"><div><blockquote class="clamp">“Marta was part of our support and customer success team at Nedzo for almost a year, and I'm glad to recommend her. What stood out first was how she treated customers. She's patient with people who are frustrated, clear when explaining something technical to someone who isn't, and she follows through. Customers noticed and she was the favorite support rep for many of them. She also grew a lot in the time she was with us. Marta came in with limited exposure to SaaS and AI and left able to handle escalations on her own, onboard new customers end to end, and write help docs the team still uses. She asked good questions, took feedback without defensiveness, and put in the work to close the gaps herself. She cares about doing the job well, which is not something you can teach. Any team that puts her in front of customers will be better for it.”</blockquote><button class="more" type="button">Read more</button></div><figcaption><b>Ivo Schipper</b><span>Co-founder, Nedzo · managed Marta directly</span><br /><a href="https://www.linkedin.com/in/marta-lopes-07a791150/" target="_blank" rel="noopener noreferrer">View on LinkedIn ↗</a></figcaption></figure>

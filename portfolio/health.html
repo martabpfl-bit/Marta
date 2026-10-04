@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Customer Health Monitor — Marta Lopes</title>
+<meta name="description" content="A working demo of the customer health view Marta Lopes designed: nine signals, one status." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%231b2040'/%3E%3Ctext x='16' y='21' font-family='Arial' font-size='13' font-weight='700' fill='%23f3f0e6' text-anchor='middle'%3EML%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f3f0e6; --bg2: #ece7d8; --ink: #1b2040; --ink2: #3d4266; --mute: #85826f; --line: rgba(27, 32, 64, 0.12); --card: #fbf9f3;
+    --g: #3f9c6b; --y: #d4a017; --r: #c8553d;
+    --sans: "Instrument Sans", "Helvetica Neue", Arial, sans-serif; --serif: "Instrument Serif", Georgia, serif; --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    --gut: clamp(16px, 4vw, 56px);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+  h1, h2, h3, p { margin: 0; }
+  button { font: inherit; color: inherit; }
+  a { color: inherit; }
+  em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--ink2); }
+  .mono { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mute); }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; border-radius: 6px; }
+
+  header { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px var(--gut); }
+  .back { display: inline-flex; gap: 8px; align-items: center; text-decoration: none; font-size: 14px; padding: 9px 15px; border: 1px solid var(--line); border-radius: 999px; background: var(--card); }
+  .tag { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; padding: 6px 10px; border-radius: 999px; background: var(--ink); color: var(--bg); }
+  .intro { padding: 10px var(--gut) 26px; display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; flex-wrap: wrap; }
+  .intro h1 { font-size: clamp(2.2rem, 5vw, 4.2rem); letter-spacing: -0.045em; line-height: 0.98; font-weight: 600; }
+  .intro p { margin-top: 14px; max-width: 58ch; color: var(--ink2); line-height: 1.55; }
+
+  .app { display: grid; grid-template-columns: 340px 1fr; gap: 16px; padding: 0 var(--gut) 60px; align-items: start; }
+  .app > * { min-width: 0; }
+  .panel { background: var(--card); border: 1px solid var(--line); border-radius: 20px; }
+  .side { padding: 16px; position: sticky; top: 16px; }
+  .summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .summary button { border: 1px solid var(--line); background: var(--bg); border-radius: 14px; padding: 10px; text-align: left; cursor: pointer; transition: border-color 0.2s, background 0.2s; }
+  .summary button[aria-pressed="true"] { border-color: var(--ink); background: #fff; }
+  .summary b { display: block; font-size: 1.6rem; letter-spacing: -0.03em; }
+  .summary span { font-size: 12px; color: var(--ink2); display: inline-flex; align-items: center; gap: 6px; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; flex: 0 0 auto; }
+  .dot.g { background: var(--g); } .dot.y { background: var(--y); } .dot.r { background: var(--r); }
+  .list { margin-top: 14px; display: grid; gap: 6px; }
+  .acct { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: center; width: 100%; text-align: left; border: 1px solid transparent; background: transparent; padding: 11px 12px; border-radius: 12px; cursor: pointer; transition: background 0.2s, border-color 0.2s; }
+  .acct:hover { background: var(--bg); }
+  .acct[aria-current="true"] { background: #fff; border-color: var(--line); }
+  .acct b { display: block; font-size: 14px; font-weight: 600; }
+  .acct small { color: var(--mute); font-size: 12px; }
+  .acct .sc { font-family: var(--mono); font-size: 12px; color: var(--ink2); }
+
+  .main { padding: clamp(18px, 3vw, 30px); }
+  .top { display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: center; }
+  .ring { position: relative; width: 150px; height: 150px; }
+  .ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+  .ring circle { fill: none; stroke-width: 12; }
+  .ring .bgc { stroke: var(--bg2); }
+  .ring .fg { stroke: var(--g); stroke-linecap: round; transition: stroke-dashoffset 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), stroke 0.4s; }
+  .ring .val { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; }
+  .ring .val b { font-size: 2.4rem; letter-spacing: -0.04em; display: block; line-height: 1; }
+  .ring .val span { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; color: var(--mute); }
+  .top h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); letter-spacing: -0.035em; }
+  .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .meta span { font-size: 12.5px; padding: 6px 11px; border-radius: 999px; background: var(--bg); border: 1px solid var(--line); }
+  .status { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; padding: 7px 13px; border-radius: 999px; color: #fff; font-size: 13px; font-weight: 600; transition: background 0.4s; }
+
+  .sig-head { display: flex; justify-content: space-between; align-items: baseline; margin-top: 30px; gap: 10px; flex-wrap: wrap; }
+  .sig-head h3 { font-size: 1.15rem; letter-spacing: -0.02em; }
+  .signals { margin-top: 12px; display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 8px; }
+  .sig { border: 1px solid var(--line); border-radius: 14px; padding: 12px 13px; background: var(--bg); }
+  .sig .name { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; }
+  .sig .desc { font-size: 12px; color: var(--mute); margin-top: 3px; line-height: 1.35; min-height: 2.7em; }
+  .seg { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 10px; border: 1px solid var(--line); border-radius: 999px; padding: 3px; background: #fff; }
+  .seg button { border: 0; background: transparent; border-radius: 999px; padding: 6px 0; font-size: 12px; cursor: pointer; color: var(--ink2); transition: background 0.2s, color 0.2s; }
+  .seg button[aria-pressed="true"][data-v="2"] { background: var(--g); color: #fff; }
+  .seg button[aria-pressed="true"][data-v="1"] { background: var(--y); color: #fff; }
+  .seg button[aria-pressed="true"][data-v="0"] { background: var(--r); color: #fff; }
+
+  .action { margin-top: 26px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .box { border-radius: 16px; padding: 18px; }
+  .box.why { background: var(--bg); border: 1px solid var(--line); }
+  .box.next { background: var(--ink); color: var(--bg); }
+  .box h3 { font-size: 1rem; letter-spacing: -0.01em; }
+  .box ul { margin: 10px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+  .box li { font-size: 13.5px; line-height: 1.45; padding-left: 18px; position: relative; }
+  .box li::before { content: ""; position: absolute; left: 0; top: 0.5em; width: 8px; height: 8px; border-radius: 50%; background: var(--c, var(--mute)); }
+  .box.next li::before { background: var(--bg); opacity: 0.6; }
+  .box.next .mono { color: rgba(243, 240, 230, 0.6); }
+  .foot { padding: 0 var(--gut) 40px; color: var(--mute); font-size: 13px; line-height: 1.5; max-width: 80ch; }
+  .flash { animation: flash 0.6s; }
+  @keyframes flash { 0% { box-shadow: 0 0 0 0 rgba(27, 32, 64, 0.25); } 100% { box-shadow: 0 0 0 14px rgba(27, 32, 64, 0); } }
+
+  @media (max-width: 900px) {
+    .app { grid-template-columns: 1fr; }
+    .side { position: static; overflow: hidden; }
+    .signals { grid-template-columns: 1fr; }
+    .list { grid-auto-flow: column; grid-auto-columns: 78%; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 4px; }
+    .acct { scroll-snap-align: start; border-color: var(--line); }
+    .top { grid-template-columns: 1fr; justify-items: start; gap: 16px; }
+    .ring { width: 120px; height: 120px; }
+    .action { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) { .ring .fg { transition: none; } .flash { animation: none; } }
+</style>
+</head>
+<body>
+<header>
+  <a class="back" href="index.html#work">← Back to portfolio</a>
+  <span class="tag">Interactive demo · sample data</span>
+</header>
+
+<section class="intro">
+  <div>
+    <p class="mono">Project · Customer health</p>
+    <h1>Customer Health <em>Monitor.</em></h1>
+    <p>Nobody asked me to build this. I combined nine signals about each customer into one status, so a problem shows up before the customer has to tell me. This is a working demo with made-up sample accounts: pick an account, change any signal and watch the status and the next steps update.</p>
+  </div>
+</section>
+
+<div class="app">
+  <aside class="panel side">
+    <div class="summary" role="group" aria-label="Filter by status">
+      <button type="button" data-f="g" aria-pressed="false"><b id="cG">0</b><span><i class="dot g"></i>Healthy</span></button>
+      <button type="button" data-f="y" aria-pressed="false"><b id="cY">0</b><span><i class="dot y"></i>Watch</span></button>
+      <button type="button" data-f="r" aria-pressed="false"><b id="cR">0</b><span><i class="dot r"></i>At risk</span></button>
+    </div>
+    <div class="list" id="list" role="list"></div>
+  </aside>
+
+  <main class="panel main" id="main" aria-live="polite">
+    <div class="top">
+      <div class="ring" id="ring">
+        <svg viewBox="0 0 120 120" aria-hidden="true"><circle class="bgc" cx="60" cy="60" r="52" /><circle class="fg" id="fg" cx="60" cy="60" r="52" /></svg>
+        <div class="val"><div><b id="score">0</b><span>HEALTH</span></div></div>
+      </div>
+      <div>
+        <p class="mono" id="aSeg">Segment</p>
+        <h2 id="aName">Account</h2>
+        <div class="meta" id="aMeta"></div>
+        <span class="status" id="aStatus">Healthy</span>
+      </div>
+    </div>
+
+    <div class="sig-head">
+      <h3>The nine signals</h3>
+      <span class="mono">Click to change · Good / Watch / Risk</span>
+    </div>
+    <div class="signals" id="signals"></div>
+
+    <div class="action">
+      <div class="box why"><h3>Why this status</h3><ul id="why"></ul></div>
+      <div class="box next"><p class="mono">What I would do next</p><ul id="next"></ul></div>
+    </div>
+  </main>
+</div>
+
+<p class="foot">Sample data only: the accounts, names and numbers on this page are invented for the demo. The real health view used live customer data, was presented to leadership and approved for use.</p>
+
+<script>
+(() => {
+  const SIG = [
+    ["usage", "Usage", "How much the product is actually used", "Check who stopped using it and book a short check-in."],
+    ["outcomes", "Outcomes", "Is it delivering the result they bought it for", "Revisit the goals agreed at onboarding and what is blocking them."],
+    ["appointments", "Appointments", "Bookings created through the product", "Review the booking flow and the calendar integration."],
+    ["automation", "Automation performance", "Workflows running without errors", "Test the workflow end to end, reproduce the failure and document it for the developers."],
+    ["transcripts", "Transcripts", "What calls and conversations show", "Review recent calls and transcripts to see where things go wrong."],
+    ["sentiment", "Sentiment", "How the client feels in conversations", "Call the main contact and listen before proposing anything."],
+    ["communication", "Communication", "Responsiveness and contact frequency", "Re-open the channel: a weekly touchpoint or a shared Slack."],
+    ["lifecycle", "Lifecycle stage", "Where they are: onboarding, live, mature", "Confirm onboarding is really complete; re-run training if needed."],
+    ["renewal", "Renewal proximity", "How close the renewal date is", "Prepare the renewal conversation around the value delivered so far."],
+  ];
+  // sample accounts — invented for the demo (2 = good, 1 = watch, 0 = risk)
+  const ACC = [
+    { n: "Harbour Dental Group", s: "Healthcare · 14 seats", r: 190, v: [2, 2, 2, 2, 2, 2, 1, 2, 2] },
+    { n: "Atlas Realty", s: "Real estate · 5 seats", r: 41, v: [1, 2, 1, 1, 0, 1, 2, 2, 1] },
+    { n: "Nordline Builders", s: "Construction · 10 seats", r: 120, v: [1, 1, 2, 0, 1, 2, 1, 1, 2] },
+    { n: "Bloom Wellness", s: "Wellness · 3 seats", r: 18, v: [0, 1, 0, 1, 1, 0, 0, 2, 0] },
+    { n: "Vista Home Services", s: "Home services · 8 seats", r: 260, v: [2, 2, 2, 2, 1, 2, 2, 2, 2] },
+    { n: "Kite Legal", s: "Legal · 6 seats", r: 75, v: [2, 1, 1, 2, 2, 1, 1, 2, 1] },
+    { n: "Pine & Co. Clinics", s: "Healthcare · 22 seats", r: 33, v: [1, 0, 1, 2, 1, 0, 1, 2, 0] },
+    { n: "Lumen Auto", s: "Automotive · 4 seats", r: 150, v: [2, 2, 1, 2, 2, 2, 2, 1, 2] },
+  ];
+  const $ = (s) => document.querySelector(s);
+  const C = { g: "var(--g)", y: "var(--y)", r: "var(--r)" }, L = { g: "Healthy", y: "Watch", r: "At risk" };
+  const score = (a) => Math.round((a.v.reduce((x, y) => x + y, 0) / 18) * 100);
+  const status = (a) => {
+    const sc = score(a), risks = a.v.filter((x) => x === 0).length;
+    if (sc < 50 || risks >= 3 || (a.v[8] === 0 && risks >= 2)) return "r";
+    if (sc < 80 || risks >= 1) return "y";
+    return "g";
+  };
+  let cur = 1, filter = null;
+  const R = 2 * Math.PI * 52, fg = $("#fg");
+  fg.style.strokeDasharray = R;
+
+  const renderList = () => {
+    const counts = { g: 0, y: 0, r: 0 };
+    ACC.forEach((a) => counts[status(a)]++);
+    $("#cG").textContent = counts.g; $("#cY").textContent = counts.y; $("#cR").textContent = counts.r;
+    const order = ACC.map((a, i) => i).sort((i, j) => score(ACC[i]) - score(ACC[j]));
+    $("#list").innerHTML = order.filter((i) => !filter || status(ACC[i]) === filter).map((i) => {
+      const a = ACC[i], st = status(a);
+      return `<button class="acct" role="listitem" type="button" data-i="${i}" aria-current="${i === cur}"><i class="dot ${st}"></i><span><b>${a.n}</b><small>${a.s}</small></span><span class="sc">${score(a)}</span></button>`;
+    }).join("");
+    document.querySelectorAll(".acct").forEach((b) => b.addEventListener("click", () => { cur = +b.dataset.i; render(); }));
+  };
+
+  const renderMain = (changed) => {
+    const a = ACC[cur], sc = score(a), st = status(a);
+    $("#aName").textContent = a.n; $("#aSeg").textContent = a.s;
+    $("#aMeta").innerHTML = `<span>Renewal in ${a.r} days</span><span>${a.v.filter((x) => x === 2).length} good · ${a.v.filter((x) => x === 1).length} watch · ${a.v.filter((x) => x === 0).length} risk</span>`;
+    $("#score").textContent = sc;
+    fg.style.strokeDashoffset = R * (1 - sc / 100); fg.style.stroke = C[st];
+    const s = $("#aStatus"); s.textContent = L[st]; s.style.background = C[st];
+    $("#signals").innerHTML = SIG.map((g, k) => `<div class="sig"><div class="name">${g[1]}<i class="dot ${["r", "y", "g"][a.v[k]]}"></i></div><p class="desc">${g[2]}</p><div class="seg" role="group" aria-label="${g[1]}">${[[2, "Good"], [1, "Watch"], [0, "Risk"]].map(([v, t]) => `<button type="button" data-k="${k}" data-v="${v}" aria-pressed="${a.v[k] === v}">${t}</button>`).join("")}</div></div>`).join("");
+    document.querySelectorAll(".seg button").forEach((b) => b.addEventListener("click", () => { ACC[cur].v[+b.dataset.k] = +b.dataset.v; render(true); }));
+    const bad = SIG.map((g, k) => [g, a.v[k], k]).filter((x) => x[1] < 2).sort((x, y) => x[1] - y[1]);
+    $("#why").innerHTML = bad.length ? bad.map(([g, v]) => `<li style="--c:${v ? C.y : C.r}"><b>${g[1]}</b> is ${v ? "on watch" : "at risk"}</li>`).join("") : `<li style="--c:${C.g}">All nine signals look good.</li>`;
+    const steps = bad.slice(0, 3).map(([g]) => g[3]);
+    if (st === "r") steps.unshift("Reach out this week. Don’t wait for the client to raise it.");
+    if (!steps.length) steps.push("Keep the regular touchpoint and look for expansion opportunities.");
+    $("#next").innerHTML = steps.map((t) => `<li>${t}</li>`).join("");
+    if (changed) { $("#ring").classList.remove("flash"); void $("#ring").offsetWidth; $("#ring").classList.add("flash"); }
+  };
+  const render = (changed) => { renderMain(changed); renderList(); };
+
+  document.querySelectorAll(".summary button").forEach((b) => b.addEventListener("click", () => {
+    filter = filter === b.dataset.f ? null : b.dataset.f;
+    document.querySelectorAll(".summary button").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.f === filter)));
+    renderList();
+  }));
+  render();
+})();
+</script>
+</body>
+</html>
