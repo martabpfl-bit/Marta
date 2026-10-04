@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>LinkedIn Outreach System — Marta Lopes</title>
+<meta name="description" content="How Marta Lopes connected HeyReach, LinkedIn and Claude to write meaningful outreach and track conversations. Interactive demo with sample profiles." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%231b2040'/%3E%3Ctext x='16' y='21' font-family='Arial' font-size='13' font-weight='700' fill='%23f3f0e6' text-anchor='middle'%3EML%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f3f0e6; --bg2: #ece7d8; --ink: #1b2040; --ink2: #3d4266; --mute: #85826f; --line: rgba(27, 32, 64, 0.12); --card: #fbf9f3;
+    --g: #3f9c6b; --y: #d4a017; --r: #c8553d; --hl: #f6e3a1;
+    --sans: "Instrument Sans", "Helvetica Neue", Arial, sans-serif; --serif: "Instrument Serif", Georgia, serif; --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    --gut: clamp(16px, 4vw, 56px);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+  h1, h2, h3, p, ul { margin: 0; }
+  ul { padding: 0; list-style: none; }
+  button { font: inherit; color: inherit; }
+  a { color: inherit; }
+  em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--ink2); }
+  mark { background: var(--hl); color: inherit; border-radius: 4px; padding: 0 2px; }
+  .mono { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mute); }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; border-radius: 6px; }
+  header { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px var(--gut); }
+  .back { display: inline-flex; gap: 8px; align-items: center; text-decoration: none; font-size: 14px; padding: 9px 15px; border: 1px solid var(--line); border-radius: 999px; background: var(--card); }
+  .tag { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; padding: 6px 10px; border-radius: 999px; background: var(--ink); color: var(--bg); }
+  section { padding: 0 var(--gut); margin-bottom: 70px; }
+  .intro h1 { font-size: clamp(2.2rem, 5vw, 4.2rem); letter-spacing: -0.045em; line-height: 0.98; font-weight: 600; margin-top: 6px; }
+  .intro p { margin-top: 14px; max-width: 62ch; color: var(--ink2); line-height: 1.55; }
+  .h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); letter-spacing: -0.035em; font-weight: 600; line-height: 1.05; }
+  .step { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .step b { width: 28px; height: 28px; border-radius: 50%; background: var(--ink); color: var(--bg); display: grid; place-items: center; font-size: 13px; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 999px; font-size: 14px; font-weight: 500; border: 1px solid var(--ink); cursor: pointer; background: transparent; }
+  .btn.dark { background: var(--ink); color: var(--bg); }
+  .btn:disabled { opacity: 0.5; cursor: default; }
+
+  .real { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .real div { background: var(--ink); color: var(--bg); border-radius: 18px; padding: 20px; }
+  .real b { display: block; font-size: clamp(2.2rem, 4vw, 3.2rem); letter-spacing: -0.04em; line-height: 1; }
+  .real span { display: block; margin-top: 8px; font-size: 13.5px; opacity: 0.8; line-height: 1.4; }
+  /* flow */
+  .flow { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0; margin-top: 26px; position: relative; }
+  .node { position: relative; text-align: center; padding: 0 6px; }
+  .node .ic { width: 64px; height: 64px; margin: 0 auto; border-radius: 18px; background: var(--card); border: 1px solid var(--line); display: grid; place-items: center; font-size: 26px; position: relative; z-index: 1; }
+  .node.ai .ic { background: var(--ink); color: var(--bg); }
+  .node b { display: block; margin-top: 10px; font-size: 14px; }
+  .node span { display: block; font-size: 12px; color: var(--mute); margin-top: 2px; line-height: 1.35; }
+  .node:not(:last-child)::after { content: ""; position: absolute; top: 32px; left: calc(50% + 32px); right: calc(-50% + 32px); height: 2px; background: repeating-linear-gradient(90deg, var(--mute) 0 4px, transparent 4px 9px); opacity: 0.5; }
+  .node:not(:last-child)::before { content: ""; position: absolute; top: 28px; left: calc(50% + 32px); width: 10px; height: 10px; border-radius: 50%; background: var(--g); z-index: 2; animation: pk 3.2s linear infinite; animation-delay: calc(var(--i) * 0.53s); opacity: 0; }
+  @keyframes pk { 0% { transform: translateX(0); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateX(calc(100vw / 6 - 64px - 2 * var(--gut) / 6)); opacity: 0; } }
+
+  /* composer */
+  .comp { display: grid; grid-template-columns: 300px 1fr; gap: 16px; margin-top: 22px; align-items: start; }
+  .panel { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: clamp(16px, 2.2vw, 24px); min-width: 0; }
+  .people { display: grid; gap: 8px; }
+  .person { display: grid; grid-template-columns: 42px 1fr; gap: 12px; align-items: center; text-align: left; width: 100%; padding: 10px; border-radius: 14px; border: 1px solid transparent; background: transparent; cursor: pointer; transition: background 0.2s, border-color 0.2s; }
+  .person:hover { background: var(--bg); }
+  .person[aria-pressed="true"] { background: #fff; border-color: var(--line); }
+  .av { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: 14px; color: #fff; }
+  .person b { display: block; font-size: 14px; }
+  .person small { display: block; font-size: 12px; color: var(--mute); line-height: 1.3; }
+  .work { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .data dl { margin: 10px 0 0; display: grid; gap: 9px; }
+  .data dt { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mute); }
+  .data dd { margin: 2px 0 0; font-size: 13.5px; line-height: 1.45; }
+  .data dd.used { background: var(--hl); border-radius: 6px; padding: 2px 6px; margin-left: -6px; }
+  .msg { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 16px; min-height: 150px; font-size: 14.5px; line-height: 1.55; white-space: pre-wrap; }
+  .msg .ph { color: #b9b4a4; font-style: italic; }
+  .caret { display: inline-block; width: 2px; height: 1.1em; background: var(--ink); vertical-align: -3px; animation: bl 0.8s steps(1) infinite; }
+  @keyframes bl { 50% { opacity: 0; } }
+  .checks { margin-top: 12px; display: grid; gap: 6px; }
+  .checks li { font-size: 13px; display: flex; gap: 8px; align-items: flex-start; opacity: 0.35; transition: opacity 0.3s; }
+  .checks li.done { opacity: 1; }
+  .checks li i { font-style: normal; width: 18px; height: 18px; border-radius: 50%; flex: 0 0 18px; display: grid; place-items: center; font-size: 11px; color: #fff; background: var(--mute); }
+  .checks li.ok i { background: var(--g); }
+  .checks li.bad i { background: var(--r); }
+  .review { margin-top: 12px; padding: 12px 14px; border-radius: 12px; background: #fbe9e4; color: #7a2f20; font-size: 13.5px; line-height: 1.45; display: none; }
+  .review.on { display: block; }
+  details { margin-top: 12px; border-top: 1px solid var(--line); padding-top: 10px; }
+  summary { cursor: pointer; font-size: 13.5px; font-weight: 600; }
+  details p { margin-top: 8px; font-size: 13.5px; line-height: 1.5; color: var(--ink2); background: var(--bg); border-radius: 12px; padding: 10px 12px; }
+  .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 14px; }
+
+  /* tracker */
+  .board { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin-top: 22px; }
+  .col { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 12px; min-height: 260px; }
+  .col h3 { display: flex; justify-content: space-between; font-size: 13px; letter-spacing: -0.01em; }
+  .col h3 span { font-family: var(--mono); color: var(--mute); }
+  .cards { display: grid; gap: 6px; margin-top: 10px; }
+  .lead { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; font-size: 12.5px; animation: pop 0.45s cubic-bezier(0.2, 1.4, 0.4, 1); }
+  .lead b { display: block; font-size: 12.5px; }
+  .lead small { color: var(--mute); font-size: 11px; }
+  .chip { display: inline-block; margin-top: 5px; font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 7px; border-radius: 999px; color: #fff; }
+  @keyframes pop { from { transform: scale(0.85); opacity: 0; } to { transform: none; opacity: 1; } }
+  .funnel { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 12px; }
+  .kpi { background: var(--ink); color: var(--bg); border-radius: 16px; padding: 16px; }
+  .kpi b { display: block; font-size: 1.9rem; letter-spacing: -0.03em; }
+  .kpi span { font-size: 12.5px; opacity: 0.75; }
+
+  /* built vs scale */
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 22px; }
+  .two .panel h3 { font-size: 1.2rem; letter-spacing: -0.02em; margin-top: 6px; }
+  .two ul { margin-top: 14px; display: grid; gap: 10px; }
+  .two li { font-size: 14px; line-height: 1.5; padding-left: 20px; position: relative; color: var(--ink2); }
+  .two li::before { content: ""; position: absolute; left: 0; top: 0.55em; width: 8px; height: 8px; border-radius: 50%; background: var(--g); }
+  .two .panel.dark { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .two .panel.dark li { color: rgba(243, 240, 230, 0.85); }
+  .two .panel.dark li::before { background: var(--bg); opacity: 0.6; }
+  .two .panel.dark .mono { color: rgba(243, 240, 230, 0.6); }
+  .foot { padding: 0 var(--gut) 40px; color: var(--mute); font-size: 13px; line-height: 1.5; max-width: 80ch; }
+
+  @media (max-width: 900px) {
+    .flow { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 26px; }
+    .node:nth-child(3n)::after, .node:nth-child(3n)::before { display: none; }
+    .node::before { display: none; }
+    .comp, .work, .two, .real { grid-template-columns: 1fr; }
+    .people { grid-auto-flow: column; grid-auto-columns: 76%; overflow-x: auto; scroll-snap-type: x mandatory; }
+    .person { scroll-snap-align: start; border-color: var(--line); }
+    .board { grid-template-columns: repeat(5, 72%); overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; }
+    .col { scroll-snap-align: start; }
+    .funnel { grid-template-columns: 1fr 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) { .node::before, .caret, .lead { animation: none !important; } }
+</style>
+</head>
+<body>
+<header>
+  <a class="back" href="index.html#work">← Back to portfolio</a>
+  <span class="tag">Interactive demo · sample profiles</span>
+</header>
+
+<section class="intro">
+  <p class="mono">Project · Outreach system</p>
+  <h1>LinkedIn Outreach <em>System.</em></h1>
+  <p>I connected HeyReach to my LinkedIn and to Claude. For each person, Claude used the information on their profile to write a message that actually made sense for them, and every conversation was tracked. Try it below with sample profiles.</p>
+</section>
+
+<section>
+  <div class="real">
+    <div><b>~20</b><span>LinkedIn conversations started a day, up to the platform’s limit</span></div>
+    <div><b>~33%</b><span>of them became a meaningful conversation</span></div>
+    <div><b>~20</b><span>meetings booked in two months, opening the Portuguese market</span></div>
+  </div>
+  <p class="mono" style="margin-top:10px">Real results · approximate · it started in the summer holidays, so closing was slower</p>
+</section>
+
+<section>
+  <div class="step"><b>↻</b><span class="mono">How the pieces connect</span></div>
+  <div class="flow">
+    <div class="node" style="--i:0"><div class="ic">🎯</div><b>Lead list</b><span>Who I want to reach, on LinkedIn</span></div>
+    <div class="node" style="--i:1"><div class="ic">🔗</div><b>HeyReach</b><span>Profile info: role, company, context</span></div>
+    <div class="node ai" style="--i:2"><div class="ic">✦</div><b>Claude</b><span>Writes the message from that info</span></div>
+    <div class="node" style="--i:3"><div class="ic">✓</div><b>Checks</b><span>Real detail, no pitch, a question</span></div>
+    <div class="node" style="--i:4"><div class="ic">💬</div><b>LinkedIn</b><span>Sent at a safe daily pace</span></div>
+    <div class="node" style="--i:5"><div class="ic">📊</div><b>Tracking</b><span>Every reply, every stage</span></div>
+  </div>
+</section>
+
+<section>
+  <div class="step"><b>1</b><span class="mono">Pick a person · then let Claude write</span></div>
+  <h2 class="h2">From a profile to a message <em>worth answering.</em></h2>
+  <div class="comp">
+    <div class="panel"><div class="people" id="people"></div></div>
+    <div class="panel">
+      <div class="work">
+        <div class="data"><p class="mono">What came in from the profile</p><dl id="data"></dl></div>
+        <div>
+          <p class="mono">Message written by Claude</p>
+          <div class="msg" id="msg" aria-live="polite"><span class="ph">Press “Write message”.</span></div>
+          <ul class="checks" id="checks"></ul>
+          <div class="review" id="review"></div>
+          <details id="fu"><summary>Follow-ups if there’s no reply</summary><p id="fu1"></p><p id="fu2"></p></details>
+        </div>
+      </div>
+      <div class="row"><button class="btn dark" type="button" id="write">✦ Write message</button><span class="mono" id="count"></span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="step"><b>2</b><span class="mono">Track every conversation</span></div>
+  <h2 class="h2">Nothing gets lost <em>after the first message.</em></h2>
+  <div class="board" id="board"></div>
+  <div class="funnel">
+    <div class="kpi"><b id="kA">0%</b><span>accepted the connection</span></div>
+    <div class="kpi"><b id="kR">0%</b><span>replied</span></div>
+    <div class="kpi"><b id="kI">0%</b><span>became a meaningful conversation</span></div>
+    <div class="kpi"><b id="kM">0</b><span>meetings booked</span></div>
+  </div>
+  <div class="row"><button class="btn dark" type="button" id="sim">▶ Simulate a week</button><button class="btn" type="button" id="reset">Reset</button><span class="mono">Sample leads · replies are sorted by Claude, answered by me</span></div>
+</section>
+
+<section>
+  <div class="step"><b>3</b><span class="mono">What I did · what comes next</span></div>
+  <h2 class="h2">How I built it, <em>and how I’d scale it.</em></h2>
+  <div class="two">
+    <div class="panel">
+      <p class="mono">How I built it</p>
+      <h3>HeyReach + LinkedIn + Claude</h3>
+      <ul>
+        <li>Connected HeyReach to my LinkedIn account and to Claude.</li>
+        <li>Set up the messages I wanted to send, shaped by the information that came in for each person.</li>
+        <li>Claude turned that information into a meaningful, personal message instead of a template.</li>
+        <li>Tracked the conversations that followed: ~33% became meaningful, ~20 meetings in two months.</li>
+      </ul>
+    </div>
+    <div class="panel dark">
+      <p class="mono">How I’d scale it</p>
+      <h3>Same idea, built for a team</h3>
+      <ul>
+        <li>Lead lists from Sales Navigator, with no scraping tools: they break LinkedIn’s terms and put the account at risk.</li>
+        <li>Claude only uses facts from the profile, returns a fixed structure, and anything without a real detail goes to review instead of being sent.</li>
+        <li>I review the first messages by hand, then a sample every week.</li>
+        <li>Replies flow into the CRM by stage; Claude sorts them and suggests an answer, a person sends it.</li>
+        <li>Weekly numbers (accepted, replied, meaningful, meetings) decide what to change in the prompt.</li>
+        <li>Only business information, kept to the minimum, and anyone who says no is never contacted again.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<p class="foot">Sample data only: the people, companies and messages on this page are invented for the demo, and the messages are pre-written, so nothing is sent and no AI is called from this page.</p>
+
+<script>
+(() => {
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const $ = (s) => document.querySelector(s);
+  // sample profiles, invented for the demo. "use" = which field the message is built on
+  const P = [
+    { n: "Inês Carvalho", i: "IC", c: "#5a6fb0", role: "Head of Customer Success", co: "Lumio (SaaS, 60 people)", loc: "Lisbon, Portugal", ctx: "Posted about onboarding new customers faster without adding headcount", use: "ctx", lang: "PT",
+      m: "Olá Inês, vi o teu post sobre <mark>acelerar o onboarding sem aumentar a equipa</mark>. É exatamente o problema em que tenho estado a trabalhar com agentes de voz. Como é que estão a lidar com isso na Lumio neste momento?",
+      f1: "Olá Inês, só para fechar o ciclo: se fizer sentido, partilho dois exemplos de onboarding que reduziram o trabalho manual sem perder o contacto com o cliente.", f2: "Última mensagem da minha parte, Inês. Se o onboarding voltar a ser prioridade, fico disponível para trocar ideias." },
+    { n: "Daniel Brooks", i: "DB", c: "#3f9c6b", role: "Operations Director", co: "Brooks & Hale Realty", loc: "Manchester, UK", ctx: "Team of 8 agents; hiring a receptionist", use: "ctx", lang: "EN",
+      m: "Hi Daniel, I noticed Brooks & Hale is <mark>hiring a receptionist for a team of eight agents</mark>. Is that mainly to keep up with calls and enquiries, or something else?",
+      f1: "Hi Daniel, quick follow-up: I’ve seen small agencies handle around half of routine enquiries automatically. Happy to share how, if useful.", f2: "Last note from me, Daniel. If enquiries become a bottleneck later, I’m around." },
+    { n: "Rita Mendes", i: "RM", c: "#c8553d", role: "Founder", co: "Mendes Obras (construction, 10 people)", loc: "Braga, Portugal", ctx: "Spoke at a regional construction fair about digitising small firms", use: "ctx", lang: "PT",
+      m: "Olá Rita, vi que falou na feira sobre <mark>digitalizar pequenas empresas de construção</mark>. Qual foi a parte mais difícil de pôr a equipa a usar ferramentas novas?",
+      f1: "Olá Rita, se ajudar, partilho como outra empresa do setor organizou os pedidos de clientes num só sítio, sem complicar o dia a dia da equipa.", f2: "Última mensagem, Rita. Fico por aqui se um dia quiser trocar ideias sobre o tema." },
+    { n: "Alex Turner", i: "AT", c: "#85826f", role: "Manager", co: "—", loc: "—", ctx: "—", use: null, lang: "EN",
+      m: null, why: "Not enough real information on this profile to write something personal. Instead of sending a generic message, it goes to review." },
+  ];
+  const FIELDS = [["role", "Role"], ["co", "Company"], ["loc", "Location"], ["ctx", "Recent context"]];
+  let cur = 0, typing = null;
+
+  const strip = (h) => h.replace(/<[^>]+>/g, "");
+  const renderPeople = () => {
+    $("#people").innerHTML = P.map((p, k) => `<button class="person" type="button" data-k="${k}" aria-pressed="${k === cur}"><span class="av" style="background:${p.c}">${p.i}</span><span><b>${p.n}</b><small>${p.role} · ${p.co}</small></span></button>`).join("");
+    document.querySelectorAll(".person").forEach((b) => b.addEventListener("click", () => { cur = +b.dataset.k; select(); }));
+  };
+  const CHECKS = (p) => {
+    const txt = p.m ? strip(p.m) : "";
+    return [
+      ["Uses a real detail from the profile", !!p.use],
+      ["Doesn’t pitch in the first message", !!p.m],
+      ["Ends with a question", /\?\s*$/.test(txt)],
+      [`Short enough for LinkedIn (${txt.length} / 300)`, !!p.m && txt.length <= 300],
+      [`Written in ${p.lang === "PT" ? "Portuguese" : "English"}, like the person`, !!p.m],
+    ];
+  };
+  const select = () => {
+    clearInterval(typing);
+    const p = P[cur];
+    renderPeople();
+    $("#data").innerHTML = FIELDS.map(([k, l]) => `<div><dt>${l}</dt><dd data-f="${k}">${p[k]}</dd></div>`).join("");
+    $("#msg").innerHTML = `<span class="ph">Press “Write message”.</span>`;
+    $("#checks").innerHTML = CHECKS(p).map(([t]) => `<li><i>·</i>${t}</li>`).join("");
+    $("#review").classList.remove("on"); $("#fu").style.display = "none"; $("#fu").open = false; $("#count").textContent = "";
+    $("#write").disabled = false;
+  };
+  const finish = (p) => {
+    document.querySelectorAll("#checks li").forEach((li, k) => {
+      setTimeout(() => { const ok = CHECKS(p)[k][1]; li.classList.add("done", ok ? "ok" : "bad"); li.querySelector("i").textContent = ok ? "✓" : "✕"; }, reduce ? 0 : k * 160);
+    });
+    if (p.m) { $("#fu1").textContent = "Follow-up 1 · " + p.f1; $("#fu2").textContent = "Follow-up 2 · " + p.f2; $("#fu").style.display = "block"; $("#count").textContent = "Ready to send"; }
+    else { $("#review").textContent = p.why; $("#review").classList.add("on"); $("#count").textContent = "Sent to review"; }
+  };
+  $("#write").addEventListener("click", () => {
+    const p = P[cur]; $("#write").disabled = true;
+    if (p.use) document.querySelector(`#data dd[data-f="${p.use}"]`).classList.add("used");
+    if (!p.m) { $("#msg").innerHTML = `<span class="ph">No message written.</span>`; return finish(p); }
+    if (reduce) { $("#msg").innerHTML = p.m; return finish(p); }
+    // type the plain text, then swap in the version with the highlighted detail
+    const plain = strip(p.m); let k = 0;
+    typing = setInterval(() => {
+      k += 2; $("#msg").innerHTML = plain.slice(0, k).replace(/&/g, "&amp;").replace(/</g, "&lt;") + '<span class="caret"></span>';
+      if (k >= plain.length) { clearInterval(typing); $("#msg").innerHTML = p.m; finish(p); }
+    }, 18);
+  });
+
+  /* tracker — sample leads moving through the stages */
+  const ST = ["Sent", "Accepted", "Replied", "Interested", "Meeting"];
+  const NAMES = ["Sofia R.", "Tom W.", "Marta S.", "James P.", "Ana L.", "Chris D.", "João M.", "Emma K.", "Pedro A.", "Laura F.", "Nuno C.", "Olivia H.", "Rui B.", "Kate M.", "Tiago V.", "Sam G.", "Beatriz P.", "Mark T.", "Carla N.", "Ben S."];
+  const TAG = { Interested: ["Interested", "var(--g)"], "Not now": ["Not now", "var(--y)"], No: ["Not interested", "var(--r)"] };
+  let leads, day;
+  const reset = () => { leads = NAMES.map((n, i) => ({ n, s: 0, t: null, co: ["SaaS", "Real estate", "Clinic", "Agency", "Construction"][i % 5] })); day = 0; draw(); };
+  const draw = () => {
+    $("#board").innerHTML = ST.map((s, k) => {
+      const L = leads.filter((l) => l.s === k);
+      return `<div class="col"><h3>${s}<span>${L.length}</span></h3><div class="cards">${L.map((l) => `<div class="lead"><b>${l.n}</b><small>${l.co}</small>${l.t ? `<br><span class="chip" style="background:${TAG[l.t][1]}">${TAG[l.t][0]}</span>` : ""}</div>`).join("")}</div></div>`;
+    }).join("");
+    const n = leads.length, reach = (k) => leads.filter((l) => l.s >= k).length;
+    $("#kA").textContent = Math.round((reach(1) / n) * 100) + "%";
+    $("#kR").textContent = Math.round((reach(2) / n) * 100) + "%";
+    $("#kI").textContent = Math.round((reach(3) / n) * 100) + "%";
+    $("#kM").textContent = reach(4);
+  };
+  // a fixed, repeatable script of what happens each day (sample data)
+  const SCRIPT = [
+    [[0, 1], [1, 1], [2, 1], [4, 1], [5, 1], [7, 1], [9, 1], [11, 1], [13, 1], [16, 1]],
+    [[0, 2, "Interested"], [2, 2, "Not now"], [5, 2, "No"], [9, 2, "Interested"], [3, 1], [12, 1]],
+    [[0, 3], [9, 3], [13, 2, "Interested"], [16, 2, "Not now"], [4, 2, "Interested"], [11, 2, "Interested"]],
+    [[0, 4], [13, 3], [7, 2, "Interested"], [4, 3], [11, 3], [1, 2, "Interested"]],
+    [[9, 4], [7, 3], [1, 3]],
+  ];
+  const step = () => {
+    if (day >= SCRIPT.length) return false;
+    SCRIPT[day].forEach(([i, s, t]) => { leads[i].s = s; if (t) leads[i].t = t; });
+    day++; draw(); return true;
+  };
+  $("#sim").addEventListener("click", () => {
+    $("#sim").disabled = true;
+    if (day >= SCRIPT.length) reset();
+    const run = () => { if (step()) setTimeout(run, reduce ? 0 : 750); else $("#sim").disabled = false; };
+    run();
+  });
+  $("#reset").addEventListener("click", reset);
+
+  select(); reset();
+})();
+</script>
+</body>
+</html>

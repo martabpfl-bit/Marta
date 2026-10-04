@@ -196,6 +196,16 @@
   .mt p i { height: 7px; border-radius: 4px; background: var(--bg2); position: relative; overflow: hidden; }
   .mt p i::after { content: ""; position: absolute; inset: 0; background: var(--ink2); transform-origin: left; transform: scaleX(0); animation: mtf 6s infinite; animation-delay: calc(var(--d) * 0.45s); }
   @keyframes mtf { 0% { transform: scaleX(0); } 15%, 85% { transform: scaleX(var(--w, 1)); } 100% { transform: scaleX(0); } }
+  .mo { width: 84%; display: grid; grid-template-columns: 1fr auto 1.3fr; gap: 16px; align-items: center; }
+  .mo-p { background: rgba(243, 240, 230, 0.08); border-radius: 14px; padding: 16px; display: grid; gap: 8px; }
+  .mo-p i { width: 38px; height: 38px; border-radius: 50%; background: #5a6fb0; }
+  .mo-p b { height: 8px; width: 80%; border-radius: 4px; background: rgba(243, 240, 230, 0.5); }
+  .mo-p span { height: 7px; width: 60%; border-radius: 4px; background: #f6e3a1; }
+  .mo-arrow { width: 40px; height: 40px; border-radius: 50%; background: var(--bg); color: var(--ink); display: grid; place-items: center; animation: ping 2.2s infinite; }
+  .mo-m { position: relative; background: #fff; border-radius: 16px 16px 16px 4px; padding: 16px; display: grid; gap: 8px; }
+  .mo-m p { height: 7px; border-radius: 4px; background: var(--bg2); transform-origin: left; animation: mtf 5s infinite; }
+  .mo-m p:nth-child(2) { width: 85%; animation-delay: 0.4s; } .mo-m p:nth-child(3) { width: 60%; animation-delay: 0.8s; }
+  .mo-m em { position: absolute; right: 12px; bottom: 6px; font-style: normal; font-weight: 700; color: var(--good); }
   .stories-h { margin-top: 90px; font-size: clamp(1.8rem, 3.4vw, 3rem); letter-spacing: -0.04em; font-weight: 600; line-height: 1; }
 
   /* ───────── work accordion */
@@ -323,7 +333,7 @@
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .status i, .marq, .mh li i, .mh .rf, .mt p i::after, .live::before { animation: none; }
+    .status i, .marq, .mo-arrow, .mo-m p, .mh li i, .mh .rf, .mt p i::after, .live::before { animation: none; }
     .jcard { opacity: 1; transform: none; }
   }
 </style>
@@ -468,6 +478,12 @@
       <p class="mono kicker">03 · Projects</p>
       <h2 class="h2">Things I’ve built. <em>Open them and try.</em></h2>
       <div class="projects">
+        <a class="proj wide" href="outreach.html">
+          <div class="pv"><span class="live">Live demo</span>
+            <div class="mo" aria-hidden="true"><div class="mo-p"><i></i><b></b><span></span></div><div class="mo-arrow">✦</div><div class="mo-m"><p></p><p></p><p></p><em>?</em></div></div>
+          </div>
+          <div class="pt"><p class="mono">Growth · Automation · AI</p><h3>LinkedIn Outreach System</h3><p>I connected HeyReach to my LinkedIn and to Claude: each message built from the person’s own profile, every conversation tracked. About a third became meaningful conversations, and ~20 meetings were booked in two months.</p><span class="go"><i>→</i>Try the demo</span></div>
+        </a>
         <a class="proj" href="health.html">
           <div class="pv"><span class="live">Live demo</span>
             <div class="mh" aria-hidden="true"><ul><li><i></i><b></b><span></span></li><li><i></i><b></b><span></span></li><li><i></i><b></b><span></span></li><li><i></i><b></b><span></span></li></ul><svg viewBox="0 0 104 104"><circle class="rb" cx="52" cy="52" r="46" /><circle class="rf" cx="52" cy="52" r="46" /></svg></div>
@@ -491,64 +507,6 @@
         </a>
       </div>
 
-      <h3 class="stories-h">Client work, <em>in short.</em></h3>
-      <div class="acc" id="acc">
-        <article class="panel open">
-          <button class="tab" type="button" aria-expanded="true"><b>AI agent · Real estate</b><i>+</i></button>
-          <div class="body">
-            <div>
-              <p class="mono">Implementation · End to end</p>
-              <h3>An AI agent for a small real estate team</h3>
-              <p>Around 350 contacts a month on WhatsApp and by phone, answered by hand. I brought the client in, ran discovery, requirements, testing and training, and built it with a developer. When the original data source stopped giving access, I proposed an alternative route.</p>
-              <ul>
-                <li>Stayed the client’s point of contact after go-live: weekly meeting and a shared Slack channel</li>
-                <li>Every issue written up the same way in Linear and Slack, with what I’d already tried</li>
-              </ul>
-            </div>
-            <div class="metric">
-              <div><b>~50%</b><span>of ~350 monthly contacts handled automatically</span></div>
-              <div><b>3 mo.</b><span>pilot, and the client continued</span></div>
-            </div>
-          </div>
-        </article>
-        <article class="panel">
-          <button class="tab" type="button" aria-expanded="false"><b>Scope · Construction</b><i>+</i></button>
-          <div class="body">
-            <div>
-              <p class="mono">Decisions · Stakeholders</p>
-              <h3>Getting ten people to agree on scope</h3>
-              <p>A construction company in the north of Portugal: about ten people, around 700 contacts a month, nothing shared or digitised, and everyone with a different idea of the process.</p>
-              <ul>
-                <li>Listened, found the actual decision, brought in the right people</li>
-                <li>Proposed a workable path, confirmed it and documented it</li>
-                <li>Taught the client what had to happen first, and what was feasible</li>
-              </ul>
-            </div>
-            <div class="metric">
-              <div><b>~700</b><span>contacts a month, nothing digitised</span></div>
-              <div><b>Phase 1</b><span>agreed and approved by the client</span></div>
-            </div>
-          </div>
-        </article>
-        <article class="panel">
-          <button class="tab" type="button" aria-expanded="false"><b>Opening Portugal</b><i>+</i></button>
-          <div class="body">
-            <div>
-              <p class="mono">Growth · Initiative</p>
-              <h3>Opening a new market, before anyone asked</h3>
-              <p>The team wanted clients beyond the US. I tried Portugal: LinkedIn content, direct outreach, a Customer Success summit, two speakers invited onto our podcast, and conversations with agencies and consultants who brought us good potential clients.</p>
-              <ul>
-                <li>Started in the summer holidays: conversations went well, closing was slow</li>
-                <li>A few big prospects reached advanced stages</li>
-              </ul>
-            </div>
-            <div class="metric">
-              <div><b>~33%</b><span>of outreach became a meaningful conversation</span></div>
-              <div><b>~20</b><span>meetings booked in two months, then promoted</span></div>
-            </div>
-          </div>
-        </article>
-      </div>
     </div>
   </section>
 
@@ -735,14 +693,6 @@
   if (reduce || !window.gsap) { jset(1); }
   addEventListener("resize", () => { jL = buildRoad(); jset(window.__jp || 0); });
 
-  /* ───────── work accordion */
-  $$("#acc .panel").forEach((p) => {
-    const open = () => {
-      $$("#acc .panel").forEach((x) => { x.classList.toggle("open", x === p); x.querySelector(".tab").setAttribute("aria-expanded", String(x === p)); });
-    };
-    p.querySelector(".tab").addEventListener("click", open);
-  });
-
   /* ───────── feedback rails */
   $$(".arrows button").forEach((b) => b.addEventListener("click", () => {
     const r = document.getElementById(b.dataset.rail);
@@ -804,8 +754,8 @@
   /* ───────── video: the frame grows to full width as it scrolls in */
   if (!vsec.hidden) gsap.fromTo("#vframe", { scale: 0.82, borderRadius: 48 }, { scale: 1, borderRadius: 28, ease: "none", scrollTrigger: { trigger: "#vframe", start: "top 95%", end: "center 55%", scrub: true } });
 
-  /* ───────── work panels slide up */
-  gsap.from("#acc .panel", { y: 60, opacity: 0, duration: 0.9, stagger: 0.1, ease: "power3.out", scrollTrigger: { trigger: "#acc", start: "top 80%" } });
+  /* ───────── project cards rise in */
+  gsap.from(".proj", { y: 60, opacity: 0, duration: 0.9, stagger: 0.1, ease: "power3.out", scrollTrigger: { trigger: ".projects", start: "top 80%" } });
 
   /* ───────── timeline: line draws, big years come into focus */
   gsap.to("#tlp", { scaleY: 1, ease: "none", scrollTrigger: { trigger: "#tl", start: "top 60%", end: "bottom 60%", scrub: true } });
