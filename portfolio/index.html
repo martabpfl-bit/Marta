@@ -1,0 +1,740 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Marta Lopes — Customer Success & Implementation</title>
+<meta name="description" content="Customer Success, Implementation and Account Management. I build the kind of client relationships that last." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%231b2040'/%3E%3Ctext x='16' y='21' font-family='Arial' font-size='13' font-weight='700' fill='%23f3f0e6' text-anchor='middle'%3EML%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f3f0e6;
+    --bg2: #ece7d8;
+    --ink: #1b2040;
+    --ink2: #3d4266;
+    --mute: #85826f;
+    --line: rgba(27, 32, 64, 0.12);
+    --card: #fbf9f3;
+    --t-cs: #1b2040;
+    --t-tool: #5a5d7d;
+    --t-tech: #9a8b7a;
+    --good: #3f9c6b;
+    --sans: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+    --serif: "Instrument Serif", Georgia, serif;
+    --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    --gut: clamp(20px, 5vw, 72px);
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--bg); color: var(--ink); -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body { margin: 0; font-family: var(--sans); background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  h1, h2, h3, p, ul, ol, figure, blockquote { margin: 0; }
+  ul, ol { padding: 0; list-style: none; }
+  a { color: inherit; }
+  button { font: inherit; color: inherit; }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 6px; }
+  em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: -0.01em; color: var(--ink2); }
+  .mono { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mute); }
+  .kicker { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+  .kicker::before { content: ""; width: 28px; height: 1px; background: var(--mute); }
+  .h2 { font-size: clamp(2.4rem, 6vw, 5.4rem); line-height: 0.98; letter-spacing: -0.045em; font-weight: 600; }
+  .lede { font-size: clamp(1rem, 1.25vw, 1.15rem); line-height: 1.6; color: var(--ink2); max-width: 46ch; }
+  section { position: relative; padding: clamp(90px, 14vh, 160px) var(--gut); }
+  .wrap { max-width: 1280px; margin: 0 auto; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 0.95em 1.5em; border-radius: 999px; font-size: 14px; font-weight: 500; text-decoration: none; border: 1px solid var(--ink); transition: transform 0.25s, background 0.25s, color 0.25s; cursor: pointer; }
+  .btn--dark { background: var(--ink); color: var(--bg); }
+  .btn--ghost { background: transparent; color: var(--ink); }
+  .btn:hover { transform: translateY(-2px); }
+  .btn--ghost:hover { background: var(--ink); color: var(--bg); }
+
+  /* ───────── nav */
+  .nav { position: fixed; top: 16px; left: 0; right: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; padding: 0 var(--gut); pointer-events: none; }
+  .logo { pointer-events: auto; width: 42px; height: 42px; border-radius: 50%; background: var(--ink); color: var(--bg); display: grid; place-items: center; font-weight: 700; font-size: 13px; text-decoration: none; letter-spacing: 0.02em; }
+  .pill { pointer-events: auto; position: relative; display: flex; gap: 2px; padding: 5px; border-radius: 999px; background: rgba(251, 249, 243, 0.78); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--line); }
+  .pill a { position: relative; z-index: 1; padding: 8px 14px; border-radius: 999px; font-size: 13px; text-decoration: none; color: var(--ink2); transition: color 0.3s; white-space: nowrap; }
+  .pill a.on { color: var(--bg); }
+  .pill .ind { position: absolute; z-index: 0; top: 5px; bottom: 5px; left: 5px; width: 0; border-radius: 999px; background: var(--ink); opacity: 0; }
+  .nav .cta { pointer-events: auto; font-size: 13px; padding: 10px 16px; }
+
+  /* ───────── hero */
+  .hero { min-height: 100vh; min-height: 100svh; padding-top: 120px; padding-bottom: 48px; overflow: hidden; display: flex; align-items: flex-end; background: radial-gradient(120vmax 80vmax at 70% 10%, #f8f5ec, var(--bg) 60%); }
+  .hero-name { position: absolute; left: 50%; top: 46%; transform: translate(-50%, -50%); font-size: clamp(7rem, 29vw, 30rem); font-weight: 700; letter-spacing: -0.06em; line-height: 1; color: rgba(27, 32, 64, 0.055); white-space: nowrap; user-select: none; pointer-events: none; }
+  .hero-name span { display: inline-block; }
+  .hero-avatar { position: absolute; right: 6%; bottom: 0; height: min(86vh, 860px); aspect-ratio: 600 / 941; z-index: 1; transform-origin: 50% 100%; mix-blend-mode: multiply; }
+  .hero-avatar.has-video { mix-blend-mode: normal; }
+  /* the 3D avatar is rendered on white: multiply melts the white into the cream page */
+  .hero-avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center bottom; display: block; }
+  .hero-avatar .alt { opacity: 0; }
+  .hero-avatar video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; border-radius: 999px 999px 0 0; display: none; }
+  .hero-avatar.has-video video { display: block; }
+  .hero-avatar.has-video img { display: none; }
+  .hero-avatar .sound { position: absolute; left: 50%; bottom: 22%; transform: translateX(-50%); display: none; }
+  .hero-avatar.has-video .sound { display: inline-flex; }
+  .hero-copy { position: relative; z-index: 2; width: 100%; display: flex; flex-direction: column; align-items: flex-start; gap: 28px; }
+  .hero h1 { font-size: clamp(3rem, 6.4vw, 6.6rem); line-height: 0.9; letter-spacing: -0.055em; font-weight: 700; }
+  .hero h1 .dot { color: var(--t-tech); }
+  .hero .sub { margin-top: 22px; font-size: clamp(1rem, 1.4vw, 1.25rem); color: var(--ink2); max-width: 36ch; }
+  .hero-side { display: grid; gap: 14px; justify-items: start; }
+  .status { display: inline-flex; align-items: center; gap: 10px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); font-size: 13px; }
+  .status i { width: 8px; height: 8px; border-radius: 50%; background: var(--good); box-shadow: 0 0 0 0 rgba(63, 156, 107, 0.5); animation: ping 2.2s infinite; }
+  @keyframes ping { 70%, 100% { box-shadow: 0 0 0 10px rgba(63, 156, 107, 0); } }
+  .hero-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  /* ───────── about + lanyard badge */
+  .about .wrap { display: grid; grid-template-columns: 1.05fr 0.9fr 0.8fr; gap: clamp(24px, 4vw, 64px); align-items: center; }
+  .about h2 em { font-size: 1.08em; }
+  .about .lede { margin-top: 26px; }
+  .about .btns { display: flex; gap: 10px; margin-top: 30px; flex-wrap: wrap; }
+  .lanyard { position: relative; height: 560px; display: flex; justify-content: center; }
+  .badge-rig { position: absolute; top: -40px; left: 50%; width: 260px; margin-left: -130px; transform-origin: 50% 0; cursor: grab; touch-action: none; }
+  .badge-rig:active { cursor: grabbing; }
+  .strap { width: 22px; height: 190px; margin: 0 auto; background: repeating-linear-gradient(180deg, var(--ink) 0 10px, #262c55 10px 20px); border-radius: 0 0 4px 4px; }
+  .clip { width: 40px; height: 26px; margin: -2px auto 0; border-radius: 6px; background: linear-gradient(#c9c4b4, #a9a392); box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.12); }
+  .badge { margin-top: -6px; background: var(--card); border-radius: 18px; overflow: hidden; box-shadow: 0 30px 60px -20px rgba(27, 32, 64, 0.35), 0 2px 0 rgba(27, 32, 64, 0.05); border: 1px solid var(--line); }
+  .badge-top { background: var(--ink); color: var(--bg); padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; }
+  .badge-top b { font-size: 12px; letter-spacing: 0.16em; }
+  .badge-top span { font-family: var(--mono); font-size: 10px; opacity: 0.7; }
+  .badge-photo { width: 118px; height: 140px; margin: 20px auto 12px; border-radius: 10px; overflow: hidden; border: 3px solid var(--bg2); }
+  .badge-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 22%; display: block; }
+  .badge-name { text-align: center; font-weight: 700; letter-spacing: 0.08em; font-size: 15px; }
+  .badge-role { text-align: center; font-size: 12px; color: var(--ink2); margin-top: 4px; }
+  .badge-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 16px 18px 6px; font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.08em; color: var(--mute); text-transform: uppercase; }
+  .badge-grid b { display: block; color: var(--ink); font-weight: 500; margin-top: 2px; }
+  .barcode { height: 34px; margin: 10px 18px 18px; background: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 4px, var(--ink) 4px 5px, transparent 5px 8px, var(--ink) 8px 11px, transparent 11px 12px); opacity: 0.85; }
+  .facts { display: grid; gap: 0; }
+  .facts li { display: grid; grid-template-columns: 90px 1fr; gap: 12px; padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+  .facts li span:first-child { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mute); padding-top: 2px; }
+  .facts blockquote { margin-top: 26px; font-family: var(--serif); font-style: italic; font-size: 1.35rem; line-height: 1.3; color: var(--ink2); }
+
+  /* ───────── periodic table */
+  .toolkit .head { display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; flex-wrap: wrap; }
+  .chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 34px; }
+  .chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); font-size: 13px; cursor: pointer; transition: background 0.25s, color 0.25s, border-color 0.25s; }
+  .chip i { width: 9px; height: 9px; border-radius: 3px; background: var(--c, var(--ink)); }
+  .chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .table { display: grid; grid-template-columns: 1fr 260px; gap: 28px; margin-top: 28px; align-items: start; }
+  .grid { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 8px; }
+  .el { position: relative; aspect-ratio: 1 / 1.08; border-radius: 10px; padding: 8px 9px; color: #fff; background: var(--c); cursor: pointer; border: 0; text-align: left; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.25s, opacity 0.35s, filter 0.35s; }
+  .el[data-f="cs"] { --c: var(--t-cs); }
+  .el[data-f="tool"] { --c: var(--t-tool); }
+  .el[data-f="tech"] { --c: var(--t-tech); }
+  .el small { font-family: var(--mono); font-size: 9px; opacity: 0.7; }
+  .el b { font-size: clamp(1.1rem, 1.9vw, 1.7rem); font-weight: 600; letter-spacing: -0.02em; line-height: 1; }
+  .el span { font-size: 9.5px; opacity: 0.8; line-height: 1.15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .el:hover, .el:focus-visible { transform: translateY(-4px) scale(1.04); z-index: 2; }
+  .el.dim { opacity: 0.16; filter: grayscale(1); }
+  .detail { position: sticky; top: 110px; border: 1px solid var(--line); border-radius: 16px; background: var(--card); padding: 22px; min-height: 260px; }
+  .detail .sym { width: 96px; height: 104px; border-radius: 14px; background: var(--c, var(--ink)); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 2.6rem; font-weight: 600; letter-spacing: -0.03em; transition: background 0.3s; }
+  .detail h3 { margin-top: 18px; font-size: 1.3rem; letter-spacing: -0.02em; }
+  .detail p { margin-top: 8px; font-size: 14px; line-height: 1.5; color: var(--ink2); }
+  .detail .mono { margin-top: 14px; display: block; }
+
+  /* ───────── work accordion */
+  .work .acc { display: flex; gap: 10px; height: 520px; margin-top: 46px; }
+  .panel { position: relative; flex: 0 0 76px; border-radius: 18px; background: var(--card); border: 1px solid var(--line); overflow: hidden; cursor: pointer; transition: flex 0.7s cubic-bezier(0.7, 0, 0.2, 1), background 0.4s; }
+  .panel.open { flex: 1 1 auto; cursor: default; background: #fffdf8; }
+  .panel .tab { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; align-items: center; padding: 20px 0; transition: opacity 0.3s; background: none; border: 0; cursor: pointer; width: 100%; }
+  .panel .tab b { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+  .panel .tab i { width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--ink); display: grid; place-items: center; font-style: normal; font-size: 14px; }
+  .panel.open .tab { opacity: 0; pointer-events: none; }
+  .panel .body { position: absolute; inset: 0; padding: clamp(24px, 3vw, 40px); display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 32px; opacity: 0; pointer-events: none; transition: opacity 0.35s; min-width: 640px; }
+  .panel.open .body { opacity: 1; pointer-events: auto; transition-delay: 0.35s; }
+  .body h3 { font-size: clamp(1.6rem, 2.6vw, 2.4rem); letter-spacing: -0.035em; line-height: 1.05; margin-top: 12px; }
+  .body p { margin-top: 16px; line-height: 1.6; color: var(--ink2); font-size: 15px; }
+  .body ul { margin-top: 16px; display: grid; gap: 8px; }
+  .body li { font-size: 14px; padding-left: 18px; position: relative; line-height: 1.45; }
+  .body li::before { content: ""; position: absolute; left: 0; top: 0.6em; width: 7px; height: 7px; border-radius: 50%; background: var(--t-tech); }
+  .metric { align-self: center; border-radius: 16px; background: var(--ink); color: var(--bg); padding: 26px; display: grid; gap: 18px; }
+  .metric div b { display: block; font-size: clamp(2.2rem, 4vw, 3.4rem); letter-spacing: -0.04em; font-weight: 600; line-height: 1; }
+  .metric div span { font-size: 13px; opacity: 0.75; }
+
+  /* ───────── timeline */
+  .tl { position: relative; margin-top: 60px; }
+  .tl::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: var(--line); }
+  .tl-progress { position: absolute; left: 50%; top: 0; width: 1px; height: 100%; background: var(--ink); transform-origin: top; transform: scaleY(0); }
+  .tl-item { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 90px; padding: 40px 0; align-items: center; }
+  .tl-item::after { content: ""; position: absolute; left: 50%; top: 50%; width: 11px; height: 11px; margin: -5.5px 0 0 -5.5px; border-radius: 50%; background: var(--ink); box-shadow: 0 0 0 6px var(--bg); }
+  .tl-year { font-size: clamp(3rem, 7vw, 6rem); font-weight: 700; letter-spacing: -0.05em; line-height: 1; text-align: right; }
+  .tl-year em { font-size: 0.9em; }
+  .tl-card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 24px; max-width: 460px; }
+  .tl-item:nth-child(even) .tl-year { order: 2; text-align: left; }
+  .tl-item:nth-child(even) .tl-card { order: 1; justify-self: end; }
+  .tl-card .mono { display: block; }
+  .tl-card h3 { margin-top: 10px; font-size: 1.3rem; letter-spacing: -0.02em; }
+  .tl-card .org { color: var(--ink2); font-size: 14px; margin-top: 2px; }
+  .tl-card ul { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .tl-card li { font-size: 12px; padding: 5px 10px; border-radius: 999px; background: var(--bg2); }
+  .promo { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; padding: 6px 12px; border-radius: 999px; background: var(--ink); color: var(--bg); font-size: 12.5px; }
+
+  /* ───────── moments (horizontal) */
+  .moments { padding-left: 0; padding-right: 0; overflow: hidden; }
+  .moments .head { padding: 0 var(--gut); }
+  .track { display: flex; gap: 18px; padding: 50px var(--gut) 10px; width: max-content; }
+  .mcard { width: 320px; flex: 0 0 auto; background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 26px; display: flex; flex-direction: column; justify-content: space-between; min-height: 300px; }
+  .mcard .ico { width: 48px; height: 48px; border-radius: 14px; background: var(--bg2); display: grid; place-items: center; font-size: 22px; }
+  .mcard .num { font-size: clamp(3rem, 5vw, 4.4rem); font-weight: 700; letter-spacing: -0.05em; line-height: 1; }
+  .mcard .num small { font-size: 0.45em; letter-spacing: -0.02em; margin-left: 2px; }
+  .mcard p { font-size: 14px; color: var(--ink2); line-height: 1.45; margin-top: 8px; }
+  .mcard.dark { background: var(--ink); color: var(--bg); }
+  .mcard.dark p { color: rgba(243, 240, 230, 0.75); }
+  .mcard.dark .ico { background: rgba(243, 240, 230, 0.1); }
+
+  /* ───────── feedback */
+  .fb-row { margin-top: 40px; }
+  .fb-row + .fb-row { margin-top: 90px; }
+  .fb-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; }
+  .fb-head h3 { font-size: clamp(1.8rem, 3.4vw, 3rem); letter-spacing: -0.04em; font-weight: 600; line-height: 1; }
+  .arrows { display: flex; gap: 8px; }
+  .arrows button { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--ink); background: transparent; cursor: pointer; font-size: 16px; transition: background 0.25s, color 0.25s; }
+  .arrows button:hover { background: var(--ink); color: var(--bg); }
+  .rail { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 28px 2px 10px; scrollbar-width: none; }
+  .rail::-webkit-scrollbar { display: none; }
+  .q { scroll-snap-align: start; flex: 0 0 min(440px, 86vw); background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; gap: 22px; }
+  .q blockquote { font-family: var(--serif); font-size: 1.3rem; line-height: 1.35; color: var(--ink); }
+  .q blockquote.clamp { display: -webkit-box; -webkit-line-clamp: 7; -webkit-box-orient: vertical; overflow: hidden; }
+  .q .more { align-self: flex-start; background: none; border: 0; padding: 0; font-size: 13px; color: var(--ink2); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+  .q figcaption { font-size: 14px; }
+  .q figcaption b { display: block; font-weight: 600; }
+  .q figcaption span { color: var(--mute); font-size: 13px; }
+  .q figcaption a { display: inline-block; margin-top: 8px; font-size: 12px; color: var(--ink2); }
+  .stars { color: #00b67a; letter-spacing: 2px; font-size: 14px; }
+
+  /* ───────── beyond */
+  .beyond .wrap { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(30px, 6vw, 90px); align-items: center; }
+  .beyond figure { border-radius: 26px; overflow: hidden; aspect-ratio: 1; }
+  .beyond figure img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .beyond p { margin-top: 18px; }
+
+  /* ───────── contact */
+  .contact { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; }
+  .big { font-size: clamp(3rem, 10vw, 10.5rem); line-height: 0.92; letter-spacing: -0.06em; font-weight: 700; background: linear-gradient(90deg, var(--ink) 0 50%, rgba(27, 32, 64, 0.16) 50% 100%); background-size: 200% 100%; background-position: 100% 0; -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .big em { -webkit-text-fill-color: transparent; }
+  .contact .btns { display: flex; gap: 10px; margin-top: 44px; flex-wrap: wrap; }
+  footer { padding: 28px var(--gut); display: flex; justify-content: space-between; gap: 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--mute); flex-wrap: wrap; }
+
+  /* ───────── mobile */
+  @media (max-width: 900px) {
+    .pill { display: none; }
+    .hero { align-items: flex-end; }
+    .hero-avatar { right: auto; left: 50%; margin-left: calc(min(42vh, 88vw) * -0.3188); height: min(42vh, 88vw); top: 84px; bottom: auto; }
+    .hero-copy { flex-direction: column; align-items: flex-start; }
+    .hero-side { justify-items: start; }
+    .hero-btns { justify-content: flex-start; }
+    .about .wrap { grid-template-columns: 1fr; }
+    .lanyard { height: 520px; }
+    .table { grid-template-columns: 1fr; }
+    .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .detail { position: static; min-height: 0; }
+    .work .acc { flex-direction: column; height: auto; }
+    .panel { flex: 0 0 64px; }
+    .panel.open { flex: 0 0 auto; }
+    .panel .tab { flex-direction: row; padding: 0 20px; }
+    .panel .tab b { writing-mode: horizontal-tb; transform: none; }
+    .panel .body { position: relative; grid-template-columns: 1fr; min-width: 0; display: none; }
+    .panel.open .body { display: grid; }
+    .tl::before, .tl-progress { left: 14px; }
+    .tl-item { grid-template-columns: 1fr; gap: 14px; padding: 26px 0 26px 44px; }
+    .tl-item::after { left: 14px; top: 46px; }
+    .tl-year, .tl-item:nth-child(even) .tl-year { order: 0; text-align: left; font-size: 3rem; }
+    .tl-item:nth-child(even) .tl-card { order: 1; justify-self: start; }
+    .moments .track { overflow-x: auto; width: auto; scroll-snap-type: x mandatory; }
+    .mcard { scroll-snap-align: start; width: 78vw; }
+    .beyond .wrap { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .status i { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Main">
+  <a class="logo" href="#top" aria-label="Marta Lopes — back to top">ML</a>
+  <div class="pill" id="pill">
+    <i class="ind" aria-hidden="true"></i>
+    <a href="#about">About</a>
+    <a href="#toolkit">Toolkit</a>
+    <a href="#work">Work</a>
+    <a href="#experience">Experience</a>
+    <a href="#moments">Moments</a>
+    <a href="#feedback">Feedback</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a class="btn btn--dark cta" href="mailto:martabpfl@gmail.com">Let’s talk</a>
+</nav>
+
+<main>
+  <!-- ───────── HERO -->
+  <section class="hero" id="top">
+    <div class="hero-name" aria-hidden="true"><span>M</span><span>A</span><span>R</span><span>T</span><span>A</span></div>
+
+    <!-- Optional: drop a talking-avatar video at assets/intro.mp4 and it replaces the still avatar. -->
+    <figure class="hero-avatar" id="avatar">
+      <img class="main" src="assets/avatar.jpg" alt="Marta Lopes, 3D avatar" />
+      <img class="alt" src="assets/avatar-2.jpg" alt="" aria-hidden="true" />
+      <video id="introVid" muted loop playsinline preload="metadata" aria-label="Marta introducing herself">
+        <source src="assets/intro.mp4" type="video/mp4" />
+      </video>
+      <button class="btn btn--dark sound" id="soundBtn" type="button">▶ Hear my intro</button>
+    </figure>
+
+    <div class="hero-copy wrap">
+      <div>
+        <p class="mono kicker">Marta Lopes · Lisbon</p>
+        <h1 class="hero-title">Customer Success<br />&amp; Implementation<span class="dot">.</span></h1>
+        <p class="sub">I build the kind of client relationships that last.</p>
+      </div>
+      <div class="hero-side">
+        <span class="status"><i></i>Open to new roles</span>
+        <div class="hero-btns">
+          <a class="btn btn--dark" href="#work">Explore my work ↓</a>
+          <a class="btn btn--ghost" href="https://www.linkedin.com/in/marta-lopes-07a791150/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────── ABOUT -->
+  <section class="about" id="about">
+    <div class="wrap">
+      <div class="reveal">
+        <p class="mono kicker">01 · About</p>
+        <h2 class="h2">Hi, I’m <em>Marta.</em></h2>
+        <p class="lede">I started my career in healthcare as a nutritionist, where understanding what people really needed was always at the centre of what I did. Moving to Australia took me into customer service and account management, and eventually into tech and AI.</p>
+        <p class="lede" style="margin-top:14px">At Nedzo, I became the first Customer Success hire: close to clients and close to the product. Turning a client’s use case into something that actually works, solving problems with the technical team, and staying with that client as they grow.</p>
+        <div class="btns">
+          <a class="btn btn--dark" href="mailto:martabpfl@gmail.com">Email me</a>
+          <a class="btn btn--ghost" href="https://www.linkedin.com/in/marta-lopes-07a791150/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+        </div>
+      </div>
+
+      <div class="lanyard" aria-label="ID badge">
+        <div class="badge-rig" id="badge">
+          <div class="strap"></div>
+          <div class="clip"></div>
+          <div class="badge">
+            <div class="badge-top"><b>CUSTOMER SUCCESS</b><span>ID · 2026</span></div>
+            <div class="badge-photo"><img src="assets/portrait.jpg" alt="Marta Lopes" /></div>
+            <p class="badge-name">MARTA LOPES</p>
+            <p class="badge-role">Head of Growth &amp; Expansion</p>
+            <div class="badge-grid">
+              <div>Focus<b>Onboarding → Retention</b></div>
+              <div>Based<b>Lisbon, PT</b></div>
+              <div>Since<b>2020</b></div>
+              <div>Status<b>Open to work</b></div>
+            </div>
+            <div class="barcode" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <ul class="facts">
+          <li><span>Last role</span><span>Head of Growth &amp; Expansion, Nedzo AI</span></li>
+          <li><span>First</span><span>Customer Success hire at an early-stage Voice AI company</span></li>
+          <li><span>Clients</span><span>~10 high-touch B2B · ~100 self-service</span></li>
+          <li><span>Scope</span><span>End to end: onboarding to retention</span></li>
+          <li><span>Based</span><span>Lisbon, Portugal</span></li>
+        </ul>
+        <blockquote>“I care about the person behind the renewal number.”</blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────── TOOLKIT -->
+  <section class="toolkit" id="toolkit">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <p class="mono kicker">02 · Toolkit</p>
+          <h2 class="h2">The periodic table <em>of my toolkit.</em></h2>
+        </div>
+        <p class="lede">24 elements in three families. Hover a tile to see it, or pick a family to light it up.</p>
+      </div>
+      <div class="chips" role="group" aria-label="Filter by family">
+        <button class="chip" type="button" data-filter="all" aria-pressed="true">All</button>
+        <button class="chip" type="button" data-filter="cs" aria-pressed="false" style="--c:var(--t-cs)"><i></i>Customer Success</button>
+        <button class="chip" type="button" data-filter="tool" aria-pressed="false" style="--c:var(--t-tool)"><i></i>Tools</button>
+        <button class="chip" type="button" data-filter="tech" aria-pressed="false" style="--c:var(--t-tech)"><i></i>Technical</button>
+      </div>
+      <div class="table">
+        <div class="grid" id="grid"></div>
+        <aside class="detail" id="detail" aria-live="polite">
+          <div class="sym" id="dSym">Im</div>
+          <h3 id="dName">Implementation</h3>
+          <p id="dDesc">Turning a client use case into a workable setup: workflows, integrations, testing and launch.</p>
+          <span class="mono" id="dFam">Customer Success</span>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────── WORK -->
+  <section class="work" id="work">
+    <div class="wrap">
+      <p class="mono kicker">03 · Work</p>
+      <h2 class="h2">Things I’ve <em>done.</em></h2>
+      <div class="acc" id="acc">
+        <article class="panel open">
+          <button class="tab" type="button" aria-expanded="true"><b>AI agent · Real estate</b><i>+</i></button>
+          <div class="body">
+            <div>
+              <p class="mono">Implementation · End to end</p>
+              <h3>An AI agent for a small real estate team</h3>
+              <p>Around 350 contacts a month on WhatsApp and by phone, answered by hand. I brought the client in, ran discovery, requirements, testing and training, and built it with a developer. When the original data source stopped giving access, I proposed an alternative route.</p>
+              <ul>
+                <li>Stayed the client’s point of contact after go-live: weekly meeting and a shared Slack channel</li>
+                <li>Every issue written up the same way in Linear and Slack, with what I’d already tried</li>
+              </ul>
+            </div>
+            <div class="metric">
+              <div><b>~50%</b><span>of ~350 monthly contacts handled automatically</span></div>
+              <div><b>3 mo.</b><span>pilot, and the client continued</span></div>
+            </div>
+          </div>
+        </article>
+        <article class="panel">
+          <button class="tab" type="button" aria-expanded="false"><b>Scope · Construction</b><i>+</i></button>
+          <div class="body">
+            <div>
+              <p class="mono">Decisions · Stakeholders</p>
+              <h3>Getting ten people to agree on scope</h3>
+              <p>A construction company in the north of Portugal: about ten people, around 700 contacts a month, nothing shared or digitised, and everyone with a different idea of the process.</p>
+              <ul>
+                <li>Listened, found the actual decision, brought in the right people</li>
+                <li>Proposed a workable path, confirmed it and documented it</li>
+                <li>Taught the client what had to happen first, and what was feasible</li>
+              </ul>
+            </div>
+            <div class="metric">
+              <div><b>~700</b><span>contacts a month, nothing digitised</span></div>
+              <div><b>Phase 1</b><span>agreed and approved by the client</span></div>
+            </div>
+          </div>
+        </article>
+        <article class="panel">
+          <button class="tab" type="button" aria-expanded="false"><b>Customer health view</b><i>+</i></button>
+          <div class="body">
+            <div>
+              <p class="mono">Proactive · Retention</p>
+              <h3>Noticing a problem before the customer tells me</h3>
+              <p>Nobody asked me to build it. I combined nine signals about each customer (usage, outcomes, appointments, automation performance, transcripts, sentiment, communication, lifecycle stage, renewal proximity) into one health status.</p>
+              <ul>
+                <li>On an account that turned yellow: investigated, reached out, proposed solutions</li>
+                <li>Presented to leadership and approved for use</li>
+              </ul>
+            </div>
+            <div class="metric">
+              <div><b>9</b><span>signals, one status: green, yellow or red</span></div>
+              <div><b>Renewed</b><span>a flagged customer subsequently renewed</span></div>
+            </div>
+          </div>
+        </article>
+        <article class="panel">
+          <button class="tab" type="button" aria-expanded="false"><b>Opening Portugal</b><i>+</i></button>
+          <div class="body">
+            <div>
+              <p class="mono">Growth · Initiative</p>
+              <h3>Opening a new market, before anyone asked</h3>
+              <p>The team wanted clients beyond the US. I tried Portugal: LinkedIn content, direct outreach, a Customer Success summit, two speakers invited onto our podcast, and conversations with agencies and consultants who brought us good potential clients.</p>
+              <ul>
+                <li>Started in the summer holidays: conversations went well, closing was slow</li>
+                <li>A few big prospects reached advanced stages</li>
+              </ul>
+            </div>
+            <div class="metric">
+              <div><b>~33%</b><span>of outreach became a meaningful conversation</span></div>
+              <div><b>~20</b><span>meetings booked in two months, then promoted</span></div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────── EXPERIENCE -->
+  <section class="experience" id="experience">
+    <div class="wrap">
+      <p class="mono kicker">04 · Experience</p>
+      <h2 class="h2">Where I’ve <em>been.</em></h2>
+      <div class="tl" id="tl">
+        <i class="tl-progress" id="tlp"></i>
+        <div class="tl-item">
+          <p class="tl-year">2020</p>
+          <div class="tl-card"><span class="mono">2020 – 2022</span><h3>Project Manager</h3><p class="org">Community Nutrition</p><ul><li>3 government-funded health programs</li><li>20 partnerships</li><li>~50K beneficiaries</li></ul></div>
+        </div>
+        <div class="tl-item">
+          <p class="tl-year">2023</p>
+          <div class="tl-card"><span class="mono">2023 – 2024 · Australia</span><h3>Customer Service</h3><p class="org">White Stone</p><ul><li>Customer retention &amp; re-engagement</li><li>30+ daily bookings &amp; enquiries</li></ul></div>
+        </div>
+        <div class="tl-item">
+          <p class="tl-year">2024</p>
+          <div class="tl-card"><span class="mono">2024 – 2025</span><h3>Account Management</h3><p class="org">Medinox</p><ul><li>100+ pharmacy accounts</li><li>200+ products</li><li>+20% sales</li></ul></div>
+        </div>
+        <div class="tl-item">
+          <p class="tl-year">2025</p>
+          <div class="tl-card"><span class="mono">2025 – 2026 · B2B Voice AI</span><h3>Customer Success</h3><p class="org">Nedzo AI · first Customer Success hire</p><ul><li>Onboarding</li><li>Implementation</li><li>Integrations</li><li>Adoption</li><li>Retention</li></ul><span class="promo">↑ Promoted to Head of Growth &amp; Expansion</span></div>
+        </div>
+        <div class="tl-item">
+          <p class="tl-year"><em>Next</em></p>
+          <div class="tl-card"><span class="mono">2026 –</span><h3>Your team?</h3><p class="org">Customer Success · Implementation</p><a class="btn btn--dark" style="margin-top:16px" href="mailto:martabpfl@gmail.com">Let’s talk →</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────── MOMENTS -->
+  <section class="moments" id="moments">
+    <div class="head wrap">
+      <p class="mono kicker">05 · Moments</p>
+      <h2 class="h2">Proud <em>moments.</em></h2>
+    </div>
+    <div class="track" id="track">
+      <article class="mcard"><div class="ico">🌱</div><div><p class="num" data-count="50" data-pre="~" data-suf="K">~50K</p><p>beneficiaries across three government-funded health programs</p></div></article>
+      <article class="mcard"><div class="ico">🤝</div><div><p class="num" data-count="20">20</p><p>partnerships built for those programs</p></div></article>
+      <article class="mcard"><div class="ico">💊</div><div><p class="num" data-count="100" data-suf="+">100+</p><p>pharmacy accounts managed at Medinox</p></div></article>
+      <article class="mcard"><div class="ico">📈</div><div><p class="num" data-count="20" data-pre="+" data-suf="%">+20%</p><p>sales growth across my accounts</p></div></article>
+      <article class="mcard"><div class="ico">🤖</div><div><p class="num" data-count="50" data-pre="~" data-suf="%">~50%</p><p>of ~350 monthly contacts automated by an AI agent I implemented</p></div></article>
+      <article class="mcard"><div class="ico">📅</div><div><p class="num" data-count="20" data-pre="~">~20</p><p>meetings booked in two months while opening the Portuguese market</p></div></article>
+      <article class="mcard"><div class="ico">⭐</div><div><p class="num">1st</p><p>Customer Success hire at Nedzo AI</p></div></article>
+      <article class="mcard dark"><div class="ico">↑</div><div><p class="num" style="font-size:clamp(2rem,3.4vw,2.8rem)">Head of Growth &amp; Expansion</p><p>Promoted at Nedzo AI for bringing in leads, partners and new conversations</p></div></article>
+    </div>
+  </section>
+
+  <!-- ───────── FEEDBACK -->
+  <section class="feedback" id="feedback">
+    <div class="wrap">
+      <p class="mono kicker">06 · Feedback</p>
+      <h2 class="h2">In other people’s <em>words.</em></h2>
+
+      <div class="fb-row">
+        <div class="fb-head"><h3>What clients <em>say.</em></h3><div class="arrows"><button type="button" data-rail="r1" data-dir="-1" aria-label="Previous">←</button><button type="button" data-rail="r1" data-dir="1" aria-label="Next">→</button></div></div>
+        <div class="rail" id="r1">
+          <figure class="q"><div><p class="stars">★★★★★</p><blockquote style="margin-top:12px">“Marta went over it with me to try to see what caused the problem, and to see how she could help in solving it. She was very helpful and courteous. She went step by step with me to try to get the issue resolved. In the end I got things working fine again. Thanks Marta!!”</blockquote></div><figcaption><b>Shelly Smith-Mitchell</b><span>Nedzo customer · Trustpilot</span><br /><a href="https://www.trustpilot.com/reviews/6a3aeeda7732f6d535613dc2" target="_blank" rel="noopener noreferrer">View on Trustpilot ↗</a></figcaption></figure>
+          <figure class="q"><div><p class="stars">★★★★★</p><blockquote style="margin-top:12px">“I love these guys. Marta the support is fantastic, the owner helped me personally too. We book a ton of appointments thanks to this software and regularly recommend it to others. So good.”</blockquote></div><figcaption><b>H Trace</b><span>Nedzo customer · Trustpilot</span><br /><a href="https://www.trustpilot.com/reviews/69bc6aaf10c0e4e523aff952" target="_blank" rel="noopener noreferrer">View on Trustpilot ↗</a></figcaption></figure>
+          <figure class="q"><div><p class="stars">★★★★★</p><blockquote style="margin-top:12px">“Marta was sooo helpful and nice to deal with. I couldn’t recommend it more. Very satisfied with my experience.”</blockquote></div><figcaption><b>Maria Artigas</b><span>Nedzo customer · Trustpilot</span><br /><a href="https://www.trustpilot.com/reviews/69672b905de0f42f55f9949d" target="_blank" rel="noopener noreferrer">View on Trustpilot ↗</a></figcaption></figure>
+        </div>
+      </div>
+
+      <div class="fb-row">
+        <div class="fb-head"><h3>What it’s like to <em>work with me.</em></h3><div class="arrows"><button type="button" data-rail="r2" data-dir="-1" aria-label="Previous">←</button><button type="button" data-rail="r2" data-dir="1" aria-label="Next">→</button></div></div>
+        <div class="rail" id="r2">
+          <figure class="q"><div><blockquote class="clamp">“I had the pleasure of working with Marta during her time at Nedzo, where she was our first Customer Success hire and an important part of the company's early growth. Marta joined at a stage when very little was established, and she took ownership of our customer relationships with professionalism and care. Our clients consistently spoke well of her, and she represented Nedzo with a level of warmth and reliability that is not easy to find. I am grateful for her contribution to Nedzo and would happily recommend her to any organisation looking for a dedicated, customer-focused professional.”</blockquote><button class="more" type="button">Read more</button></div><figcaption><b>Denis Rhomays</b><span>Co-Founder &amp; CEO, Nedzo AI · managed Marta directly</span><br /><a href="https://www.linkedin.com/in/marta-lopes-07a791150/" target="_blank" rel="noopener noreferrer">View on LinkedIn ↗</a></figcaption></figure>
+          <figure class="q"><div><blockquote class="clamp">“Marta was part of our support and customer success team at Nedzo for almost a year, and I'm glad to recommend her. What stood out first was how she treated customers. She's patient with people who are frustrated, clear when explaining something technical to someone who isn't, and she follows through. Customers noticed and she was the favorite support rep for many of them. She also grew a lot in the time she was with us. Marta came in with limited exposure to SaaS and AI and left able to handle escalations on her own, onboard new customers end to end, and write help docs the team still uses. She asked good questions, took feedback without defensiveness, and put in the work to close the gaps herself. She cares about doing the job well, which is not something you can teach. Any team that puts her in front of customers will be better for it.”</blockquote><button class="more" type="button">Read more</button></div><figcaption><b>Ivo Schipper</b><span>Co-founder, Nedzo · managed Marta directly</span><br /><a href="https://www.linkedin.com/in/marta-lopes-07a791150/" target="_blank" rel="noopener noreferrer">View on LinkedIn ↗</a></figcaption></figure>
+          <figure class="q"><div><blockquote class="clamp">“I had the pleasure of working with Marta at Nedzo AI, where I got to see her grow from Customer Success Specialist to Head of Growth & Expansion. Although we worked in different departments, Marta was one of those people who naturally made an impact across the whole team. She was genuinely loved by everyone and was often the life of our meetings. She’s smart, assertive, confident, and incredibly good at connecting and communicating with people. What I appreciated most about working with Marta was how dedicated and supportive she was, not only when it came to helping our clients, but also when it came to helping her teammates. Whenever someone needed a hand, regardless of the department, she was always willing to step in and help. Marta brings a great combination of confidence, intelligence, initiative, and genuine care for the people she works with. Her promotion to Head of Growth & Expansion felt like a natural reflection of the value she brought to the team. I’m grateful I had the chance to work alongside her, and I’d gladly recommend Marta to any team lucky enough to have her.”</blockquote><button class="more" type="button">Read more</button></div><figcaption><b>Danielle Tanteco</b><span>Creative Designer &amp; Content Creator, Nedzo AI</span><br /><a href="https://www.linkedin.com/in/marta-lopes-07a791150/" target="_blank" rel="noopener noreferrer">View on LinkedIn ↗</a></figcaption></figure>
+          <figure class="q"><div><blockquote class="clamp">“I had the pleasure of working with Marta Lopes at White Stone Wellness, where she was part of our team as a Customer Service Representative and Receptionist. Marta is an outstanding professional, dedicated, proactive, and always reliable. She consistently demonstrated excellent manners with clients, creating a welcoming and professional environment from the very first interaction. I truly appreciated her professionalism and her proactive approach to solving problems before they even arose. I confidently recommend Marta for any role that requires professionalism, dedication, and strong customer service skills. She would be a great asset to any team.”</blockquote><button class="more" type="button">Read more</button></div><figcaption><b>Patricia Ott</b><span>Marketing Specialist, Operations &amp; Customer Experience Coordinator</span><br /><a href="https://www.linkedin.com/in/marta-lopes-07a791150/" target="_blank" rel="noopener noreferrer">View on LinkedIn ↗</a></figcaption></figure>
+          <figure class="q"><div><blockquote class="clamp">“I worked with Marta for two years, and she showed exemplary proactivity and a remarkable capacity for initiative: always looking for new solutions, quick to act on the unexpected, with a practical and effective approach. Her communication skills stand out, along with how easily she builds and maintains a strong, influential network. Marta goes all in for the team, genuinely cares about the wellbeing of both the team and the company, and has the strategic vision to quickly spot opportunities to create value. A creative, motivating professional with a very positive impact on any team.”</blockquote><button class="more" type="button">Read more</button></div><figcaption><b>Maria Nogueira Santos</b><span>Nutritionist &amp; Managing Partner, Sobre'Mesa</span><br /><a href="https://www.linkedin.com/in/marta-lopes-07a791150/" target="_blank" rel="noopener noreferrer">View on LinkedIn ↗</a></figcaption></figure>
+          <figure class="q"><div><blockquote class="clamp">“I had the pleasure of working with Marta in the social media space, and she is truly outstanding at what she does. She has a strong eye for content, understands how to engage audiences, and knows how to adapt strategies to meet client goals. Marta is not only creative with ideas but also organized in execution, making campaigns run smoothly from start to finish. What I admire most is how collaborative and supportive she is, always ready to share insights, brainstorm, and lift the team up. Any company or client would be lucky to have Marta managing their social media presence.”</blockquote><button class="more" type="button">Read more</button></div><figcaption><b>Angela Sinama</b><span>Social Media &amp; Content Manager</span><br /><a href="https://www.linkedin.com/in/marta-lopes-07a791150/" target="_blank" rel="noopener noreferrer">View on LinkedIn ↗</a></figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────── BEYOND -->
+  <section class="beyond" id="beyond">
+    <div class="wrap">
+      <figure class="reveal"><img src="assets/travel.jpg" alt="Marta travelling" loading="lazy" /></figure>
+      <div class="reveal">
+        <p class="mono kicker">07 · Beyond my CV</p>
+        <h2 class="h2">Who I am <em>when I’m not working.</em></h2>
+        <p class="lede">Nutrition was never really about food. It was about learning to sit with someone, ask the right questions and understand what they actually need before offering an answer. That habit never left me.</p>
+        <p class="lede">Since then, I have lived and worked across Portugal and Australia, travelled through Southeast Asia and kept choosing roles that put me close to people, problems and new things to learn.</p>
+        <p class="lede">That is still how I approach Customer Success. I care about the person behind the renewal number, because understanding what is blocking them is usually what improves the number.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────── CONTACT -->
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <p class="mono kicker">08 · Contact</p>
+      <h2 class="big" id="big">Let’s build something <em>together.</em></h2>
+      <div class="btns">
+        <a class="btn btn--dark" href="mailto:martabpfl@gmail.com">martabpfl@gmail.com →</a>
+        <a class="btn btn--ghost" href="https://www.linkedin.com/in/marta-lopes-07a791150/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>Marta Lopes · Customer Success · Implementation · Account Management</span>
+  <a href="#top">Back to top ↑</a>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(() => {
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+
+  /* ───────── intro video: shown only if assets/intro.mp4 exists */
+  const vid = $("#introVid"), avatar = $("#avatar"), soundBtn = $("#soundBtn");
+  const fallback = () => { vid.remove(); soundBtn.remove(); };
+  vid.addEventListener("loadeddata", () => { avatar.classList.add("has-video"); if (!reduce) vid.play().catch(() => {}); });
+  vid.querySelector("source").addEventListener("error", fallback);
+  vid.addEventListener("error", fallback);
+  soundBtn.addEventListener("click", () => {
+    vid.muted = !vid.muted; vid.loop = vid.muted; vid.currentTime = vid.muted ? vid.currentTime : 0; vid.play();
+    soundBtn.textContent = vid.muted ? "▶ Hear my intro" : "❚❚ Mute";
+  });
+
+  /* ───────── periodic table data */
+  const EL = [
+    ["On","Onboarding","cs","Getting new customers set up and live, end to end."],
+    ["Im","Implementation","cs","Turning a client use case into a workable setup: workflows, integrations, testing and launch."],
+    ["Rq","Requirements","cs","Discovery with the client before anything gets built."],
+    ["Tr","Training","cs","Teaching clients and teams to get value from the product."],
+    ["Ad","Adoption","cs","Tracking how clients actually use the product and removing blockers."],
+    ["Re","Retention","cs","Staying close enough to see risk before renewal."],
+    ["Am","Account management","cs","Keeping the client and the technical team aligned, and closing the loop."],
+    ["Es","Escalations","cs","Investigating before escalating, then handing over with full context."],
+    ["Ch","Customer health","cs","Combining signals into one status so problems show up early."],
+    ["Ic","Intercom","tool","Support conversations and help docs."],
+    ["Sl","Slack","tool","Shared channels with clients and the internal team."],
+    ["Li","Linear","tool","Tracking issues and improvements with Product and Engineering."],
+    ["At","Attio","tool","CRM and pipeline."],
+    ["Gh","GoHighLevel","tool","Client CRM and automations."],
+    ["Mk","Make","tool","Workflow automation."],
+    ["Zp","Zapier","tool","Connecting tools without code."],
+    ["Cc","Cal.com","tool","Booking flows and calendar integrations."],
+    ["St","Stripe","tool","Billing and subscriptions."],
+    ["Lo","Loom","tool","Async walkthroughs for clients and the team."],
+    ["Wh","Webhooks","tech","Passing data between systems in real time."],
+    ["Ap","API integrations","tech","Connecting the product to the tools clients already use."],
+    ["Ag","AI agent testing","tech","Testing agent behaviour before and after go-live."],
+    ["Tx","Transcript analysis","tech","Reviewing calls and transcripts to find what went wrong."],
+    ["Wf","Workflow troubleshooting","tech","Reproducing issues and isolating the cause."],
+  ];
+  const FAM = { cs: "Customer Success", tool: "Tools", tech: "Technical" };
+  const grid = $("#grid");
+  grid.innerHTML = EL.map((e, i) => `<button class="el" type="button" data-f="${e[2]}" data-i="${i}"><small>${String(i + 1).padStart(2, "0")}</small><b>${e[0]}</b><span>${e[1]}</span></button>`).join("");
+  const det = { sym: $("#dSym"), name: $("#dName"), desc: $("#dDesc"), fam: $("#dFam"), box: $("#detail") };
+  const showEl = (i) => {
+    const e = EL[i];
+    det.sym.textContent = e[0]; det.name.textContent = e[1]; det.desc.textContent = e[3]; det.fam.textContent = FAM[e[2]];
+    det.box.style.setProperty("--c", `var(--t-${e[2]})`);
+    if (!reduce) gsap.fromTo(det.sym, { scale: 0.85, rotate: -6 }, { scale: 1, rotate: 0, duration: 0.5, ease: "back.out(2.4)" });
+  };
+  $$(".el").forEach((b) => { b.addEventListener("mouseenter", () => showEl(+b.dataset.i)); b.addEventListener("focus", () => showEl(+b.dataset.i)); b.addEventListener("click", () => showEl(+b.dataset.i)); });
+  $$(".chip").forEach((c) => c.addEventListener("click", () => {
+    $$(".chip").forEach((x) => x.setAttribute("aria-pressed", String(x === c)));
+    const f = c.dataset.filter;
+    $$(".el").forEach((el) => el.classList.toggle("dim", f !== "all" && el.dataset.f !== f));
+    const first = EL.findIndex((e) => f === "all" || e[2] === f); showEl(first);
+  }));
+
+  /* ───────── work accordion */
+  $$("#acc .panel").forEach((p) => {
+    const open = () => {
+      $$("#acc .panel").forEach((x) => { x.classList.toggle("open", x === p); x.querySelector(".tab").setAttribute("aria-expanded", String(x === p)); });
+    };
+    p.querySelector(".tab").addEventListener("click", open);
+  });
+
+  /* ───────── feedback rails */
+  $$(".arrows button").forEach((b) => b.addEventListener("click", () => {
+    const r = document.getElementById(b.dataset.rail);
+    r.scrollBy({ left: +b.dataset.dir * (r.firstElementChild.offsetWidth + 16), behavior: reduce ? "auto" : "smooth" });
+  }));
+  $$(".q .more").forEach((m) => m.addEventListener("click", () => {
+    const q = m.previousElementSibling; const open = q.classList.toggle("clamp");
+    m.textContent = open ? "Read more" : "Show less";
+  }));
+
+  if (reduce || !window.gsap) return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ───────── nav pill indicator follows the active section */
+  const pill = $("#pill"), ind = $(".ind", pill), links = $$("a", pill);
+  const moveInd = (a) => {
+    links.forEach((l) => l.classList.toggle("on", l === a));
+    if (!a) return gsap.to(ind, { opacity: 0, duration: 0.3 });
+    gsap.to(ind, { x: a.offsetLeft - 5, width: a.offsetWidth, opacity: 1, duration: 0.55, ease: "power3.out" });
+  };
+  links.forEach((a) => {
+    ScrollTrigger.create({ trigger: a.getAttribute("href"), start: "top 55%", end: "bottom 55%", onToggle: (s) => s.isActive && moveInd(a) });
+  });
+  ScrollTrigger.create({ trigger: ".hero", start: "top top", end: "bottom 55%", onToggle: (s) => s.isActive && moveInd(null) });
+
+  /* ───────── hero: letters rise, avatar enters; on scroll the name slides, the avatar sinks */
+  const intro = gsap.timeline({ defaults: { ease: "power4.out" } });
+  intro.from(".hero-name span", { yPercent: 60, opacity: 0, duration: 1.4, stagger: 0.07 })
+       .from("#avatar", { y: 80, opacity: 0, duration: 1.3 }, 0.3)
+       .from(".hero-copy > div > *", { y: 40, opacity: 0, duration: 1, stagger: 0.1 }, 0.5)
+       .from(".hero-side > *", { y: 20, opacity: 0, duration: 0.9, stagger: 0.1 }, 0.8)
+       .from(".nav", { y: -30, opacity: 0, duration: 0.9 }, 0.6);
+  gsap.to(".hero-name", { xPercent: -14, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+  gsap.to("#avatar", { y: 160, scale: 0.92, opacity: 0, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+  // idle life: a slow breath, and every few seconds the expression changes
+  if (!avatar.classList.contains("has-video")) {
+    gsap.to("#avatar .main, #avatar .alt", { scaleY: 1.008, scaleX: 0.997, transformOrigin: "50% 100%", duration: 2.4, ease: "sine.inOut", yoyo: true, repeat: -1 });
+    gsap.to("#avatar .alt", { opacity: 1, duration: 0.7, ease: "sine.inOut", yoyo: true, repeat: -1, repeatDelay: 3.2, delay: 2.5 });
+  }
+  gsap.to(".hero-title", { y: -90, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+
+  /* ───────── generic reveals */
+  $$(".reveal, .h2, .kicker").forEach((el) => {
+    gsap.from(el, { y: 50, opacity: 0, duration: 1.1, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 85%" } });
+  });
+
+  /* ───────── lanyard badge: drops in and swings; drag to swing it */
+  const badge = $("#badge");
+  gsap.set(badge, { yPercent: -120, rotate: 0, autoAlpha: 0 });
+  ScrollTrigger.create({
+    trigger: ".about", start: "top 70%", once: true,
+    onEnter: () => gsap.timeline()
+      .to(badge, { yPercent: 0, autoAlpha: 1, duration: 1.1, ease: "bounce.out" })
+      .fromTo(badge, { rotate: 16 }, { rotate: 0, duration: 2.4, ease: "elastic.out(1.1, 0.18)" }, 0.15),
+  });
+  let dragging = false, lastX = 0, rot = 0;
+  badge.addEventListener("pointerdown", (e) => { dragging = true; lastX = e.clientX; badge.setPointerCapture(e.pointerId); gsap.killTweensOf(badge, "rotate"); rot = gsap.getProperty(badge, "rotate"); });
+  badge.addEventListener("pointermove", (e) => { if (!dragging) return; rot = gsap.utils.clamp(-35, 35, rot + (e.clientX - lastX) * 0.35); lastX = e.clientX; gsap.set(badge, { rotate: rot }); });
+  const release = () => { if (!dragging) return; dragging = false; gsap.to(badge, { rotate: 0, duration: 2.2, ease: "elastic.out(1.2, 0.15)" }); };
+  badge.addEventListener("pointerup", release); badge.addEventListener("pointercancel", release);
+  // a small sway with scroll speed
+  ScrollTrigger.create({ trigger: ".about", start: "top bottom", end: "bottom top", onUpdate: (s) => { if (dragging) return; const v = gsap.utils.clamp(-10, 10, s.getVelocity() / 120); gsap.to(badge, { rotate: v, duration: 0.6, ease: "power2.out", overwrite: "auto", onComplete: () => gsap.to(badge, { rotate: 0, duration: 1.8, ease: "elastic.out(1, 0.2)" }) }); } });
+
+  /* ───────── periodic tiles cascade in */
+  gsap.from(".el", { y: 30, opacity: 0, scale: 0.9, duration: 0.7, ease: "back.out(1.6)", stagger: { each: 0.03, from: "start" }, scrollTrigger: { trigger: "#grid", start: "top 80%" } });
+
+  /* ───────── work panels slide up */
+  gsap.from("#acc .panel", { y: 60, opacity: 0, duration: 0.9, stagger: 0.1, ease: "power3.out", scrollTrigger: { trigger: "#acc", start: "top 80%" } });
+
+  /* ───────── timeline: line draws, big years come into focus */
+  gsap.to("#tlp", { scaleY: 1, ease: "none", scrollTrigger: { trigger: "#tl", start: "top 60%", end: "bottom 60%", scrub: true } });
+  $$(".tl-item").forEach((it) => {
+    gsap.fromTo($(".tl-year", it), { opacity: 0.12, scale: 0.8, filter: "blur(6px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", ease: "none", scrollTrigger: { trigger: it, start: "top 85%", end: "top 45%", scrub: true } });
+    gsap.from($(".tl-card", it), { x: it.matches(":nth-child(even)") ? -60 : 60, opacity: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: it, start: "top 75%" } });
+  });
+
+  /* ───────── moments: pinned horizontal scroll (desktop) + count-up */
+  const mm = gsap.matchMedia();
+  mm.add("(min-width: 901px)", () => {
+    const track = $("#track");
+    const dist = () => track.scrollWidth - window.innerWidth;
+    gsap.to(track, { x: () => -dist(), ease: "none", scrollTrigger: { trigger: ".moments", start: "top top", end: () => "+=" + dist(), pin: true, scrub: 0.6, invalidateOnRefresh: true } });
+  });
+  $$(".num[data-count]").forEach((n) => {
+    const end = +n.dataset.count, pre = n.dataset.pre || "", suf = n.dataset.suf || "", o = { v: 0 };
+    ScrollTrigger.create({ trigger: n, start: "top 95%", once: true, onEnter: () => gsap.to(o, { v: end, duration: 1.6, ease: "power2.out", onUpdate: () => (n.textContent = pre + Math.round(o.v) + suf) }) });
+    n.textContent = pre + "0" + suf;
+  });
+  gsap.from(".mcard", { y: 40, opacity: 0, duration: 0.8, stagger: 0.08, ease: "power3.out", scrollTrigger: { trigger: "#track", start: "top 85%" } });
+
+  /* ───────── feedback cards */
+  gsap.from(".q", { y: 40, opacity: 0, duration: 0.8, stagger: 0.07, ease: "power3.out", scrollTrigger: { trigger: "#feedback", start: "top 70%" } });
+
+  /* ───────── contact: the headline fills with ink as you scroll */
+  gsap.to("#big", { backgroundPosition: "0% 0", ease: "none", scrollTrigger: { trigger: ".contact", start: "top 80%", end: "center 55%", scrub: true } });
+
+  addEventListener("load", () => ScrollTrigger.refresh());
+})();
+</script>
+</body>
+</html>
