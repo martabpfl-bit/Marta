@@ -175,6 +175,8 @@
   .vframe button { position: absolute; inset: 0; width: 100%; border: 0; padding: 0; cursor: pointer; background: var(--ink) center / cover no-repeat; }
   .vframe button::after { content: "▶"; position: absolute; left: 50%; top: 50%; width: 88px; height: 88px; margin: -44px 0 0 -44px; border-radius: 50%; background: var(--bg); color: var(--ink); display: grid; place-items: center; font-size: 26px; padding-left: 5px; box-shadow: 0 0 0 14px rgba(243, 240, 230, 0.2); transition: transform 0.3s; }
   .vframe button:hover::after { transform: scale(1.08); }
+  .vlink { margin-top: 14px; font-size: 14px; }
+  .vlink a { color: var(--ink2); }
   .vframe iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
   /* ───────── projects */
@@ -470,11 +472,12 @@
   </section>
 
   <!-- ───────── VIDEO (set data-yt to the YouTube video id or link to show it) -->
-  <section class="video" id="video" data-yt="" hidden>
+  <section class="video" id="video" data-yt="https://www.youtube.com/watch?v=B8Wf7GZ3qH4" hidden>
     <div class="wrap">
       <p class="mono kicker" data-pt="Nas minhas palavras">In my own words</p>
       <h2 class="h2" data-pt="Ouve &lt;em&gt;da minha voz.&lt;/em&gt;">Hear it <em>from me.</em></h2>
       <div class="vframe" id="vframe"><button type="button" aria-label="Play my video"></button></div>
+      <p class="vlink"><a href="https://www.youtube.com/watch?v=B8Wf7GZ3qH4" target="_blank" rel="noopener noreferrer" data-pt="Ver no YouTube ↗">Watch on YouTube ↗</a></p>
     </div>
   </section>
 
