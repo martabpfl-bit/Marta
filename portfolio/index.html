@@ -76,6 +76,7 @@
   .hero h1 { font-size: clamp(3rem, 6.4vw, 6.6rem); line-height: 0.9; letter-spacing: -0.055em; font-weight: 700; }
   .hero h1 .dot { color: var(--t-tech); }
   .hero .sub { margin-top: 22px; font-size: clamp(1rem, 1.4vw, 1.25rem); color: var(--ink2); max-width: 36ch; }
+  .hero .sub2 { margin-top: 12px; font-size: 15px; line-height: 1.55; color: var(--mute); max-width: 52ch; }
   .hero-side { display: grid; gap: 14px; justify-items: start; }
   .status { display: inline-flex; align-items: center; gap: 10px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); font-size: 13px; }
   .status i { width: 8px; height: 8px; border-radius: 50%; background: var(--good); box-shadow: 0 0 0 0 rgba(63, 156, 107, 0.5); animation: ping 2.2s infinite; }
@@ -85,7 +86,8 @@
   /* ───────── about + lanyard badge */
   .about .wrap { display: grid; grid-template-columns: 1.05fr 0.9fr 0.8fr; gap: clamp(24px, 4vw, 64px); align-items: center; }
   .about h2 em { font-size: 1.08em; }
-  .about .lede { margin-top: 26px; }
+  .about .lede { margin-top: 14px; }
+  .about .h2 + .lede { margin-top: 26px; }
   .about .btns { display: flex; gap: 10px; margin-top: 30px; flex-wrap: wrap; }
   .lanyard { position: relative; height: 560px; display: flex; justify-content: center; }
   .badge-rig { position: absolute; top: -40px; left: 50%; width: 260px; margin-left: -130px; transform-origin: 50% 0; cursor: grab; touch-action: none; }
@@ -108,28 +110,42 @@
   .facts li span:first-child { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mute); padding-top: 2px; }
   .facts blockquote { margin-top: 26px; font-family: var(--serif); font-style: italic; font-size: 1.35rem; line-height: 1.3; color: var(--ink2); }
 
-  /* ───────── periodic table */
-  .toolkit .head { display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; flex-wrap: wrap; }
-  .chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 34px; }
-  .chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); font-size: 13px; cursor: pointer; transition: background 0.25s, color 0.25s, border-color 0.25s; }
-  .chip i { width: 9px; height: 9px; border-radius: 3px; background: var(--c, var(--ink)); }
-  .chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-  .table { display: grid; grid-template-columns: 1fr 260px; gap: 28px; margin-top: 28px; align-items: start; }
-  .grid { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 8px; }
-  .el { position: relative; aspect-ratio: 1 / 1.08; border-radius: 10px; padding: 8px 9px; color: #fff; background: var(--c); cursor: pointer; border: 0; text-align: left; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.25s, opacity 0.35s, filter 0.35s; }
-  .el[data-f="cs"] { --c: var(--t-cs); }
-  .el[data-f="tool"] { --c: var(--t-tool); }
-  .el[data-f="tech"] { --c: var(--t-tech); }
-  .el small { font-family: var(--mono); font-size: 9px; opacity: 0.7; }
-  .el b { font-size: clamp(1.1rem, 1.9vw, 1.7rem); font-weight: 600; letter-spacing: -0.02em; line-height: 1; }
-  .el span { font-size: 9.5px; opacity: 0.8; line-height: 1.15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .el:hover, .el:focus-visible { transform: translateY(-4px) scale(1.04); z-index: 2; }
-  .el.dim { opacity: 0.16; filter: grayscale(1); }
-  .detail { position: sticky; top: 110px; border: 1px solid var(--line); border-radius: 16px; background: var(--card); padding: 22px; min-height: 260px; }
-  .detail .sym { width: 96px; height: 104px; border-radius: 14px; background: var(--c, var(--ink)); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 2.6rem; font-weight: 600; letter-spacing: -0.03em; transition: background 0.3s; }
-  .detail h3 { margin-top: 18px; font-size: 1.3rem; letter-spacing: -0.02em; }
-  .detail p { margin-top: 8px; font-size: 14px; line-height: 1.5; color: var(--ink2); }
-  .detail .mono { margin-top: 14px; display: block; }
+  /* ───────── client journey */
+  .journey { padding-top: clamp(70px, 10vh, 110px); padding-bottom: clamp(70px, 10vh, 110px); }
+  .journey .head { display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; flex-wrap: wrap; }
+  .journey .h2 { font-size: clamp(2.2rem, 4.6vw, 4.4rem); }
+  .jmap { position: relative; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); grid-template-rows: auto 130px auto; column-gap: 18px; margin-top: 34px; }
+  .jroad { grid-column: 1 / -1; grid-row: 2; position: relative; }
+  .jroad svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .jroad .base { fill: none; stroke: var(--line); stroke-width: 2; stroke-dasharray: 2 7; stroke-linecap: round; }
+  .jroad .lit { fill: none; stroke: var(--ink); stroke-width: 2.5; stroke-linecap: round; }
+  .jstop { position: absolute; width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 50%; background: var(--bg); border: 2px solid var(--mute); transition: background 0.35s, border-color 0.35s, transform 0.35s; }
+  .jstop.on { background: var(--ink); border-color: var(--ink); transform: scale(1.15); }
+  .jdot { position: absolute; left: 0; top: 0; width: 0; height: 0; z-index: 3; }
+  .jdot i { position: absolute; width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%; background: var(--good); box-shadow: 0 0 0 6px rgba(63, 156, 107, 0.18), 0 6px 16px rgba(27, 32, 64, 0.25); }
+  .jdot span { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); white-space: nowrap; padding: 6px 11px; border-radius: 999px; background: var(--ink); color: var(--bg); font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .jcard { grid-column: var(--col); grid-row: 1; align-self: end; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 18px; opacity: 0.32; transform: translateY(10px); transition: opacity 0.45s, transform 0.45s, box-shadow 0.45s; }
+  .jcard.low { grid-row: 3; align-self: start; transform: translateY(-10px); }
+  .jcard.on { opacity: 1; transform: none; box-shadow: 0 20px 40px -24px rgba(27, 32, 64, 0.35); }
+  .jcard .mono { display: block; }
+  .jcard h3 { margin-top: 8px; font-size: 1.15rem; letter-spacing: -0.02em; line-height: 1.15; }
+  .jcard p { margin-top: 8px; font-size: 13.5px; line-height: 1.5; color: var(--ink2); }
+  .tools { margin-top: 46px; display: grid; gap: 12px; }
+  .tools .row { display: flex; align-items: center; gap: 18px; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+  .tools .lbl { flex: 0 0 auto; }
+  .marq { display: flex; gap: 10px; width: max-content; animation: marq 38s linear infinite; }
+  .tools .row:nth-child(2) .marq { animation-duration: 30s; animation-direction: reverse; }
+  .marq span { padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); font-size: 13px; white-space: nowrap; }
+  .tools .row:nth-child(2) .marq span { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  @keyframes marq { to { transform: translateX(-50%); } }
+
+  /* ───────── video */
+  .video[hidden] { display: none; }
+  .vframe { position: relative; margin-top: 40px; aspect-ratio: 16 / 9; border-radius: 28px; overflow: hidden; background: var(--ink); box-shadow: 0 40px 80px -40px rgba(27, 32, 64, 0.5); transform-origin: 50% 30%; }
+  .vframe button { position: absolute; inset: 0; width: 100%; border: 0; padding: 0; cursor: pointer; background: var(--ink) center / cover no-repeat; }
+  .vframe button::after { content: "▶"; position: absolute; left: 50%; top: 50%; width: 88px; height: 88px; margin: -44px 0 0 -44px; border-radius: 50%; background: var(--bg); color: var(--ink); display: grid; place-items: center; font-size: 26px; padding-left: 5px; box-shadow: 0 0 0 14px rgba(243, 240, 230, 0.2); transition: transform 0.3s; }
+  .vframe button:hover::after { transform: scale(1.08); }
+  .vframe iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
   /* ───────── work accordion */
   .work .acc { display: flex; gap: 10px; height: 520px; margin-top: 46px; }
@@ -209,7 +225,7 @@
 
   /* ───────── contact */
   .contact { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; }
-  .big { font-size: clamp(3rem, 10vw, 10.5rem); line-height: 0.92; letter-spacing: -0.06em; font-weight: 700; background: linear-gradient(90deg, var(--ink) 0 50%, rgba(27, 32, 64, 0.16) 50% 100%); background-size: 200% 100%; background-position: 100% 0; -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .big { font-size: clamp(2.6rem, 7.4vw, 8rem); line-height: 0.92; letter-spacing: -0.06em; font-weight: 700; background: linear-gradient(90deg, var(--ink) 0 50%, rgba(27, 32, 64, 0.16) 50% 100%); background-size: 200% 100%; background-position: 100% 0; -webkit-background-clip: text; background-clip: text; color: transparent; }
   .big em { -webkit-text-fill-color: transparent; }
   .contact .btns { display: flex; gap: 10px; margin-top: 44px; flex-wrap: wrap; }
   footer { padding: 28px var(--gut); display: flex; justify-content: space-between; gap: 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--mute); flex-wrap: wrap; }
@@ -218,15 +234,22 @@
   @media (max-width: 900px) {
     .pill { display: none; }
     .hero { align-items: flex-end; }
-    .hero-avatar { right: auto; left: 50%; margin-left: calc(min(42vh, 88vw) * -0.3188); height: min(42vh, 88vw); top: 84px; bottom: auto; }
+    .hero { flex-direction: column; align-items: stretch; justify-content: flex-end; padding-top: 84px; }
+    .hero-avatar { position: relative; right: auto; height: min(40vh, 80vw); margin: 0 auto 18px; }
+    .hero-name { top: 30%; }
     .hero-copy { flex-direction: column; align-items: flex-start; }
     .hero-side { justify-items: start; }
     .hero-btns { justify-content: flex-start; }
     .about .wrap { grid-template-columns: 1fr; }
     .lanyard { height: 520px; }
-    .table { grid-template-columns: 1fr; }
-    .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-    .detail { position: static; min-height: 0; }
+    .jmap { grid-template-columns: 36px 1fr; grid-template-rows: none; row-gap: 16px; column-gap: 14px; }
+    .jroad { grid-column: 1; grid-row: 1 / span 5; }
+    .jcard, .jcard.low { grid-column: 2; grid-row: auto; align-self: auto; transform: translateX(14px); }
+    .jcard.on { transform: none; }
+    .tools .row { flex-direction: column; align-items: flex-start; }
+    .vframe { border-radius: 18px; }
+    .jdot span { display: none; }
+    .vframe button::after { width: 64px; height: 64px; margin: -32px 0 0 -32px; font-size: 20px; }
     .work .acc { flex-direction: column; height: auto; }
     .panel { flex: 0 0 64px; }
     .panel.open { flex: 0 0 auto; }
@@ -245,7 +268,8 @@
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .status i { animation: none; }
+    .status i, .marq { animation: none; }
+    .jcard { opacity: 1; transform: none; }
   }
 </style>
 </head>
@@ -256,10 +280,9 @@
   <div class="pill" id="pill">
     <i class="ind" aria-hidden="true"></i>
     <a href="#about">About</a>
-    <a href="#toolkit">Toolkit</a>
+    <a href="#journey">How I work</a>
     <a href="#work">Work</a>
     <a href="#experience">Experience</a>
-    <a href="#moments">Moments</a>
     <a href="#feedback">Feedback</a>
     <a href="#contact">Contact</a>
   </div>
@@ -283,15 +306,16 @@
 
     <div class="hero-copy wrap">
       <div>
-        <p class="mono kicker">Marta Lopes · Lisbon</p>
+        <p class="mono kicker">Customer Success · Account Management · Implementation · AI</p>
         <h1 class="hero-title">Customer Success<br />&amp; Implementation<span class="dot">.</span></h1>
         <p class="sub">I build the kind of client relationships that last.</p>
+        <p class="sub2">From onboarding and implementation to adoption and retention, I like being the person clients can rely on and the bridge between what they need and the teams building it.</p>
       </div>
       <div class="hero-side">
         <span class="status"><i></i>Open to new roles</span>
         <div class="hero-btns">
-          <a class="btn btn--dark" href="#work">Explore my work ↓</a>
-          <a class="btn btn--ghost" href="https://www.linkedin.com/in/marta-lopes-07a791150/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+          <a class="btn btn--dark" href="#contact">Let’s talk →</a>
+          <a class="btn btn--ghost" href="#journey">How I work ↓</a>
         </div>
       </div>
     </div>
@@ -301,10 +325,12 @@
   <section class="about" id="about">
     <div class="wrap">
       <div class="reveal">
-        <p class="mono kicker">01 · About</p>
+        <p class="mono kicker">01 · From healthcare to customer success and AI</p>
         <h2 class="h2">Hi, I’m <em>Marta.</em></h2>
-        <p class="lede">I started my career in healthcare as a nutritionist, where understanding what people really needed was always at the centre of what I did. Moving to Australia took me into customer service and account management, and eventually into tech and AI.</p>
-        <p class="lede" style="margin-top:14px">At Nedzo, I became the first Customer Success hire: close to clients and close to the product. Turning a client’s use case into something that actually works, solving problems with the technical team, and staying with that client as they grow.</p>
+        <p class="lede">I started my career in healthcare as a nutritionist, where working with people and understanding what they really needed was always at the centre of what I did.</p>
+        <p class="lede">Moving to Australia took my career in a different direction. I worked across customer service and account management, and eventually found my way into tech and AI.</p>
+        <p class="lede">At Nedzo, I became the first Customer Success hire and discovered the part of my work I enjoy most: being close to clients while also being close to the product. I loved understanding a client’s use case, helping turn it into something that actually worked, solving problems with the technical team and then staying with that client as they adopted and grew with the product.</p>
+        <p class="lede">That combination of people, technology and problem-solving is where I want to keep building my career.</p>
         <div class="btns">
           <a class="btn btn--dark" href="mailto:martabpfl@gmail.com">Email me</a>
           <a class="btn btn--ghost" href="https://www.linkedin.com/in/marta-lopes-07a791150/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
@@ -344,30 +370,39 @@
     </div>
   </section>
 
-  <!-- ───────── TOOLKIT -->
-  <section class="toolkit" id="toolkit">
+  <!-- ───────── VIDEO (set data-yt to the YouTube video id or link to show it) -->
+  <section class="video" id="video" data-yt="" hidden>
+    <div class="wrap">
+      <p class="mono kicker">In my own words</p>
+      <h2 class="h2">Hear it <em>from me.</em></h2>
+      <div class="vframe" id="vframe"><button type="button" aria-label="Play my video"></button></div>
+    </div>
+  </section>
+
+  <!-- ───────── CLIENT JOURNEY -->
+  <section class="journey" id="journey">
     <div class="wrap">
       <div class="head">
         <div>
-          <p class="mono kicker">02 · Toolkit</p>
-          <h2 class="h2">The periodic table <em>of my toolkit.</em></h2>
+          <p class="mono kicker">02 · What I do</p>
+          <h2 class="h2">How I work with clients, <em>from first call to renewal.</em></h2>
         </div>
-        <p class="lede">24 elements in three families. Hover a tile to see it, or pick a family to light it up.</p>
+        <p class="lede">Follow a client through the journey I own, end to end.</p>
       </div>
-      <div class="chips" role="group" aria-label="Filter by family">
-        <button class="chip" type="button" data-filter="all" aria-pressed="true">All</button>
-        <button class="chip" type="button" data-filter="cs" aria-pressed="false" style="--c:var(--t-cs)"><i></i>Customer Success</button>
-        <button class="chip" type="button" data-filter="tool" aria-pressed="false" style="--c:var(--t-tool)"><i></i>Tools</button>
-        <button class="chip" type="button" data-filter="tech" aria-pressed="false" style="--c:var(--t-tech)"><i></i>Technical</button>
+      <div class="jmap" id="jmap">
+        <div class="jroad" id="jroad" aria-hidden="true">
+          <svg id="jsvg"><path class="base" id="jbase" /><path class="lit" id="jlit" /></svg>
+          <div class="jdot" id="jdot"><span id="jlabel">New client</span><i></i></div>
+        </div>
+        <article class="jcard " data-label="New client" style="--col:1"><span class="mono">01 · Onboarding</span><h3>Clear ownership from the first conversation</h3><p>Requirements discovery: understanding the client’s use case before anything gets built.</p></article>
+        <article class="jcard low" data-label="Going live" style="--col:2"><span class="mono">02 · Implementation</span><h3>A use case becomes a working setup</h3><p>I turn a client use case into a workable setup: workflows, integrations, testing and launch.</p></article>
+        <article class="jcard " data-label="Issue raised" style="--col:3"><span class="mono">03 · Technical Customer Success</span><h3>When something breaks, I investigate before I escalate</h3><p>I reproduce issues, review calls and transcripts, test workflows, document what matters and work with Product or Engineering through resolution.</p></article>
+        <article class="jcard low" data-label="Adopting" style="--col:4"><span class="mono">04 · Adoption</span><h3>Spotting blockers early</h3><p>I track how clients are actually using the product and stay close enough to understand what is getting in the way of value.</p></article>
+        <article class="jcard " data-label="Renewing" style="--col:5"><span class="mono">05 · Retention & growth</span><h3>Both sides aligned, loop closed</h3><p>I sit between a client who needs something to work and a technical team that needs clear information to make it happen, all the way to renewal or expansion.</p></article>
       </div>
-      <div class="table">
-        <div class="grid" id="grid"></div>
-        <aside class="detail" id="detail" aria-live="polite">
-          <div class="sym" id="dSym">Im</div>
-          <h3 id="dName">Implementation</h3>
-          <p id="dDesc">Turning a client use case into a workable setup: workflows, integrations, testing and launch.</p>
-          <span class="mono" id="dFam">Customer Success</span>
-        </aside>
+      <div class="tools">
+        <div class="row"><span class="mono lbl">Tools I work with</span><div class="marq"><span>Intercom</span><span>Slack</span><span>Linear</span><span>Attio</span><span>GoHighLevel</span><span>Make</span><span>Zapier</span><span>Cal.com</span><span>Calendly</span><span>Stripe</span><span>Skool</span><span>Google Workspace</span><span>Loom</span><span>Intercom</span><span>Slack</span><span>Linear</span><span>Attio</span><span>GoHighLevel</span><span>Make</span><span>Zapier</span><span>Cal.com</span><span>Calendly</span><span>Stripe</span><span>Skool</span><span>Google Workspace</span><span>Loom</span></div></div>
+        <div class="row"><span class="mono lbl">Technical exposure</span><div class="marq"><span>Webhooks</span><span>API integrations</span><span>AI agent testing</span><span>Call &amp; transcript analysis</span><span>Workflow troubleshooting</span><span>Webhooks</span><span>API integrations</span><span>AI agent testing</span><span>Call &amp; transcript analysis</span><span>Workflow troubleshooting</span><span>Webhooks</span><span>API integrations</span><span>AI agent testing</span><span>Call &amp; transcript analysis</span><span>Workflow troubleshooting</span><span>Webhooks</span><span>API integrations</span><span>AI agent testing</span><span>Call &amp; transcript analysis</span><span>Workflow troubleshooting</span></div></div>
       </div>
     </div>
   </section>
@@ -468,15 +503,15 @@
         </div>
         <div class="tl-item">
           <p class="tl-year">2023</p>
-          <div class="tl-card"><span class="mono">2023 – 2024 · Australia</span><h3>Customer Service</h3><p class="org">White Stone</p><ul><li>Customer retention &amp; re-engagement</li><li>30+ daily bookings &amp; enquiries</li></ul></div>
+          <div class="tl-card"><span class="mono">2023 – 2024</span><h3>Customer Service</h3><p class="org">White Stone</p><ul><li>Customer retention &amp; re-engagement</li><li>30+ daily bookings &amp; enquiries</li></ul></div>
         </div>
         <div class="tl-item">
           <p class="tl-year">2024</p>
-          <div class="tl-card"><span class="mono">2024 – 2025</span><h3>Account Management</h3><p class="org">Medinox</p><ul><li>100+ pharmacy accounts</li><li>200+ products</li><li>+20% sales</li></ul></div>
+          <div class="tl-card"><span class="mono">2024 – 2025</span><h3>Account Management</h3><p class="org">Medinox</p><ul><li>100+ pharmacy accounts</li><li>200+ products</li><li>Account growth · +20% sales</li></ul></div>
         </div>
         <div class="tl-item">
           <p class="tl-year">2025</p>
-          <div class="tl-card"><span class="mono">2025 – 2026 · B2B Voice AI</span><h3>Customer Success</h3><p class="org">Nedzo AI · first Customer Success hire</p><ul><li>Onboarding</li><li>Implementation</li><li>Integrations</li><li>Adoption</li><li>Retention</li></ul><span class="promo">↑ Promoted to Head of Growth &amp; Expansion</span></div>
+          <div class="tl-card"><span class="mono">2025 – 2026</span><h3>Customer Success</h3><p class="org">Nedzo AI · First Customer Success hire · B2B Voice AI</p><ul><li>Onboarding · Implementation · Integrations</li><li>Adoption · Retention · Client relationships</li><li>Bridge between clients &amp; Product/Engineering</li></ul><span class="promo">↑ Promoted to Head of Growth &amp; Expansion</span><p class="org" style="margin-top:8px">Growth · Expansion · Customer lifecycle</p></div>
         </div>
         <div class="tl-item">
           <p class="tl-year"><em>Next</em></p>
@@ -511,7 +546,7 @@
       <h2 class="h2">In other people’s <em>words.</em></h2>
 
       <div class="fb-row">
-        <div class="fb-head"><h3>What clients <em>say.</em></h3><div class="arrows"><button type="button" data-rail="r1" data-dir="-1" aria-label="Previous">←</button><button type="button" data-rail="r1" data-dir="1" aria-label="Next">→</button></div></div>
+        <div class="fb-head"><h3>What clients say <em>about working with me.</em></h3><div class="arrows"><button type="button" data-rail="r1" data-dir="-1" aria-label="Previous">←</button><button type="button" data-rail="r1" data-dir="1" aria-label="Next">→</button></div></div>
         <div class="rail" id="r1">
           <figure class="q"><div><p class="stars">★★★★★</p><blockquote style="margin-top:12px">“Marta went over it with me to try to see what caused the problem, and to see how she could help in solving it. She was very helpful and courteous. She went step by step with me to try to get the issue resolved. In the end I got things working fine again. Thanks Marta!!”</blockquote></div><figcaption><b>Shelly Smith-Mitchell</b><span>Nedzo customer · Trustpilot</span><br /><a href="https://www.trustpilot.com/reviews/6a3aeeda7732f6d535613dc2" target="_blank" rel="noopener noreferrer">View on Trustpilot ↗</a></figcaption></figure>
           <figure class="q"><div><p class="stars">★★★★★</p><blockquote style="margin-top:12px">“I love these guys. Marta the support is fantastic, the owner helped me personally too. We book a ton of appointments thanks to this software and regularly recommend it to others. So good.”</blockquote></div><figcaption><b>H Trace</b><span>Nedzo customer · Trustpilot</span><br /><a href="https://www.trustpilot.com/reviews/69bc6aaf10c0e4e523aff952" target="_blank" rel="noopener noreferrer">View on Trustpilot ↗</a></figcaption></figure>
@@ -524,7 +559,7 @@
         <div class="rail" id="r2">
           <figure class="q"><div><blockquote class="clamp">“I had the pleasure of working with Marta during her time at Nedzo, where she was our first Customer Success hire and an important part of the company's early growth. Marta joined at a stage when very little was established, and she took ownership of our customer relationships with professionalism and care. Our clients consistently spoke well of her, and she represented Nedzo with a level of warmth and reliability that is not easy to find. I am grateful for her contribution to Nedzo and would happily recommend her to any organisation looking for a dedicated, customer-focused professional.”</blockquote><button class="more" type="button">Read more</button></div><figcaption><b>Denis Rhomays</b><span>Co-Founder &amp; CEO, Nedzo AI · managed Marta directly</span><br /><a href="https://www.linkedin.com/in/marta-lopes-07a791150/" target="_blank" rel="noopener noreferrer">View on LinkedIn ↗</a></figcaption></figure>
           <figure class="q"><div><blockquote class="clamp">“Marta was part of our support and customer success team at Nedzo for almost a year, and I'm glad to recommend her. What stood out first was how she treated customers. She's patient with people who are frustrated, clear when explaining something technical to someone who isn't, and she follows through. Customers noticed and she was the favorite support rep for many of them. She also grew a lot in the time she was with us. Marta came in with limited exposure to SaaS and AI and left able to handle escalations on her own, onboard new customers end to end, and write help docs the team still uses. She asked good questions, took feedback without defensiveness, and put in the work to close the gaps herself. She cares about doing the job well, which is not something you can teach. Any team that puts her in front of customers will be better for it.”</blockquote><button class="more" type="button">Read more</button></div><figcaption><b>Ivo Schipper</b><span>Co-founder, Nedzo · managed Marta directly</span><br /><a href="https://www.linkedin.com/in/marta-lopes-07a791150/" target="_blank" rel="noopener noreferrer">View on LinkedIn ↗</a></figcaption></figure>
-          <figure class="q"><div><blockquote class="clamp">“I had the pleasure of working with Marta at Nedzo AI, where I got to see her grow from Customer Success Specialist to Head of Growth & Expansion. Although we worked in different departments, Marta was one of those people who naturally made an impact across the whole team. She was genuinely loved by everyone and was often the life of our meetings. She’s smart, assertive, confident, and incredibly good at connecting and communicating with people. What I appreciated most about working with Marta was how dedicated and supportive she was, not only when it came to helping our clients, but also when it came to helping her teammates. Whenever someone needed a hand, regardless of the department, she was always willing to step in and help. Marta brings a great combination of confidence, intelligence, initiative, and genuine care for the people she works with. Her promotion to Head of Growth & Expansion felt like a natural reflection of the value she brought to the team. I’m grateful I had the chance to work alongside her, and I’d gladly recommend Marta to any team lucky enough to have her.”</blockquote><button class="more" type="button">Read more</button></div><figcaption><b>Danielle Tanteco</b><span>Creative Designer &amp; Content Creator, Nedzo AI</span><br /><a href="https://www.linkedin.com/in/marta-lopes-07a791150/" target="_blank" rel="noopener noreferrer">View on LinkedIn ↗</a></figcaption></figure>
+          <figure class="q"><div><blockquote class="clamp">“I had the pleasure of working with Marta at Nedzo AI, where I got to see her grow from Customer Success Specialist to Head of Growth & Expansion. Although we worked in different departments, Marta was one of those people who naturally made an impact across the whole team. She was genuinely loved by everyone and was often the life of our meetings. She’s smart, assertive, confident, and incredibly good at connecting and communicating with people. What I appreciated most about working with Marta was how dedicated and supportive she was, not only when it came to helping our clients, but also when it came to helping her teammates. Whenever someone needed a hand, regardless of the department, she was always willing to step in and help. Marta brings a great combination of confidence, intelligence, initiative, and genuine care for the people she works with. Her promotion to Head of Growth & Expansion felt like a natural reflection of the value she brought to the team. I’m grateful I had the chance to work alongside her, and I’d gladly recommend Marta to any team lucky enough to have her.”</blockquote><button class="more" type="button">Read more</button></div><figcaption><b>Danielle Tanteco</b><span>Creative Designer &amp; Content Creator, Nedzo AI · LinkedIn recommendation, September 2026</span><br /><a href="https://www.linkedin.com/in/marta-lopes-07a791150/" target="_blank" rel="noopener noreferrer">View on LinkedIn ↗</a></figcaption></figure>
           <figure class="q"><div><blockquote class="clamp">“I had the pleasure of working with Marta Lopes at White Stone Wellness, where she was part of our team as a Customer Service Representative and Receptionist. Marta is an outstanding professional, dedicated, proactive, and always reliable. She consistently demonstrated excellent manners with clients, creating a welcoming and professional environment from the very first interaction. I truly appreciated her professionalism and her proactive approach to solving problems before they even arose. I confidently recommend Marta for any role that requires professionalism, dedication, and strong customer service skills. She would be a great asset to any team.”</blockquote><button class="more" type="button">Read more</button></div><figcaption><b>Patricia Ott</b><span>Marketing Specialist, Operations &amp; Customer Experience Coordinator</span><br /><a href="https://www.linkedin.com/in/marta-lopes-07a791150/" target="_blank" rel="noopener noreferrer">View on LinkedIn ↗</a></figcaption></figure>
           <figure class="q"><div><blockquote class="clamp">“I worked with Marta for two years, and she showed exemplary proactivity and a remarkable capacity for initiative: always looking for new solutions, quick to act on the unexpected, with a practical and effective approach. Her communication skills stand out, along with how easily she builds and maintains a strong, influential network. Marta goes all in for the team, genuinely cares about the wellbeing of both the team and the company, and has the strategic vision to quickly spot opportunities to create value. A creative, motivating professional with a very positive impact on any team.”</blockquote><button class="more" type="button">Read more</button></div><figcaption><b>Maria Nogueira Santos</b><span>Nutritionist &amp; Managing Partner, Sobre'Mesa</span><br /><a href="https://www.linkedin.com/in/marta-lopes-07a791150/" target="_blank" rel="noopener noreferrer">View on LinkedIn ↗</a></figcaption></figure>
           <figure class="q"><div><blockquote class="clamp">“I had the pleasure of working with Marta in the social media space, and she is truly outstanding at what she does. She has a strong eye for content, understands how to engage audiences, and knows how to adapt strategies to meet client goals. Marta is not only creative with ideas but also organized in execution, making campaigns run smoothly from start to finish. What I admire most is how collaborative and supportive she is, always ready to share insights, brainstorm, and lift the team up. Any company or client would be lucky to have Marta managing their social media presence.”</blockquote><button class="more" type="button">Read more</button></div><figcaption><b>Angela Sinama</b><span>Social Media &amp; Content Manager</span><br /><a href="https://www.linkedin.com/in/marta-lopes-07a791150/" target="_blank" rel="noopener noreferrer">View on LinkedIn ↗</a></figcaption></figure>
@@ -551,9 +586,9 @@
   <section class="contact" id="contact">
     <div class="wrap">
       <p class="mono kicker">08 · Contact</p>
-      <h2 class="big" id="big">Let’s build something <em>together.</em></h2>
+      <h2 class="big" id="big">Looking for someone who can <em>own the client journey?</em></h2>
       <div class="btns">
-        <a class="btn btn--dark" href="mailto:martabpfl@gmail.com">martabpfl@gmail.com →</a>
+        <a class="btn btn--dark" href="mailto:martabpfl@gmail.com">Email me →</a>
         <a class="btn btn--ghost" href="https://www.linkedin.com/in/marta-lopes-07a791150/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
       </div>
     </div>
@@ -561,7 +596,7 @@
 </main>
 
 <footer>
-  <span>Marta Lopes · Customer Success · Implementation · Account Management</span>
+  <span>Marta Lopes · Customer Success · Account Management · Implementation</span>
   <a href="#top">Back to top ↑</a>
 </footer>
 
@@ -584,50 +619,59 @@
     soundBtn.textContent = vid.muted ? "▶ Hear my intro" : "❚❚ Mute";
   });
 
-  /* ───────── periodic table data */
-  const EL = [
-    ["On","Onboarding","cs","Getting new customers set up and live, end to end."],
-    ["Im","Implementation","cs","Turning a client use case into a workable setup: workflows, integrations, testing and launch."],
-    ["Rq","Requirements","cs","Discovery with the client before anything gets built."],
-    ["Tr","Training","cs","Teaching clients and teams to get value from the product."],
-    ["Ad","Adoption","cs","Tracking how clients actually use the product and removing blockers."],
-    ["Re","Retention","cs","Staying close enough to see risk before renewal."],
-    ["Am","Account management","cs","Keeping the client and the technical team aligned, and closing the loop."],
-    ["Es","Escalations","cs","Investigating before escalating, then handing over with full context."],
-    ["Ch","Customer health","cs","Combining signals into one status so problems show up early."],
-    ["Ic","Intercom","tool","Support conversations and help docs."],
-    ["Sl","Slack","tool","Shared channels with clients and the internal team."],
-    ["Li","Linear","tool","Tracking issues and improvements with Product and Engineering."],
-    ["At","Attio","tool","CRM and pipeline."],
-    ["Gh","GoHighLevel","tool","Client CRM and automations."],
-    ["Mk","Make","tool","Workflow automation."],
-    ["Zp","Zapier","tool","Connecting tools without code."],
-    ["Cc","Cal.com","tool","Booking flows and calendar integrations."],
-    ["St","Stripe","tool","Billing and subscriptions."],
-    ["Lo","Loom","tool","Async walkthroughs for clients and the team."],
-    ["Wh","Webhooks","tech","Passing data between systems in real time."],
-    ["Ap","API integrations","tech","Connecting the product to the tools clients already use."],
-    ["Ag","AI agent testing","tech","Testing agent behaviour before and after go-live."],
-    ["Tx","Transcript analysis","tech","Reviewing calls and transcripts to find what went wrong."],
-    ["Wf","Workflow troubleshooting","tech","Reproducing issues and isolating the cause."],
-  ];
-  const FAM = { cs: "Customer Success", tool: "Tools", tech: "Technical" };
-  const grid = $("#grid");
-  grid.innerHTML = EL.map((e, i) => `<button class="el" type="button" data-f="${e[2]}" data-i="${i}"><small>${String(i + 1).padStart(2, "0")}</small><b>${e[0]}</b><span>${e[1]}</span></button>`).join("");
-  const det = { sym: $("#dSym"), name: $("#dName"), desc: $("#dDesc"), fam: $("#dFam"), box: $("#detail") };
-  const showEl = (i) => {
-    const e = EL[i];
-    det.sym.textContent = e[0]; det.name.textContent = e[1]; det.desc.textContent = e[3]; det.fam.textContent = FAM[e[2]];
-    det.box.style.setProperty("--c", `var(--t-${e[2]})`);
-    if (!reduce) gsap.fromTo(det.sym, { scale: 0.85, rotate: -6 }, { scale: 1, rotate: 0, duration: 0.5, ease: "back.out(2.4)" });
+  /* ───────── YouTube video: click-to-load, only shown once an id is set */
+  const vsec = $("#video"), ytRaw = vsec.dataset.yt.trim();
+  const ytId = (ytRaw.match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{11})/) || [, ytRaw])[1];
+  if (ytId && /^[\w-]{11}$/.test(ytId)) {
+    vsec.hidden = false;
+    const vb = $("#vframe button");
+    vb.style.backgroundImage = `url(https://i.ytimg.com/vi/${ytId}/hqdefault.jpg)`;
+    vb.addEventListener("click", () => {
+      $("#vframe").innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${ytId}?autoplay=1&rel=0" title="Marta Lopes video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+    });
+  }
+
+  /* ───────── client journey road: path through the five stops */
+  const jroad = $("#jroad"), jcards = $$(".jcard"), jbase = $("#jbase"), jlit = $("#jlit"), jdot = $("#jdot"), jlabel = $("#jlabel");
+  const isMob = () => matchMedia("(max-width: 900px)").matches;
+  let stops = [];
+  const buildRoad = () => {
+    const r = jroad.getBoundingClientRect(), w = r.width, h = r.height;
+    $("#jsvg").setAttribute("viewBox", `0 0 ${w} ${h}`);
+    stops = jcards.map((c, i) => {
+      const cr = c.getBoundingClientRect();
+      return isMob() ? { x: w / 2 + (i % 2 ? 6 : -6), y: cr.top - r.top + cr.height / 2 } : { x: cr.left - r.left + cr.width / 2, y: i % 2 ? h * 0.78 : h * 0.22 };
+    });
+    const pts = [isMob() ? { x: w / 2, y: 0 } : { x: Math.max(0, stops[0].x - 90), y: h / 2 }, ...stops, isMob() ? { x: w / 2, y: h } : { x: Math.min(w, stops[4].x + 70), y: h / 2 }];
+    let d = `M${pts[0].x},${pts[0].y}`;
+    for (let i = 1; i < pts.length; i++) {
+      const p0 = pts[i - 1], p1 = pts[i];
+      d += isMob() ? ` C${p0.x},${(p0.y + p1.y) / 2} ${p1.x},${(p0.y + p1.y) / 2} ${p1.x},${p1.y}` : ` C${(p0.x + p1.x) / 2},${p0.y} ${(p0.x + p1.x) / 2},${p1.y} ${p1.x},${p1.y}`;
+    }
+    jbase.setAttribute("d", d); jlit.setAttribute("d", d);
+    $$(".jstop", jroad).forEach((n) => n.remove());
+    const L = jlit.getTotalLength();
+    stops.forEach((s) => {
+      let best = 0, bd = 1e9;
+      for (let l = 0; l <= L; l += 4) { const q = jlit.getPointAtLength(l), dd = (q.x - s.x) ** 2 + (q.y - s.y) ** 2; if (dd < bd) { bd = dd; best = l; } }
+      s.at = best / L;
+      const n = document.createElement("i"); n.className = "jstop"; n.style.left = s.x + "px"; n.style.top = s.y + "px"; jroad.appendChild(n);
+    });
+    jlit.style.strokeDasharray = L; return L;
   };
-  $$(".el").forEach((b) => { b.addEventListener("mouseenter", () => showEl(+b.dataset.i)); b.addEventListener("focus", () => showEl(+b.dataset.i)); b.addEventListener("click", () => showEl(+b.dataset.i)); });
-  $$(".chip").forEach((c) => c.addEventListener("click", () => {
-    $$(".chip").forEach((x) => x.setAttribute("aria-pressed", String(x === c)));
-    const f = c.dataset.filter;
-    $$(".el").forEach((el) => el.classList.toggle("dim", f !== "all" && el.dataset.f !== f));
-    const first = EL.findIndex((e) => f === "all" || e[2] === f); showEl(first);
-  }));
+  let jL = buildRoad();
+  const jset = (p) => {
+    jlit.style.strokeDashoffset = jL * (1 - p);
+    const q = jlit.getPointAtLength(jL * p);
+    jdot.style.transform = `translate(${q.x}px, ${q.y}px)`;
+    let cur = 0;
+    stops.forEach((s, i) => { if (p >= s.at - 0.015) cur = i; });
+    const nodes = $$(".jstop", jroad);
+    stops.forEach((s, i) => { const on = p >= s.at - 0.015; jcards[i].classList.toggle("on", on); nodes[i] && nodes[i].classList.toggle("on", on); });
+    jlabel.textContent = jcards[cur].dataset.label;
+  };
+  if (reduce || !window.gsap) { jset(1); }
+  addEventListener("resize", () => { jL = buildRoad(); jset(window.__jp || 0); });
 
   /* ───────── work accordion */
   $$("#acc .panel").forEach((p) => {
@@ -649,18 +693,6 @@
 
   if (reduce || !window.gsap) return;
   gsap.registerPlugin(ScrollTrigger);
-
-  /* ───────── nav pill indicator follows the active section */
-  const pill = $("#pill"), ind = $(".ind", pill), links = $$("a", pill);
-  const moveInd = (a) => {
-    links.forEach((l) => l.classList.toggle("on", l === a));
-    if (!a) return gsap.to(ind, { opacity: 0, duration: 0.3 });
-    gsap.to(ind, { x: a.offsetLeft - 5, width: a.offsetWidth, opacity: 1, duration: 0.55, ease: "power3.out" });
-  };
-  links.forEach((a) => {
-    ScrollTrigger.create({ trigger: a.getAttribute("href"), start: "top 55%", end: "bottom 55%", onToggle: (s) => s.isActive && moveInd(a) });
-  });
-  ScrollTrigger.create({ trigger: ".hero", start: "top top", end: "bottom 55%", onToggle: (s) => s.isActive && moveInd(null) });
 
   /* ───────── hero: letters rise, avatar enters; on scroll the name slides, the avatar sinks */
   const intro = gsap.timeline({ defaults: { ease: "power4.out" } });
@@ -700,8 +732,15 @@
   // a small sway with scroll speed
   ScrollTrigger.create({ trigger: ".about", start: "top bottom", end: "bottom top", onUpdate: (s) => { if (dragging) return; const v = gsap.utils.clamp(-10, 10, s.getVelocity() / 120); gsap.to(badge, { rotate: v, duration: 0.6, ease: "power2.out", overwrite: "auto", onComplete: () => gsap.to(badge, { rotate: 0, duration: 1.8, ease: "elastic.out(1, 0.2)" }) }); } });
 
-  /* ───────── periodic tiles cascade in */
-  gsap.from(".el", { y: 30, opacity: 0, scale: 0.9, duration: 0.7, ease: "back.out(1.6)", stagger: { each: 0.03, from: "start" }, scrollTrigger: { trigger: "#grid", start: "top 80%" } });
+  /* ───────── client journey: pinned on desktop, the client travels the road as you scroll */
+  const jm = gsap.matchMedia(), jp = { p: 0 };
+  const jtween = (st) => gsap.fromTo(jp, { p: 0 }, { p: 1, ease: "none", onUpdate: () => { window.__jp = jp.p; jset(jp.p); }, scrollTrigger: st });
+  jm.add("(min-width: 901px)", () => jtween({ trigger: ".journey", start: "top top", end: "+=" + Math.round(innerHeight * 2.2), pin: true, scrub: 0.8, invalidateOnRefresh: true, onRefresh: () => { jL = buildRoad(); jset(jp.p); } }));
+  jm.add("(max-width: 900px)", () => jtween({ trigger: "#jmap", start: "top 70%", end: "bottom 60%", scrub: 0.6, onRefresh: () => { jL = buildRoad(); jset(jp.p); } }));
+  jset(0);
+
+  /* ───────── video: the frame grows to full width as it scrolls in */
+  if (!vsec.hidden) gsap.fromTo("#vframe", { scale: 0.82, borderRadius: 48 }, { scale: 1, borderRadius: 28, ease: "none", scrollTrigger: { trigger: "#vframe", start: "top 95%", end: "center 55%", scrub: true } });
 
   /* ───────── work panels slide up */
   gsap.from("#acc .panel", { y: 60, opacity: 0, duration: 0.9, stagger: 0.1, ease: "power3.out", scrollTrigger: { trigger: "#acc", start: "top 80%" } });
@@ -732,6 +771,18 @@
 
   /* ───────── contact: the headline fills with ink as you scroll */
   gsap.to("#big", { backgroundPosition: "0% 0", ease: "none", scrollTrigger: { trigger: ".contact", start: "top 80%", end: "center 55%", scrub: true } });
+
+  /* ───────── nav pill indicator follows the active section (created after the pins so positions include them) */
+  const pill = $("#pill"), ind = $(".ind", pill), links = $$("a", pill);
+  const moveInd = (a) => {
+    links.forEach((l) => l.classList.toggle("on", l === a));
+    if (!a) return gsap.to(ind, { opacity: 0, duration: 0.3 });
+    gsap.to(ind, { x: a.offsetLeft - 5, width: a.offsetWidth, opacity: 1, duration: 0.55, ease: "power3.out" });
+  };
+  links.forEach((a) => {
+    ScrollTrigger.create({ trigger: a.getAttribute("href"), start: "top 55%", end: "bottom 55%", onToggle: (s) => s.isActive && moveInd(a) });
+  });
+  ScrollTrigger.create({ trigger: ".hero", start: "top top", end: "bottom 55%", onToggle: (s) => s.isActive && moveInd(null) });
 
   addEventListener("load", () => ScrollTrigger.refresh());
 })();
