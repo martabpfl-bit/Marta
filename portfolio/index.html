@@ -93,7 +93,7 @@
   .hero-avatar.has-video { mix-blend-mode: normal; }
   /* the 3D avatar is rendered on white: multiply melts the white into the cream page */
   .hero-avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center bottom; display: block; }
-  .hero-avatar .alt { opacity: 0; }
+  .hero-avatar .alt, .hero-avatar .talk { opacity: 0; }
   .hero-avatar video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; border-radius: 999px 999px 0 0; display: none; }
   .hero-avatar.has-video video { display: block; }
   .hero-avatar.has-video img { display: none; }
@@ -402,6 +402,7 @@
     <figure class="hero-avatar" id="avatar">
       <img class="main" src="assets/avatar.jpg" alt="Marta Lopes, 3D avatar" />
       <img class="alt" src="assets/avatar-2.jpg" alt="" aria-hidden="true" />
+      <img class="talk" src="assets/avatar-talk.jpg" alt="" aria-hidden="true" />
       <video id="introVid" muted loop playsinline preload="metadata" aria-label="Marta introducing herself">
         <source src="assets/intro.mp4" type="video/mp4" />
       </video>
@@ -730,17 +731,54 @@
   const voiceBtn = $("#voiceBtn"), voice = new Audio("assets/intro.mp3");
   voice.preload = "none";
   const L = (en, pt) => (window.__lang === "pt" ? pt : en);
-  let talk = null;
+  const imgs = { main: $("#avatar .main"), alt: $("#avatar .alt"), talk: $("#avatar .talk") };
+  let actx = null, analyser = null, buf = null, raf = 0, sway = null, open = false;
+  const lipSync = () => {
+    let level = 0;
+    if (analyser) {
+      analyser.getByteTimeDomainData(buf);
+      let sum = 0; for (let i = 0; i < buf.length; i++) { const v = (buf[i] - 128) / 128; sum += v * v; }
+      level = Math.sqrt(sum / buf.length);
+    } else level = Math.random() * 0.12;
+    // hysteresis so the mouth doesn't flicker
+    if (!open && level > 0.06) open = true; else if (open && level < 0.035) open = false;
+    imgs.talk.style.opacity = open ? 1 : 0;
+    raf = requestAnimationFrame(lipSync);
+  };
   const voiceUI = (on) => {
     voiceBtn.classList.toggle("playing", on);
     $(".vt", voiceBtn).textContent = on ? L("Playing… tap to stop", "A tocar… toca para parar") : L("Hear my intro · 10 s", "Ouvir a minha apresentação · 10 s");
-    if (window.gsap && !reduce) {
-      if (on) talk = gsap.to("#avatar .alt", { opacity: 1, duration: 0.12, ease: "none", repeat: -1, yoyo: true, repeatDelay: 0.16 });
-      else if (talk) { talk.kill(); talk = null; gsap.to("#avatar .alt", { opacity: 0, duration: 0.2 }); }
+    cancelAnimationFrame(raf);
+    if (on && sway) { sway.kill(); sway = null; }
+    if (on) {
+      window.__idleFace && window.__idleFace.pause();
+      imgs.main.style.opacity = 0; imgs.alt.style.opacity = 1; imgs.talk.style.opacity = 0;
+      if (window.gsap && !reduce) {
+        gsap.set("#avatar img", { transformOrigin: "50% 100%" });
+        sway = gsap.timeline({ repeat: -1, defaults: { ease: "sine.inOut" } })
+          .to("#avatar img", { rotation: 1.1, y: -3, duration: 0.9 })
+          .to("#avatar img", { rotation: -0.8, y: 0, duration: 1.1 })
+          .to("#avatar img", { rotation: 0.5, y: -2, duration: 0.8 })
+          .to("#avatar img", { rotation: 0, y: 0, duration: 0.9 });
+      }
+      lipSync();
+    } else {
+      if (sway) { sway.kill(); sway = null; if (window.gsap) gsap.to("#avatar img", { rotation: 0, y: 0, duration: 0.4 }); }
+      imgs.talk.style.opacity = 0; imgs.alt.style.opacity = ""; imgs.main.style.opacity = "";
+      if (window.__idleFace) { window.gsap && gsap.set(imgs.alt, { opacity: 0 }); window.__idleFace.restart(true); }
     }
   };
+  const ensureAudioGraph = () => {
+    if (actx || !(window.AudioContext || window.webkitAudioContext)) return;
+    try {
+      actx = new (window.AudioContext || window.webkitAudioContext)();
+      const src = actx.createMediaElementSource(voice);
+      analyser = actx.createAnalyser(); analyser.fftSize = 1024; buf = new Uint8Array(analyser.fftSize);
+      src.connect(analyser); analyser.connect(actx.destination);
+    } catch { analyser = null; }
+  };
   voiceBtn.addEventListener("click", () => {
-    if (voice.paused) { voice.currentTime = 0; voice.play().then(() => voiceUI(true)).catch(() => {}); }
+    if (voice.paused) { ensureAudioGraph(); actx && actx.resume && actx.resume(); voice.currentTime = 0; voice.play().then(() => voiceUI(true)).catch(() => {}); }
     else { voice.pause(); voiceUI(false); }
   });
   voice.addEventListener("ended", () => voiceUI(false));
@@ -791,8 +829,8 @@
   gsap.to("#avatar", { y: 160, scale: 0.92, opacity: 0, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
   // idle life: a slow breath, and every few seconds the expression changes
   if (!avatar.classList.contains("has-video")) {
-    gsap.to("#avatar .main, #avatar .alt", { scaleY: 1.008, scaleX: 0.997, transformOrigin: "50% 100%", duration: 2.4, ease: "sine.inOut", yoyo: true, repeat: -1 });
-    gsap.to("#avatar .alt", { opacity: 1, duration: 0.22, ease: "power1.inOut", yoyo: true, repeat: -1, repeatDelay: 3.6, delay: 2.5 });
+    gsap.to("#avatar img", { scaleY: 1.008, scaleX: 0.997, transformOrigin: "50% 100%", duration: 2.4, ease: "sine.inOut", yoyo: true, repeat: -1 });
+    window.__idleFace = gsap.to("#avatar .alt", { opacity: 1, duration: 0.22, ease: "power1.inOut", yoyo: true, repeat: -1, repeatDelay: 3.6, delay: 2.5 });
   }
   gsap.to(".hero-title", { y: -90, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
 
