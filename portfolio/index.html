@@ -78,7 +78,7 @@
   .voice { display: inline-flex; align-items: center; gap: 10px; padding: 9px 15px 9px 13px; border-radius: 999px; border: 1px solid var(--ink); background: var(--ink); color: var(--bg); font-size: 13.5px; font-weight: 500; cursor: pointer; transition: transform 0.25s; }
   .voice:hover { transform: translateY(-2px); }
   .voice:not(.playing) .bars i { height: 8px; } .voice:not(.playing) .bars i:nth-child(2), .voice:not(.playing) .bars i:nth-child(4) { height: 12px; }
-  .music { position: fixed; left: var(--gut); bottom: 20px; z-index: 55; display: grid; gap: 10px; justify-items: start; }
+  .music { position: fixed; right: var(--gut); bottom: 20px; z-index: 55; display: grid; gap: 10px; justify-items: end; }
   .music[hidden], .music-panel[hidden] { display: none; }
   .music-btn { display: inline-flex; align-items: center; gap: 9px; padding: 10px 15px; border-radius: 999px; border: 1px solid var(--line); background: rgba(251, 249, 243, 0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); font-size: 13px; font-weight: 500; cursor: pointer; box-shadow: 0 10px 30px -14px rgba(27, 32, 64, 0.4); }
   .music-panel { width: min(340px, calc(100vw - 32px)); border-radius: 16px; overflow: hidden; box-shadow: 0 20px 50px -20px rgba(27, 32, 64, 0.5); }
@@ -330,7 +330,9 @@
   @media (max-width: 900px) {
     .pill { display: none; }
     .nav .cta { display: none; }
-    .music { bottom: 14px; }
+    .music { bottom: 14px; right: 16px; }
+    .music-btn span:not(.bars) { display: none; }
+    .music-btn { padding: 13px; }
     .hero { align-items: flex-end; }
     .hero { flex-direction: column; align-items: stretch; justify-content: flex-end; padding-top: 84px; }
     .hero-avatar { position: relative; right: auto; height: min(40vh, 80vw); margin: 0 auto 18px; }
@@ -643,9 +645,9 @@
   <a href="#top" data-pt="Voltar ao topo ↑">Back to top ↑</a>
 </footer>
 <!-- Music: set data-spotify to a Spotify playlist link to show the player -->
-<div class="music" id="music" data-spotify="" hidden>
+<div class="music" id="music" data-spotify="https://open.spotify.com/playlist/37i9dQZF1EId3YcNENPlKe" hidden>
   <div class="music-panel" id="musicPanel" hidden></div>
-  <button class="music-btn" id="musicBtn" type="button" aria-expanded="false"><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span data-pt="Música">Music</span></button>
+  <button class="music-btn" id="musicBtn" type="button" aria-expanded="false" aria-label="Music" data-pt-label="Música"><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span data-pt="Música">Music</span></button>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
