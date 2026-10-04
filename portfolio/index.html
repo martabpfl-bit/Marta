@@ -38,7 +38,7 @@
     --gut: clamp(20px, 5vw, 72px);
   }
   * { box-sizing: border-box; }
-  html { background: var(--bg); color: var(--ink); -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  html { background: var(--bg); color: var(--ink); -webkit-text-size-adjust: 100%; }
   body { margin: 0; font-family: var(--sans); background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
   h1, h2, h3, p, ul, ol, figure, blockquote { margin: 0; }
   ul, ol { padding: 0; list-style: none; }
@@ -805,6 +805,16 @@
     try { navigator.clipboard.writeText(email).then(() => show((window.__lang === "pt" ? "Email copiado: " : "Email copied: ") + email), () => show(email)); } catch { show(email); }
   }));
 
+  /* ───────── in-page links scroll smoothly */
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a || a.getAttribute("href").length < 2) return;
+    const t = document.querySelector(a.getAttribute("href"));
+    if (!t) return;
+    e.preventDefault();
+    window.scrollTo({ top: t.getBoundingClientRect().top + scrollY - 10, behavior: reduce ? "auto" : "smooth" });
+  });
+
   /* ───────── feedback rails */
   $$(".arrows button").forEach((b) => b.addEventListener("click", () => {
     const r = document.getElementById(b.dataset.rail);
@@ -859,7 +869,7 @@
   /* ───────── client journey: pinned on desktop, the client travels the road as you scroll */
   const jm = gsap.matchMedia(), jp = { p: 0 };
   const jtween = (st) => gsap.fromTo(jp, { p: 0 }, { p: 1, ease: "none", onUpdate: () => { window.__jp = jp.p; jset(jp.p); }, scrollTrigger: st });
-  jm.add("(min-width: 901px)", () => jtween({ trigger: ".journey", start: "top top", end: "+=" + Math.round(innerHeight * 2.2), pin: true, scrub: 0.8, invalidateOnRefresh: true, onRefresh: () => { jL = buildRoad(); jset(jp.p); } }));
+  jm.add("(min-width: 901px)", () => jtween({ trigger: ".journey", start: "top top", end: "+=" + Math.round(innerHeight * 2.2), pin: true, anticipatePin: 1, scrub: 0.8, invalidateOnRefresh: true, onRefresh: () => { jL = buildRoad(); jset(jp.p); } }));
   jm.add("(max-width: 900px)", () => jtween({ trigger: "#jmap", start: "top 70%", end: "bottom 60%", scrub: 0.6, onRefresh: () => { jL = buildRoad(); jset(jp.p); } }));
   jset(0);
 
@@ -895,6 +905,7 @@
   ScrollTrigger.create({ trigger: ".hero", start: "top top", end: "bottom 55%", onToggle: (s) => s.isActive && moveInd(null) });
 
   addEventListener("load", () => ScrollTrigger.refresh());
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => ScrollTrigger.refresh());
 })();
 </script>
 </body>
