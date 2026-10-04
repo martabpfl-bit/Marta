@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Eat Conscience Professional — for nutritionists</title>
+<meta name="description" content="The nutritionist's workspace connected to the Eat Conscience app: see what needs your attention, prepare consultations in minutes, and set the Care Profile that personalises your client's everyday app." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/brand.css" />
+<style>
+  section { position: relative; padding: clamp(80px, 12vh, 140px) clamp(18px, 5vw, 72px); }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+  .btn { white-space: nowrap; display: inline-flex; align-items: center; gap: 10px; padding: 0.9em 1.4em; border-radius: 999px; font-size: 14.5px; font-weight: 600; text-decoration: none; border: 1px solid var(--walnut); transition: transform .25s, background .25s, color .25s; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn.dark { background: var(--walnut); color: var(--ivory); }
+  .btn.ghost { color: var(--walnut); }
+  .btn.ghost:hover { background: var(--walnut); color: var(--ivory); }
+  .h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(2.2rem, 5vw, 4.2rem); line-height: 1.02; letter-spacing: -0.025em; }
+  .h2 em { font-style: italic; color: var(--sage); }
+  .lede { font-size: clamp(1rem, 1.3vw, 1.15rem); line-height: 1.6; color: var(--walnut-2); max-width: 54ch; }
+
+  /* nav */
+  .nav { position: fixed; inset: 16px 0 auto; z-index: 40; display: flex; justify-content: space-between; align-items: center; padding: 0 clamp(18px, 5vw, 72px); pointer-events: none; }
+  .nav > * { pointer-events: auto; }
+  .nav .links { display: flex; gap: 4px; padding: 5px; border-radius: 999px; background: rgba(255, 253, 248, .8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--line); }
+  .nav .links a { padding: 8px 14px; border-radius: 999px; text-decoration: none; font-size: 13.5px; color: var(--walnut-2); }
+  .nav .links a:hover { background: var(--cream); }
+  .nav .logo { padding: 8px 14px; border-radius: 999px; background: rgba(255, 253, 248, .8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--line); }
+
+  /* hero — the app's walnut, opened by scroll (pieces cut from the app's own image) */
+  .hero { height: 100vh; height: 100svh; padding: 0; overflow: hidden; color: var(--ivory); background: radial-gradient(70vmax 60vmax at 68% 42%, #6b4529, #4a3020 55%, #2b1c12); }
+  .hero::after { content: ""; position: absolute; inset: 0; background: radial-gradient(120vmax 90vmax at 50% 50%, transparent 55%, rgba(0,0,0,.35)); pointer-events: none; }
+  .hero-inner { position: absolute; inset: 0; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 0 clamp(18px, 5vw, 72px); max-width: 1320px; margin: 0 auto; }
+  .hero-copy, .reveal-copy { grid-column: 1; grid-row: 1; position: relative; z-index: 3; max-width: 34rem; }
+  .hero-copy h1, .reveal-copy h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(2.6rem, 5.4vw, 5rem); line-height: .98; letter-spacing: -0.03em; }
+  .hero-copy h1 em, .reveal-copy h2 em { font-style: italic; color: #c9d4bd; }
+  .hero-copy p { margin-top: 20px; max-width: 44ch; color: rgba(248, 244, 236, .8); line-height: 1.6; }
+  .hero .eyebrow { color: rgba(248, 244, 236, .6); margin-bottom: 18px; }
+  .hero-copy .btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 28px; }
+  .hero .btn.light { background: var(--ivory); color: var(--walnut); border-color: var(--ivory); }
+  .hero .btn.outline { color: var(--ivory); border-color: rgba(248, 244, 236, .5); }
+  .hero .btn.outline:hover { background: var(--ivory); color: var(--walnut); }
+  .reveal-copy { opacity: 0; pointer-events: none; }
+  .reveal-copy p { margin-top: 18px; color: rgba(248, 244, 236, .8); line-height: 1.6; max-width: 40ch; }
+  .nut-stage { grid-column: 2; grid-row: 1; position: relative; height: min(84vh, 760px); z-index: 2; }
+  .piece { position: absolute; left: 50%; top: 50%; will-change: transform; filter: drop-shadow(0 30px 30px rgba(0,0,0,.35)); }
+  .piece.top { width: min(30vw, 46vh, 400px); }
+  .piece.kernel { width: min(22vw, 34vh, 300px); }
+  .piece.bottom { width: min(31vw, 48vh, 414px); }
+  .chip { position: absolute; z-index: 4; padding: 10px 16px; border-radius: 999px; background: rgba(248, 244, 236, .94); color: var(--walnut); font-size: 14px; white-space: nowrap; opacity: 0; box-shadow: 0 14px 30px -14px rgba(0,0,0,.5); }
+  .chip b { font-weight: 600; }
+  .chip i { font-style: normal; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--sage); margin-right: 8px; vertical-align: 1px; }
+  .chip.coral i { background: var(--coral); }
+  .scroll-cue { position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%); z-index: 3; font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: rgba(248, 244, 236, .6); }
+  .nav.on-dark .links, .nav.on-dark .logo { background: rgba(43, 28, 18, .45); border-color: rgba(248, 244, 236, .16); color: var(--ivory); }
+  .nav.on-dark .links a { color: rgba(248, 244, 236, .85); }
+  .nav.on-dark .links a:hover { background: rgba(248, 244, 236, .1); }
+  .nav.on-dark .logo .placeholder i { color: rgba(248, 244, 236, .6); border-color: rgba(248, 244, 236, .5); }
+  .nav.on-dark .btn.dark { background: var(--ivory); color: var(--walnut); border-color: var(--ivory); }
+  @media (max-width: 860px) {
+    .hero-inner { grid-template-columns: 1fr; grid-template-rows: 1fr auto; align-items: end; padding-bottom: 7vh; padding-top: 80px; }
+    .nut-stage { grid-column: 1; grid-row: 1; height: 100%; }
+    .hero-copy, .reveal-copy { grid-row: 2; }
+    .hero-copy h1, .reveal-copy h2 { font-size: clamp(2.2rem, 9vw, 3rem); }
+    .piece.top { width: 58vw; } .piece.kernel { width: 42vw; } .piece.bottom { width: 60vw; }
+    .chip { display: none; }
+    .nav .logo .pro { display: none; }
+  }
+
+  /* relationship */
+  .flow { background: var(--paper); }
+  .flow .grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(30px, 6vw, 90px); align-items: center; }
+  .steps { display: grid; gap: 0; margin-top: 34px; }
+  .step { display: grid; grid-template-columns: 46px 1fr; gap: 16px; padding: 20px 0; border-top: 1px solid var(--line); opacity: .35; transition: opacity .4s; }
+  .step.on { opacity: 1; }
+  .step b { font-family: var(--serif); font-size: 1.4rem; font-weight: 400; color: var(--sage); }
+  .step h3 { font-family: var(--serif); font-weight: 500; font-size: 1.35rem; letter-spacing: -0.01em; }
+  .step p { margin-top: 4px; color: var(--walnut-2); line-height: 1.5; font-size: 15px; }
+  .kernel-stage { position: relative; aspect-ratio: 1; max-width: 460px; justify-self: center; width: 100%; }
+  .kernel-stage svg { width: 100%; height: 100%; overflow: visible; }
+  .kernel-stage { background: radial-gradient(circle at 50% 50%, #6b4529 0 38%, transparent 38.5%); border-radius: 50%; }
+  .k-img { position: absolute; left: 50%; top: 50%; width: 46%; transform: translate(-50%, -50%); filter: drop-shadow(0 18px 20px rgba(0,0,0,.35)); }
+  .kernel-stage .label { position: absolute; left: 50%; bottom: -6%; transform: translateX(-50%); font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--walnut-3); white-space: nowrap; }
+
+  /* scalloped edges */
+  .scallop { position: absolute; left: 0; right: 0; height: 30px; background: radial-gradient(circle at 30px 0, var(--walnut) 29.5px, transparent 30.5px) repeat-x; background-size: 60px 30px; pointer-events: none; z-index: 1; }
+  .scallop.top { top: -29px; transform: scaleY(-1); }
+  .scallop.bottom { bottom: -29px; }
+  .principles { background: var(--walnut); color: var(--ivory); }
+  .principles .h2 em { color: #b9c7ad; }
+  .principles .lede { color: rgba(248, 244, 236, .8); }
+  .plist { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 60px; margin-top: 50px; }
+  .plist li { padding: 24px 0; border-top: 1px solid rgba(248, 244, 236, .16); }
+  .plist h3 { font-family: var(--serif); font-weight: 400; font-size: 1.5rem; letter-spacing: -0.01em; }
+  .plist p { margin-top: 8px; color: rgba(248, 244, 236, .75); line-height: 1.55; font-size: 15px; }
+
+  /* product */
+  .product .row { display: grid; grid-template-columns: 1fr 1.15fr; gap: clamp(30px, 6vw, 90px); align-items: center; padding: 60px 0; }
+  .product .row:nth-child(even) .copy { order: 2; }
+  .product .row h3 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.8rem, 3.2vw, 2.6rem); letter-spacing: -0.02em; line-height: 1.05; margin-top: 10px; }
+  .product .row p { margin-top: 14px; color: var(--walnut-2); line-height: 1.6; }
+  .mock { background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: 20px; box-shadow: 0 40px 70px -50px rgba(58, 42, 32, .5); display: grid; gap: 10px; font-size: 13.5px; }
+  .mock .bar { display: flex; justify-content: space-between; align-items: center; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+  .mock .bar b { font-family: var(--serif); font-weight: 500; font-size: 1.05rem; }
+  .mock .item { display: grid; grid-template-columns: 34px 1fr auto; gap: 12px; align-items: center; padding: 10px; border-radius: 12px; background: var(--ivory); }
+  .mock .av { width: 34px; height: 34px; border-radius: 50%; background: var(--sage-soft); display: grid; place-items: center; font-weight: 600; font-size: 12px; color: var(--walnut-2); }
+  .mock .item small { display: block; color: var(--walnut-3); font-size: 12px; margin-top: 2px; }
+  .tag { display: inline-block; font-size: 11.5px; padding: 3px 9px; border-radius: 999px; background: var(--sage-soft); color: var(--walnut-2); white-space: nowrap; }
+  .tag.amber { background: var(--amber-soft); }
+  .tag.coral { background: var(--blush); }
+  .mock .para { padding: 12px; border-radius: 12px; background: var(--ivory); line-height: 1.5; color: var(--walnut-2); }
+  .mock .para b { color: var(--walnut); }
+  .mock .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .mock .field { padding: 10px 12px; border-radius: 12px; border: 1px solid var(--line); }
+  .mock .field span { display: block; font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--walnut-3); }
+  .draft { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--coral); }
+
+  .privacy { background: var(--sage-soft); }
+  .privacy .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(30px, 6vw, 90px); align-items: start; }
+  .privacy ul { display: grid; gap: 14px; }
+  .privacy li { padding-left: 26px; position: relative; line-height: 1.55; color: var(--walnut-2); }
+  .privacy li::before { content: ""; position: absolute; left: 0; top: .45em; width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--sage); }
+
+  .cta { text-align: center; }
+  .cta .btns { display: flex; gap: 10px; justify-content: center; margin-top: 30px; flex-wrap: wrap; }
+  .note { margin-top: 18px; font-size: 13px; color: var(--walnut-3); }
+
+  footer { position: relative; background: var(--walnut); color: var(--ivory); padding: 80px clamp(18px, 5vw, 72px) 28px; overflow: hidden; margin-top: 34px; }
+  .wordmark { font-family: var(--serif); font-weight: 400; font-size: clamp(3.4rem, 13vw, 13rem); line-height: .85; letter-spacing: -0.04em; text-align: center; white-space: nowrap; }
+  .wordmark em { font-style: italic; color: #b9c7ad; }
+  .foot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 40px; font-size: 13px; color: rgba(248, 244, 236, .7); }
+  .leaf { position: absolute; width: clamp(80px, 14vw, 200px); opacity: .2; }
+
+  @media (max-width: 860px) {
+    .nav .links { display: none; }
+    .flow .grid, .product .row, .privacy .wrap { grid-template-columns: 1fr; }
+    .product .row:nth-child(even) .copy { order: 0; }
+    .plist { grid-template-columns: 1fr; }
+    .kernel-stage { max-width: 300px; }
+    .mock .fields { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .step { opacity: 1; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Main">
+  <a class="logo" href="#top" aria-label="Eat Conscience Professional — top">
+    <img src="assets/logo.svg" alt="Eat Conscience" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'placeholder',innerHTML:'Eat Conscience <i>logo</i>'}))" />
+    <span class="pro">Professional</span>
+  </a>
+  <div class="links"><a href="#flow">How it connects</a><a href="#principles">Principles</a><a href="#product">The workspace</a><a href="#privacy">Privacy</a></div>
+  <a class="btn dark" href="app/" style="padding:.7em 1.2em;font-size:13.5px">Log in</a>
+</nav>
+
+<main>
+  <!-- HERO: the app's walnut opens as you scroll -->
+  <section class="hero" id="top">
+    <div class="hero-inner">
+      <div class="hero-copy" id="heroCopy">
+        <p class="eyebrow">For nutritionists</p>
+        <h1>Care that continues <em>between consultations.</em></h1>
+        <p>Your client lives with the Eat Conscience app every day. You get one calm workspace to see what needs your attention, prepare each consultation, and set the Care Profile that shapes their app.</p>
+        <div class="btns"><a class="btn light" href="app/">Open the prototype →</a><a class="btn outline" href="#flow">How it connects ↓</a></div>
+      </div>
+      <div class="reveal-copy" id="revealCopy">
+        <p class="eyebrow">Open it up</p>
+        <h2>See what matters, <em>decide what changes.</em></h2>
+        <p>What your client chooses to share, organised for you. Your approved priorities, carried by their app.</p>
+      </div>
+      <div class="nut-stage" id="nutStage" role="img" aria-label="The Eat Conscience walnut opening to show the kernel inside">
+        <img class="piece bottom" id="pBottom" src="assets/nut/bottom.png" alt="" />
+        <img class="piece kernel" id="pKernel" src="assets/nut/kernel.png" alt="" />
+        <img class="piece top" id="pTop" src="assets/nut/top.png" alt="" />
+        <span class="chip" id="c1"><i></i><b>Care Profile</b> you approve</span>
+        <span class="chip" id="c2"><i></i>Everyday <b>context</b>, not logs</span>
+        <span class="chip coral" id="c3"><i></i><b>Companion</b> in the app</span>
+        <span class="chip" id="c4"><i></i>Insights <b>you decide on</b></span>
+      </div>
+    </div>
+    <span class="scroll-cue" id="cue">Scroll to open</span>
+  </section>
+
+  <!-- HOW IT CONNECTS -->
+  <section class="flow" id="flow">
+    <div class="wrap grid">
+      <div>
+        <p class="eyebrow">How it connects</p>
+        <h2 class="h2" style="margin-top:12px">Two interfaces, <em>one care relationship.</em></h2>
+        <p class="lede" style="margin-top:18px">The app is the person’s everyday experience, and works on its own. When you’re connected, you set the clinical direction and the app carries it between consultations.</p>
+        <ol class="steps" id="steps">
+          <li class="step"><b>01</b><div><h3>Care Profile</h3><p>Objectives, needs, preferences, restrictions and current priorities, set and approved by you.</p></div></li>
+          <li class="step"><b>02</b><div><h3>Everyday behaviour &amp; context</h3><p>Meal photos, short reflections and recipe choices your client decides to share. No exhaustive food logging.</p></div></li>
+          <li class="step"><b>03</b><div><h3>Useful insights</h3><p>AI organises what was shared and points out possible patterns, never scores or grades.</p></div></li>
+          <li class="step"><b>04</b><div><h3>Your professional decisions</h3><p>You review, judge and approve. Nothing clinical changes without you.</p></div></li>
+          <li class="step"><b>05</b><div><h3>A personalised app experience</h3><p>Your approved priorities shape recipes, prompts and the Companion in your client’s app.</p></div></li>
+        </ol>
+      </div>
+      <div class="kernel-stage" aria-hidden="true">
+        <svg viewBox="0 0 400 400" id="kernelSvg">
+          <circle cx="200" cy="200" r="168" fill="none" stroke="var(--line)" stroke-width="1.5" stroke-dasharray="3 8" />
+          <circle id="kProgress" cx="200" cy="200" r="168" fill="none" stroke="var(--sage)" stroke-width="3" stroke-linecap="round" stroke-dasharray="1056" stroke-dashoffset="1056" transform="rotate(-90 200 200)" />
+          <g id="kDots"></g>
+        </svg>
+        <img class="k-img" id="kImg" src="assets/nut/kernel.png" alt="" />
+        <span class="label" id="kLabel">Care Profile</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRINCIPLES -->
+  <section class="principles" id="principles">
+    <i class="scallop top" aria-hidden="true"></i>
+    <div class="wrap">
+      <p class="eyebrow" style="color:rgba(248,244,236,.6)">Principles</p>
+      <h2 class="h2" style="margin-top:12px">Nutrition that adapts <em>to real life.</em></h2>
+      <ul class="plist">
+        <li><h3>Context, not compliance</h3><p>Minimal, useful context instead of exhaustive logging. Patterns to understand, never a grade.</p></li>
+        <li><h3>No guilt by design</h3><p>No adherence scores, no punitive red states, no automatic criticism when someone eats outside a plan.</p></li>
+        <li><h3>Calories aren’t the headline</h3><p>Calories and weight are never the default way the workspace is organised.</p></li>
+        <li><h3>AI drafts, you decide</h3><p>AI organises information and drafts summaries or suggestions. Clinical judgement and approval stay with you.</p></li>
+      </ul>
+    </div>
+    <i class="scallop bottom" aria-hidden="true"></i>
+  </section>
+
+  <!-- THE WORKSPACE -->
+  <section class="product" id="product">
+    <div class="wrap">
+      <p class="eyebrow">The workspace</p>
+      <h2 class="h2" style="margin-top:12px">Built for the work <em>between sessions.</em></h2>
+
+      <div class="row">
+        <div class="copy"><p class="eyebrow">Today</p><h3>Know what needs action, at a glance.</h3><p>Clients who may need attention, today’s appointments and the questions that need your professional judgement, in one calm view.</p></div>
+        <div class="mock" aria-hidden="true">
+          <div class="bar"><b>Today</b><span class="tag">Fictional data</span></div>
+          <div class="item"><span class="av">IM</span><div>Inês M.<small>Asked about eating before training</small></div><span class="tag amber">Needs your judgement</span></div>
+          <div class="item"><span class="av">RS</span><div>Rui S.<small>Consultation today · 15:30</small></div><span class="tag">Brief ready</span></div>
+          <div class="item"><span class="av">CL</span><div>Carla L.<small>Shared fewer moments this week</small></div><span class="tag">Worth a check-in</span></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="copy"><p class="eyebrow">Consultation brief</p><h3>Prepared in two minutes, not twenty.</h3><p>A short summary of what changed since the last consultation, in your client’s own words, with possible patterns and questions to explore. A draft for you to review.</p></div>
+        <div class="mock" aria-hidden="true">
+          <div class="bar"><b>Brief · Rui S.</b><span class="draft">AI draft · review</span></div>
+          <div class="para"><b>Since 12 Sep:</b> shared 9 meals and 4 reflections. Breakfasts became more regular on workdays.</div>
+          <div class="para"><b>In his words:</b> “Evenings are still the hardest, I get home too tired to cook.”</div>
+          <div class="para"><b>To explore:</b> simple weeknight dinners; how the new shift pattern is going.</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="copy"><p class="eyebrow">Care Profile</p><h3>Your direction, carried by the app.</h3><p>Set objectives, needs, preferences, restrictions and current priorities. Preview how they’ll shape your client’s app before anything changes.</p></div>
+        <div class="mock" aria-hidden="true">
+          <div class="bar"><b>Care Profile · v4</b><span class="tag">Preview, not synced</span></div>
+          <div class="fields">
+            <div class="field"><span>Current priority</span>Regular breakfasts on workdays</div>
+            <div class="field"><span>Preference</span>Vegetarian most days</div>
+            <div class="field"><span>Restriction</span>Lactose intolerance</div>
+            <div class="field"><span>Effect in the app</span>Quick lactose-free breakfasts first</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIVACY -->
+  <section class="privacy" id="privacy">
+    <div class="wrap">
+      <div><p class="eyebrow">Privacy &amp; consent</p><h2 class="h2" style="margin-top:12px">Their app, <em>their choice.</em></h2></div>
+      <ul>
+        <li>The person decides to connect with a nutritionist, and can disconnect.</li>
+        <li>You only see what they choose to share: meal photos, reflections, recipe preferences and messages.</li>
+        <li>Private Buddy conversations stay private unless the person explicitly shares them.</li>
+        <li>Clinical information is restricted to authorised professionals.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap">
+      <h2 class="h2">Try the workspace <em>with sample clients.</em></h2>
+      <div class="btns"><a class="btn dark" href="app/">Open the prototype →</a></div>
+      <p class="note">Prototype with clearly labelled fictional data. Nothing is connected to the Eat Conscience app yet.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <i class="scallop top" aria-hidden="true"></i>
+  <svg class="leaf" style="left:-20px;top:30px" viewBox="0 0 100 100" aria-hidden="true"><path d="M10 90 C20 40 50 10 92 8 C88 52 60 84 10 90 Z M10 90 L70 30" fill="none" stroke="#f8f4ec" stroke-width="3" /></svg>
+  <svg class="leaf" style="right:-10px;top:10px;transform:scaleX(-1)" viewBox="0 0 100 100" aria-hidden="true"><path d="M10 90 C20 40 50 10 92 8 C88 52 60 84 10 90 Z M10 90 L70 30" fill="none" stroke="#f8f4ec" stroke-width="3" /></svg>
+  <p class="wordmark" aria-hidden="true">Eat <em>Conscience</em></p>
+  <div class="foot"><span>Eat Conscience Professional · prototype</span><span>For nutritionists, connected to the Eat Conscience app</span></div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(() => {
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const steps = [...document.querySelectorAll(".step")];
+  const labels = ["Care Profile", "Everyday context", "Useful insights", "Your decision", "Personalised app"];
+  if (reduce || !window.gsap) {
+    steps.forEach((s) => s.classList.add("on"));
+    const t = document.getElementById("pTop"), b = document.getElementById("pBottom");
+    t.style.transform = "translate(-50%, -170%)"; b.style.transform = "translate(-50%, 40%)";
+    const k = document.getElementById("pKernel"); k.style.transform = "translate(-50%, -50%)";
+    return;
+  }
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* nav switches to light-on-dark over the hero */
+  const nav = document.querySelector(".nav");
+  ScrollTrigger.create({ trigger: ".hero", start: "top top", end: "bottom top+=60", onToggle: (st) => nav.classList.toggle("on-dark", st.isActive) });
+  nav.classList.add("on-dark");
+
+  /* hero intro: the closed walnut settles in */
+  const stage = document.getElementById("nutStage");
+  const H = () => stage.getBoundingClientRect().height;
+  const topH = () => document.getElementById("pTop").getBoundingClientRect().height;
+  // closed: top shell rests on the bottom shell, kernel hidden inside
+  // positions in % of each piece's own size, so the closed state never depends on image load timing
+  const closed = () => {
+    gsap.set("#pTop", { xPercent: -50, yPercent: -88, y: 0, rotation: -4 });
+    gsap.set("#pBottom", { xPercent: -50, yPercent: -24, y: 0, rotation: 2 });
+    gsap.set("#pKernel", { xPercent: -50, yPercent: -50, y: 0, scale: .6, opacity: 0 });
+  };
+  closed();
+  gsap.from("#nutStage", { y: 40, opacity: 0, duration: 1.4, ease: "power3.out" });
+  gsap.from("#heroCopy > *", { y: 24, opacity: 0, duration: 1, stagger: .1, ease: "power3.out", delay: .2 });
+  const idle = gsap.to("#nutStage", { y: -8, duration: 2.6, ease: "sine.inOut", yoyo: true, repeat: -1 });
+
+  /* scroll: the shells part vertically and the kernel appears, like the app's exploded walnut */
+  const tl = gsap.timeline({
+    defaults: { ease: "none" },
+    scrollTrigger: { trigger: ".hero", start: "top top", end: "+=" + Math.round(innerHeight * 2.2), pin: true, scrub: .8, anticipatePin: 1, invalidateOnRefresh: true,
+      onEnter: () => idle.pause(), onLeaveBack: () => idle.resume(), onRefresh: closed },
+  });
+  tl.to("#cue", { opacity: 0, duration: .2 }, 0)
+    .to("#heroCopy", { y: -30, opacity: 0, duration: .7 }, .3)
+    .to("#pTop", { y: () => -H() * 0.24, rotation: -8, duration: 1.6, ease: "power2.inOut" }, .4)
+    .to("#pBottom", { y: () => H() * 0.24, rotation: 6, duration: 1.6, ease: "power2.inOut" }, .4)
+    .to("#pKernel", { opacity: 1, scale: 1, rotation: 6, duration: 1.2, ease: "power2.out" }, .8)
+    .to("#revealCopy", { opacity: 1, duration: .8 }, 1.4);
+  const chipPos = [["c1", -0.42, -0.22], ["c2", 0.18, -0.12], ["c3", -0.46, 0.14], ["c4", 0.16, 0.24]];
+  chipPos.forEach(([id, fx, fy], i) => {
+    tl.fromTo("#" + id, { opacity: 0, x: 0, y: 0, left: "50%", top: "50%", xPercent: -50, yPercent: -50, scale: .7 },
+      { opacity: 1, scale: 1, x: () => fx * stage.getBoundingClientRect().width * (innerWidth < 860 ? 0.55 : 1), y: () => fy * H(), duration: 1, ease: "power2.out" }, 1.5 + i * .15);
+  });
+  tl.to({}, { duration: .6 });
+
+  /* relationship: steps light up, the kernel half turns and the ring fills */
+  const kLabel = document.getElementById("kLabel");
+  ScrollTrigger.create({
+    trigger: "#steps", start: "top 65%", end: "bottom 45%", scrub: true,
+    onUpdate: (st) => {
+      const i = Math.min(steps.length - 1, Math.floor(st.progress * steps.length));
+      steps.forEach((s, k) => s.classList.toggle("on", k <= i));
+      kLabel.textContent = labels[i];
+      gsap.set("#kProgress", { attr: { "stroke-dashoffset": 1056 * (1 - st.progress) } });
+      gsap.set("#kImg", { rotation: st.progress * 300 - 20 });
+    },
+  });
+  steps[0].classList.add("on");
+
+  /* product rows rise in */
+  document.querySelectorAll(".product .row").forEach((r) => {
+    gsap.from(r.querySelectorAll(".copy > *, .mock"), { y: 50, opacity: 0, duration: 1, stagger: .08, ease: "power3.out", scrollTrigger: { trigger: r, start: "top 80%" } });
+  });
+  gsap.from(".plist li", { y: 30, opacity: 0, duration: .9, stagger: .1, ease: "power3.out", scrollTrigger: { trigger: ".plist", start: "top 80%" } });
+  gsap.from(".wordmark", { yPercent: 40, opacity: 0, duration: 1.4, ease: "power3.out", scrollTrigger: { trigger: "footer", start: "top 85%" } });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => ScrollTrigger.refresh());
+  addEventListener("load", () => ScrollTrigger.refresh());
+})();
+</script>
+</body>
+</html>

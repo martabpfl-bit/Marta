@@ -1,0 +1,38 @@
+/* Eat Conscience Professional — shared brand tokens
+   Warm, editorial, natural: ivory ground, walnut text, sage accents, coral only for Companion presence. */
+:root {
+  --ivory: #f8f4ec;
+  --cream: #f1eadc;
+  --paper: #fffdf8;
+  --walnut: #3a2a20;
+  --walnut-2: #5c4636;
+  --walnut-3: #8a7262;
+  --line: rgba(58, 42, 32, 0.12);
+  --sage: #7f9271;
+  --sage-soft: #e3e8dc;
+  --coral: #d9806f;
+  --blush: #f3d8cf;
+  --amber: #b98a3e;
+  --amber-soft: #f4e8cf;
+  --serif: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --sans: "Figtree", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --radius: 14px;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--ivory); color: var(--walnut); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+h1, h2, h3, h4, p, ul, ol, figure, blockquote { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+a { color: inherit; }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--sage); outline-offset: 2px; border-radius: 6px; }
+.serif { font-family: var(--serif); font-optical-sizing: auto; }
+.eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--walnut-3); }
+
+/* Logo slot: replace assets/logo.svg with the original Eat Conscience logo file (do not redraw it). */
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo img { height: 34px; width: auto; display: block; }
+.logo .placeholder { white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; font-family: var(--serif); font-size: 19px; letter-spacing: -0.01em; }
+.logo .placeholder i { font-style: normal; font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--walnut-3); border: 1px dashed var(--walnut-3); border-radius: 6px; padding: 2px 6px; }
+.logo .pro { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sage); }
