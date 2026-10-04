@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --bg: #f3f0e6; --bg2: #ece7d8; --ink: #1b2040; --ink2: #3d4266; --mute: #85826f; --line: rgba(27, 32, 64, 0.12); --card: #fbf9f3;
+    --bg: #f3f0e6; --bg2: #ece7d8; --ink: #1b2040; --ink2: #3d4266; --mute: #6b6855; --line: rgba(27, 32, 64, 0.12); --card: #fbf9f3;
     --g: #3f9c6b; --y: #d4a017; --r: #c8553d; --hl: #f6e3a1;
     --sans: "Instrument Sans", "Helvetica Neue", Arial, sans-serif; --serif: "Instrument Serif", Georgia, serif; --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
     --gut: clamp(16px, 4vw, 56px);
@@ -142,7 +142,7 @@
 
 <section>
   <div class="real">
-    <div><b>~20</b><span>LinkedIn conversations started a day, up to the platform’s limit</span></div>
+    <div><b>~20</b><span>outreach messages a day at most, within LinkedIn’s limit</span></div>
     <div><b>~33%</b><span>of them became a meaningful conversation</span></div>
     <div><b>~20</b><span>meetings booked in two months, opening the Portuguese market</span></div>
   </div>
@@ -233,14 +233,14 @@
   // sample profiles, invented for the demo. "use" = which field the message is built on
   const P = [
     { n: "Inês Carvalho", i: "IC", c: "#5a6fb0", role: "Head of Customer Success", co: "Lumio (SaaS, 60 people)", loc: "Lisbon, Portugal", ctx: "Posted about onboarding new customers faster without adding headcount", use: "ctx", lang: "PT",
-      m: "Olá Inês, vi o teu post sobre <mark>acelerar o onboarding sem aumentar a equipa</mark>. É exatamente o problema em que tenho estado a trabalhar com agentes de voz. Como é que estão a lidar com isso na Lumio neste momento?",
+      m: "Olá Inês, vi o post sobre <mark>acelerar o onboarding sem aumentar a equipa</mark>. É exatamente o problema em que tenho estado a trabalhar com agentes de voz. Como estão a lidar com isso na Lumio neste momento?",
       f1: "Olá Inês, só para fechar o ciclo: se fizer sentido, partilho dois exemplos de onboarding que reduziram o trabalho manual sem perder o contacto com o cliente.", f2: "Última mensagem da minha parte, Inês. Se o onboarding voltar a ser prioridade, fico disponível para trocar ideias." },
     { n: "Daniel Brooks", i: "DB", c: "#3f9c6b", role: "Operations Director", co: "Brooks & Hale Realty", loc: "Manchester, UK", ctx: "Team of 8 agents; hiring a receptionist", use: "ctx", lang: "EN",
       m: "Hi Daniel, I noticed Brooks & Hale is <mark>hiring a receptionist for a team of eight agents</mark>. Is that mainly to keep up with calls and enquiries, or something else?",
       f1: "Hi Daniel, quick follow-up: I’ve seen small agencies handle around half of routine enquiries automatically. Happy to share how, if useful.", f2: "Last note from me, Daniel. If enquiries become a bottleneck later, I’m around." },
     { n: "Rita Mendes", i: "RM", c: "#c8553d", role: "Founder", co: "Mendes Obras (construction, 10 people)", loc: "Braga, Portugal", ctx: "Spoke at a regional construction fair about digitising small firms", use: "ctx", lang: "PT",
-      m: "Olá Rita, vi que falou na feira sobre <mark>digitalizar pequenas empresas de construção</mark>. Qual foi a parte mais difícil de pôr a equipa a usar ferramentas novas?",
-      f1: "Olá Rita, se ajudar, partilho como outra empresa do setor organizou os pedidos de clientes num só sítio, sem complicar o dia a dia da equipa.", f2: "Última mensagem, Rita. Fico por aqui se um dia quiser trocar ideias sobre o tema." },
+      m: "Olá Rita, vi a intervenção na feira sobre <mark>digitalizar pequenas empresas de construção</mark>. Qual foi a parte mais difícil de pôr a equipa a usar ferramentas novas?",
+      f1: "Olá Rita, se ajudar, partilho como outra empresa do setor organizou os pedidos de clientes num só sítio, sem complicar o dia a dia da equipa.", f2: "Última mensagem, Rita. Se um dia fizer sentido trocar ideias sobre o tema, fico disponível." },
     { n: "Alex Turner", i: "AT", c: "#85826f", role: "Manager", co: "—", loc: "—", ctx: "—", use: null, lang: "EN",
       m: null, why: "Not enough real information on this profile to write something personal. Instead of sending a generic message, it goes to review." },
   ];

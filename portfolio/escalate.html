@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --bg: #f3f0e6; --bg2: #ece7d8; --ink: #1b2040; --ink2: #3d4266; --mute: #85826f; --line: rgba(27, 32, 64, 0.12); --card: #fbf9f3;
+    --bg: #f3f0e6; --bg2: #ece7d8; --ink: #1b2040; --ink2: #3d4266; --mute: #6b6855; --line: rgba(27, 32, 64, 0.12); --card: #fbf9f3;
     --g: #3f9c6b; --y: #d4a017; --r: #c8553d;
     --sans: "Instrument Sans", "Helvetica Neue", Arial, sans-serif; --serif: "Instrument Serif", Georgia, serif; --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
     --gut: clamp(16px, 4vw, 56px);
@@ -93,6 +93,8 @@
     </div>
     <div class="field"><label for="link">Conversation link <span>call, transcript or chat</span></label><input id="link" name="link" /></div>
     <div class="field"><label for="happened">What happened</label><textarea id="happened" name="happened"></textarea></div>
+    <div class="field"><label for="steps">Steps to reproduce <span>optional</span></label><textarea id="steps" name="steps"></textarea></div>
+    <div class="field"><label for="freq">How often <span>optional · e.g. 4 of the last 10 calls</span></label><input id="freq" name="freq" /></div>
     <div class="field"><label for="expected">What was expected</label><textarea id="expected" name="expected"></textarea></div>
     <div class="field"><label for="findings">What I found</label><textarea id="findings" name="findings"></textarea></div>
     <div class="field"><label for="likely">Likely problem</label><textarea id="likely" name="likely"></textarea></div>
@@ -115,6 +117,7 @@
 
 <script>
 (() => {
+  const OPT = [["steps", "Steps to reproduce"], ["freq", "How often"]];
   const F = [
     ["client", "Client & IDs", "Add the client and the IDs so nobody has to look them up."],
     ["link", "Conversation link", "Add the conversation link so the developer can see it happen."],
@@ -131,6 +134,8 @@
     client: "Sample clinic · agent #A-102 · booking workflow v3",
     impact: "High: core flow affected",
     link: "https://example.com/calls/48213 (03:12 → 04:05)",
+    steps: "1. Call the agent. 2. Ask for an appointment on a weekday (\"Tuesday afternoon\"). 3. Agent confirms the day, then reports no availability.",
+    freq: "4 of the last 10 calls",
     happened: "Caller asked for Tuesday afternoon. The agent confirmed the date, then said it couldn't find availability and ended the booking.",
     expected: "The agent should read back the open slots for Tuesday afternoon and book the one the caller picks.",
     findings: "The calendar shows three open slots on Tuesday. The webhook to the calendar returns a 200 but an empty list. Happens on 4 of the last 10 calls, always when the caller says a weekday instead of a date.",
@@ -149,14 +154,15 @@
     $("#hints").innerHTML = F.map(([k, , h]) => `<li class="${val(k) ? "ok" : ""}">${h}</li>`).join("");
     $("#pTitle").textContent = val("title") || "Untitled issue";
     const p = $("#pri"); p.textContent = val("impact") || "No impact set"; p.style.background = PRI[val("impact")] || "var(--mute)";
-    $("#dl").innerHTML = F.map(([k, l]) => `<div><dt>${l}</dt><dd class="${val(k) ? "" : "empty"}"></dd></div>`).join("");
-    $("#dl").querySelectorAll("dd").forEach((d, i) => (d.textContent = val(F[i][0]) || "Not filled in yet"));
+    const shown = [...F.slice(0, 3), ...OPT.filter(([k]) => val(k)), ...F.slice(3)];
+    $("#dl").innerHTML = shown.map(([k, l]) => `<div><dt>${l}</dt><dd class="${val(k) ? "" : "empty"}"></dd></div>`).join("");
+    $("#dl").querySelectorAll("dd").forEach((d, i) => (d.textContent = val(shown[i][0]) || "Not filled in yet"));
   };
   form.addEventListener("input", render);
   $("#ex").addEventListener("click", () => { Object.entries(EX).forEach(([k, v]) => (form.elements[k].value = v)); render(); });
   $("#clear").addEventListener("click", () => { form.reset(); render(); });
   $("#copy").addEventListener("click", async () => {
-    const md = `## ${val("title") || "Untitled issue"}\n**Impact:** ${val("impact") || "-"}\n\n` + F.map(([k, l]) => `**${l}**\n${val(k) || "-"}`).join("\n\n");
+    const md = `## ${val("title") || "Untitled issue"}\n**Impact:** ${val("impact") || "-"}\n\n` + [...F.slice(0, 3), ...OPT.filter(([k]) => val(k)), ...F.slice(3)].map(([k, l]) => `**${l}**\n${val(k) || "-"}`).join("\n\n");
     try { await navigator.clipboard.writeText(md); } catch { const t = document.createElement("textarea"); t.value = md; document.body.appendChild(t); t.select(); document.execCommand("copy"); t.remove(); }
     $("#copied").classList.add("on"); setTimeout(() => $("#copied").classList.remove("on"), 1600);
   });

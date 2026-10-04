@@ -3,8 +3,17 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Marta Lopes — Customer Success & Implementation</title>
-<meta name="description" content="Customer Success, Implementation and Account Management. I build the kind of client relationships that last." />
+<title>Marta Lopes · Customer Success · Remote</title>
+<meta name="description" content="Marta Lopes, Customer Success. From onboarding to renewal: implementation, technical troubleshooting, adoption and retention. Remote, available across time zones. Portuguese and English." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://marta-lopes.vercel.app/" />
+<meta property="og:title" content="Marta Lopes · Customer Success" />
+<meta property="og:description" content="From onboarding to renewal. Remote, across time zones. Try the projects I built." />
+<meta property="og:image" content="https://marta-lopes.vercel.app/assets/og.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://marta-lopes.vercel.app/assets/og.jpg" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%231b2040'/%3E%3Ctext x='16' y='21' font-family='Arial' font-size='13' font-weight='700' fill='%23f3f0e6' text-anchor='middle'%3EML%3C/text%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,7 +24,7 @@
     --bg2: #ece7d8;
     --ink: #1b2040;
     --ink2: #3d4266;
-    --mute: #85826f;
+    --mute: #6b6855;
     --line: rgba(27, 32, 64, 0.12);
     --card: #fbf9f3;
     --t-cs: #1b2040;
@@ -73,8 +82,9 @@
   .hero-avatar .sound { position: absolute; left: 50%; bottom: 22%; transform: translateX(-50%); display: none; }
   .hero-avatar.has-video .sound { display: inline-flex; }
   .hero-copy { position: relative; z-index: 2; width: 100%; display: flex; flex-direction: column; align-items: flex-start; gap: 28px; }
-  .hero h1 { font-size: clamp(3rem, 6.4vw, 6.6rem); line-height: 0.9; letter-spacing: -0.055em; font-weight: 700; }
+  .hero h1 { font-size: clamp(2.8rem, 5.2vw, 5.4rem); line-height: 0.9; letter-spacing: -0.055em; font-weight: 700; }
   .hero h1 .dot { color: var(--t-tech); }
+  .hero h1 em { font-weight: 400; letter-spacing: -0.03em; }
   .hero .sub { margin-top: 22px; font-size: clamp(1rem, 1.4vw, 1.25rem); color: var(--ink2); max-width: 36ch; }
   .hero .sub2 { margin-top: 12px; font-size: 15px; line-height: 1.55; color: var(--mute); max-width: 52ch; }
   .hero-side { display: grid; gap: 14px; justify-items: start; }
@@ -128,6 +138,8 @@
   .jcard.low { grid-row: 3; align-self: start; transform: translateY(-10px); }
   .jcard.on { opacity: 1; transform: none; box-shadow: 0 20px 40px -24px rgba(27, 32, 64, 0.35); }
   .jcard .mono { display: block; }
+  .jcard .proof { display: block; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line); font-size: 12.5px; line-height: 1.45; color: var(--ink); font-weight: 600; text-decoration: none; }
+  .jcard a.proof:hover { text-decoration: underline; text-underline-offset: 3px; }
   .jcard h3 { margin-top: 8px; font-size: 1.15rem; letter-spacing: -0.02em; line-height: 1.15; }
   .jcard p { margin-top: 8px; font-size: 13.5px; line-height: 1.5; color: var(--ink2); }
   .tools { margin-top: 46px; display: grid; gap: 12px; }
@@ -288,6 +300,7 @@
   .contact { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; }
   .big { font-size: clamp(2.6rem, 7.4vw, 8rem); line-height: 0.92; letter-spacing: -0.06em; font-weight: 700; background: linear-gradient(90deg, var(--ink) 0 50%, rgba(27, 32, 64, 0.16) 50% 100%); background-size: 200% 100%; background-position: 100% 0; -webkit-background-clip: text; background-clip: text; color: transparent; }
   .big em { -webkit-text-fill-color: transparent; }
+  .contact-meta { margin-top: 30px; max-width: none; }
   .contact .btns { display: flex; gap: 10px; margin-top: 44px; flex-wrap: wrap; }
   footer { padding: 28px var(--gut); display: flex; justify-content: space-between; gap: 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--mute); flex-wrap: wrap; }
 
@@ -348,10 +361,10 @@
     <a href="#journey">How I work</a>
     <a href="#work">Projects</a>
     <a href="#experience">Experience</a>
-    <a href="#feedback">Feedback</a>
+    <a href="#feedback">Reviews</a>
     <a href="#contact">Contact</a>
   </div>
-  <a class="btn btn--dark cta" href="mailto:martabpfl@gmail.com">Let’s talk</a>
+  <a class="btn btn--dark cta" href="#contact">Let’s talk</a>
 </nav>
 
 <main>
@@ -371,16 +384,15 @@
 
     <div class="hero-copy wrap">
       <div>
-        <p class="mono kicker">Customer Success · Account Management · Implementation · AI</p>
-        <h1 class="hero-title">Customer Success<br />&amp; Implementation<span class="dot">.</span></h1>
-        <p class="sub">I build the kind of client relationships that last.</p>
-        <p class="sub2">From onboarding and implementation to adoption and retention, I like being the person clients can rely on and the bridge between what they need and the teams building it.</p>
+        <p class="mono kicker">Remote · Lisbon for now · Any time zone · PT / EN</p>
+        <h1 class="hero-title">Customer Success,<br />from onboarding <em>to renewal</em><span class="dot">.</span></h1>
+        <p class="sub">I build the kind of client relationships that last: the person clients rely on, and the bridge to the team building the product.</p>
       </div>
       <div class="hero-side">
-        <span class="status"><i></i>Open to new roles</span>
+        <span class="status"><i></i>Open to Customer Success roles · Remote</span>
         <div class="hero-btns">
-          <a class="btn btn--dark" href="#contact">Let’s talk →</a>
-          <a class="btn btn--ghost" href="#journey">How I work ↓</a>
+          <a class="btn btn--dark" href="assets/Marta-Lopes-CV.pdf" target="_blank" rel="noopener">Download CV ↓</a>
+          <a class="btn btn--ghost" href="#contact">Let’s talk →</a>
         </div>
       </div>
     </div>
@@ -390,14 +402,13 @@
   <section class="about" id="about">
     <div class="wrap">
       <div class="reveal">
-        <p class="mono kicker">01 · From healthcare to customer success and AI</p>
+        <p class="mono kicker">01 · About</p>
         <h2 class="h2">Hi, I’m <em>Marta.</em></h2>
-        <p class="lede">I started my career in healthcare as a nutritionist, where working with people and understanding what they really needed was always at the centre of what I did.</p>
-        <p class="lede">Moving to Australia took my career in a different direction. I worked across customer service and account management, and eventually found my way into tech and AI.</p>
+        <p class="lede">Moving to Australia took my career in a new direction: I worked across customer service and account management, and found my way into tech and AI.</p>
         <p class="lede">At Nedzo, I became the first Customer Success hire and discovered the part of my work I enjoy most: being close to clients while also being close to the product. I loved understanding a client’s use case, helping turn it into something that actually worked, solving problems with the technical team and then staying with that client as they adopted and grew with the product.</p>
         <p class="lede">That combination of people, technology and problem-solving is where I want to keep building my career.</p>
         <div class="btns">
-          <a class="btn btn--dark" href="mailto:martabpfl@gmail.com">Email me</a>
+          <a class="btn btn--dark" href="assets/Marta-Lopes-CV.pdf" target="_blank" rel="noopener">Download CV ↓</a>
           <a class="btn btn--ghost" href="https://www.linkedin.com/in/marta-lopes-07a791150/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
         </div>
       </div>
@@ -410,11 +421,11 @@
             <div class="badge-top"><b>CUSTOMER SUCCESS</b><span>ID · 2026</span></div>
             <div class="badge-photo"><img src="assets/portrait.jpg" alt="Marta Lopes" /></div>
             <p class="badge-name">MARTA LOPES</p>
-            <p class="badge-role">Head of Growth &amp; Expansion</p>
+            <p class="badge-role">Customer Success</p>
             <div class="badge-grid">
-              <div>Focus<b>Onboarding → Retention</b></div>
-              <div>Based<b>Lisbon, PT</b></div>
-              <div>Since<b>2020</b></div>
+              <div>Focus<b>Onboarding → Renewal</b></div>
+              <div>Works<b>Remote · any TZ</b></div>
+              <div>Languages<b>PT · EN</b></div>
               <div>Status<b>Open to work</b></div>
             </div>
             <div class="barcode" aria-hidden="true"></div>
@@ -424,13 +435,13 @@
 
       <div class="reveal">
         <ul class="facts">
-          <li><span>Last role</span><span>Head of Growth &amp; Expansion, Nedzo AI</span></li>
-          <li><span>First</span><span>Customer Success hire at an early-stage Voice AI company</span></li>
-          <li><span>Clients</span><span>~10 high-touch B2B · ~100 self-service</span></li>
-          <li><span>Scope</span><span>End to end: onboarding to retention</span></li>
-          <li><span>Based</span><span>Lisbon, Portugal</span></li>
+          <li><span>Last role</span><span>Customer Success Specialist → Head of Growth &amp; Expansion, Nedzo AI</span></li>
+          <li><span>Joined as</span><span>First Customer Success hire at an early-stage Voice AI company</span></li>
+          <li><span>Accounts</span><span>~10 high-touch B2B · ~100 self-service</span></li>
+          <li><span>Scope</span><span>End to end: onboarding to renewal</span></li>
+          <li><span>Works</span><span>Remote · Lisbon for now · available across time zones</span></li>
+          <li><span>Languages</span><span>Portuguese (native) · English (fluent)</span></li>
         </ul>
-        <blockquote>“I care about the person behind the renewal number.”</blockquote>
       </div>
     </div>
   </section>
@@ -449,7 +460,7 @@
     <div class="wrap">
       <div class="head">
         <div>
-          <p class="mono kicker">02 · What I do</p>
+          <p class="mono kicker">02 · How I work</p>
           <h2 class="h2">How I work with clients, <em>from first call to renewal.</em></h2>
         </div>
         <p class="lede">Follow a client through the journey I own, end to end.</p>
@@ -460,14 +471,14 @@
           <div class="jdot" id="jdot"><span id="jlabel">New client</span><i></i></div>
         </div>
         <article class="jcard " data-label="New client" style="--col:1"><span class="mono">01 · Onboarding</span><h3>Clear ownership from the first conversation</h3><p>Requirements discovery: understanding the client’s use case before anything gets built.</p></article>
-        <article class="jcard low" data-label="Going live" style="--col:2"><span class="mono">02 · Implementation</span><h3>A use case becomes a working setup</h3><p>I turn a client use case into a workable setup: workflows, integrations, testing and launch.</p></article>
-        <article class="jcard " data-label="Issue raised" style="--col:3"><span class="mono">03 · Technical Customer Success</span><h3>When something breaks, I investigate before I escalate</h3><p>I reproduce issues, review calls and transcripts, test workflows, document what matters and work with Product or Engineering through resolution.</p></article>
-        <article class="jcard low" data-label="Adopting" style="--col:4"><span class="mono">04 · Adoption</span><h3>Spotting blockers early</h3><p>I track how clients are actually using the product and stay close enough to understand what is getting in the way of value.</p></article>
-        <article class="jcard " data-label="Renewing" style="--col:5"><span class="mono">05 · Retention & growth</span><h3>Both sides aligned, loop closed</h3><p>I sit between a client who needs something to work and a technical team that needs clear information to make it happen, all the way to renewal or expansion.</p></article>
+        <article class="jcard low" data-label="Going live" style="--col:2"><span class="mono">02 · Implementation</span><h3>A use case becomes a working setup</h3><p>I turn a client use case into a workable setup: workflows, integrations, testing and launch.</p><span class="proof">When the data source stopped giving access mid-project, I proposed another route. ~50% of ~350 monthly contacts ended up handled automatically.</span></article>
+        <article class="jcard " data-label="Issue raised" style="--col:3"><span class="mono">03 · Technical Customer Success</span><h3>When something breaks, I investigate before I escalate</h3><p>I reproduce issues, review calls and transcripts, test workflows, document what matters and work with Product or Engineering through resolution.</p><a class="proof" href="escalate.html">See how I hand it over →</a></article>
+        <article class="jcard low" data-label="Adopting" style="--col:4"><span class="mono">04 · Adoption</span><h3>Spotting blockers early</h3><p>I track how clients are actually using the product and stay close enough to understand what is getting in the way of value.</p><a class="proof" href="health.html">See the health monitor →</a></article>
+        <article class="jcard " data-label="Renewing" style="--col:5"><span class="mono">05 · Retention & growth</span><h3>Clients who renew and grow</h3><p>I sit between a client who needs something to work and a technical team that needs clear information to make it happen, all the way to renewal or expansion.</p><a class="proof" href="#feedback">What clients say →</a></article>
       </div>
       <div class="tools">
-        <div class="row"><span class="mono lbl">Tools I work with</span><div class="marq"><span>Intercom</span><span>Slack</span><span>Linear</span><span>Attio</span><span>GoHighLevel</span><span>Make</span><span>Zapier</span><span>Cal.com</span><span>Calendly</span><span>Stripe</span><span>Skool</span><span>Google Workspace</span><span>Loom</span><span>Intercom</span><span>Slack</span><span>Linear</span><span>Attio</span><span>GoHighLevel</span><span>Make</span><span>Zapier</span><span>Cal.com</span><span>Calendly</span><span>Stripe</span><span>Skool</span><span>Google Workspace</span><span>Loom</span></div></div>
-        <div class="row"><span class="mono lbl">Technical exposure</span><div class="marq"><span>Webhooks</span><span>API integrations</span><span>AI agent testing</span><span>Call &amp; transcript analysis</span><span>Workflow troubleshooting</span><span>Webhooks</span><span>API integrations</span><span>AI agent testing</span><span>Call &amp; transcript analysis</span><span>Workflow troubleshooting</span><span>Webhooks</span><span>API integrations</span><span>AI agent testing</span><span>Call &amp; transcript analysis</span><span>Workflow troubleshooting</span><span>Webhooks</span><span>API integrations</span><span>AI agent testing</span><span>Call &amp; transcript analysis</span><span>Workflow troubleshooting</span></div></div>
+        <div class="row"><span class="mono lbl">Tools I work with</span><div class="marq"><span>Intercom</span><span>Slack</span><span>Linear</span><span>Attio</span><span>GoHighLevel</span><span>Make</span><span>Zapier</span><span>Cal.com</span><span>Calendly</span><span>Stripe</span><span>Skool</span><span>Google Workspace</span><span>Loom</span><span aria-hidden="true" style="display:contents"><span>Intercom</span><span>Slack</span><span>Linear</span><span>Attio</span><span>GoHighLevel</span><span>Make</span><span>Zapier</span><span>Cal.com</span><span>Calendly</span><span>Stripe</span><span>Skool</span><span>Google Workspace</span><span>Loom</span></span></div></div>
+        <div class="row"><span class="mono lbl">Technical exposure</span><div class="marq"><span>Webhooks</span><span>API integrations</span><span>AI agent testing</span><span>Call &amp; transcript analysis</span><span>Workflow troubleshooting</span><span>Webhooks</span><span>API integrations</span><span>AI agent testing</span><span>Call &amp; transcript analysis</span><span>Workflow troubleshooting</span><span aria-hidden="true" style="display:contents"><span>Webhooks</span><span>API integrations</span><span>AI agent testing</span><span>Call &amp; transcript analysis</span><span>Workflow troubleshooting</span><span>Webhooks</span><span>API integrations</span><span>AI agent testing</span><span>Call &amp; transcript analysis</span><span>Workflow troubleshooting</span></span></div></div>
       </div>
     </div>
   </section>
@@ -476,14 +487,8 @@
   <section class="work" id="work">
     <div class="wrap">
       <p class="mono kicker">03 · Projects</p>
-      <h2 class="h2">Things I’ve built. <em>Open them and try.</em></h2>
+      <h2 class="h2">Things I’ve built. <em>Try them yourself.</em></h2>
       <div class="projects">
-        <a class="proj wide" href="outreach.html">
-          <div class="pv"><span class="live">Live demo</span>
-            <div class="mo" aria-hidden="true"><div class="mo-p"><i></i><b></b><span></span></div><div class="mo-arrow">✦</div><div class="mo-m"><p></p><p></p><p></p><em>?</em></div></div>
-          </div>
-          <div class="pt"><p class="mono">Growth · Automation · AI</p><h3>LinkedIn Outreach System</h3><p>I connected HeyReach to my LinkedIn and to Claude: each message built from the person’s own profile, every conversation tracked. About a third became meaningful conversations, and ~20 meetings were booked in two months.</p><span class="go"><i>→</i>Try the demo</span></div>
-        </a>
         <a class="proj" href="health.html">
           <div class="pv"><span class="live">Live demo</span>
             <div class="mh" aria-hidden="true"><ul><li><i></i><b></b><span></span></li><li><i></i><b></b><span></span></li><li><i></i><b></b><span></span></li><li><i></i><b></b><span></span></li></ul><svg viewBox="0 0 104 104"><circle class="rb" cx="52" cy="52" r="46" /><circle class="rf" cx="52" cy="52" r="46" /></svg></div>
@@ -497,13 +502,19 @@
           </div>
           <div class="pt"><p class="mono">Technical CS · Handoff</p><h3>Escalation Ticket Builder</h3><p>How I hand a client problem to the developers, every time, in Linear and Slack: what happened, what was expected, what I found, what I tried and why it didn’t fix it.</p><span class="go"><i>→</i>Build a ticket</span></div>
         </a>
+        <a class="proj wide" href="outreach.html">
+          <div class="pv"><span class="live">Live demo</span>
+            <div class="mo" aria-hidden="true"><div class="mo-p"><i></i><b></b><span></span></div><div class="mo-arrow">✦</div><div class="mo-m"><p></p><p></p><p></p><em>?</em></div></div>
+          </div>
+          <div class="pt"><p class="mono">Growth · Automation · AI</p><h3>LinkedIn Outreach System</h3><p>I connected HeyReach to my LinkedIn and to Claude: each message built from the person’s own profile, every conversation tracked. About a third became meaningful conversations, and ~20 meetings were booked in two months.</p><span class="go"><i>→</i>Try the demo</span></div>
+        </a>
         <!-- My app: set data-href to the live link (and optionally add a screenshot at assets/app.jpg) to show this card -->
         <a class="proj wide" id="appCard" data-href="https://eatconscience.com" href="https://eatconscience.com" target="_blank" rel="noopener noreferrer">
           <div class="pv"><span class="live">Live app</span>
             <div class="browser" aria-hidden="true"><div class="bar"><i></i><i></i><i></i><span>eatconscience.com</span></div><div class="bview"><b>Eat <em>Conscience.</em></b></div></div>
             <img class="shot" src="assets/app.jpg" alt="" onerror="this.remove()" />
           </div>
-          <div class="pt"><p class="mono">My own app · Live</p><h3>Eat Conscience</h3><p>My own app, live and open to try. Built on the same thing that runs through all my work: understanding what people actually need.</p><span class="go"><i>↗</i>Open eatconscience.com</span></div>
+          <div class="pt"><p class="mono">My own app · Live</p><h3>Eat Conscience</h3><p>A nutrition app I designed and built myself with AI-assisted development, from idea to live product. It joins my background as a dietitian with the way I work: start from what people actually need.</p><span class="go"><i>↗</i>Open eatconscience.com</span></div>
         </a>
       </div>
 
@@ -514,59 +525,43 @@
   <section class="experience" id="experience">
     <div class="wrap">
       <p class="mono kicker">04 · Experience</p>
-      <h2 class="h2">Where I’ve <em>been.</em></h2>
+      <h2 class="h2">Where I’ve <em>worked.</em></h2>
       <div class="tl" id="tl">
         <i class="tl-progress" id="tlp"></i>
         <div class="tl-item">
           <p class="tl-year"><em>Next</em></p>
-          <div class="tl-card"><span class="mono">2026 –</span><h3>Your team?</h3><p class="org">Customer Success · Implementation</p><a class="btn btn--dark" style="margin-top:16px" href="mailto:martabpfl@gmail.com">Let’s talk →</a></div>
+          <div class="tl-card"><span class="mono">2026 –</span><h3>Your team?</h3><p class="org">Customer Success · Remote</p><a class="btn btn--dark" style="margin-top:16px" href="#contact">Let’s talk →</a></div>
         </div>
         <div class="tl-item">
           <p class="tl-year">2025</p>
-          <div class="tl-card"><span class="mono">2025 – 2026</span><h3>Customer Success</h3><p class="org">Nedzo AI · First Customer Success hire · B2B Voice AI</p><ul><li>Onboarding · Implementation · Integrations</li><li>Adoption · Retention · Client relationships</li><li>Bridge between clients &amp; Product/Engineering</li></ul><span class="promo">↑ Promoted to Head of Growth &amp; Expansion</span><p class="org" style="margin-top:8px">Growth · Expansion · Customer lifecycle</p></div>
+          <div class="tl-card"><span class="mono">2025 – 2026</span><h3>Customer Success Specialist → Head of Growth &amp; Expansion</h3><p class="org">Nedzo AI · B2B Voice AI · first Customer Success hire</p><ul><li>Owned onboarding, implementation and integrations</li><li>Managed ~10 high-touch and ~100 self-service accounts</li><li>Handled escalations with Product and Engineering</li><li>Built a customer health view, approved by leadership</li></ul><span class="promo">↑ Promoted to Head of Growth &amp; Expansion</span><p class="org" style="margin-top:8px">Opened the Portuguese market: ~20 meetings in two months</p></div>
         </div>
         <div class="tl-item">
           <p class="tl-year">2024</p>
-          <div class="tl-card"><span class="mono">2024 – 2025</span><h3>Account Management</h3><p class="org">Medinox</p><ul><li>100+ pharmacy accounts</li><li>200+ products</li><li>Account growth · +20% sales</li></ul></div>
+          <div class="tl-card"><span class="mono">2024 – 2025</span><h3>Account Management</h3><p class="org">Medinox</p><ul><li>Managed 100+ pharmacy accounts</li><li>Across 200+ products</li><li>Grew sales +20% across my accounts</li></ul></div>
         </div>
         <div class="tl-item">
           <p class="tl-year">2023</p>
-          <div class="tl-card"><span class="mono">2023 – 2024</span><h3>Customer Service</h3><p class="org">White Stone</p><ul><li>Customer retention &amp; re-engagement</li><li>30+ daily bookings &amp; enquiries</li></ul></div>
+          <div class="tl-card"><span class="mono">2023 – 2024</span><h3>Customer Service</h3><p class="org">White Stone Wellness</p><ul><li>Handled 30+ bookings and enquiries a day</li><li>Re-engaged and retained customers</li></ul></div>
         </div>
         <div class="tl-item">
           <p class="tl-year">2020</p>
-          <div class="tl-card"><span class="mono">2020 – 2022</span><h3>Project Manager</h3><p class="org">Community Nutrition</p><ul><li>3 government-funded health programs</li><li>20 partnerships</li><li>~50K beneficiaries</li></ul></div>
+          <div class="tl-card"><span class="mono">2020 – 2022</span><h3>Project Manager</h3><p class="org">Community Nutrition</p><ul><li>Led 3 government-funded health programmes</li><li>Built 20 partnerships</li><li>Reached ~50K beneficiaries</li></ul></div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ───────── MOMENTS -->
-  <section class="moments" id="moments">
-    <div class="head wrap">
-      <p class="mono kicker">05 · Moments</p>
-      <h2 class="h2">Proud <em>moments.</em></h2>
-    </div>
-    <div class="track" id="track">
-      <article class="mcard"><div class="ico">🌱</div><div><p class="num" data-count="50" data-pre="~" data-suf="K">~50K</p><p>beneficiaries across three government-funded health programs</p></div></article>
-      <article class="mcard"><div class="ico">🤝</div><div><p class="num" data-count="20">20</p><p>partnerships built for those programs</p></div></article>
-      <article class="mcard"><div class="ico">💊</div><div><p class="num" data-count="100" data-suf="+">100+</p><p>pharmacy accounts managed at Medinox</p></div></article>
-      <article class="mcard"><div class="ico">📈</div><div><p class="num" data-count="20" data-pre="+" data-suf="%">+20%</p><p>sales growth across my accounts</p></div></article>
-      <article class="mcard"><div class="ico">🤖</div><div><p class="num" data-count="50" data-pre="~" data-suf="%">~50%</p><p>of ~350 monthly contacts automated by an AI agent I implemented</p></div></article>
-      <article class="mcard"><div class="ico">📅</div><div><p class="num" data-count="20" data-pre="~">~20</p><p>meetings booked in two months while opening the Portuguese market</p></div></article>
-      <article class="mcard"><div class="ico">⭐</div><div><p class="num">1st</p><p>Customer Success hire at Nedzo AI</p></div></article>
-      <article class="mcard dark"><div class="ico">↑</div><div><p class="num" style="font-size:clamp(2rem,3.4vw,2.8rem)">Head of Growth &amp; Expansion</p><p>Promoted at Nedzo AI for bringing in leads, partners and new conversations</p></div></article>
-    </div>
-  </section>
 
   <!-- ───────── FEEDBACK -->
   <section class="feedback" id="feedback">
     <div class="wrap">
-      <p class="mono kicker">06 · Feedback</p>
+      <p class="mono kicker">05 · Reviews</p>
       <h2 class="h2">In other people’s <em>words.</em></h2>
 
       <div class="fb-row">
-        <div class="fb-head"><h3>What direct clients <em>say about me.</em></h3><div class="arrows"><button type="button" data-rail="r1" data-dir="-1" aria-label="Previous">←</button><button type="button" data-rail="r1" data-dir="1" aria-label="Next">→</button></div></div>
+        <div class="fb-head"><h3>What clients <em>say.</em></h3><div class="arrows"><button type="button" data-rail="r1" data-dir="-1" aria-label="Previous">←</button><button type="button" data-rail="r1" data-dir="1" aria-label="Next">→</button></div></div>
         <div class="rail" id="r1">
           <figure class="q"><div><p class="stars">★★★★★</p><blockquote style="margin-top:12px">“Marta went over it with me to try to see what caused the problem, and to see how she could help in solving it. She was very helpful and courteous. She went step by step with me to try to get the issue resolved. In the end I got things working fine again. Thanks Marta!!”</blockquote></div><figcaption><b>Shelly Smith-Mitchell</b><span>Nedzo customer · Trustpilot</span><br /><a href="https://www.trustpilot.com/reviews/6a3aeeda7732f6d535613dc2" target="_blank" rel="noopener noreferrer">View on Trustpilot ↗</a></figcaption></figure>
           <figure class="q"><div><p class="stars">★★★★★</p><blockquote style="margin-top:12px">“I love these guys. Marta the support is fantastic, the owner helped me personally too. We book a ton of appointments thanks to this software and regularly recommend it to others. So good.”</blockquote></div><figcaption><b>H Trace</b><span>Nedzo customer · Trustpilot</span><br /><a href="https://www.trustpilot.com/reviews/69bc6aaf10c0e4e523aff952" target="_blank" rel="noopener noreferrer">View on Trustpilot ↗</a></figcaption></figure>
@@ -575,14 +570,14 @@
       </div>
 
       <div class="fb-row">
-        <div class="fb-head"><h3>What colleagues <em>say about me.</em></h3><div class="arrows"><button type="button" data-rail="r2" data-dir="-1" aria-label="Previous">←</button><button type="button" data-rail="r2" data-dir="1" aria-label="Next">→</button></div></div>
+        <div class="fb-head"><h3>What the people I worked with <em>say.</em></h3><div class="arrows"><button type="button" data-rail="r2" data-dir="-1" aria-label="Previous">←</button><button type="button" data-rail="r2" data-dir="1" aria-label="Next">→</button></div></div>
         <div class="rail" id="r2">
-          <figure class="q"><div><blockquote class="clamp">“I had the pleasure of working with Marta during her time at Nedzo, where she was our first Customer Success hire and an important part of the company's early growth. Marta joined at a stage when very little was established, and she took ownership of our customer relationships with professionalism and care. Our clients consistently spoke well of her, and she represented Nedzo with a level of warmth and reliability that is not easy to find. I am grateful for her contribution to Nedzo and would happily recommend her to any organisation looking for a dedicated, customer-focused professional.”</blockquote><button class="more" type="button">Read more</button></div><figcaption><b>Denis Rhomays</b><span>Co-Founder &amp; CEO, Nedzo AI · managed Marta directly</span><br /><a href="https://www.linkedin.com/in/marta-lopes-07a791150/" target="_blank" rel="noopener noreferrer">View on LinkedIn ↗</a></figcaption></figure>
-          <figure class="q"><div><blockquote class="clamp">“Marta was part of our support and customer success team at Nedzo for almost a year, and I'm glad to recommend her. What stood out first was how she treated customers. She's patient with people who are frustrated, clear when explaining something technical to someone who isn't, and she follows through. Customers noticed and she was the favorite support rep for many of them. She also grew a lot in the time she was with us. Marta came in with limited exposure to SaaS and AI and left able to handle escalations on her own, onboard new customers end to end, and write help docs the team still uses. She asked good questions, took feedback without defensiveness, and put in the work to close the gaps herself. She cares about doing the job well, which is not something you can teach. Any team that puts her in front of customers will be better for it.”</blockquote><button class="more" type="button">Read more</button></div><figcaption><b>Ivo Schipper</b><span>Co-founder, Nedzo · managed Marta directly</span><br /><a href="https://www.linkedin.com/in/marta-lopes-07a791150/" target="_blank" rel="noopener noreferrer">View on LinkedIn ↗</a></figcaption></figure>
-          <figure class="q"><div><blockquote class="clamp">“I had the pleasure of working with Marta at Nedzo AI, where I got to see her grow from Customer Success Specialist to Head of Growth & Expansion. Although we worked in different departments, Marta was one of those people who naturally made an impact across the whole team. She was genuinely loved by everyone and was often the life of our meetings. She’s smart, assertive, confident, and incredibly good at connecting and communicating with people. What I appreciated most about working with Marta was how dedicated and supportive she was, not only when it came to helping our clients, but also when it came to helping her teammates. Whenever someone needed a hand, regardless of the department, she was always willing to step in and help. Marta brings a great combination of confidence, intelligence, initiative, and genuine care for the people she works with. Her promotion to Head of Growth & Expansion felt like a natural reflection of the value she brought to the team. I’m grateful I had the chance to work alongside her, and I’d gladly recommend Marta to any team lucky enough to have her.”</blockquote><button class="more" type="button">Read more</button></div><figcaption><b>Danielle Tanteco</b><span>Creative Designer &amp; Content Creator, Nedzo AI · LinkedIn recommendation, September 2026</span><br /><a href="https://www.linkedin.com/in/marta-lopes-07a791150/" target="_blank" rel="noopener noreferrer">View on LinkedIn ↗</a></figcaption></figure>
-          <figure class="q"><div><blockquote class="clamp">“I had the pleasure of working with Marta Lopes at White Stone Wellness, where she was part of our team as a Customer Service Representative and Receptionist. Marta is an outstanding professional, dedicated, proactive, and always reliable. She consistently demonstrated excellent manners with clients, creating a welcoming and professional environment from the very first interaction. I truly appreciated her professionalism and her proactive approach to solving problems before they even arose. I confidently recommend Marta for any role that requires professionalism, dedication, and strong customer service skills. She would be a great asset to any team.”</blockquote><button class="more" type="button">Read more</button></div><figcaption><b>Patricia Ott</b><span>Marketing Specialist, Operations &amp; Customer Experience Coordinator</span><br /><a href="https://www.linkedin.com/in/marta-lopes-07a791150/" target="_blank" rel="noopener noreferrer">View on LinkedIn ↗</a></figcaption></figure>
-          <figure class="q"><div><blockquote class="clamp">“I worked with Marta for two years, and she showed exemplary proactivity and a remarkable capacity for initiative: always looking for new solutions, quick to act on the unexpected, with a practical and effective approach. Her communication skills stand out, along with how easily she builds and maintains a strong, influential network. Marta goes all in for the team, genuinely cares about the wellbeing of both the team and the company, and has the strategic vision to quickly spot opportunities to create value. A creative, motivating professional with a very positive impact on any team.”</blockquote><button class="more" type="button">Read more</button></div><figcaption><b>Maria Nogueira Santos</b><span>Nutritionist &amp; Managing Partner, Sobre'Mesa</span><br /><a href="https://www.linkedin.com/in/marta-lopes-07a791150/" target="_blank" rel="noopener noreferrer">View on LinkedIn ↗</a></figcaption></figure>
-          <figure class="q"><div><blockquote class="clamp">“I had the pleasure of working with Marta in the social media space, and she is truly outstanding at what she does. She has a strong eye for content, understands how to engage audiences, and knows how to adapt strategies to meet client goals. Marta is not only creative with ideas but also organized in execution, making campaigns run smoothly from start to finish. What I admire most is how collaborative and supportive she is, always ready to share insights, brainstorm, and lift the team up. Any company or client would be lucky to have Marta managing their social media presence.”</blockquote><button class="more" type="button">Read more</button></div><figcaption><b>Angela Sinama</b><span>Social Media &amp; Content Manager</span><br /><a href="https://www.linkedin.com/in/marta-lopes-07a791150/" target="_blank" rel="noopener noreferrer">View on LinkedIn ↗</a></figcaption></figure>
+          <figure class="q"><div><blockquote class="clamp">“I had the pleasure of working with Marta during her time at Nedzo, where she was our first Customer Success hire and an important part of the company's early growth. Marta joined at a stage when very little was established, and she took ownership of our customer relationships with professionalism and care. Our clients consistently spoke well of her, and she represented Nedzo with a level of warmth and reliability that is not easy to find. I am grateful for her contribution to Nedzo and would happily recommend her to any organisation looking for a dedicated, customer-focused professional.”</blockquote><button class="more" type="button">Read more</button></div><figcaption><b>Denis Rhomays</b><span>Co-Founder &amp; CEO, Nedzo AI · managed Marta directly</span><br /><a href="https://www.linkedin.com/in/marta-lopes-07a791150/" target="_blank" rel="noopener noreferrer">See it on my LinkedIn ↗</a></figcaption></figure>
+          <figure class="q"><div><blockquote class="clamp">“I had the pleasure of working with Marta at Nedzo AI, where I got to see her grow from Customer Success Specialist to Head of Growth & Expansion. Although we worked in different departments, Marta was one of those people who naturally made an impact across the whole team. She was genuinely loved by everyone and was often the life of our meetings. She’s smart, assertive, confident, and incredibly good at connecting and communicating with people. What I appreciated most about working with Marta was how dedicated and supportive she was, not only when it came to helping our clients, but also when it came to helping her teammates. Whenever someone needed a hand, regardless of the department, she was always willing to step in and help. Marta brings a great combination of confidence, intelligence, initiative, and genuine care for the people she works with. Her promotion to Head of Growth & Expansion felt like a natural reflection of the value she brought to the team. I’m grateful I had the chance to work alongside her, and I’d gladly recommend Marta to any team lucky enough to have her.”</blockquote><button class="more" type="button">Read more</button></div><figcaption><b>Danielle Tanteco</b><span>Creative Designer &amp; Content Creator, Nedzo AI</span><br /><a href="https://www.linkedin.com/in/marta-lopes-07a791150/" target="_blank" rel="noopener noreferrer">See it on my LinkedIn ↗</a></figcaption></figure>
+          <figure class="q"><div><blockquote class="clamp">“Marta was part of our support and customer success team at Nedzo for almost a year, and I'm glad to recommend her. What stood out first was how she treated customers. She's patient with people who are frustrated, clear when explaining something technical to someone who isn't, and she follows through. Customers noticed and she was the favorite support rep for many of them. She also grew a lot in the time she was with us. Marta came in with limited exposure to SaaS and AI and left able to handle escalations on her own, onboard new customers end to end, and write help docs the team still uses. She asked good questions, took feedback without defensiveness, and put in the work to close the gaps herself. She cares about doing the job well, which is not something you can teach. Any team that puts her in front of customers will be better for it.”</blockquote><button class="more" type="button">Read more</button></div><figcaption><b>Ivo Schipper</b><span>Co-Founder, Nedzo AI · managed Marta directly</span><br /><a href="https://www.linkedin.com/in/marta-lopes-07a791150/" target="_blank" rel="noopener noreferrer">See it on my LinkedIn ↗</a></figcaption></figure>
+          <figure class="q"><div><blockquote class="clamp">“I had the pleasure of working with Marta Lopes at White Stone Wellness, where she was part of our team as a Customer Service Representative and Receptionist. Marta is an outstanding professional, dedicated, proactive, and always reliable. She consistently demonstrated excellent manners with clients, creating a welcoming and professional environment from the very first interaction. I truly appreciated her professionalism and her proactive approach to solving problems before they even arose. I confidently recommend Marta for any role that requires professionalism, dedication, and strong customer service skills. She would be a great asset to any team.”</blockquote><button class="more" type="button">Read more</button></div><figcaption><b>Patricia Ott</b><span>Marketing Specialist, Operations &amp; Customer Experience Coordinator</span><br /><a href="https://www.linkedin.com/in/marta-lopes-07a791150/" target="_blank" rel="noopener noreferrer">See it on my LinkedIn ↗</a></figcaption></figure>
+          <figure class="q"><div><blockquote class="clamp">“I worked with Marta for two years, and she showed exemplary proactivity and a remarkable capacity for initiative: always looking for new solutions, quick to act on the unexpected, with a practical and effective approach. Her communication skills stand out, along with how easily she builds and maintains a strong, influential network. Marta goes all in for the team, genuinely cares about the wellbeing of both the team and the company, and has the strategic vision to quickly spot opportunities to create value. A creative, motivating professional with a very positive impact on any team.”</blockquote><button class="more" type="button">Read more</button></div><figcaption><b>Maria Nogueira Santos</b><span>Nutritionist &amp; Managing Partner, Sobre'Mesa</span><br /><a href="https://www.linkedin.com/in/marta-lopes-07a791150/" target="_blank" rel="noopener noreferrer">See it on my LinkedIn ↗</a></figcaption></figure>
+          <figure class="q"><div><blockquote class="clamp">“I had the pleasure of working with Marta in the social media space, and she is truly outstanding at what she does. She has a strong eye for content, understands how to engage audiences, and knows how to adapt strategies to meet client goals. Marta is not only creative with ideas but also organized in execution, making campaigns run smoothly from start to finish. What I admire most is how collaborative and supportive she is, always ready to share insights, brainstorm, and lift the team up. Any company or client would be lucky to have Marta managing their social media presence.”</blockquote><button class="more" type="button">Read more</button></div><figcaption><b>Angela Sinama</b><span>Social Media &amp; Content Manager</span><br /><a href="https://www.linkedin.com/in/marta-lopes-07a791150/" target="_blank" rel="noopener noreferrer">See it on my LinkedIn ↗</a></figcaption></figure>
         </div>
       </div>
     </div>
@@ -593,7 +588,7 @@
     <div class="wrap">
       <figure class="reveal"><img src="assets/travel.jpg" alt="Marta travelling" loading="lazy" /></figure>
       <div class="reveal">
-        <p class="mono kicker">07 · Beyond my CV</p>
+        <p class="mono kicker">06 · Beyond my CV</p>
         <h2 class="h2">Who I am <em>when I’m not working.</em></h2>
         <p class="lede">Nutrition was never really about food. It was about learning to sit with someone, ask the right questions and understand what they actually need before offering an answer. That habit never left me.</p>
         <p class="lede">Since then, I have lived and worked across Portugal and Australia, travelled through Southeast Asia and kept choosing roles that put me close to people, problems and new things to learn.</p>
@@ -605,10 +600,12 @@
   <!-- ───────── CONTACT -->
   <section class="contact" id="contact">
     <div class="wrap">
-      <p class="mono kicker">08 · Contact</p>
+      <p class="mono kicker">07 · Contact</p>
       <h2 class="big" id="big">Looking for someone who can <em>own the client journey?</em></h2>
+      <p class="lede contact-meta">martabpfl@gmail.com · Remote, available across time zones · Portuguese &amp; English</p>
       <div class="btns">
         <a class="btn btn--dark" href="mailto:martabpfl@gmail.com">Email me →</a>
+        <a class="btn btn--ghost" href="assets/Marta-Lopes-CV.pdf" target="_blank" rel="noopener">Download CV ↓</a>
         <a class="btn btn--ghost" href="https://www.linkedin.com/in/marta-lopes-07a791150/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
       </div>
     </div>
@@ -616,7 +613,7 @@
 </main>
 
 <footer>
-  <span>Marta Lopes · Customer Success · Account Management · Implementation</span>
+  <span>Marta Lopes · Remote · PT / EN · © 2026</span>
   <a href="#top">Back to top ↑</a>
 </footer>
 
@@ -718,7 +715,7 @@
   // idle life: a slow breath, and every few seconds the expression changes
   if (!avatar.classList.contains("has-video")) {
     gsap.to("#avatar .main, #avatar .alt", { scaleY: 1.008, scaleX: 0.997, transformOrigin: "50% 100%", duration: 2.4, ease: "sine.inOut", yoyo: true, repeat: -1 });
-    gsap.to("#avatar .alt", { opacity: 1, duration: 0.7, ease: "sine.inOut", yoyo: true, repeat: -1, repeatDelay: 3.2, delay: 2.5 });
+    gsap.to("#avatar .alt", { opacity: 1, duration: 0.22, ease: "power1.inOut", yoyo: true, repeat: -1, repeatDelay: 3.6, delay: 2.5 });
   }
   gsap.to(".hero-title", { y: -90, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
 
@@ -763,20 +760,6 @@
     gsap.fromTo($(".tl-year", it), { opacity: 0.12, scale: 0.8, filter: "blur(6px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", ease: "none", scrollTrigger: { trigger: it, start: "top 85%", end: "top 45%", scrub: true } });
     gsap.from($(".tl-card", it), { x: it.matches(":nth-child(even)") ? -60 : 60, opacity: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: it, start: "top 75%" } });
   });
-
-  /* ───────── moments: pinned horizontal scroll (desktop) + count-up */
-  const mm = gsap.matchMedia();
-  mm.add("(min-width: 901px)", () => {
-    const track = $("#track");
-    const dist = () => track.scrollWidth - window.innerWidth;
-    gsap.to(track, { x: () => -dist(), ease: "none", scrollTrigger: { trigger: ".moments", start: "top top", end: () => "+=" + dist(), pin: true, scrub: 0.6, invalidateOnRefresh: true } });
-  });
-  $$(".num[data-count]").forEach((n) => {
-    const end = +n.dataset.count, pre = n.dataset.pre || "", suf = n.dataset.suf || "", o = { v: 0 };
-    ScrollTrigger.create({ trigger: n, start: "top 95%", once: true, onEnter: () => gsap.to(o, { v: end, duration: 1.6, ease: "power2.out", onUpdate: () => (n.textContent = pre + Math.round(o.v) + suf) }) });
-    n.textContent = pre + "0" + suf;
-  });
-  gsap.from(".mcard", { y: 40, opacity: 0, duration: 0.8, stagger: 0.08, ease: "power3.out", scrollTrigger: { trigger: "#track", start: "top 85%" } });
 
   /* ───────── feedback cards */
   gsap.from(".q", { y: 40, opacity: 0, duration: 0.8, stagger: 0.07, ease: "power3.out", scrollTrigger: { trigger: "#feedback", start: "top 70%" } });
