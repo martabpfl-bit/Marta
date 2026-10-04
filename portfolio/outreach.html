@@ -126,55 +126,60 @@
     .funnel { grid-template-columns: 1fr 1fr; }
   }
   @media (prefers-reduced-motion: reduce) { .node::before, .caret, .lead { animation: none !important; } }
+  .hdr-r { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+  .lang { display: flex; padding: 4px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); }
+  .lang button { border: 0; background: transparent; padding: 5px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; cursor: pointer; color: var(--ink2); }
+  .lang button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+  @media (max-width: 600px) { .hdr-r .tag { display: none; } }
 </style>
 </head>
 <body>
 <header>
-  <a class="back" href="index.html#work">← Back to portfolio</a>
-  <span class="tag">Interactive demo · sample profiles</span>
+  <a class="back" href="index.html#work" data-pt="← Voltar ao portfólio">← Back to portfolio</a>
+  <span class="hdr-r"><span class="lang" role="group" aria-label="Language"><button type="button" data-lang="pt" aria-pressed="false">PT</button><button type="button" data-lang="en" aria-pressed="true">EN</button></span><span class="tag" data-pt="Demo interativa · perfis de exemplo">Interactive demo · sample profiles</span></span>
 </header>
 
 <section class="intro">
-  <p class="mono">Project · Outreach system</p>
+  <p class="mono" data-pt="Projeto · Sistema de outreach">Project · Outreach system</p>
   <h1>LinkedIn Outreach <em>System.</em></h1>
-  <p>I connected HeyReach to my LinkedIn and to Claude. For each person, Claude used the information on their profile to write a message that actually made sense for them, and every conversation was tracked. Try it below with sample profiles.</p>
+  <p data-pt="Liguei o HeyReach ao meu LinkedIn e ao Claude. Para cada pessoa, o Claude usou a informação do perfil para escrever uma mensagem que fizesse mesmo sentido para ela, e cada conversa foi acompanhada. Experimenta abaixo com perfis de exemplo.">I connected HeyReach to my LinkedIn and to Claude. For each person, Claude used the information on their profile to write a message that actually made sense for them, and every conversation was tracked. Try it below with sample profiles.</p>
 </section>
 
 <section>
   <div class="real">
-    <div><b>~20</b><span>outreach messages a day at most, within LinkedIn’s limit</span></div>
-    <div><b>~33%</b><span>of them became a meaningful conversation</span></div>
-    <div><b>~20</b><span>meetings booked in two months, opening the Portuguese market</span></div>
+    <div><b>~20</b><span data-pt="mensagens por dia, no máximo, dentro do limite do LinkedIn">outreach messages a day at most, within LinkedIn’s limit</span></div>
+    <div><b>~33%</b><span data-pt="tornaram-se conversas com interesse">of them became a meaningful conversation</span></div>
+    <div><b>~20</b><span data-pt="reuniões marcadas em dois meses, a abrir o mercado português">meetings booked in two months, opening the Portuguese market</span></div>
   </div>
-  <p class="mono" style="margin-top:10px">Real results · approximate · it started in the summer holidays, so closing was slower</p>
+  <p class="mono" style="margin-top:10px" data-pt="Resultados reais · aproximados · começou nas férias de verão, por isso o fecho foi mais lento">Real results · approximate · it started in the summer holidays, so closing was slower</p>
 </section>
 
 <section>
-  <div class="step"><b>↻</b><span class="mono">How the pieces connect</span></div>
+  <div class="step"><b>↻</b><span class="mono" data-pt="Como as peças se ligam">How the pieces connect</span></div>
   <div class="flow">
-    <div class="node" style="--i:0"><div class="ic">🎯</div><b>Lead list</b><span>Who I want to reach, on LinkedIn</span></div>
-    <div class="node" style="--i:1"><div class="ic">🔗</div><b>HeyReach</b><span>Profile info: role, company, context</span></div>
-    <div class="node ai" style="--i:2"><div class="ic">✦</div><b>Claude</b><span>Writes the message from that info</span></div>
-    <div class="node" style="--i:3"><div class="ic">✓</div><b>Checks</b><span>Real detail, no pitch, a question</span></div>
-    <div class="node" style="--i:4"><div class="ic">💬</div><b>LinkedIn</b><span>Sent at a safe daily pace</span></div>
-    <div class="node" style="--i:5"><div class="ic">📊</div><b>Tracking</b><span>Every reply, every stage</span></div>
+    <div class="node" style="--i:0"><div class="ic">🎯</div><b data-pt="Lista de leads">Lead list</b><span data-pt="Quem quero contactar, no LinkedIn">Who I want to reach, on LinkedIn</span></div>
+    <div class="node" style="--i:1"><div class="ic">🔗</div><b>HeyReach</b><span data-pt="Dados do perfil: cargo, empresa, contexto">Profile info: role, company, context</span></div>
+    <div class="node ai" style="--i:2"><div class="ic">✦</div><b>Claude</b><span data-pt="Escreve a mensagem com esses dados">Writes the message from that info</span></div>
+    <div class="node" style="--i:3"><div class="ic">✓</div><b data-pt="Verificações">Checks</b><span data-pt="Detalhe real, sem vender, uma pergunta">Real detail, no pitch, a question</span></div>
+    <div class="node" style="--i:4"><div class="ic">💬</div><b>LinkedIn</b><span data-pt="Enviado a um ritmo diário seguro">Sent at a safe daily pace</span></div>
+    <div class="node" style="--i:5"><div class="ic">📊</div><b data-pt="Acompanhamento">Tracking</b><span data-pt="Cada resposta, cada etapa">Every reply, every stage</span></div>
   </div>
 </section>
 
 <section>
-  <div class="step"><b>1</b><span class="mono">Pick a person · then let Claude write</span></div>
-  <h2 class="h2">From a profile to a message <em>worth answering.</em></h2>
+  <div class="step"><b>1</b><span class="mono" data-pt="Escolhe uma pessoa · depois deixa o Claude escrever">Pick a person · then let Claude write</span></div>
+  <h2 class="h2" data-pt="De um perfil a uma mensagem &lt;em&gt;que vale a pena responder.&lt;/em&gt;">From a profile to a message <em>worth answering.</em></h2>
   <div class="comp">
     <div class="panel"><div class="people" id="people"></div></div>
     <div class="panel">
       <div class="work">
-        <div class="data"><p class="mono">What came in from the profile</p><dl id="data"></dl></div>
+        <div class="data"><p class="mono" data-pt="O que veio do perfil">What came in from the profile</p><dl id="data"></dl></div>
         <div>
-          <p class="mono">Message written by Claude</p>
-          <div class="msg" id="msg" aria-live="polite"><span class="ph">Press “Write message”.</span></div>
+          <p class="mono" data-pt="Mensagem escrita pelo Claude">Message written by Claude</p>
+          <div class="msg" id="msg" aria-live="polite"><span class="ph" data-pt="Carrega em “Write message”.">Press “Write message”.</span></div>
           <ul class="checks" id="checks"></ul>
           <div class="review" id="review"></div>
-          <details id="fu"><summary>Follow-ups if there’s no reply</summary><p id="fu1"></p><p id="fu2"></p></details>
+          <details id="fu"><summary data-pt="Follow-ups se não houver resposta">Follow-ups if there’s no reply</summary><p id="fu1"></p><p id="fu2"></p></details>
         </div>
       </div>
       <div class="row"><button class="btn dark" type="button" id="write">✦ Write message</button><span class="mono" id="count"></span></div>
@@ -183,49 +188,50 @@
 </section>
 
 <section>
-  <div class="step"><b>2</b><span class="mono">Track every conversation</span></div>
-  <h2 class="h2">Nothing gets lost <em>after the first message.</em></h2>
+  <div class="step"><b>2</b><span class="mono" data-pt="Acompanhar cada conversa">Track every conversation</span></div>
+  <h2 class="h2" data-pt="Nada se perde &lt;em&gt;depois da primeira mensagem.&lt;/em&gt;">Nothing gets lost <em>after the first message.</em></h2>
   <div class="board" id="board"></div>
   <div class="funnel">
-    <div class="kpi"><b id="kA">0%</b><span>accepted the connection</span></div>
-    <div class="kpi"><b id="kR">0%</b><span>replied</span></div>
-    <div class="kpi"><b id="kI">0%</b><span>became a meaningful conversation</span></div>
-    <div class="kpi"><b id="kM">0</b><span>meetings booked</span></div>
+    <div class="kpi"><b id="kA">0%</b><span data-pt="aceitaram o pedido de ligação">accepted the connection</span></div>
+    <div class="kpi"><b id="kR">0%</b><span data-pt="responderam">replied</span></div>
+    <div class="kpi"><b id="kI">0%</b><span data-pt="tornaram-se conversas com interesse">became a meaningful conversation</span></div>
+    <div class="kpi"><b id="kM">0</b><span data-pt="reuniões marcadas">meetings booked</span></div>
   </div>
-  <div class="row"><button class="btn dark" type="button" id="sim">▶ Simulate a week</button><button class="btn" type="button" id="reset">Reset</button><span class="mono">Sample leads · replies are sorted by Claude, answered by me</span></div>
+  <div class="row"><button class="btn dark" type="button" id="sim" data-pt="▶ Simular uma semana">▶ Simulate a week</button><button class="btn" type="button" id="reset" data-pt="Repor">Reset</button><span class="mono" data-pt="Leads de exemplo · as respostas são classificadas pelo Claude e respondidas por mim">Sample leads · replies are sorted by Claude, answered by me</span></div>
 </section>
 
 <section>
-  <div class="step"><b>3</b><span class="mono">What I did · what comes next</span></div>
-  <h2 class="h2">How I built it, <em>and how I’d scale it.</em></h2>
+  <div class="step"><b>3</b><span class="mono" data-pt="O que fiz · o que vem a seguir">What I did · what comes next</span></div>
+  <h2 class="h2" data-pt="Como o construí, &lt;em&gt;e como o faria crescer.&lt;/em&gt;">How I built it, <em>and how I’d scale it.</em></h2>
   <div class="two">
     <div class="panel">
-      <p class="mono">How I built it</p>
+      <p class="mono" data-pt="Como o construí">How I built it</p>
       <h3>HeyReach + LinkedIn + Claude</h3>
       <ul>
-        <li>Connected HeyReach to my LinkedIn account and to Claude.</li>
-        <li>Set up the messages I wanted to send, shaped by the information that came in for each person.</li>
-        <li>Claude turned that information into a meaningful, personal message instead of a template.</li>
-        <li>Tracked the conversations that followed: ~33% became meaningful, ~20 meetings in two months.</li>
+        <li data-pt="Liguei o HeyReach à minha conta de LinkedIn e ao Claude.">Connected HeyReach to my LinkedIn account and to Claude.</li>
+        <li data-pt="Defini as mensagens que queria enviar, adaptadas à informação que chegava sobre cada pessoa.">Set up the messages I wanted to send, shaped by the information that came in for each person.</li>
+        <li data-pt="O Claude transformava essa informação numa mensagem pessoal e com sentido, em vez de um modelo genérico.">Claude turned that information into a meaningful, personal message instead of a template.</li>
+        <li data-pt="Acompanhei as conversas que se seguiram: ~33% tornaram-se conversas com interesse, ~20 reuniões em dois meses.">Tracked the conversations that followed: ~33% became meaningful, ~20 meetings in two months.</li>
       </ul>
     </div>
     <div class="panel dark">
-      <p class="mono">How I’d scale it</p>
-      <h3>Same idea, built for a team</h3>
+      <p class="mono" data-pt="Como o faria crescer">How I’d scale it</p>
+      <h3 data-pt="A mesma ideia, pensada para uma equipa">Same idea, built for a team</h3>
       <ul>
-        <li>Lead lists from Sales Navigator, with no scraping tools: they break LinkedIn’s terms and put the account at risk.</li>
-        <li>Claude only uses facts from the profile, returns a fixed structure, and anything without a real detail goes to review instead of being sent.</li>
-        <li>I review the first messages by hand, then a sample every week.</li>
-        <li>Replies flow into the CRM by stage; Claude sorts them and suggests an answer, a person sends it.</li>
-        <li>Weekly numbers (accepted, replied, meaningful, meetings) decide what to change in the prompt.</li>
-        <li>Only business information, kept to the minimum, and anyone who says no is never contacted again.</li>
+        <li data-pt="Listas de leads do Sales Navigator, sem ferramentas de scraping: violam os termos do LinkedIn e põem a conta em risco.">Lead lists from Sales Navigator, with no scraping tools: they break LinkedIn’s terms and put the account at risk.</li>
+        <li data-pt="O Claude só usa factos do perfil, devolve uma estrutura fixa, e o que não tiver um detalhe real vai para revisão em vez de ser enviado.">Claude only uses facts from the profile, returns a fixed structure, and anything without a real detail goes to review instead of being sent.</li>
+        <li data-pt="Revejo as primeiras mensagens à mão e depois uma amostra todas as semanas.">I review the first messages by hand, then a sample every week.</li>
+        <li data-pt="As respostas entram no CRM por etapa; o Claude classifica-as e sugere uma resposta, e é uma pessoa que a envia.">Replies flow into the CRM by stage; Claude sorts them and suggests an answer, a person sends it.</li>
+        <li data-pt="Os números semanais (aceites, respostas, conversas com interesse, reuniões) decidem o que mudar no prompt.">Weekly numbers (accepted, replied, meaningful, meetings) decide what to change in the prompt.</li>
+        <li data-pt="Só informação profissional, no mínimo necessário, e quem disser que não nunca volta a ser contactado.">Only business information, kept to the minimum, and anyone who says no is never contacted again.</li>
       </ul>
     </div>
   </div>
 </section>
 
-<p class="foot">Sample data only: the people, companies and messages on this page are invented for the demo, and the messages are pre-written, so nothing is sent and no AI is called from this page.</p>
+<p class="foot" data-pt="Apenas dados de exemplo: as pessoas, empresas e mensagens desta página foram inventadas para a demo, e as mensagens estão pré-escritas, por isso nada é enviado e esta página não chama nenhuma IA.">Sample data only: the people, companies and messages on this page are invented for the demo, and the messages are pre-written, so nothing is sent and no AI is called from this page.</p>
 
+<script src="assets/i18n.js"></script>
 <script>
 (() => {
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;

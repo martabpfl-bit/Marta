@@ -66,55 +66,61 @@
   .copied.on { opacity: 1; }
   .foot { padding: 0 var(--gut) 40px; color: var(--mute); font-size: 13px; max-width: 80ch; line-height: 1.5; }
   @media (max-width: 900px) { .app { grid-template-columns: 1fr; } .preview { position: static; } .row2 { grid-template-columns: 1fr; } }
+  .hdr-r { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+  .lang { display: flex; padding: 4px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); }
+  .lang button { border: 0; background: transparent; padding: 5px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; cursor: pointer; color: var(--ink2); }
+  .lang button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+  @media (max-width: 600px) { .hdr-r .tag { display: none; } }
 </style>
 </head>
 <body>
 <header>
-  <a class="back" href="index.html#work">← Back to portfolio</a>
-  <span class="tag">Interactive tool</span>
+  <a class="back" href="index.html#work" data-pt="← Voltar ao portfólio">← Back to portfolio</a>
+  <span class="hdr-r"><span class="lang" role="group" aria-label="Language"><button type="button" data-lang="pt" aria-pressed="false">PT</button><button type="button" data-lang="en" aria-pressed="true">EN</button></span><span class="tag" data-pt="Ferramenta interativa">Interactive tool</span></span>
 </header>
 
 <section class="intro">
-  <p class="mono">Project · Handoff to developers</p>
+  <p class="mono" data-pt="Projeto · Passagem aos developers">Project · Handoff to developers</p>
   <h1>Escalation Ticket <em>Builder.</em></h1>
-  <p>When I can’t fix a client problem myself, I hand it over the same way every time, in Linear and Slack, so the developer doesn’t have to come back with questions. This tool is that structure. Fill it in, or load the example, and copy a ticket that’s ready to go.</p>
+  <p data-pt="Quando não consigo resolver sozinha o problema de um cliente, passo-o sempre da mesma forma, no Linear e no Slack, para que o developer não tenha de voltar com perguntas. Esta ferramenta é essa estrutura. Preenche-a, ou carrega o exemplo, e copia um ticket pronto a enviar.">When I can’t fix a client problem myself, I hand it over the same way every time, in Linear and Slack, so the developer doesn’t have to come back with questions. This tool is that structure. Fill it in, or load the example, and copy a ticket that’s ready to go.</p>
   <div class="tools">
-    <button class="btn dark" type="button" id="ex">Load an example</button>
-    <button class="btn" type="button" id="clear">Clear</button>
+    <button class="btn dark" type="button" id="ex" data-pt="Carregar um exemplo">Load an example</button>
+    <button class="btn" type="button" id="clear" data-pt="Limpar">Clear</button>
   </div>
 </section>
 
 <div class="app">
   <form class="panel" id="form" autocomplete="off">
-    <div class="field"><label for="title">Short title <span>what’s broken, in one line</span></label><input id="title" name="title" /></div>
+    <div class="field"><label for="title" data-pt="Título curto &lt;span&gt;o que está avariado, numa linha&lt;/span&gt;">Short title <span>what’s broken, in one line</span></label><input id="title" name="title" /></div>
     <div class="row2">
-      <div class="field"><label for="client">Client &amp; IDs <span>account, agent, workflow</span></label><input id="client" name="client" /></div>
-      <div class="field"><label for="impact">Impact</label><select id="impact" name="impact"><option value="">Choose…</option><option>Urgent: client blocked</option><option>High: core flow affected</option><option>Medium: workaround exists</option><option>Low: cosmetic</option></select></div>
+      <div class="field"><label for="client" data-pt="Cliente e IDs &lt;span&gt;conta, agente, fluxo&lt;/span&gt;">Client &amp; IDs <span>account, agent, workflow</span></label><input id="client" name="client" /></div>
+      <div class="field"><label for="impact" data-pt="Impacto">Impact</label><select id="impact" name="impact"><option value="">Choose…</option><option>Urgent: client blocked</option><option>High: core flow affected</option><option>Medium: workaround exists</option><option>Low: cosmetic</option></select></div>
     </div>
-    <div class="field"><label for="link">Conversation link <span>call, transcript or chat</span></label><input id="link" name="link" /></div>
-    <div class="field"><label for="happened">What happened</label><textarea id="happened" name="happened"></textarea></div>
-    <div class="field"><label for="steps">Steps to reproduce <span>optional</span></label><textarea id="steps" name="steps"></textarea></div>
-    <div class="field"><label for="freq">How often <span>optional · e.g. 4 of the last 10 calls</span></label><input id="freq" name="freq" /></div>
-    <div class="field"><label for="expected">What was expected</label><textarea id="expected" name="expected"></textarea></div>
-    <div class="field"><label for="findings">What I found</label><textarea id="findings" name="findings"></textarea></div>
-    <div class="field"><label for="likely">Likely problem</label><textarea id="likely" name="likely"></textarea></div>
-    <div class="field"><label for="tried">What I tried</label><textarea id="tried" name="tried"></textarea></div>
-    <div class="field"><label for="why">Why it didn’t fix it</label><textarea id="why" name="why"></textarea></div>
+    <div class="field"><label for="link" data-pt="Link da conversa &lt;span&gt;chamada, transcrição ou chat&lt;/span&gt;">Conversation link <span>call, transcript or chat</span></label><input id="link" name="link" /></div>
+    <div class="field"><label for="happened" data-pt="O que aconteceu">What happened</label><textarea id="happened" name="happened"></textarea></div>
+    <div class="field"><label for="steps" data-pt="Passos para reproduzir &lt;span&gt;opcional&lt;/span&gt;">Steps to reproduce <span>optional</span></label><textarea id="steps" name="steps"></textarea></div>
+    <div class="field"><label for="freq" data-pt="Frequência &lt;span&gt;opcional · ex.: 4 das últimas 10 chamadas&lt;/span&gt;">How often <span>optional · e.g. 4 of the last 10 calls</span></label><input id="freq" name="freq" /></div>
+    <div class="field"><label for="expected" data-pt="O que era esperado">What was expected</label><textarea id="expected" name="expected"></textarea></div>
+    <div class="field"><label for="findings" data-pt="O que descobri">What I found</label><textarea id="findings" name="findings"></textarea></div>
+    <div class="field"><label for="likely" data-pt="Problema provável">Likely problem</label><textarea id="likely" name="likely"></textarea></div>
+    <div class="field"><label for="tried" data-pt="O que tentei">What I tried</label><textarea id="tried" name="tried"></textarea></div>
+    <div class="field"><label for="why" data-pt="Porque não resolveu">Why it didn’t fix it</label><textarea id="why" name="why"></textarea></div>
   </form>
 
   <aside class="panel preview">
     <div class="meter"><div class="bar"><i id="bar"></i></div><b id="ready">Not ready yet</b></div>
     <ul class="hints" id="hints"></ul>
     <div class="ticket">
-      <div class="th"><b>TICKET PREVIEW</b><span class="pri" id="pri" style="background:var(--mute)">No impact set</span></div>
+      <div class="th"><b data-pt="PRÉ-VISUALIZAÇÃO DO TICKET">TICKET PREVIEW</b><span class="pri" id="pri" style="background:var(--mute)">No impact set</span></div>
       <div class="tb"><h2 id="pTitle">Untitled issue</h2><dl id="dl"></dl></div>
     </div>
-    <div class="tools"><button class="btn dark" type="button" id="copy">Copy ticket</button><span class="copied" id="copied">Copied ✓</span></div>
+    <div class="tools"><button class="btn dark" type="button" id="copy" data-pt="Copiar ticket">Copy ticket</button><span class="copied" id="copied" data-pt="Copiado ✓">Copied ✓</span></div>
   </aside>
 </div>
 
-<p class="foot">The example is invented for the demo. Nothing you type here leaves your browser.</p>
+<p class="foot" data-pt="O exemplo foi inventado para a demo. Nada do que escreves aqui sai do teu browser.">The example is invented for the demo. Nothing you type here leaves your browser.</p>
 
+<script src="assets/i18n.js"></script>
 <script>
 (() => {
   const OPT = [["steps", "Steps to reproduce"], ["freq", "How often"]];

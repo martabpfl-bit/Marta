@@ -106,19 +106,24 @@
     .action { grid-template-columns: 1fr; }
   }
   @media (prefers-reduced-motion: reduce) { .ring .fg { transition: none; } .flash { animation: none; } }
+  .hdr-r { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+  .lang { display: flex; padding: 4px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); }
+  .lang button { border: 0; background: transparent; padding: 5px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; cursor: pointer; color: var(--ink2); }
+  .lang button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+  @media (max-width: 600px) { .hdr-r .tag { display: none; } }
 </style>
 </head>
 <body>
 <header>
-  <a class="back" href="index.html#work">← Back to portfolio</a>
-  <span class="tag">Interactive demo · sample data</span>
+  <a class="back" href="index.html#work" data-pt="← Voltar ao portfólio">← Back to portfolio</a>
+  <span class="hdr-r"><span class="lang" role="group" aria-label="Language"><button type="button" data-lang="pt" aria-pressed="false">PT</button><button type="button" data-lang="en" aria-pressed="true">EN</button></span><span class="tag" data-pt="Demo interativa · dados de exemplo">Interactive demo · sample data</span></span>
 </header>
 
 <section class="intro">
   <div>
-    <p class="mono">Project · Customer health</p>
+    <p class="mono" data-pt="Projeto · Saúde dos clientes">Project · Customer health</p>
     <h1>Customer Health <em>Monitor.</em></h1>
-    <p>Nobody asked me to build this. I combined nine signals about each customer into one status, so a problem shows up before the customer has to tell me. This is a working demo with made-up sample accounts: pick an account, change any signal and watch the status and the next steps update.</p>
+    <p data-pt="Ninguém me pediu para construir isto. Juntei nove sinais sobre cada cliente num só estado, para que um problema apareça antes de o cliente ter de o dizer. Esta é uma demo funcional com contas de exemplo inventadas: escolhe uma conta, muda qualquer sinal e vê o estado e os próximos passos a atualizar.">Nobody asked me to build this. I combined nine signals about each customer into one status, so a problem shows up before the customer has to tell me. This is a working demo with made-up sample accounts: pick an account, change any signal and watch the status and the next steps update.</p>
   </div>
 </section>
 
@@ -147,25 +152,26 @@
     </div>
 
     <div class="sig-head">
-      <h3>The nine signals</h3>
-      <span class="mono">Click to change · Good / Watch / Risk</span>
+      <h3 data-pt="Os nove sinais">The nine signals</h3>
+      <span class="mono" data-pt="Clica para mudar · Good / Watch / Risk">Click to change · Good / Watch / Risk</span>
     </div>
     <div class="signals" id="signals"></div>
 
     <div class="action">
-      <div class="box why"><h3>Why this status</h3><ul id="why"></ul></div>
-      <div class="box next"><p class="mono">What I would do next</p><ul id="next"></ul></div>
+      <div class="box why"><h3 data-pt="Porquê este estado">Why this status</h3><ul id="why"></ul></div>
+      <div class="box next"><p class="mono" data-pt="O que eu faria a seguir">What I would do next</p><ul id="next"></ul></div>
     </div>
   </main>
 </div>
 
 <section class="real-life">
-  <p class="mono">What happened in real life</p>
-  <p>At Nedzo, one account turned yellow. I investigated what was behind it, reached out to the client and proposed solutions. The customer subsequently renewed. I presented the health view to leadership and it was approved for use.</p>
+  <p class="mono" data-pt="O que aconteceu na vida real">What happened in real life</p>
+  <p data-pt="Na Nedzo, uma conta ficou amarela. Investiguei o que estava por trás, falei com o cliente e propus soluções. O cliente acabou por renovar. Apresentei esta visão da saúde dos clientes à liderança e foi aprovada para uso.">At Nedzo, one account turned yellow. I investigated what was behind it, reached out to the client and proposed solutions. The customer subsequently renewed. I presented the health view to leadership and it was approved for use.</p>
 </section>
 
-<p class="foot">Sample data only: the accounts, names and numbers on this page are invented for the demo. The real health view used live customer data, was presented to leadership and approved for use.</p>
+<p class="foot" data-pt="Apenas dados de exemplo: as contas, nomes e números desta página foram inventados para a demo. A versão real usava dados reais de clientes, foi apresentada à liderança e aprovada para uso.">Sample data only: the accounts, names and numbers on this page are invented for the demo. The real health view used live customer data, was presented to leadership and approved for use.</p>
 
+<script src="assets/i18n.js"></script>
 <script>
 (() => {
   const SIG = [
