@@ -103,7 +103,7 @@
   .hero h1 { font-size: clamp(2.8rem, 5.2vw, 5.4rem); line-height: 0.9; letter-spacing: -0.055em; font-weight: 700; }
   .hero h1 .dot { color: var(--t-tech); }
   .hero h1 em { font-weight: 400; letter-spacing: -0.03em; }
-  .hero .sub { margin-top: 22px; font-size: clamp(1rem, 1.4vw, 1.25rem); color: var(--ink2); max-width: 36ch; }
+  .hero .sub { margin-top: 32px; font-size: clamp(1rem, 1.4vw, 1.25rem); color: var(--ink2); max-width: 36ch; }
   .hero .sub2 { margin-top: 12px; font-size: 15px; line-height: 1.55; color: var(--mute); max-width: 52ch; }
   .hero-side { display: grid; gap: 14px; justify-items: start; }
   .status { display: inline-flex; align-items: center; gap: 10px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); font-size: 13px; }
@@ -341,7 +341,7 @@
     .hero-side { justify-items: start; }
     .hero-btns { justify-content: flex-start; }
     .about .wrap { grid-template-columns: 1fr; }
-    .lanyard { height: 520px; }
+    .lanyard { height: 610px; }
     .jmap { grid-template-columns: 36px 1fr; grid-template-rows: none; row-gap: 16px; column-gap: 14px; }
     .jroad { grid-column: 1; grid-row: 1 / span 5; }
     .jcard, .jcard.low { grid-column: 2; grid-row: auto; align-self: auto; transform: translateX(14px); }
@@ -842,7 +842,7 @@
     gsap.to("#avatar img", { scaleY: 1.008, scaleX: 0.997, transformOrigin: "50% 100%", duration: 2.4, ease: "sine.inOut", yoyo: true, repeat: -1 });
     window.__idleFace = gsap.to("#avatar .alt", { opacity: 1, duration: 0.22, ease: "power1.inOut", yoyo: true, repeat: -1, repeatDelay: 3.6, delay: 2.5 });
   }
-  gsap.to(".hero-title", { y: -90, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+  gsap.fromTo(".hero-title", { y: 0 }, { y: -90, ease: "none", immediateRender: false, scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
 
   /* ───────── generic reveals */
   $$(".reveal, .h2, .kicker").forEach((el) => {
@@ -869,7 +869,25 @@
   /* ───────── client journey: pinned on desktop, the client travels the road as you scroll */
   const jm = gsap.matchMedia(), jp = { p: 0 };
   const jtween = (st) => gsap.fromTo(jp, { p: 0 }, { p: 1, ease: "none", onUpdate: () => { window.__jp = jp.p; jset(jp.p); }, scrollTrigger: st });
-  jm.add("(min-width: 901px)", () => jtween({ trigger: ".journey", start: "top top", end: "+=" + Math.round(innerHeight * 2.2), pin: true, anticipatePin: 1, scrub: 0.8, invalidateOnRefresh: true, onRefresh: () => { jL = buildRoad(); jset(jp.p); } }));
+  jm.add("(min-width: 901px)", () => {
+    let tw = null, fits = null;
+    const onRefresh = () => { jL = buildRoad(); jset(jp.p); };
+    const build = () => {
+      const top = $(".nav").getBoundingClientRect().bottom + 16, f = $("#jmap").offsetHeight <= innerHeight - top - 16;
+      if (f === fits) return false;
+      if (tw) { tw.scrollTrigger.kill(true); tw.kill(); }
+      fits = f;
+      tw = jtween(f
+        ? { trigger: "#jmap", start: () => "center " + Math.round(($(".nav").getBoundingClientRect().bottom + 16 + innerHeight) / 2) + "px", end: () => "+=" + Math.round(innerHeight * 2.2), pin: true, anticipatePin: 1, scrub: 0.8, refreshPriority: 1, invalidateOnRefresh: true, onRefresh }
+        : { trigger: "#jmap", start: "top 70%", end: "bottom 60%", scrub: 0.6, refreshPriority: 1, onRefresh });
+      return true;
+    };
+    build();
+    const re = () => { if (build()) { ScrollTrigger.sort(); ScrollTrigger.refresh(); } };
+    addEventListener("resize", re); document.addEventListener("langchange", re);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(re);
+    return () => { removeEventListener("resize", re); document.removeEventListener("langchange", re); if (tw) { tw.scrollTrigger.kill(true); tw.kill(); } tw = null; fits = null; };
+  });
   jm.add("(max-width: 900px)", () => jtween({ trigger: "#jmap", start: "top 70%", end: "bottom 60%", scrub: 0.6, onRefresh: () => { jL = buildRoad(); jset(jp.p); } }));
   jset(0);
 
@@ -896,11 +914,12 @@
   const pill = $("#pill"), ind = $(".ind", pill), links = $$("a", pill);
   const moveInd = (a) => {
     links.forEach((l) => l.classList.toggle("on", l === a));
-    if (!a) return gsap.to(ind, { opacity: 0, duration: 0.3 });
-    gsap.to(ind, { x: a.offsetLeft - 5, width: a.offsetWidth, opacity: 1, duration: 0.55, ease: "power3.out" });
+    if (!a) return gsap.to(ind, { opacity: 0, duration: 0.3, overwrite: true });
+    gsap.to(ind, { x: a.offsetLeft - 5, width: a.offsetWidth, opacity: 1, duration: 0.55, ease: "power3.out", overwrite: true });
   };
-  links.forEach((a) => {
-    ScrollTrigger.create({ trigger: a.getAttribute("href"), start: "top 55%", end: "bottom 55%", onToggle: (s) => s.isActive && moveInd(a) });
+  links.forEach((a, i) => {
+    // the first section clears the pill when you leave it upwards, even if a fast scroll skips the hero trigger
+    ScrollTrigger.create({ trigger: a.getAttribute("href"), start: "top 55%", end: "bottom 55%", onToggle: (s) => s.isActive && moveInd(a), onLeaveBack: () => i === 0 && moveInd(null) });
   });
   ScrollTrigger.create({ trigger: ".hero", start: "top top", end: "bottom 55%", onToggle: (s) => s.isActive && moveInd(null) });
 
