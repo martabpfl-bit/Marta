@@ -161,8 +161,9 @@
   .jcard h3 { margin-top: 8px; font-size: 1.15rem; letter-spacing: -0.02em; line-height: 1.15; }
   .jcard p { margin-top: 8px; font-size: 13.5px; line-height: 1.5; color: var(--ink2); }
   .tools { margin-top: 46px; display: grid; gap: 12px; }
-  .tools .row { display: flex; align-items: center; gap: 18px; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
-  .tools .lbl { flex: 0 0 auto; }
+  .tools .row { display: grid; gap: 10px; }
+  .tools .lbl { display: block; }
+  .tools .mwrap { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
   .marq { display: flex; gap: 10px; width: max-content; animation: marq 38s linear infinite; }
   .tools .row:nth-child(2) .marq { animation-duration: 30s; animation-direction: reverse; }
   .marq span { padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); font-size: 13px; white-space: nowrap; }
@@ -346,7 +347,6 @@
     .jroad { grid-column: 1; grid-row: 1 / span 5; }
     .jcard, .jcard.low { grid-column: 2; grid-row: auto; align-self: auto; transform: translateX(14px); }
     .jcard.on { transform: none; }
-    .tools .row { flex-direction: column; align-items: flex-start; }
     .vframe { border-radius: 18px; }
     .jdot span { display: none; }
     .vframe button::after { width: 64px; height: 64px; margin: -32px 0 0 -32px; font-size: 20px; }
@@ -496,8 +496,8 @@
         <article class="jcard " data-label="Renewing" data-label-pt="A renovar" style="--col:5"><span class="mono" data-pt="05 · Retenção e crescimento">05 · Retention & growth</span><h3 data-pt="Clientes que renovam e crescem">Clients who renew and grow</h3><p data-pt="Estou entre um cliente que precisa que algo funcione e uma equipa técnica que precisa de informação clara para o fazer acontecer, até à renovação ou expansão.">I sit between a client who needs something to work and a technical team that needs clear information to make it happen, all the way to renewal or expansion.</p><a class="proof" href="#feedback" data-pt="O que dizem os clientes →">What clients say →</a></article>
       </div>
       <div class="tools">
-        <div class="row"><span class="mono lbl" data-pt="Ferramentas que uso">Tools I work with</span><div class="marq"><span>Intercom</span><span>Slack</span><span>Linear</span><span>Attio</span><span>GoHighLevel</span><span>Make</span><span>Zapier</span><span>Cal.com</span><span>Calendly</span><span>Stripe</span><span>Skool</span><span>Google Workspace</span><span>Loom</span><span aria-hidden="true" style="display:contents"><span>Intercom</span><span>Slack</span><span>Linear</span><span>Attio</span><span>GoHighLevel</span><span>Make</span><span>Zapier</span><span>Cal.com</span><span>Calendly</span><span>Stripe</span><span>Skool</span><span>Google Workspace</span><span>Loom</span></span></div></div>
-        <div class="row"><span class="mono lbl" data-pt="Experiência técnica">Technical exposure</span><div class="marq"><span>Webhooks</span><span>API integrations</span><span>AI agent testing</span><span>Call &amp; transcript analysis</span><span>Workflow troubleshooting</span><span>Webhooks</span><span>API integrations</span><span>AI agent testing</span><span>Call &amp; transcript analysis</span><span>Workflow troubleshooting</span><span aria-hidden="true" style="display:contents"><span>Webhooks</span><span>API integrations</span><span>AI agent testing</span><span>Call &amp; transcript analysis</span><span>Workflow troubleshooting</span><span>Webhooks</span><span>API integrations</span><span>AI agent testing</span><span>Call &amp; transcript analysis</span><span>Workflow troubleshooting</span></span></div></div>
+        <div class="row"><span class="mono lbl" data-pt="Ferramentas que uso">Tools I work with</span><div class="mwrap"><div class="marq"><span>Intercom</span><span>Slack</span><span>Linear</span><span>Attio</span><span>GoHighLevel</span><span>Make</span><span>Zapier</span><span>Cal.com</span><span>Calendly</span><span>Stripe</span><span>Skool</span><span>Google Workspace</span><span>Loom</span><span aria-hidden="true" style="display:contents"><span>Intercom</span><span>Slack</span><span>Linear</span><span>Attio</span><span>GoHighLevel</span><span>Make</span><span>Zapier</span><span>Cal.com</span><span>Calendly</span><span>Stripe</span><span>Skool</span><span>Google Workspace</span><span>Loom</span></span></div></div></div>
+        <div class="row"><span class="mono lbl" data-pt="Experiência técnica">Technical exposure</span><div class="mwrap"><div class="marq"><span>Webhooks</span><span>API integrations</span><span>AI agent testing</span><span>Call &amp; transcript analysis</span><span>Workflow troubleshooting</span><span>Webhooks</span><span>API integrations</span><span>AI agent testing</span><span>Call &amp; transcript analysis</span><span>Workflow troubleshooting</span><span aria-hidden="true" style="display:contents"><span>Webhooks</span><span>API integrations</span><span>AI agent testing</span><span>Call &amp; transcript analysis</span><span>Workflow troubleshooting</span><span>Webhooks</span><span>API integrations</span><span>AI agent testing</span><span>Call &amp; transcript analysis</span><span>Workflow troubleshooting</span></span></div></div></div>
       </div>
     </div>
   </section>
@@ -832,8 +832,8 @@
   const intro = gsap.timeline({ defaults: { ease: "power4.out" } });
   intro.from(".hero-name span", { yPercent: 60, opacity: 0, duration: 1.4, stagger: 0.07 })
        .from("#avatar", { y: 80, opacity: 0, duration: 1.3 }, 0.3)
-       .from(".hero-copy > div > *", { y: 40, opacity: 0, duration: 1, stagger: 0.1 }, 0.5)
-       .from(".hero-side > *", { y: 20, opacity: 0, duration: 0.9, stagger: 0.1 }, 0.8)
+       .from(".hero-copy > div:first-child > *", { y: 40, opacity: 0, duration: 1, stagger: 0.1 }, 0.5)
+       .fromTo(".hero-side > *", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, stagger: 0.1, clearProps: "transform,opacity" }, 0.8)
        .from(".nav", { y: -30, opacity: 0, duration: 0.9 }, 0.6);
   gsap.to(".hero-name", { xPercent: -14, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
   gsap.fromTo("#avatar", { y: 0 }, { y: -50, ease: "none", immediateRender: false, scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
@@ -868,10 +868,10 @@
 
   /* ───────── client journey: pinned on desktop, the client travels the road as you scroll */
   const jm = gsap.matchMedia(), jp = { p: 0 };
-  const jtween = (st) => gsap.fromTo(jp, { p: 0 }, { p: 1, ease: "none", onUpdate: () => { window.__jp = jp.p; jset(jp.p); }, scrollTrigger: st });
+  const jtween = (st) => gsap.fromTo(jp, { p: 0 }, { p: 1, ease: "none", onUpdate: () => { window.__jp = Math.min(1, jp.p / 0.8); jset(window.__jp); }, scrollTrigger: st });
   jm.add("(min-width: 901px)", () => {
     let tw = null, fits = null;
-    const onRefresh = () => { jL = buildRoad(); jset(jp.p); };
+    const onRefresh = () => { jL = buildRoad(); jset(window.__jp || 0); };
     const build = () => {
       const top = $(".nav").getBoundingClientRect().bottom + 16, f = $("#jmap").offsetHeight <= innerHeight - top - 16;
       if (f === fits) return false;
@@ -879,7 +879,7 @@
       fits = f;
       tw = jtween(f
         ? { trigger: "#jmap", start: () => "center " + Math.round(($(".nav").getBoundingClientRect().bottom + 16 + innerHeight) / 2) + "px", end: () => "+=" + Math.round(innerHeight * 2.2), pin: true, anticipatePin: 1, scrub: 0.8, refreshPriority: 1, invalidateOnRefresh: true, onRefresh }
-        : { trigger: "#jmap", start: "top 70%", end: "bottom 60%", scrub: 0.6, refreshPriority: 1, onRefresh });
+        : { trigger: "#jmap", start: "top 80%", end: "bottom bottom", scrub: 0.6, refreshPriority: 1, onRefresh });
       return true;
     };
     build();
@@ -888,7 +888,7 @@
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(re);
     return () => { removeEventListener("resize", re); document.removeEventListener("langchange", re); if (tw) { tw.scrollTrigger.kill(true); tw.kill(); } tw = null; fits = null; };
   });
-  jm.add("(max-width: 900px)", () => jtween({ trigger: "#jmap", start: "top 70%", end: "bottom 60%", scrub: 0.6, onRefresh: () => { jL = buildRoad(); jset(jp.p); } }));
+  jm.add("(max-width: 900px)", () => jtween({ trigger: "#jmap", start: "top 70%", end: "bottom 60%", scrub: 0.6, onRefresh: () => { jL = buildRoad(); jset(window.__jp || 0); } }));
   jset(0);
 
   /* ───────── video: the frame grows to full width as it scrolls in */
