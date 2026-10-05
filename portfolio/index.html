@@ -836,7 +836,7 @@
        .from(".hero-side > *", { y: 20, opacity: 0, duration: 0.9, stagger: 0.1 }, 0.8)
        .from(".nav", { y: -30, opacity: 0, duration: 0.9 }, 0.6);
   gsap.to(".hero-name", { xPercent: -14, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
-  gsap.to("#avatar", { y: -50, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+  gsap.fromTo("#avatar", { y: 0 }, { y: -50, ease: "none", immediateRender: false, scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
   // idle life: a slow breath, and every few seconds the expression changes
   if (!avatar.classList.contains("has-video")) {
     gsap.to("#avatar img", { scaleY: 1.008, scaleX: 0.997, transformOrigin: "50% 100%", duration: 2.4, ease: "sine.inOut", yoyo: true, repeat: -1 });
