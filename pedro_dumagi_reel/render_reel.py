@@ -17,12 +17,17 @@ def S(root=None): pass
 
 # ---------- timeline (seconds) ----------
 # (start, duration, spin_degrees, from_idx, to_idx)
-SWEEPS = [(1.6, 0.95, 90, 0, 1), (4.3, 0.85, 90, 1, 2), (6.9, 0.8, 180, 2, 3),
-          (9.3, 0.75, 180, 3, 4)]
-JUMP_T, LAND_T = 12.2, 12.75       # Monica leaves frame top / lands
-FAN_FINAL = (11.6, 1.5, 270)       # fan whirls into the jump
+SWEEPS = [(1.6, 0.95, 0, 0, 1), (4.3, 0.85, 0, 1, 2), (6.9, 0.8, 0, 2, 3),
+          (9.3, 0.75, 0, 3, 4), (11.9, 1.1, 0, 4, 5)]
+JUMP_T, LAND_T = 12.1, 12.9        # Monica leaves frame top / lands
+FAN_BASE = 42.0                    # deg/s idle spin (fan never stops)
+FAN_BOOST = 380.0                  # extra deg/s peak during a reveal sweep
 DUR = 18.0
-ARRIVALS = [2.55, 5.15, 7.7, 10.05, LAND_T]   # impact moments
+ARRIVALS = [2.55, 5.15, 7.7, 10.05, LAND_T]
+_TT = np.arange(0, DUR+0.01, 1/600.0)
+_W = FAN_BASE + sum(FAN_BOOST*np.where((_TT>=st)&(_TT<st+du), np.sin(np.pi*(_TT-st)/du)**2, 0) for st,du,_,_,_ in SWEEPS)
+_A = REST + np.concatenate([[0], np.cumsum((_W[1:]+_W[:-1])/2/600.0)])
+def fan_angle(t): return float(np.interp(t, _TT, _A))   # impact moments
 
 # dog / head bump centres (source coords) per still: (cx, cy, radius, phase)
 DOGS = {
@@ -50,21 +55,11 @@ class Reel:
         self.xs, self.ys = xs, ys
         self.phi = np.degrees(np.arctan2(ys-HUB[1], xs-HUB[0]))
         self.fan_cache = {}
-        import os
-        mask = (self._fan_once(REST, grow=1.25, solid=True)[..., 3] > 128).astype(np.uint8)*255
-        self.clean = []
-        for i, im in enumerate(self.imgs):
-            p = f'{root}/build/clean_{i}.png'
-            if os.path.exists(p): self.clean.append(np.asarray(Image.open(p).convert('RGB')))
-            else:
-                c = cv2.inpaint(im, mask, 7, cv2.INPAINT_TELEA); Image.fromarray(c).save(p); self.clean.append(c)
+        # fan-free plates (make_clean_plates.py): the baked-in fan is never shown
+        self.imgs = [np.asarray(Image.open(f'{root}/build/clean_{i}.png').convert('RGB')) for i in range(6)]
 
-    # ----- soft local motion warp for dogs -----
-    def layer(self, idx, t, energy, fan_on):
-        if fan_on <= 0: return self.warp(idx, t, energy, self.imgs)
-        if fan_on >= 1: return self.warp(idx, t, energy, self.clean)
-        a = self.warp(idx, t, energy, self.imgs).astype(np.float32); b = self.warp(idx, t, energy, self.clean).astype(np.float32)
-        return (a*(1-fan_on) + b*fan_on).astype(np.uint8)
+    def layer(self, idx, t, energy, fan_on=1):
+        return self.warp(idx, t, energy)
 
     def warp(self, idx, t, energy, src=None):
         src = self.imgs if src is None else src
@@ -85,17 +80,14 @@ class Reel:
 
     # ----- fan overlay -----
     def fan(self, ang, blur_deg):
-        key = (round(ang, 1), round(blur_deg, 1))
-        if key in self.fan_cache: return self.fan_cache[key]
-        n = 1 if blur_deg < 1 else min(9, 2+int(blur_deg/4))
-        acc = np.zeros((H, W, 4), np.float32)
+        n = 1 if blur_deg < 1.2 else min(9, 2+int(blur_deg/3))
+        pm = np.zeros((H, W, 3), np.float32); al = np.zeros((H, W), np.float32)
         for i in range(n):
-            a = ang - (blur_deg*(i/(n-1)) if n > 1 else 0)
-            acc += self._fan_once(a)
-        out = acc / n
-        if len(self.fan_cache) > 8: self.fan_cache.clear()
-        self.fan_cache[key] = out
-        return out
+            f = self._fan_once(ang - (blur_deg*(i/(n-1)) if n > 1 else 0))
+            a = f[..., 3]/255.0; pm += f[..., :3]*a[..., None]; al += a
+        rgb = pm/np.maximum(al[..., None], 1e-3)
+        a_out = np.clip(al/n*1.8, 0, 1)*255          # keep blades mostly solid under blur
+        return np.concatenate([rgb, a_out[..., None]], 2)
 
     def _fan_once(self, ang, grow=1.0, solid=False):
         ss = 2
@@ -115,58 +107,44 @@ class Reel:
                     d.polygon([P(r0, wa*f), P(r1, wb*f), P(r1, -wb*f*0.6), P(r0, -wa*f*0.6)], fill=c)
                 for f in (-0.35, 0.05, 0.45):                                     # wood grain streaks
                     d.line([P(r0*2, wa*f), P(r1*0.97, wb*f)], fill=(78,42,26,255), width=max(1,int(2*k)))
-        rx, ry = 78*k, 185*k
-        d.ellipse([hx-rx, hy-ry, hx+rx, hy+ry], fill=(30,28,28,255) if not solid else (255,255,255,255))
-        if not solid:
-            d.ellipse([hx-rx*0.62, hy-ry*0.62, hx+rx*0.62, hy+ry*0.62], fill=(48,46,48,255))
-            d.ellipse([hx-rx*0.3, hy-ry*0.3, hx+rx*0.3, hy+ry*0.3], fill=(24,22,24,255))
+        rx, ry = 74*k, 150*k
+        if solid:
+            d.ellipse([hx-rx, hy-ry, hx+rx, hy+ry], fill=(255,255,255,255))
+        else:
+            d.ellipse([hx-rx, hy-ry, hx+rx, hy+ry], fill=(26,24,25,255))
+            d.ellipse([hx-rx*0.93, hy-ry*0.93, hx+rx*0.93, hy+ry*0.93], outline=(150,148,152,255), width=max(1,int(5*k)))
+            d.ellipse([hx-rx*0.72, hy-ry*0.72, hx+rx*0.72, hy+ry*0.72], fill=(52,50,54,255))
+            d.ellipse([hx-rx*0.45, hy-ry*0.45, hx+rx*0.45, hy+ry*0.45], fill=(30,28,31,255))
+            d.arc([hx-rx*0.85, hy-ry*0.85, hx+rx*0.85, hy+ry*0.85], 200, 290, fill=(205,205,210,255), width=max(1,int(6*k)))
         return np.asarray(im.resize((W, H), Image.LANCZOS)).astype(np.float32)
 
     # ----- one frame -----
     def frame(self, t):
-        # which still is "current", sweep state
-        cur, old, swept, fan_ang, fan_blur, new_zoom, fan_on = 0, None, 0.0, REST, 0.0, 1.0, 0.0
-        for (st, du, spin, a, b) in SWEEPS:
-            if t >= st: cur = b
-            if st <= t < st+du:
-                x = (t-st)/du; p = smooth(x); old = a; cur = b
-                ang_now = spin*p
-                swept = min(ang_now, 90.0)
-                fan_ang = REST + ang_now
-                fan_blur = abs(spin*(smooth(x+0.02)-smooth(x-0.02)))*0.9
-                new_zoom = 1.05 - 0.05*ease_out(x)
-                fan_on = min(1.0, x*du/0.14, (1-x)*du/0.14)
-        if t >= LAND_T: cur = 5
-        elif t >= SWEEPS[-1][0] + SWEEPS[-1][1]: cur = 4
-        fs, fd, fspin = FAN_FINAL
-        if fs <= t < fs+fd:
-            x = (t-fs)/fd; p = smooth(x); fan_ang = REST + fspin*p
-            fan_blur = abs(fspin*(smooth(x+0.02)-smooth(x-0.02)))*0.9
-            fan_on = min(1.0, x*fd/0.14, (1-x)*fd/0.14)
+        cur, old, swept, new_zoom = 0, None, 0.0, 1.0
+        fan_ang = fan_angle(t); fan_on = 1.0
+        fan_blur = abs(fan_angle(t+0.5/FPS) - fan_angle(t-0.5/FPS))
+        for (st, du, _s, a_, b_) in SWEEPS:
+            if t >= st+du: cur = b_
+            elif t >= st:
+                cur, old = b_, a_
+                swept = min(90.0, fan_ang - fan_angle(st))
+        
         # energy of dog motion: arrivals excite everyone briefly; Monica = party
         energy = 0.0
         for at in ARRIVALS:
             if t >= at: energy = max(energy, (0.9 if at == LAND_T else 0.45)*math.exp(-(t-at)/(2.2 if at == LAND_T else 0.9)))
 
-        base_idx = cur if cur != 5 else 5
-        if JUMP_T <= t < LAND_T: base_idx = 4
+        base_idx = cur
         img = self.layer(base_idx, t, energy, fan_on)
         if old is not None:
             img_old = self.layer(old, t, energy*0.5, fan_on)
             # new layer arrives from slightly closer (zoom) while the seam hides behind the blade
-            M = cv2.getRotationMatrix2D(HUB, 0, new_zoom)
-            img_new = cv2.warpAffine(img, M, (W, H), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REFLECT)
-            rel = np.mod(((REST + (fan_ang-REST) ) - self.phi), 90.0)
-            m = np.clip((swept - rel)/0.6 + 0.5, 0, 1) if swept < 90 else np.ones((H, W), np.float32)
+            img_new = img
+            rel = np.mod(fan_ang - self.phi, 90.0)
+            m = np.clip(np.minimum(rel, swept - rel)/2.5 + 0.0, 0, 1) if swept < 90 else np.ones((H, W), np.float32)
+            m = np.where(rel < swept, m, 0.0).astype(np.float32)
             m = m[..., None]
             img = (img_new*m + img_old*(1-m)).astype(np.uint8)
-        # landing crossfade 04 -> 05 hidden under Monica's impact
-        if LAND_T-0.05 <= t < LAND_T+0.35:
-            x = smooth((t-(LAND_T-0.05))/0.3)
-            img = (img.astype(np.float32)*(1-x) + self.layer(5, t, energy, fan_on).astype(np.float32)*x).astype(np.uint8)
-        elif t >= LAND_T+0.35 and base_idx == 5:
-            pass
-
         # camera impulses: damped thump at each arrival + landing
         zoom, ox, oy, rot = 1.0, 0.0, 0.0, 0.0
         for at in ARRIVALS:
@@ -187,12 +165,11 @@ class Reel:
         if JUMP_T <= t < LAND_T+1.2:
             img = self.monica(img, t, M)
         # fan on top
-        if fan_on > 0:
-            f = self.fan(fan_ang, fan_blur)
-            a = f[..., 3:4]/255.0*fan_on
-            sh = cv2.GaussianBlur(a[..., 0], (0,0), 18)[..., None]*0.3
-            img = img.astype(np.float32)*(1-sh)
-            img = np.clip(img*(1-a) + f[..., :3]*a, 0, 255).astype(np.uint8)
+        f = self.fan(fan_ang, fan_blur)
+        a = f[..., 3:4]/255.0
+        sh = cv2.GaussianBlur(a[..., 0], (0,0), 20)[..., None]*0.32
+        img = img.astype(np.float32)*(1-sh)
+        img = np.clip(img*(1-a) + f[..., :3]*a, 0, 255).astype(np.uint8)
         return img
 
     def monica(self, img, t, camM):
