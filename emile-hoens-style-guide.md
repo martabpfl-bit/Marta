@@ -70,3 +70,12 @@ Image files could not be downloaded (sandbox blocks Instagram's CDN), so this is
 - **Format:** mostly carousels (multi-image sets telling a space), some single images and a video. Short, place-based captions, few hashtags in 2026 posts.
 - **Two modes:** (1) commercial interiors for listings, brighter and cleaner but still warm; (2) personal/fine-art architecture and urban light (sunsets, brutalist/modernist buildings), more cinematic and graphic. Pinned posts are the moodiest, most fine-art ones.
 - **Cadence:** about 2-4 posts a week, often shot in late afternoon/evening (many posts published 17:00-19:00 UTC), consistent with golden-hour work.
+
+## 11. Update from 12 more screenshots (Botticellistraat / Approved Haus project, Granbaita Dolomites)
+Corrections to earlier sections:
+- Warm hues are stronger than first estimated: amber, ochre, peach/salmon, terracotta, rust marble. Warm tones are rich and slightly saturated; greens, blues and greys stay muted. (Section 3 "saturation -10 to -15 overall" should be applied mainly to non-warm hues.)
+- Mixed light: soft golden window light plus warm tungsten glow from sconces/pendants with visible halation; outside views stay detailed and slightly cooler than the interior.
+- Hard-sun detail shots: single diagonal beam with crisp shadow bars on herringbone oak.
+- Composition: straight-on, eye-level or lower, centered/symmetrical, 24-28mm, perfectly vertical lines; interiors mostly 5:4 landscape in carousels.
+- Exterior (Dolomites): golden backlight, dark foreground framing, heavy vignette, deep forest greens.
+- Styling signatures: limewash/plaster walls, curved plaster wall shapes, arched doors, herringbone oak, checkerboard tile, pleated lampshades, fringe and fluted-glass lights, rattan, patterned velvet, wildflowers, fruit bowl, art.
