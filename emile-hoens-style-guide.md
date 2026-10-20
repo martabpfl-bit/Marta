@@ -59,3 +59,14 @@ Negative: oversaturated, HDR, cold blue tones, harsh flash, fisheye distortion, 
 ## 9. Next steps / what would improve accuracy
 - Share higher-res originals or the portfolio site to confirm lens/gear and fine grade.
 - Confirm what "other ones" means: other photos to grade (Lightroom preset), AI generation, or another photographer's work. I can then turn this into a preset, a prompt library, or a checklist.
+
+## 10. Findings from scraping his public Instagram (Apify, 27 recent posts, caption/hashtag metadata only)
+Image files could not be downloaded (sandbox blocks Instagram's CDN), so this is metadata, not pixel analysis.
+
+- **Camera:** he tags #leica on most posts and mentions @leica_camera, @leica_fotografie_international and @leicagalleryamsterdam. Treat Leica (likely Q-series or M/SL; model not stated) as his system. Leica's colour science is a big part of the warm, slightly muted, rich-shadow rendering, so a Leica-style profile is a good base for recreating it.
+- **Clients / genres:** luxury real estate (The Agency NL, Engel & Volkers, Ramon Mossel, DSTRCT, Consilium, Flare Department), hotels (Amstel Hotel, The Penz in Austria, Hotel Granbaita in the Dolomites), interior stylists (Approved Haus, PS Concepts, Studio Engelhard), editorial (The Art of Living), plus personal architecture series (Rotterdam diary, Het Breed / Frans van Gool, Zuidas sunset).
+- **Locations:** Amsterdam Zuid, Jordaan, Zandvoort beach house (mid-century modern), Dolomites, Rotterdam.
+- **Caption themes (his own words):** "warm wood", "Indian summer", "Amsterdam, most beautiful season", "Sunset at Zuidas", "Venice vibes", "Alpine living", "La vita è bella". This confirms the warm, seasonal, golden-light and natural-material focus.
+- **Format:** mostly carousels (multi-image sets telling a space), some single images and a video. Short, place-based captions, few hashtags in 2026 posts.
+- **Two modes:** (1) commercial interiors for listings, brighter and cleaner but still warm; (2) personal/fine-art architecture and urban light (sunsets, brutalist/modernist buildings), more cinematic and graphic. Pinned posts are the moodiest, most fine-art ones.
+- **Cadence:** about 2-4 posts a week, often shot in late afternoon/evening (many posts published 17:00-19:00 UTC), consistent with golden-hour work.
