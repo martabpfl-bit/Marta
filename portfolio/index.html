@@ -310,6 +310,12 @@
   .q figcaption span { color: var(--mute); font-size: 13px; }
   .q figcaption a { display: inline-block; margin-top: 8px; font-size: 12px; color: var(--ink2); }
   .stars { color: #00b67a; letter-spacing: 2px; font-size: 14px; }
+  .fb-note { margin-top: 14px; max-width: 60ch; font-size: 14px; line-height: 1.55; color: var(--mute); }
+  .g2grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; padding: 28px 2px 10px; }
+  .g2grid .q { min-width: 0; }
+  .g2grid .src { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mute); }
+  .g2grid blockquote { margin-top: 14px; font-size: clamp(1.35rem, 1.9vw, 1.6rem); line-height: 1.3; }
+  @media (max-width: 900px) { .g2grid { grid-template-columns: 1fr; } }
 
   /* ───────── beyond */
   .beyond .wrap { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(30px, 6vw, 90px); align-items: center; }
@@ -580,7 +586,17 @@
       <h2 class="h2" data-pt="Nas palavras &lt;em&gt;de outros.&lt;/em&gt;">In other people’s <em>words.</em></h2>
 
       <div class="fb-row">
-        <div class="fb-head"><h3 data-pt="O que dizem &lt;em&gt;os clientes.&lt;/em&gt;">What clients <em>say.</em></h3><div class="arrows"><button type="button" data-rail="r1" data-dir="-1" aria-label="Previous">←</button><button type="button" data-rail="r1" data-dir="1" aria-label="Next">→</button></div></div>
+        <div class="fb-head"><h3 id="g2-title" data-pt="O que dizem &lt;em&gt;os clientes.&lt;/em&gt;">What customers <em>say.</em></h3></div>
+        <p class="fb-note" data-pt="Excertos curtos de avaliações da Nedzo AI no G2 em que os clientes me referem pelo nome.">Short excerpts from customer reviews of Nedzo AI on G2 that mention me by name.</p>
+        <div class="g2grid">
+          <figure class="q"><div><p class="src" data-pt="Avaliação no G2 · fev. 2026">G2 review · Feb 2026</p><blockquote cite="https://www.g2.com/products/nedzo-ai/reviews/nedzo-ai-review-12312696">“Marta’s responses are fast, clear, and genuinely helpful”</blockquote></div><figcaption><b>Tien C.</b><span data-pt="Cliente da Nedzo">Nedzo customer</span><br /><a href="https://www.g2.com/products/nedzo-ai/reviews/nedzo-ai-review-12312696" target="_blank" rel="noopener noreferrer" aria-label="Read Tien C.’s full review on G2 (opens in a new tab)" data-pt="Ler no G2 ↗" data-pt-label="Ler a avaliação completa de Tien C. no G2 (abre num novo separador)">Read on G2 ↗</a></figcaption></figure>
+          <figure class="q"><div><p class="src" data-pt="Avaliação no G2 · jan. 2026">G2 review · Jan 2026</p><blockquote cite="https://www.g2.com/products/nedzo-ai/reviews/nedzo-ai-review-12242870">“Marta, who runs support for the Nedzo community, has been exceptional…”</blockquote></div><figcaption><b>Joe P.</b><span data-pt="Cliente da Nedzo">Nedzo customer</span><br /><a href="https://www.g2.com/products/nedzo-ai/reviews/nedzo-ai-review-12242870" target="_blank" rel="noopener noreferrer" aria-label="Read Joe P.’s full review on G2 (opens in a new tab)" data-pt="Ler no G2 ↗" data-pt-label="Ler a avaliação completa de Joe P. no G2 (abre num novo separador)">Read on G2 ↗</a></figcaption></figure>
+          <figure class="q"><div><p class="src" data-pt="Avaliação no G2 · jan. 2026">G2 review · Jan 2026</p><blockquote cite="https://www.g2.com/products/nedzo-ai/reviews/nedzo-ai-review-12243788">“Marta—she is a phenomenal resource.”</blockquote></div><figcaption><b>Daniel D.</b><span data-pt="Cliente da Nedzo">Nedzo customer</span><br /><a href="https://www.g2.com/products/nedzo-ai/reviews/nedzo-ai-review-12243788" target="_blank" rel="noopener noreferrer" aria-label="Read Daniel D.’s full review on G2 (opens in a new tab)" data-pt="Ler no G2 ↗" data-pt-label="Ler a avaliação completa de Daniel D. no G2 (abre num novo separador)">Read on G2 ↗</a></figcaption></figure>
+        </div>
+      </div>
+
+      <div class="fb-row">
+        <div class="fb-head"><h3 data-pt="Mais de clientes, &lt;em&gt;no Trustpilot.&lt;/em&gt;">More from clients, <em>on Trustpilot.</em></h3><div class="arrows"><button type="button" data-rail="r1" data-dir="-1" aria-label="Previous">←</button><button type="button" data-rail="r1" data-dir="1" aria-label="Next">→</button></div></div>
         <div class="rail" id="r1">
           <figure class="q"><div><p class="stars">★★★★★</p><blockquote style="margin-top:12px">“Marta went over it with me to try to see what caused the problem, and to see how she could help in solving it. She was very helpful and courteous. She went step by step with me to try to get the issue resolved. In the end I got things working fine again. Thanks Marta!!”</blockquote></div><figcaption><b>Shelly Smith-Mitchell</b><span data-pt="Cliente da Nedzo · Trustpilot">Nedzo customer · Trustpilot</span><br /><a href="https://www.trustpilot.com/reviews/6a3aeeda7732f6d535613dc2" target="_blank" rel="noopener noreferrer" data-pt="Ver no Trustpilot ↗">View on Trustpilot ↗</a></figcaption></figure>
           <figure class="q"><div><p class="stars">★★★★★</p><blockquote style="margin-top:12px">“I love these guys. Marta the support is fantastic, the owner helped me personally too. We book a ton of appointments thanks to this software and regularly recommend it to others. So good.”</blockquote></div><figcaption><b>H Trace</b><span data-pt="Cliente da Nedzo · Trustpilot">Nedzo customer · Trustpilot</span><br /><a href="https://www.trustpilot.com/reviews/69bc6aaf10c0e4e523aff952" target="_blank" rel="noopener noreferrer" data-pt="Ver no Trustpilot ↗">View on Trustpilot ↗</a></figcaption></figure>
